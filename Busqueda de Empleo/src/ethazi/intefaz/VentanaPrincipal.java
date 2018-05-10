@@ -1,7 +1,6 @@
 package ethazi.intefaz;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,6 +14,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JInternalFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -39,11 +43,12 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the frame
 	 */
 	public VentanaPrincipal() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 744, 517);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -99,5 +104,21 @@ public class VentanaPrincipal extends JFrame {
 		});
 		lblNewLabel.setBounds(159, 146, 135, 14);
 		contentPane.add(lblNewLabel);
+		JPanel panel_barraHerramientas = new JPanel();
+		panel_barraHerramientas.setBounds(5, 5, 728, 50);
+		contentPane.add(panel_barraHerramientas);
+		panel_barraHerramientas.setLayout(null);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton.setBounds(0, 0, 50, 50);
+		panel_barraHerramientas.add(btnNewButton);
+		
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setBounds(5, 56, 728, 422);
+		contentPane.add(layeredPane);
 	}
 }
