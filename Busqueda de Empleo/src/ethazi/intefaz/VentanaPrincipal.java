@@ -19,12 +19,13 @@ import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.BorderLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	private JPasswordField pwdEfeafa;
-	private JTextField txtIntroduceElNombre;
 
 	/**
 	 * Launch the application.
@@ -54,71 +55,17 @@ public class VentanaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblUser = new JLabel("Usuario:");
-		lblUser.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblUser.setBounds(159, 50, 135, 14);
-		contentPane.add(lblUser);
+		JPanel pa_barraHerramientas = new JPanel();
+		pa_barraHerramientas.setBounds(5, 5, 728, 51);
+		contentPane.add(pa_barraHerramientas);
+		pa_barraHerramientas.setLayout(null);
 		
-		JLabel lblPassword = new JLabel("Contrase\u00F1a:");
-		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPassword.setBounds(159, 106, 135, 14);
-		contentPane.add(lblPassword);
+		JButton btn_buscar = new JButton("");
+		btn_buscar.setBounds(0, 0, 50, 50);
+		pa_barraHerramientas.add(btn_buscar);
 		
-		JButton btnRegisttrarse = new JButton("Registrarse");
-		btnRegisttrarse.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnRegisttrarse.setBounds(160, 205, 134, 23);
-		contentPane.add(btnRegisttrarse);
-		
-		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnEntrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Ha hecho click en Entrar");
-			}
-		});
-		btnEntrar.setBounds(159, 171, 135, 23);
-		//btnEntrar.setBorder(new RoundedBorder(40)); 
-		contentPane.add(btnEntrar);
-		
-		pwdEfeafa = new JPasswordField();
-		pwdEfeafa.setBackground(new Color(255, 239, 213));
-		pwdEfeafa.setText("contrase\u00F1a");
-		pwdEfeafa.setBounds(159, 126, 135, 20);
-		contentPane.add(pwdEfeafa);
-		
-		txtIntroduceElNombre = new JTextField();
-		txtIntroduceElNombre.setBackground(new Color(255, 239, 213));
-		txtIntroduceElNombre.setText("Introduce el nombre de usuario");
-		txtIntroduceElNombre.setBounds(159, 75, 177, 20);
-		contentPane.add(txtIntroduceElNombre);
-		txtIntroduceElNombre.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("Recuperar contrase\u00F1a");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setForeground(Color.BLUE);
-		lblNewLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				//-----------------------------------------------------------------------
-			}
-		});
-		lblNewLabel.setBounds(159, 146, 135, 14);
-		contentPane.add(lblNewLabel);
-		JPanel panel_barraHerramientas = new JPanel();
-		panel_barraHerramientas.setBounds(5, 5, 728, 50);
-		contentPane.add(panel_barraHerramientas);
-		panel_barraHerramientas.setLayout(null);
-		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNewButton.setBounds(0, 0, 50, 50);
-		panel_barraHerramientas.add(btnNewButton);
-		
-		JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBounds(5, 56, 728, 422);
-		contentPane.add(layeredPane);
+		JPanel pa_contenedorPaneles = new JPanel();
+		pa_contenedorPaneles.setBounds(5, 57, 728, 426);
+		contentPane.add(pa_contenedorPaneles);
 	}
 }
