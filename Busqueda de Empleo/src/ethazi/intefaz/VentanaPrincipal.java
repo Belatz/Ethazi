@@ -25,13 +25,18 @@ import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.Dimension;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
 
 public class VentanaPrincipal extends JFrame {
-	// jon:breve descripcion en su clase.
-
 	private JPanel contentPane;
-	PaneldePOfertas pOfertas;
+	private PaneldePOfertas pOfertas;
+	private JTextField textField;
 
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -61,15 +66,6 @@ public class VentanaPrincipal extends JFrame {
 		setLocationRelativeTo(null);
 		lanzarScrollPane();
 
-		JPanel pa_barraHerramientas = new JPanel();
-		pa_barraHerramientas.setBounds(5, 5, 728, 51);
-		contentPane.add(pa_barraHerramientas);
-		pa_barraHerramientas.setLayout(null);
-
-		JButton btn_buscar = new JButton("");
-		btn_buscar.setBounds(0, 0, 50, 50);
-		pa_barraHerramientas.add(btn_buscar);
-
 		/*
 		 * jon:Lo retiro por el momento porque el scroll no funciona correctamente
 		 * dentro de el panel
@@ -82,28 +78,67 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	/*
-	 * Jon: Este metodo tiene un JScrollPane y un PaneldeOfertas
-	 * Configura el JScrollPane
-	 * Añade al JScrollPane el PaneldeOfertas
-	 * Y lanza el JScrollPane
+	 * Jon: Este metodo tiene un JScrollPane y un PaneldeOfertas Configura el
+	 * JScrollPane Añade al JScrollPane el PaneldeOfertas Y lanza el JScrollPane
 	 */
 	public void lanzarScrollPane() {
 
 		JScrollPane scroll = new JScrollPane();
 		PaneldePOfertas pOfertas = new PaneldePOfertas();
-		
+
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(10, 60, 500, 440);
 		scroll.getVerticalScrollBar().setUnitIncrement(16);
+
+		JPanel pa_barraHerramientas = new JPanel();
+		pa_barraHerramientas.setLayout(null);
+		JButton btn_buscar = new JButton("");
+		btn_buscar.setBounds(0, 0, 50, 50);
+		pa_barraHerramientas.add(btn_buscar);
+		pa_barraHerramientas.setBounds(0, 0, 733, 50);
+		contentPane.add(pa_barraHerramientas);
+
+		JButton button = new JButton("");
+		button.setToolTipText("Buscar Candidato\r\n");
+		button.setAlignmentY(0.0f);
+		button.setBounds(0, 0, 50, 50);
+		pa_barraHerramientas.add(button);
+
+		JButton button_1 = new JButton("");
+		button_1.setToolTipText("Ver Perfil");
+		button_1.setPreferredSize(new Dimension(33, 9));
+		button_1.setMinimumSize(new Dimension(33, 9));
+		button_1.setMaximumSize(new Dimension(33, 9));
+		button_1.setBounds(622, 0, 50, 50);
+		pa_barraHerramientas.add(button_1);
+
+		JButton button_2 = new JButton("");
+		button_2.setToolTipText("Cerrar Sesi\u00F3n");
+		button_2.setAlignmentY(0.0f);
+		button_2.setAlignmentX(1.0f);
+		button_2.setBounds(678, 0, 50, 50);
+		pa_barraHerramientas.add(button_2);
+
+		textField = new JTextField();
+		textField.setToolTipText("");
+		textField.setText("Introduzca el nombre de la Oferta....\r\n");
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		textField.setColumns(10);
+		textField.setBounds(51, 0, 191, 50);
+		pa_barraHerramientas.add(textField);
+
+		JComboBox comboBox = new JComboBox();
+		comboBox.setToolTipText("Men\u00FA");
+		comboBox.setName("");
+		comboBox.setBounds(252, 0, 362, 50);
+		pa_barraHerramientas.add(comboBox);
 		scroll.setViewportView(pOfertas);
-	
+
 		getContentPane().add(scroll);
 		contentPane.add(scroll);
-		
+
 	}
-	
-	public void lanzarPanelAtrasYAlante(){
-		
-	}
+
 }
