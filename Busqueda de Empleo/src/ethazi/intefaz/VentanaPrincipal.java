@@ -28,9 +28,9 @@ import javax.swing.GroupLayout.Alignment;
 
 public class VentanaPrincipal extends JFrame {
 //jon:breve descripcion en su clase.
-	private JScrollconMolde scroll;
-	private JPanel contentPane;
-
+	
+	private static JPanel contentPane;
+	private PaneldePOfertas pOfertas;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -58,10 +58,10 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
+		lancarScrollPane();
+		
 
-		scroll = new JScrollconMolde();
-
-		getContentPane().add(scroll);
+		
 
 		JPanel pa_barraHerramientas = new JPanel();
 		pa_barraHerramientas.setBounds(5, 5, 728, 51);
@@ -81,6 +81,18 @@ public class VentanaPrincipal extends JFrame {
 		 * 57, 728, 426);
 		 */
 
+	}
+	public void lancarScrollPane() {
+		
+		JScrollPane scroll = new JScrollPane();
+		pOfertas = new PaneldePOfertas();
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(5, 50, 500, 500);
+		scroll.getVerticalScrollBar().setUnitIncrement(16);
+		scroll.setViewportView(pOfertas);
+		
+		getContentPane().add(scroll);
 		contentPane.add(scroll);
 	}
 }
