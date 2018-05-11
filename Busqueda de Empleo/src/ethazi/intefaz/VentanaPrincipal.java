@@ -27,10 +27,11 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
 public class VentanaPrincipal extends JFrame {
-//jon:breve descripcion en su clase.
-	
-	private static JPanel contentPane;
-	private PaneldePOfertas pOfertas;
+	// jon:breve descripcion en su clase.
+
+	private JPanel contentPane;
+	PaneldePOfertas pOfertas;
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -50,7 +51,7 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 744, 517);
+		setBounds(100, 100, 744, 566);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		/**/contentPane.setLayout(new BorderLayout(0, 0));
@@ -58,10 +59,7 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
-		lancarScrollPane();
-		
-
-		
+		lanzarScrollPane();
 
 		JPanel pa_barraHerramientas = new JPanel();
 		pa_barraHerramientas.setBounds(5, 5, 728, 51);
@@ -82,17 +80,30 @@ public class VentanaPrincipal extends JFrame {
 		 */
 
 	}
-	public void lancarScrollPane() {
-		
+
+	/*
+	 * Jon: Este metodo tiene un JScrollPane y un PaneldeOfertas
+	 * Configura el JScrollPane
+	 * Añade al JScrollPane el PaneldeOfertas
+	 * Y lanza el JScrollPane
+	 */
+	public void lanzarScrollPane() {
+
 		JScrollPane scroll = new JScrollPane();
-		pOfertas = new PaneldePOfertas();
+		PaneldePOfertas pOfertas = new PaneldePOfertas();
+		
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setBounds(5, 50, 500, 500);
+		scroll.setBounds(10, 60, 500, 440);
 		scroll.getVerticalScrollBar().setUnitIncrement(16);
 		scroll.setViewportView(pOfertas);
-		
+	
 		getContentPane().add(scroll);
 		contentPane.add(scroll);
+		
+	}
+	
+	public void lanzarPanelAtrasYAlante(){
+		
 	}
 }
