@@ -26,7 +26,7 @@ import javax.swing.GroupLayout.Alignment;
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-
+//Prueba
 	/**
 	 * Launch the application.
 	 */
