@@ -1,4 +1,4 @@
-package ethazi.intefaz;
+package ethazi.intefaz.emergentes;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -23,7 +23,7 @@ public class ValidarCodigo extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void crearVentana(Object p_padre) {
 		try {
 			ValidarCodigo dialog = new ValidarCodigo();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

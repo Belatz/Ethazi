@@ -1,9 +1,12 @@
-package ethazi.intefaz;
+package ethazi.intefaz.frame;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ethazi.intefaz.PaneldePOfertas;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
