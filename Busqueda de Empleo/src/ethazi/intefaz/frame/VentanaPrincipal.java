@@ -31,6 +31,8 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import java.awt.CardLayout;
+import javax.swing.JSplitPane;
 
 public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
@@ -62,7 +64,6 @@ public class VentanaPrincipal extends JFrame {
 		setBounds(100, 100, 744, 566);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		/**/contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		getContentPane().setLayout(null);
@@ -85,14 +86,7 @@ public class VentanaPrincipal extends JFrame {
 	 * JScrollPane Añade al JScrollPane el PaneldeOfertas Y lanza el JScrollPane
 	 */
 	public void lanzarScrollPane() {
-
-		JScrollPane scroll = new JScrollPane();
-		PaneldePOfertas pOfertas = new PaneldePOfertas();
-
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setBounds(10, 60, 500, 440);
-		scroll.getVerticalScrollBar().setUnitIncrement(16);
+		contentPane.setLayout(null);
 
 		JPanel pa_barraHerramientas = new JPanel();
 		pa_barraHerramientas.setLayout(null);
@@ -137,11 +131,26 @@ public class VentanaPrincipal extends JFrame {
 		comboBox.setName("");
 		comboBox.setBounds(252, 0, 362, 50);
 		pa_barraHerramientas.add(comboBox);
-		scroll.setViewportView(pOfertas);
+		
+				JScrollPane scroll = new JScrollPane();
+				PaneldePOfertas pOfertas_1 = new PaneldePOfertas();
+				
+						scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+						scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+						scroll.setBounds(10, 60, 500, 440);
+						scroll.getVerticalScrollBar().setUnitIncrement(16);
+						scroll.setViewportView(pOfertas_1);
+						
+						getContentPane().add(scroll);
+						contentPane.add(scroll);
 
-		getContentPane().add(scroll);
-		contentPane.add(scroll);
+		JPanel pa_contenedor = new JPanel();
+		pa_contenedor.setBounds(0, 49, 738, 488);
+		contentPane.add(pa_contenedor);
+		pa_contenedor.setLayout(new CardLayout(0, 0));
+
+
+		JScrollPane scrollPane = new JScrollPane();
 
 	}
-
 }
