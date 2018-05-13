@@ -1,0 +1,106 @@
+package ethazi.intefaz.paneles;
+
+import java.awt.Dimension;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JCheckBox;
+
+public class PanelFiltrosCandidato extends JScrollPane {
+	
+	private JTextField txField_residencia;
+	private JTextField txField_experiencia;
+	private JTextField txField_nick;
+	private JTextField txField_nombreApe;
+
+	/**
+	 * Create the panel.
+	 */
+	public PanelFiltrosCandidato() {
+		JPanel pa_filtros = crearPanelFiltros();
+		setBounds(10, 60, 247, 550);
+		getVerticalScrollBar().setUnitIncrement(16);
+		setViewportView(pa_filtros);
+	
+
+	}
+
+	public JPanel crearPanelFiltros() {
+		JPanel pa_filtros = new JPanel();
+		
+		pa_filtros.setPreferredSize(new Dimension(228,550));
+		pa_filtros.setLayout(null);
+
+		JButton btn_aplicar = new JButton("Aplicar");
+		btn_aplicar.setBounds(66, 11, 89, 23);
+		pa_filtros.add(btn_aplicar);
+
+		JSeparator separator = new JSeparator();
+		separator.setBounds(0, 45, 226, 10);
+		pa_filtros.add(separator);
+		
+		JLabel lbl_conocimientos = new JLabel("Conocimientos:");
+		lbl_conocimientos.setBounds(7, 156, 211, 14);
+		pa_filtros.add(lbl_conocimientos);
+
+		JPanel pa_conocimientos = new PanelListaDoble();
+		pa_conocimientos.setLocation(7, 172);
+		pa_filtros.add(pa_conocimientos);
+		
+		JLabel lbl_residencia = new JLabel("Lugar de residencia:");
+		lbl_residencia.setBounds(7, 438, 115, 14);
+		pa_filtros.add(lbl_residencia);
+		
+		txField_residencia = new JTextField();
+		txField_residencia.setBounds(7, 451, 211, 20);
+		pa_filtros.add(txField_residencia);
+		txField_residencia.setColumns(10);
+		
+		JLabel lbl_experiencia = new JLabel("A\u00F1os de experiencia minimos:");
+		lbl_experiencia.setBounds(7, 476, 211, 14);
+		pa_filtros.add(lbl_experiencia);
+		
+		txField_experiencia = new JTextField();
+		txField_experiencia.setColumns(10);
+		txField_experiencia.setBounds(7, 489, 115, 20);
+		pa_filtros.add(txField_experiencia);
+		
+		JLabel lbl_nick = new JLabel("Nombre de usuario:");
+		lbl_nick.setBounds(7, 66, 162, 14);
+		pa_filtros.add(lbl_nick);
+		
+		txField_nick = new JTextField();
+		txField_nick.setColumns(10);
+		txField_nick.setBounds(7, 79, 115, 20);
+		pa_filtros.add(txField_nick);
+		
+		JLabel lbl_nombreApe = new JLabel("Nombre y apellidos:");
+		lbl_nombreApe.setBounds(7, 110, 211, 14);
+		pa_filtros.add(lbl_nombreApe);
+		
+		txField_nombreApe = new JTextField();
+		txField_nombreApe.setColumns(10);
+		txField_nombreApe.setBounds(7, 123, 211, 20);
+		pa_filtros.add(txField_nombreApe);
+		
+		JCheckBox chBox_carne = new JCheckBox("Carne de conducir");
+		chBox_carne.setBounds(7, 356, 148, 23);
+		pa_filtros.add(chBox_carne);
+		
+		JCheckBox chBox_coche = new JCheckBox("Coche propio");
+		chBox_coche.setBounds(7, 382, 148, 23);
+		pa_filtros.add(chBox_coche);
+		
+		JCheckBox chBox_viajes = new JCheckBox("Disponible para viajes");
+		chBox_viajes.setBounds(7, 408, 148, 23);
+		pa_filtros.add(chBox_viajes);
+
+		return pa_filtros;
+	}
+}
