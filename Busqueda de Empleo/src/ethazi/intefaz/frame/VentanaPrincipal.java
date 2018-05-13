@@ -39,7 +39,7 @@ import javax.swing.JSplitPane;
 public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private PaneldePOfertas pOfertas;
-	private JTextField textField;
+	private JTextField txField_buscar;
 
 	/**
 	 * Launch the application.
@@ -98,41 +98,35 @@ public class VentanaPrincipal extends JFrame {
 		pa_barraHerramientas.setBounds(0, 0, 762, 50);
 		contentPane.add(pa_barraHerramientas);
 
-		JButton button = new JButton("");
-		button.setToolTipText("Buscar Candidato\r\n");
-		button.setAlignmentY(0.0f);
-		button.setBounds(0, 0, 50, 50);
-		pa_barraHerramientas.add(button);
+		JButton btn_perfil = new JButton("");
+		btn_perfil.setToolTipText("Ver Perfil");
+		btn_perfil.setPreferredSize(new Dimension(33, 9));
+		btn_perfil.setMinimumSize(new Dimension(33, 9));
+		btn_perfil.setMaximumSize(new Dimension(33, 9));
+		btn_perfil.setBounds(642, 0, 50, 50);
+		pa_barraHerramientas.add(btn_perfil);
 
-		JButton button_1 = new JButton("");
-		button_1.setToolTipText("Ver Perfil");
-		button_1.setPreferredSize(new Dimension(33, 9));
-		button_1.setMinimumSize(new Dimension(33, 9));
-		button_1.setMaximumSize(new Dimension(33, 9));
-		button_1.setBounds(642, 0, 50, 50);
-		pa_barraHerramientas.add(button_1);
+		JButton btn_apagar = new JButton("");
+		btn_apagar.setToolTipText("Cerrar Sesi\u00F3n");
+		btn_apagar.setAlignmentY(0.0f);
+		btn_apagar.setAlignmentX(1.0f);
+		btn_apagar.setBounds(702, 0, 50, 50);
+		pa_barraHerramientas.add(btn_apagar);
 
-		JButton button_2 = new JButton("");
-		button_2.setToolTipText("Cerrar Sesi\u00F3n");
-		button_2.setAlignmentY(0.0f);
-		button_2.setAlignmentX(1.0f);
-		button_2.setBounds(702, 0, 50, 50);
-		pa_barraHerramientas.add(button_2);
+		txField_buscar = new JTextField();
+		txField_buscar.setToolTipText("");
+		txField_buscar.setText("Introduzca el nombre de la Oferta....\r\n");
+		txField_buscar.setHorizontalAlignment(SwingConstants.CENTER);
+		txField_buscar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txField_buscar.setColumns(10);
+		txField_buscar.setBounds(51, 0, 195, 50);
+		pa_barraHerramientas.add(txField_buscar);
 
-		textField = new JTextField();
-		textField.setToolTipText("");
-		textField.setText("Introduzca el nombre de la Oferta....\r\n");
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		textField.setColumns(10);
-		textField.setBounds(51, 0, 191, 50);
-		pa_barraHerramientas.add(textField);
-
-		JComboBox comboBox = new JComboBox();
-		comboBox.setToolTipText("Men\u00FA");
-		comboBox.setName("");
-		comboBox.setBounds(252, 0, 380, 50);
-		pa_barraHerramientas.add(comboBox);
+		JComboBox combo_menu = new JComboBox();
+		combo_menu.setToolTipText("Men\u00FA");
+		combo_menu.setName("");
+		combo_menu.setBounds(252, 0, 380, 50);
+		pa_barraHerramientas.add(combo_menu);
 
 		JScrollPane scroll = new JScrollPane();
 		PaneldePOfertas pOfertas_1 = new PaneldePOfertas();
