@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ethazi.intefaz.PaneldePOfertas;
+import ethazi.intefaz.paneles.PanelFiltros;
+import ethazi.intefaz.paneles.PanelFiltros;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -37,7 +39,7 @@ import javax.swing.JSplitPane;
 public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private PaneldePOfertas pOfertas;
-	private JTextField textField;
+	private JTextField txField_buscar;
 
 	/**
 	 * Launch the application.
@@ -61,7 +63,7 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 744, 566);
+		setBounds(100, 100, 768, 566);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -93,64 +95,62 @@ public class VentanaPrincipal extends JFrame {
 		JButton btn_buscar = new JButton("");
 		btn_buscar.setBounds(0, 0, 50, 50);
 		pa_barraHerramientas.add(btn_buscar);
-		pa_barraHerramientas.setBounds(0, 0, 733, 50);
+		pa_barraHerramientas.setBounds(0, 0, 762, 50);
 		contentPane.add(pa_barraHerramientas);
 
-		JButton button = new JButton("");
-		button.setToolTipText("Buscar Candidato\r\n");
-		button.setAlignmentY(0.0f);
-		button.setBounds(0, 0, 50, 50);
-		pa_barraHerramientas.add(button);
+		JButton btn_perfil = new JButton("");
+		btn_perfil.setToolTipText("Ver Perfil");
+		btn_perfil.setPreferredSize(new Dimension(33, 9));
+		btn_perfil.setMinimumSize(new Dimension(33, 9));
+		btn_perfil.setMaximumSize(new Dimension(33, 9));
+		btn_perfil.setBounds(642, 0, 50, 50);
+		pa_barraHerramientas.add(btn_perfil);
 
-		JButton button_1 = new JButton("");
-		button_1.setToolTipText("Ver Perfil");
-		button_1.setPreferredSize(new Dimension(33, 9));
-		button_1.setMinimumSize(new Dimension(33, 9));
-		button_1.setMaximumSize(new Dimension(33, 9));
-		button_1.setBounds(622, 0, 50, 50);
-		pa_barraHerramientas.add(button_1);
+		JButton btn_apagar = new JButton("");
+		btn_apagar.setToolTipText("Cerrar Sesi\u00F3n");
+		btn_apagar.setAlignmentY(0.0f);
+		btn_apagar.setAlignmentX(1.0f);
+		btn_apagar.setBounds(702, 0, 50, 50);
+		pa_barraHerramientas.add(btn_apagar);
 
-		JButton button_2 = new JButton("");
-		button_2.setToolTipText("Cerrar Sesi\u00F3n");
-		button_2.setAlignmentY(0.0f);
-		button_2.setAlignmentX(1.0f);
-		button_2.setBounds(678, 0, 50, 50);
-		pa_barraHerramientas.add(button_2);
+		txField_buscar = new JTextField();
+		txField_buscar.setToolTipText("");
+		txField_buscar.setText("Introduzca el nombre de la Oferta....\r\n");
+		txField_buscar.setHorizontalAlignment(SwingConstants.CENTER);
+		txField_buscar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		txField_buscar.setColumns(10);
+		txField_buscar.setBounds(51, 0, 195, 50);
+		pa_barraHerramientas.add(txField_buscar);
 
-		textField = new JTextField();
-		textField.setToolTipText("");
-		textField.setText("Introduzca el nombre de la Oferta....\r\n");
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		textField.setColumns(10);
-		textField.setBounds(51, 0, 191, 50);
-		pa_barraHerramientas.add(textField);
+		JComboBox combo_menu = new JComboBox();
+		combo_menu.setToolTipText("Men\u00FA");
+		combo_menu.setName("");
+		combo_menu.setBounds(252, 0, 380, 50);
+		pa_barraHerramientas.add(combo_menu);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setToolTipText("Men\u00FA");
-		comboBox.setName("");
-		comboBox.setBounds(252, 0, 362, 50);
-		pa_barraHerramientas.add(comboBox);
-		
-				JScrollPane scroll = new JScrollPane();
-				PaneldePOfertas pOfertas_1 = new PaneldePOfertas();
-				
-						scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-						scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-						scroll.setBounds(10, 60, 500, 440);
-						scroll.getVerticalScrollBar().setUnitIncrement(16);
-						scroll.setViewportView(pOfertas_1);
-						
-						getContentPane().add(scroll);
-						contentPane.add(scroll);
+		JScrollPane scroll = new JScrollPane();
+		PaneldePOfertas pOfertas_1 = new PaneldePOfertas();
+
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(10, 60, 500, 440);
+		scroll.getVerticalScrollBar().setUnitIncrement(16);
+		scroll.setViewportView(pOfertas_1);
+
+		getContentPane().add(scroll);
+		contentPane.add(scroll);
 
 		JPanel pa_contenedor = new JPanel();
-		pa_contenedor.setBounds(0, 49, 738, 488);
+		pa_contenedor.setBounds(0, 49, 762, 488);
 		contentPane.add(pa_contenedor);
 		pa_contenedor.setLayout(new CardLayout(0, 0));
 
+		JPanel pa_buscarOfertas = new JPanel();
+		pa_contenedor.add(pa_buscarOfertas, "name_745028646498");
+		pa_buscarOfertas.setLayout(null);
 
-		JScrollPane scrollPane = new JScrollPane();
-
+		JScrollPane pa_filtros = new PanelFiltros();
+		pa_filtros.setBounds(512, 0, 247, 488);
+		pa_buscarOfertas.add(pa_filtros);
 	}
 }
