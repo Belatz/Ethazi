@@ -11,7 +11,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-public class PanelFiltros extends JScrollPane {
+public class PanelFiltrosOferta extends JScrollPane {
 	
 	private JTextField txField_sueldoMin;
 	private JTextField txField_sueldoMax;
@@ -21,7 +21,7 @@ public class PanelFiltros extends JScrollPane {
 	/**
 	 * Create the panel.
 	 */
-	public PanelFiltros() {
+	public PanelFiltrosOferta() {
 		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);		
 		JPanel pa_filtros = crearPanelFiltros();
 		setBounds(10, 60, 247, 441);

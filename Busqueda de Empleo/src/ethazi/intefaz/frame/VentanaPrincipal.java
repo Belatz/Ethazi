@@ -6,8 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ethazi.intefaz.PaneldePOfertas;
-import ethazi.intefaz.paneles.PanelFiltros;
-import ethazi.intefaz.paneles.PanelFiltros;
+import ethazi.intefaz.paneles.PanelFiltrosOferta;
+import ethazi.intefaz.paneles.PanelFiltrosOferta;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -149,7 +149,7 @@ public class VentanaPrincipal extends JFrame {
 		pa_contenedor.add(pa_buscarOfertas, "name_745028646498");
 		pa_buscarOfertas.setLayout(null);
 
-		JScrollPane pa_filtros = new PanelFiltros();
+		JScrollPane pa_filtros = new PanelFiltrosOferta();
 		pa_filtros.setBounds(512, 0, 247, 488);
 		pa_buscarOfertas.add(pa_filtros);
 	}
