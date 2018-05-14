@@ -21,12 +21,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 public class PanelPublicarOferta extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField txField_titulo;
+	private JTextField txField_sueldoMin;
+	private JTextField txField_sueldoMax;
+	private JTextField txField_experiencia;
+	private JTextField txField_buscarCono;
+	private JTextField txField_lugar;
 
 	/**
 	 * Create the panel.
@@ -35,110 +35,118 @@ public class PanelPublicarOferta extends JPanel {
 		setPreferredSize(new Dimension(762,488));
 		setLayout(null);
 		
-		JLabel lblTitulo = new JLabel("Titulo:");
-		lblTitulo.setBounds(10, 52, 46, 14);
-		add(lblTitulo);
+		JLabel lbl_titulo = new JLabel("Titulo:");
+		lbl_titulo.setBounds(10, 52, 46, 14);
+		add(lbl_titulo);
 		
-		textField = new JTextField();
-		textField.setBounds(51, 49, 322, 20);
-		add(textField);
-		textField.setColumns(10);
+		txField_titulo = new JTextField();
+		txField_titulo.setBounds(51, 49, 322, 20);
+		add(txField_titulo);
+		txField_titulo.setColumns(10);
 		
-		JLabel lblPublicarOferta = new JLabel("Nueva Oferta");
-		lblPublicarOferta.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPublicarOferta.setBounds(309, 11, 172, 20);
-		add(lblPublicarOferta);
+		JLabel lbl_PublicarOferta = new JLabel("Nueva Oferta");
+		lbl_PublicarOferta.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lbl_PublicarOferta.setBounds(309, 11, 172, 20);
+		add(lbl_PublicarOferta);
 		
-		JLabel lblSueldoMinimo = new JLabel("Sueldo Minimo:");
-		lblSueldoMinimo.setBounds(10, 83, 85, 14);
-		add(lblSueldoMinimo);
+		JLabel lbl_sueldoMin = new JLabel("Sueldo Minimo:");
+		lbl_sueldoMin.setBounds(10, 83, 85, 14);
+		add(lbl_sueldoMin);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(93, 80, 93, 20);
-		add(textField_1);
+		txField_sueldoMin = new JTextField();
+		txField_sueldoMin.setColumns(10);
+		txField_sueldoMin.setBounds(93, 80, 93, 20);
+		add(txField_sueldoMin);
 		
-		JLabel lblSueldoMaximo = new JLabel("Sueldo Maximo:");
-		lblSueldoMaximo.setBounds(10, 115, 85, 14);
-		add(lblSueldoMaximo);
+		JLabel lbl_sueldoMax = new JLabel("Sueldo Maximo:");
+		lbl_sueldoMax.setBounds(10, 115, 85, 14);
+		add(lbl_sueldoMax);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(93, 112, 93, 20);
-		add(textField_2);
+		txField_sueldoMax = new JTextField();
+		txField_sueldoMax.setColumns(10);
+		txField_sueldoMax.setBounds(93, 112, 93, 20);
+		add(txField_sueldoMax);
 		
-		JLabel lblAosDeExperiencia = new JLabel("A\u00F1os de experiencia minimos:");
-		lblAosDeExperiencia.setBounds(10, 143, 152, 14);
-		add(lblAosDeExperiencia);
+		JLabel lbl_experiencia = new JLabel("A\u00F1os de experiencia minimos:");
+		lbl_experiencia.setBounds(10, 143, 152, 14);
+		add(lbl_experiencia);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(162, 140, 93, 20);
-		add(textField_3);
+		txField_experiencia = new JTextField();
+		txField_experiencia.setColumns(10);
+		txField_experiencia.setBounds(162, 140, 93, 20);
+		add(txField_experiencia);
 		
-		JLabel lblAspectosAValorar = new JLabel("Aspectos a valorar:");
-		lblAspectosAValorar.setBounds(10, 178, 107, 14);
-		add(lblAspectosAValorar);
+		JLabel lbl_aspectosValorar = new JLabel("Aspectos a valorar:");
+		lbl_aspectosValorar.setBounds(10, 178, 107, 14);
+		add(lbl_aspectosValorar);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBorder(UIManager.getBorder("TextField.border"));
-		textArea.setBounds(137, 173, 253, 41);
-		add(textArea);
+		JTextArea txArea_aspectosValorar = new JTextArea();
+		txArea_aspectosValorar.setBorder(UIManager.getBorder("TextField.border"));
+		txArea_aspectosValorar.setBounds(137, 173, 253, 41);
+		add(txArea_aspectosValorar);
 		
-		JLabel lblAspectosImprescindles = new JLabel("Aspectos imprescindibles:");
-		lblAspectosImprescindles.setBounds(10, 238, 133, 14);
-		add(lblAspectosImprescindles);
+		JLabel lbl_aspectosImpres = new JLabel("Aspectos imprescindibles:");
+		lbl_aspectosImpres.setBounds(10, 238, 133, 14);
+		add(lbl_aspectosImpres);
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBorder(UIManager.getBorder("TextField.border"));
-		textArea_1.setBounds(137, 233, 253, 41);
-		add(textArea_1);
+		JTextArea txArea_aspectosImpres = new JTextArea();
+		txArea_aspectosImpres.setBorder(UIManager.getBorder("TextField.border"));
+		txArea_aspectosImpres.setBounds(137, 233, 253, 41);
+		add(txArea_aspectosImpres);
 		
-		JLabel lblDescripcion = new JLabel("Descripcion:");
-		lblDescripcion.setBounds(10, 302, 107, 14);
-		add(lblDescripcion);
+		JLabel lbl_descripcion = new JLabel("Descripcion:");
+		lbl_descripcion.setBounds(10, 302, 107, 14);
+		add(lbl_descripcion);
 		
-		JTextArea textArea_2 = new JTextArea();
-		textArea_2.setBorder(UIManager.getBorder("TextField.border"));
-		textArea_2.setBounds(10, 328, 465, 149);
-		add(textArea_2);
+		JTextArea txArea_descripcion = new JTextArea();
+		txArea_descripcion.setBorder(UIManager.getBorder("TextField.border"));
+		txArea_descripcion.setBounds(10, 328, 465, 149);
+		add(txArea_descripcion);
 		
-		JLabel lblConocimientos = new JLabel("Conocimientos requeridos:");
-		lblConocimientos.setBounds(537, 125, 169, 14);
-		add(lblConocimientos);
+		JLabel lbl_conocimientos = new JLabel("Conocimientos requeridos:");
+		lbl_conocimientos.setBounds(537, 125, 169, 14);
+		add(lbl_conocimientos);
 		
-		JPanel panel = new PanelListaDoble();
-		panel.setBounds(537, 174, 215, 180);
-		add(panel);
+		JPanel pa_conocimientos = new PanelListaDoble();
+		pa_conocimientos.setBounds(537, 174, 215, 180);
+		add(pa_conocimientos);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(537, 140, 135, 20);
-		add(textField_4);
-		textField_4.setColumns(10);
+		txField_buscarCono = new JTextField();
+		txField_buscarCono.setBounds(537, 140, 135, 20);
+		add(txField_buscarCono);
+		txField_buscarCono.setColumns(10);
 		
-		JButton button = new JButton("");
-		button.setBounds(682, 138, 24, 23);
-		add(button);
+		JButton btn_buscar = new JButton("");
+		btn_buscar.setBounds(682, 138, 24, 23);
+		add(btn_buscar);
 		
-		JButton button_1 = new JButton("");
-		button_1.setBounds(716, 138, 24, 23);
-		add(button_1);
+		JButton btn_crear = new JButton("");
+		btn_crear.setBounds(716, 138, 24, 23);
+		add(btn_crear);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(506, 49, 234, 20);
-		add(textField_5);
+		txField_lugar = new JTextField();
+		txField_lugar.setColumns(10);
+		txField_lugar.setBounds(506, 49, 234, 20);
+		add(txField_lugar);
 		
-		JLabel lblLugarDeTrabajo = new JLabel("Lugar de trabajo:");
-		lblLugarDeTrabajo.setBounds(411, 52, 93, 14);
-		add(lblLugarDeTrabajo);
+		JLabel lbl_lugar = new JLabel("Lugar de trabajo:");
+		lbl_lugar.setBounds(411, 52, 93, 14);
+		add(lbl_lugar);
 		
-		JLabel lblTipoDeContrato = new JLabel("Tipo de contrato:");
-		lblTipoDeContrato.setBounds(411, 86, 93, 14);
-		add(lblTipoDeContrato);
+		JLabel lbl_contrato = new JLabel("Tipo de contrato:");
+		lbl_contrato.setBounds(411, 86, 93, 14);
+		add(lbl_contrato);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(506, 83, 159, 20);
-		add(comboBox);
+		JComboBox combo_contrato = new JComboBox();
+		combo_contrato.setBounds(506, 83, 159, 20);
+		add(combo_contrato);
+		
+		JButton btn_publicar = new JButton("Publicar oferta");
+		btn_publicar.setBounds(627, 436, 125, 41);
+		add(btn_publicar);
+		
+		JButton btn_cancelar = new JButton("Cancelar");
+		btn_cancelar.setBounds(492, 436, 125, 41);
+		add(btn_cancelar);
 	}
 }
