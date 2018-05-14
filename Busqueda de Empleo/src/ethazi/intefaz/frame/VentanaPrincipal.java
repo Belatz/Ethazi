@@ -12,6 +12,7 @@ import ethazi.intefaz.paneles.PanelAbrirOfertaCandidato;
 import ethazi.intefaz.paneles.PanelAbrirOfertaEmpresa;
 import ethazi.intefaz.paneles.PanelAtrasAlante;
 import ethazi.intefaz.paneles.PanelConsultarOfertas;
+import ethazi.intefaz.paneles.PanelEditarOferta;
 import ethazi.intefaz.paneles.PanelFiltrosOferta;
 import ethazi.intefaz.paneles.PanelPublicarOferta;
 import ethazi.intefaz.paneles.PanelFiltrosOferta;
@@ -89,12 +90,12 @@ public class VentanaPrincipal extends JFrame {
 
 	}
 
-	public void crearPaneles() { 
+	public void crearPaneles() {
 		// Crear consultar ofertas
 		JPanel pa_buscarOfertas = new PanelConsultarOfertas();
 		pa_contenedor.add(pa_buscarOfertas);
 		// Crear analizar empresa
-		
+
 		if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea sus posibles ventanas
 			// Crear consultar ofertas adecuadas
 
@@ -103,26 +104,26 @@ public class VentanaPrincipal extends JFrame {
 			// Crear consultar conocimientos mas buscados
 
 			// Crear realizar solicitud
-			
+
 			// Crear abrir oferta
 			JPanel pa_abrirOferta;
-			pa_abrirOferta =  new PanelAbrirOfertaCandidato();
+			pa_abrirOferta = new PanelAbrirOfertaCandidato();
 			pa_contenedor.add(pa_abrirOferta);
 			// Crear ver perfil
 
 			// Crear editar perfil
 
-		
 		} else { // Si es empresa crea sus posibles ventanas
 			// Crear consultar candidatos
-			
+
 			// Crear consultar sus ofertas
 
 			// Crear publicar oferta
 			JPanel pa_publicarOferta = new PanelPublicarOferta();
 			pa_contenedor.add(pa_publicarOferta);
 			// Crear editar oferta
-
+			JPanel pa_editarOferta = new PanelEditarOferta();
+			pa_contenedor.add(pa_editarOferta);
 			// Crear analizar candidato
 
 			// Crear analizar solicitudes
@@ -131,16 +132,13 @@ public class VentanaPrincipal extends JFrame {
 
 			// Crear abrir oferta
 			JPanel pa_abrirOferta;
-			pa_abrirOferta =  new PanelAbrirOfertaEmpresa();
+			pa_abrirOferta = new PanelAbrirOfertaEmpresa();
 			pa_contenedor.add(pa_abrirOferta);
 			// Crear ver perfil
 
 			// Crear editar perfil
 
 		}
-
-
-
 
 	}
 

@@ -38,6 +38,7 @@ public class PanelAbrirOfertaEmpresa extends JPanel {
 		add(lblOferta);
 
 		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
 		textArea.setBounds(46, 39, 438, 36);
 		add(textArea);
 
@@ -46,6 +47,7 @@ public class PanelAbrirOfertaEmpresa extends JPanel {
 		add(lblDescripcion);
 
 		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setEditable(false);
 		textArea_1.setBounds(46, 105, 669, 150);
 		add(textArea_1);
 
@@ -70,6 +72,7 @@ public class PanelAbrirOfertaEmpresa extends JPanel {
 		add(lblCodigoDeOferta);
 
 		textField = new JTextField();
+		textField.setEditable(false);
 		textField.setBounds(538, 279, 177, 20);
 		add(textField);
 		textField.setColumns(10);
@@ -79,6 +82,7 @@ public class PanelAbrirOfertaEmpresa extends JPanel {
 		add(lblLugar);
 
 		textField_1 = new JTextField();
+		textField_1.setEditable(false);
 		textField_1.setBounds(538, 443, 177, 20);
 		add(textField_1);
 		textField_1.setColumns(10);
@@ -88,6 +92,7 @@ public class PanelAbrirOfertaEmpresa extends JPanel {
 		add(lblTipoDeContrato);
 
 		textField_2 = new JTextField();
+		textField_2.setEditable(false);
 		textField_2.setColumns(10);
 		textField_2.setBounds(538, 310, 177, 20);
 		add(textField_2);
@@ -97,6 +102,7 @@ public class PanelAbrirOfertaEmpresa extends JPanel {
 		add(lblSueldoMaximo);
 
 		textField_3 = new JTextField();
+		textField_3.setEditable(false);
 		textField_3.setColumns(10);
 		textField_3.setBounds(172, 311, 211, 20);
 		add(textField_3);
@@ -106,6 +112,7 @@ public class PanelAbrirOfertaEmpresa extends JPanel {
 		add(lblSueldoMinimo);
 
 		textField_4 = new JTextField();
+		textField_4.setEditable(false);
 		textField_4.setColumns(10);
 		textField_4.setBounds(538, 345, 177, 20);
 		add(textField_4);
@@ -115,6 +122,7 @@ public class PanelAbrirOfertaEmpresa extends JPanel {
 		add(lblExperiencia);
 
 		textField_5 = new JTextField();
+		textField_5.setEditable(false);
 		textField_5.setBounds(172, 372, 543, 20);
 		add(textField_5);
 		textField_5.setColumns(10);
@@ -124,6 +132,7 @@ public class PanelAbrirOfertaEmpresa extends JPanel {
 		add(lblAspectosAValorar);
 
 		textField_6 = new JTextField();
+		textField_6.setEditable(false);
 		textField_6.setColumns(10);
 		textField_6.setBounds(172, 412, 211, 20);
 		add(textField_6);
@@ -133,6 +142,7 @@ public class PanelAbrirOfertaEmpresa extends JPanel {
 		add(lblAspectosImprescindibles);
 
 		textField_7 = new JTextField();
+		textField_7.setEditable(false);
 		textField_7.setBounds(172, 443, 211, 20);
 		add(textField_7);
 		textField_7.setColumns(10);
@@ -142,6 +152,7 @@ public class PanelAbrirOfertaEmpresa extends JPanel {
 		add(lblEmpresa);
 
 		textField_8 = new JTextField();
+		textField_8.setEditable(false);
 		textField_8.setBounds(538, 412, 177, 20);
 		add(textField_8);
 		textField_8.setColumns(10);
