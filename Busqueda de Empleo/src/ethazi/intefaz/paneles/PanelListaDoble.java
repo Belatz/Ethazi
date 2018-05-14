@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 public class PanelListaDoble extends JPanel {
-	
+
 	private JButton btn_anadir = new JButton();
 	private JButton btn_eliminar = new JButton();
 	private DefaultListModel modelo_anadidos = new DefaultListModel();
@@ -25,7 +25,7 @@ public class PanelListaDoble extends JPanel {
 	public PanelListaDoble() {
 		// EJEMPLOS
 		for (int i = 0; i < 10; i++) {
-			modelo_totales.addElement("Ejemplo"+i);
+			modelo_totales.addElement("Ejemplo" + i);
 		}
 		// ----------------
 		setLayout(null);
@@ -45,8 +45,8 @@ public class PanelListaDoble extends JPanel {
 		btn_eliminar.setBounds(new Rectangle(115, 140, 98, 36));
 		btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				modelo_totales.addElement(li_eleAnadidos.getSelectedValue()); 
-				modelo_anadidos.removeElement(li_eleAnadidos.getSelectedValue()); 
+				modelo_totales.addElement(li_eleAnadidos.getSelectedValue());
+				modelo_anadidos.removeElement(li_eleAnadidos.getSelectedValue());
 				li_eleTotales.setSelectedIndex(0);
 			}
 		});
@@ -64,8 +64,20 @@ public class PanelListaDoble extends JPanel {
 		pa_anadidos.setViewportView(li_eleAnadidos);
 		li_eleTotales.setSelectedIndex(0);
 	}
-	
+
 	public void anadirElemento(Object obj) {
 		modelo_totales.addElement(obj);
+	}
+
+	public void filtrarElemento(String p_texto) {
+		if ("".equals(p_texto)) {
+			// Cargar modelo entero desde lista de conocimientos totales
+		}
+
+		for (int i = 0; i < modelo_totales.size(); i++) {
+			if (!((String) modelo_totales.get(i)).toLowerCase().contains(p_texto.toLowerCase())) {
+				modelo_totales.removeElementAt(i);
+			}
+		}
 	}
 }
