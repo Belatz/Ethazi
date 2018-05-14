@@ -41,6 +41,7 @@ public class VentanaPrincipal extends JFrame {
 	private PaneldePOfertas pOfertas;
 	private JTextField txField_buscar;
 
+	public static final int miPrimera = 0, miCentral = 1, miUltima = 2;
 	/**
 	 * Launch the application.
 	 */
@@ -71,15 +72,10 @@ public class VentanaPrincipal extends JFrame {
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
 		lanzarScrollPane();
+		lanzarPanelFiltro();
+		lanzarBarraHerramientas();
 
-		/*
-		 * jon:Lo retiro por el momento porque el scroll no funciona correctamente
-		 * dentro de el panel
-		 */
-		/*
-		 * JPanel pa_contenedorPaneles = new JPanel(); pa_contenedorPaneles.setBounds(5,
-		 * 57, 728, 426);
-		 */
+	
 
 	}
 
@@ -89,7 +85,19 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public void lanzarScrollPane() {
 		contentPane.setLayout(null);
+		JScrollPane scroll = new JScrollPane();
+		PaneldePOfertas pOfertas_1 = new PaneldePOfertas();
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(10, 60, 500, 440);
+		scroll.getVerticalScrollBar().setUnitIncrement(16);
+		scroll.setViewportView(pOfertas_1);
 
+		getContentPane().add(scroll);
+		contentPane.add(scroll);
+		
+	}
+	public void lanzarBarraHerramientas() {
 		JPanel pa_barraHerramientas = new JPanel();
 		pa_barraHerramientas.setLayout(null);
 		JButton btn_buscar = new JButton("");
@@ -127,19 +135,8 @@ public class VentanaPrincipal extends JFrame {
 		combo_menu.setName("");
 		combo_menu.setBounds(252, 0, 380, 50);
 		pa_barraHerramientas.add(combo_menu);
-
-		JScrollPane scroll = new JScrollPane();
-		PaneldePOfertas pOfertas_1 = new PaneldePOfertas();
-
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setBounds(10, 60, 500, 440);
-		scroll.getVerticalScrollBar().setUnitIncrement(16);
-		scroll.setViewportView(pOfertas_1);
-
-		getContentPane().add(scroll);
-		contentPane.add(scroll);
-
+	}
+	public void lanzarPanelFiltro() {
 		JPanel pa_contenedor = new JPanel();
 		pa_contenedor.setBounds(0, 49, 762, 488);
 		contentPane.add(pa_contenedor);
