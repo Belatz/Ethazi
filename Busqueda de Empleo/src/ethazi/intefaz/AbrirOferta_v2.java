@@ -159,7 +159,8 @@ public class AbrirOferta_v2 extends JPanel {
 		btnuddudc.setBounds(634, 40, 80, 35);
 		add(btnuddudc);
 	}
-//Intento de dejar los ojos tachados, pero no funciona
+
+	// Intento de dejar los ojos tachados, pero no funciona
 	public void paint(Graphics g) {
 		Hashtable<TextAttribute, Object> map = new Hashtable<TextAttribute, Object>();
 		Font font = new Font(Font.SERIF, Font.PLAIN, 24);
