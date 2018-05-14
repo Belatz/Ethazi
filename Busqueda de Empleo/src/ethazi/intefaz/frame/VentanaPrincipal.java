@@ -89,12 +89,12 @@ public class VentanaPrincipal extends JFrame {
 
 	}
 
-	public void crearPaneles() { 
+	public void crearPaneles() {
 		// Crear consultar ofertas
 		JPanel pa_buscarOfertas = new PanelConsultarOfertas();
 		pa_contenedor.add(pa_buscarOfertas);
 		// Crear analizar empresa
-		
+
 		if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea sus posibles ventanas
 			// Crear consultar ofertas adecuadas
 
@@ -103,19 +103,18 @@ public class VentanaPrincipal extends JFrame {
 			// Crear consultar conocimientos mas buscados
 
 			// Crear realizar solicitud
-			
+
 			// Crear abrir oferta
 			JPanel pa_abrirOferta;
-			pa_abrirOferta =  new PanelAbrirOfertaCandidato();
+			pa_abrirOferta = new PanelAbrirOfertaCandidato();
 			pa_contenedor.add(pa_abrirOferta);
 			// Crear ver perfil
 
 			// Crear editar perfil
 
-		
 		} else { // Si es empresa crea sus posibles ventanas
 			// Crear consultar candidatos
-			
+
 			// Crear consultar sus ofertas
 
 			// Crear publicar oferta
@@ -131,16 +130,13 @@ public class VentanaPrincipal extends JFrame {
 
 			// Crear abrir oferta
 			JPanel pa_abrirOferta;
-			pa_abrirOferta =  new PanelAbrirOfertaEmpresa();
+			pa_abrirOferta = new PanelAbrirOfertaEmpresa();
 			pa_contenedor.add(pa_abrirOferta);
 			// Crear ver perfil
 
 			// Crear editar perfil
 
 		}
-
-
-
 
 	}
 
