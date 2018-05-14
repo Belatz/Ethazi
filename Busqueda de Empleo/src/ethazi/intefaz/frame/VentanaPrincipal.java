@@ -12,6 +12,7 @@ import ethazi.intefaz.paneles.PanelAbrirOfertaCandidato;
 import ethazi.intefaz.paneles.PanelAbrirOfertaEmpresa;
 import ethazi.intefaz.paneles.PanelAtrasAlante;
 import ethazi.intefaz.paneles.PanelConsultarOfertas;
+import ethazi.intefaz.paneles.PanelEditarOferta;
 import ethazi.intefaz.paneles.PanelFiltrosOferta;
 import ethazi.intefaz.paneles.PanelPublicarOferta;
 import ethazi.intefaz.paneles.PanelFiltrosOferta;
@@ -121,7 +122,8 @@ public class VentanaPrincipal extends JFrame {
 			JPanel pa_publicarOferta = new PanelPublicarOferta();
 			pa_contenedor.add(pa_publicarOferta);
 			// Crear editar oferta
-
+			JPanel pa_editarOferta = new PanelEditarOferta();
+			pa_contenedor.add(pa_editarOferta);
 			// Crear analizar candidato
 
 			// Crear analizar solicitudes
