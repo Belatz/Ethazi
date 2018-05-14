@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JSeparator;
@@ -30,6 +31,7 @@ public class RegistroCandidato extends JPanel {
 	private JTextField textField_8;
 	private JTextField textField_9;
 	private JTextField textField_11;
+	String mensaje = "¿Estas seguro?";
 
 	/**
 	 * Create the panel.
@@ -41,11 +43,11 @@ public class RegistroCandidato extends JPanel {
 		lblNombreDeUsuario.setBounds(10, 70, 111, 14);
 		add(lblNombreDeUsuario);
 
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
+		JLabel lblContrasea = new JLabel("Contrasena:");
 		lblContrasea.setBounds(320, 70, 74, 14);
 		add(lblContrasea);
 
-		JLabel lblCorreoElectronico = new JLabel("Correo electr\u00F3nico:");
+		JLabel lblCorreoElectronico = new JLabel("Correo electronico:");
 		lblCorreoElectronico.setBounds(10, 193, 111, 14);
 		add(lblCorreoElectronico);
 
@@ -62,66 +64,66 @@ public class RegistroCandidato extends JPanel {
 		lblNewLabel_2.setBounds(320, 111, 46, 14);
 		add(lblNewLabel_2);
 
-		JLabel lblNewLabel_3 = new JLabel("Direcci\u00F3n:");
+		JLabel lblNewLabel_3 = new JLabel("Direccion:");
 		lblNewLabel_3.setBounds(10, 149, 58, 14);
 		add(lblNewLabel_3);
 
-		JLabel lblNewLabel_4 = new JLabel("Tel\u00E9fono:");
+		JLabel lblNewLabel_4 = new JLabel("Telefono:");
 		lblNewLabel_4.setBounds(320, 193, 46, 14);
 		add(lblNewLabel_4);
 
 		textField = new JTextField();
-		textField.setBounds(116, 71, 136, 20);
+		textField.setBounds(116, 68, 136, 17);
 		add(textField);
 		textField.setColumns(10);
 
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(404, 68, 136, 20);
+		textField_1.setBounds(404, 68, 136, 17);
 		add(textField_1);
 
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(116, 108, 136, 20);
+		textField_2.setBounds(116, 108, 136, 17);
 		add(textField_2);
 
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(404, 108, 136, 20);
+		textField_3.setBounds(404, 108, 136, 17);
 		add(textField_3);
 
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(116, 147, 424, 20);
+		textField_4.setBounds(116, 147, 424, 17);
 		add(textField_4);
 
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		textField_5.setBounds(116, 191, 181, 20);
+		textField_5.setBounds(116, 191, 181, 17);
 		add(textField_5);
 
 		textField_6 = new JTextField();
 		textField_6.setColumns(10);
-		textField_6.setBounds(404, 190, 136, 20);
+		textField_6.setBounds(404, 190, 136, 17);
 		add(textField_6);
 
 		JLabel lblConocimientosTotales = new JLabel("Conocimientos totales:");
 		lblConocimientosTotales.setBounds(10, 242, 124, 14);
 		add(lblConocimientosTotales);
 
-		String[] conocimientos = { "", "Inglés", "Francés", "Alemán", "Euskera", "Java", "C", "C#", "C++", "Javascript",
-				"XML", "HTML" };
-		JComboBox comboBox = new JComboBox(conocimientos);
+		String[] conocimientos = { "", "Java", "C", "C#", "C++", "Javascript", "CSS", "XML", "HTML", "XQuery" };
+
+		JComboBox<Object> comboBox = new JComboBox<Object>(conocimientos);
 		comboBox.setEditable(true);
 		comboBox.setToolTipText("");
 		comboBox.setBounds(126, 237, 119, 24);
 		add(comboBox);
 
 		JTextArea txtrConocimientos = new JTextArea();
-		txtrConocimientos.setBounds(293, 262, 247, 152);
+		txtrConocimientos.setBounds(293, 262, 247, 146);
 		add(txtrConocimientos);
 
-		JLabel lblConocimientos = new JLabel("Lista de Conocimientos:");
+		JLabel lblConocimientos = new JLabel("Lista de conocimientos:");
 		lblConocimientos.setBounds(293, 242, 173, 14);
 		add(lblConocimientos);
 
@@ -174,7 +176,7 @@ public class RegistroCandidato extends JPanel {
 		add(button);
 
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(293, 463, 247, 152);
+		textArea.setBounds(293, 463, 247, 146);
 		add(textArea);
 
 		JRadioButton rdbtnSi = new JRadioButton("Si");
@@ -215,28 +217,28 @@ public class RegistroCandidato extends JPanel {
 
 		JButton btnRegistrarse = new JButton("Registrarse");
 		btnRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnRegistrarse.setBounds(416, 697, 124, 29);
+		btnRegistrarse.setBounds(416, 710, 124, 29);
 		add(btnRegistrarse);
 		btnRegistrarse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				JOptionPane aux = new JOptionPane();
-				aux.createDialog(null, "Confirmación").setVisible(true);
-				;
+				JDialog d = aux.createDialog(null, mensaje);
+				d.setVisible(true);
 			}
 		});
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "helouda");
+				JOptionPane aux = new JOptionPane();
+				JDialog d = aux.createDialog(null, mensaje);
+				d.setVisible(true);
 			}
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnCancelar.setBounds(30, 697, 124, 29);
+		btnCancelar.setBounds(29, 710, 124, 29);
 		add(btnCancelar);
-
 	}
 }
