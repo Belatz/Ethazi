@@ -40,8 +40,12 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private PaneldePOfertas pOfertas;
 	private JTextField txField_buscar;
+	private JScrollPane scroll = new JScrollPane();
+	private PaneldePOfertas pOfertas_1 = new PaneldePOfertas();
+	private JPanel pa_contenedor = new JPanel();
+	private JPanel pa_buscarOfertas = new JPanel();
+	public static final byte miPrimera = 0, miCentral = 1, miUltima = 2;
 
-	public static final int miPrimera = 0, miCentral = 1, miUltima = 2;
 	/**
 	 * Launch the application.
 	 */
@@ -71,11 +75,9 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
-		lanzarScrollPane();
+
 		lanzarPanelFiltro();
 		lanzarBarraHerramientas();
-
-	
 
 	}
 
@@ -85,18 +87,18 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public void lanzarScrollPane() {
 		contentPane.setLayout(null);
-		JScrollPane scroll = new JScrollPane();
-		PaneldePOfertas pOfertas_1 = new PaneldePOfertas();
+
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setBounds(10, 60, 500, 440);
+		scroll.setBounds(10, 0, 500, 443);
 		scroll.getVerticalScrollBar().setUnitIncrement(16);
 		scroll.setViewportView(pOfertas_1);
 
-		getContentPane().add(scroll);
-		contentPane.add(scroll);
-		
+		// getContentPane().add(scroll);
+		pa_buscarOfertas.add(scroll);
+
 	}
+
 	public void lanzarBarraHerramientas() {
 		JPanel pa_barraHerramientas = new JPanel();
 		pa_barraHerramientas.setLayout(null);
@@ -136,18 +138,71 @@ public class VentanaPrincipal extends JFrame {
 		combo_menu.setBounds(252, 0, 380, 50);
 		pa_barraHerramientas.add(combo_menu);
 	}
+
 	public void lanzarPanelFiltro() {
-		JPanel pa_contenedor = new JPanel();
-		pa_contenedor.setBounds(0, 49, 762, 488);
+
+		pa_contenedor.setBounds(0, 55, 762, 488);
 		contentPane.add(pa_contenedor);
 		pa_contenedor.setLayout(new CardLayout(0, 0));
 
-		JPanel pa_buscarOfertas = new JPanel();
 		pa_contenedor.add(pa_buscarOfertas, "name_745028646498");
 		pa_buscarOfertas.setLayout(null);
 
 		JScrollPane pa_filtros = new PanelFiltrosOferta();
-		pa_filtros.setBounds(512, 0, 247, 488);
+		pa_filtros.setBounds(512, 0, 247, 482);
 		pa_buscarOfertas.add(pa_filtros);
+		lanzarScrollPane();
+		panelAtrasYAlante(miCentral);
+	}
+
+	public void panelAtrasYAlante(byte p_ubicacionPagina) {
+
+		JPanel _panelBotonAtrasYAlante = new JPanel();
+		_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
+		// _panelBotonAtrasYAlante.setBackground(Color.RED);
+		pa_buscarOfertas.add(_panelBotonAtrasYAlante);
+		_panelBotonAtrasYAlante.setLayout(null);
+		JButton _siguiente = new JButton("Siguiente");
+		JButton _anterior = new JButton("Anterior");
+
+		switch (p_ubicacionPagina) {
+		case 0:
+			_siguiente.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					// codigo que ejecutara
+				}
+			});
+			_siguiente.setBounds(295, 0, 105, 34);
+			_panelBotonAtrasYAlante.add(_siguiente);
+			break;
+		case 1:
+			_siguiente.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					// codigo que ejecutara
+				}
+			});
+			_siguiente.setBounds(295, 0, 105, 34);
+			_panelBotonAtrasYAlante.add(_siguiente);
+
+			_anterior.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					// codigo que ejecutara
+				}
+			});
+			_anterior.setBounds(110, 0, 105, 34);
+			_panelBotonAtrasYAlante.add(_anterior);
+
+			break;
+		case 2:
+			_anterior.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					// codigo que ejecutara
+				}
+			});
+			_anterior.setBounds(110, 0, 105, 34);
+			_panelBotonAtrasYAlante.add(_anterior);
+
+			break;
+		}
 	}
 }
