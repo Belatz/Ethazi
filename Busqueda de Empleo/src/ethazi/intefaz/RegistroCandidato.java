@@ -107,7 +107,7 @@ public class RegistroCandidato extends JPanel {
 		textField_6.setBounds(404, 190, 136, 17);
 		add(textField_6);
 
-		JLabel lblConocimientosTotales = new JLabel("Conocimientos totales:");
+		JLabel lblConocimientosTotales = new JLabel("Conocimientos:");
 		lblConocimientosTotales.setBounds(10, 242, 124, 14);
 		add(lblConocimientosTotales);
 
