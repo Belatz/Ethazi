@@ -5,8 +5,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ethazi.aplicacion.Aplicacion;
+import ethazi.aplicacion.Candidato;
 import ethazi.intefaz.PaneldePOfertas;
+import ethazi.intefaz.paneles.PanelAbrirOfertaCandidato;
+import ethazi.intefaz.paneles.PanelAbrirOfertaEmpresa;
+import ethazi.intefaz.paneles.PanelAtrasAlante;
+import ethazi.intefaz.paneles.PanelConsultarOfertas;
 import ethazi.intefaz.paneles.PanelFiltrosOferta;
+import ethazi.intefaz.paneles.PanelPublicarOferta;
 import ethazi.intefaz.paneles.PanelFiltrosOferta;
 
 import javax.swing.JLabel;
@@ -38,13 +45,8 @@ import javax.swing.JSplitPane;
 
 public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
-	private PaneldePOfertas pOfertas;
 	private JTextField txField_buscar;
-	private JScrollPane scroll = new JScrollPane();
-	private PaneldePOfertas pOfertas_1 = new PaneldePOfertas();
 	private JPanel pa_contenedor = new JPanel();
-	private JPanel pa_buscarOfertas = new JPanel();
-	public static final byte miPrimera = 0, miCentral = 1, miUltima = 2;
 
 	/**
 	 * Launch the application.
@@ -76,26 +78,69 @@ public class VentanaPrincipal extends JFrame {
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
 
-		lanzarPanelFiltro();
 		lanzarBarraHerramientas();
+
+		// Crear contenedor
+		pa_contenedor.setBounds(0, 55, 762, 488);
+		contentPane.add(pa_contenedor);
+		pa_contenedor.setLayout(new CardLayout(0, 0));
+
+		crearPaneles();
 
 	}
 
-	/*
-	 * Jon: Este metodo tiene un JScrollPane y un PaneldeOfertas Configura el
-	 * JScrollPane Añade al JScrollPane el PaneldeOfertas Y lanza el JScrollPane
-	 */
-	public void lanzarScrollPane() {
-		contentPane.setLayout(null);
+	public void crearPaneles() { 
+		// Crear consultar ofertas
+		JPanel pa_buscarOfertas = new PanelConsultarOfertas();
+		pa_contenedor.add(pa_buscarOfertas);
+		// Crear analizar empresa
+		
+		if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea sus posibles ventanas
+			// Crear consultar ofertas adecuadas
 
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scroll.setBounds(10, 0, 500, 443);
-		scroll.getVerticalScrollBar().setUnitIncrement(16);
-		scroll.setViewportView(pOfertas_1);
+			// Crear consultar sus solicitudes
 
-		// getContentPane().add(scroll);
-		pa_buscarOfertas.add(scroll);
+			// Crear consultar conocimientos mas buscados
+
+			// Crear realizar solicitud
+			
+			// Crear abrir oferta
+			JPanel pa_abrirOferta;
+			pa_abrirOferta =  new PanelAbrirOfertaCandidato();
+			pa_contenedor.add(pa_abrirOferta);
+			// Crear ver perfil
+
+			// Crear editar perfil
+
+		
+		} else { // Si es empresa crea sus posibles ventanas
+			// Crear consultar candidatos
+			
+			// Crear consultar sus ofertas
+
+			// Crear publicar oferta
+			JPanel pa_publicarOferta = new PanelPublicarOferta();
+			pa_contenedor.add(pa_publicarOferta);
+			// Crear editar oferta
+
+			// Crear analizar candidato
+
+			// Crear analizar solicitudes
+
+			// Crear consultar ofertas con solicitudes
+
+			// Crear abrir oferta
+			JPanel pa_abrirOferta;
+			pa_abrirOferta =  new PanelAbrirOfertaEmpresa();
+			pa_contenedor.add(pa_abrirOferta);
+			// Crear ver perfil
+
+			// Crear editar perfil
+
+		}
+
+
+
 
 	}
 
@@ -137,72 +182,5 @@ public class VentanaPrincipal extends JFrame {
 		combo_menu.setName("");
 		combo_menu.setBounds(252, 0, 380, 50);
 		pa_barraHerramientas.add(combo_menu);
-	}
-
-	public void lanzarPanelFiltro() {
-
-		pa_contenedor.setBounds(0, 55, 762, 488);
-		contentPane.add(pa_contenedor);
-		pa_contenedor.setLayout(new CardLayout(0, 0));
-
-		pa_contenedor.add(pa_buscarOfertas, "name_745028646498");
-		pa_buscarOfertas.setLayout(null);
-
-		JScrollPane pa_filtros = new PanelFiltrosOferta();
-		pa_filtros.setBounds(512, 0, 247, 482);
-		pa_buscarOfertas.add(pa_filtros);
-		lanzarScrollPane();
-		panelAtrasYAlante(miCentral);
-	}
-
-	public void panelAtrasYAlante(byte p_ubicacionPagina) {
-
-		JPanel _panelBotonAtrasYAlante = new JPanel();
-		_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
-		// _panelBotonAtrasYAlante.setBackground(Color.RED);
-		pa_buscarOfertas.add(_panelBotonAtrasYAlante);
-		_panelBotonAtrasYAlante.setLayout(null);
-		JButton _siguiente = new JButton("Siguiente");
-		JButton _anterior = new JButton("Anterior");
-
-		switch (p_ubicacionPagina) {
-		case 0:
-			_siguiente.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					// codigo que ejecutara
-				}
-			});
-			_siguiente.setBounds(295, 0, 105, 34);
-			_panelBotonAtrasYAlante.add(_siguiente);
-			break;
-		case 1:
-			_siguiente.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					// codigo que ejecutara
-				}
-			});
-			_siguiente.setBounds(295, 0, 105, 34);
-			_panelBotonAtrasYAlante.add(_siguiente);
-
-			_anterior.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					// codigo que ejecutara
-				}
-			});
-			_anterior.setBounds(110, 0, 105, 34);
-			_panelBotonAtrasYAlante.add(_anterior);
-
-			break;
-		case 2:
-			_anterior.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					// codigo que ejecutara
-				}
-			});
-			_anterior.setBounds(110, 0, 105, 34);
-			_panelBotonAtrasYAlante.add(_anterior);
-
-			break;
-		}
 	}
 }
