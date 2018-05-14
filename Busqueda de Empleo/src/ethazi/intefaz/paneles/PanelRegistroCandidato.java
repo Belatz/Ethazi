@@ -1,4 +1,4 @@
-package ethazi.intefaz;
+package ethazi.intefaz.paneles;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -19,7 +19,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class RegistroCandidato extends JPanel {
+public class PanelRegistroCandidato extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -36,7 +36,7 @@ public class RegistroCandidato extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public RegistroCandidato() {
+	public PanelRegistroCandidato() {
 		setLayout(null);
 
 		JLabel lblNombreDeUsuario = new JLabel("Nombre de Usuario:");

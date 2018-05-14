@@ -1,4 +1,4 @@
-package ethazi.intefaz;
+package ethazi.intefaz.paneles;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class AbrirOferta_v2 extends JPanel {
+public class PanelAbrirOfertaEmpresa extends JPanel {
 
 	private JTextField textField;
 	private JTextField textField_1;
@@ -29,7 +29,7 @@ public class AbrirOferta_v2 extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AbrirOferta_v2() {
+	public PanelAbrirOfertaEmpresa() {
 		setLayout(null);
 
 		JLabel lblOferta = new JLabel("Oferta");
