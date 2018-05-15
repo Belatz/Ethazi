@@ -17,21 +17,14 @@ public class PaneldePOfertas extends JPanel  {
 	 * funcion de los parametros
 	 * la cordenada es en que punto vertical aparece el siguiente subpanel*/
 
-	ArrayList<PanelOferta> listPOfer;
-	private PanelOferta pofer;
+	ArrayList<Elemento_A_Listar> listPOfer;
+	private Elemento_A_Listar pofer;
 
-	public PaneldePOfertas() {
+	public PaneldePOfertas(ArrayList<Elemento_A_Listar> pofer) {
 		int cont = 0;
 
 		setLayout(null);
 		setPreferredSize(new Dimension(400, 1200));
-		listPOfer = new ArrayList<PanelOferta>();
-		while (cont < 10) {
-
-			pofer = new PanelOferta();
-			listPOfer.add(pofer);
-			cont++;
-		}
 		iniciarComponentes();
 
 	}

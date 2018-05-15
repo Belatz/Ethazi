@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JInternalFrame;
@@ -30,7 +31,7 @@ public class VentanaPrincipal extends JFrame {
 //jon:breve descripcion en su clase.
 	
 	private static JPanel contentPane;
-	private PaneldePOfertas pOfertas;
+	private Elemento_A_Listar aux;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -85,12 +86,17 @@ public class VentanaPrincipal extends JFrame {
 	public void lancarScrollPane() {
 		
 		JScrollPane scroll = new JScrollPane();
-		pOfertas = new PaneldePOfertas();
+		ArrayList<Elemento_A_Listar> array=new ArrayList<Elemento_A_Listar>(20);
+		aux=new Elemento_A_Listar(new Solicitud(new Oferta("titulo", "empresa", "descripcion", 500), new Candidato("nestor", "echevarria"), "aaaaaa"),(byte)0);
+		for(int i=0;i<20;i++)
+			array.add(aux);
+		//PaneldePOfertas aux2=new PaneldePOfertas();
+		Elementos_Listados aux2=new Elementos_Listados(array);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(5, 50, 500, 500);
 		scroll.getVerticalScrollBar().setUnitIncrement(16);
-		scroll.setViewportView(pOfertas);
+		scroll.setViewportView(aux2);
 		
 		getContentPane().add(scroll);
 		contentPane.add(scroll);
