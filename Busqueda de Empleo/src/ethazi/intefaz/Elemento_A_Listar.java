@@ -31,7 +31,7 @@ public class Elemento_A_Listar extends JPanel {
 
 	public Elemento_A_Listar(Elemento_Listable p_elemento, byte p_constante_opcion) {
 		miPaElemento_A_Listar=new JPanel();
-		miPaElemento_A_Listar.setBounds(0, 0, 500, 50);
+		miPaElemento_A_Listar.setBounds(0, 0, 450, 50);
 		setLayout(null);
 		
 		switch (p_constante_opcion) {

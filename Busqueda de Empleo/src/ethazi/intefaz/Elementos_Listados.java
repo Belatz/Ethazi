@@ -15,13 +15,12 @@ public class Elementos_Listados extends JPanel{
 
 	public Elementos_Listados(ArrayList<Elemento_A_Listar> arrayElementosListables) {
 		setLayout(null);
-		setPreferredSize(new Dimension(400, 1200));
-		for(int i=0;i<C_PANELESTOTALES;i++)
-		{
-			arrayElementosListables.get(i);
-		}
+		setAlignmentX(0);
+		setAlignmentY(0);
+		setPreferredSize(new Dimension(450,1100));
 		for(int i=0, coordenada=60;i< C_PANELESTOTALES;i++,coordenada+=100)
-			add(arrayElementosListables.get(i)).setBounds(10,coordenada,450,91);
+			add(arrayElementosListables.get(i)).setBounds(10,coordenada,400,91);
+		
 	}
 
 }
