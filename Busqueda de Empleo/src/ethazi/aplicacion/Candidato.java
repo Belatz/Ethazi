@@ -29,9 +29,9 @@ public class Candidato extends Usuario {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-
-	public Calendar getFechaNac() {
-		return fechaNac;
+	//Hacer el método que devuelva la fecha como String
+	public String getFechaNac() {
+		return fechaNac.toString();
 	}
 
 	public void setFechaNac(Calendar fechaNac) {
