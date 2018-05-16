@@ -3,6 +3,8 @@ package ethazi.intefaz;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import ethazi.aplicacion.Oferta;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -72,7 +74,7 @@ public class Elemento_A_Listar extends JPanel {
 		}
 			break;
 		case 1: {
-			miLblAnalizar=new JLabel(((Oferta)p_elemento).getEmpresa());//Cuando Empresa sea una Clase hay q hacer el getter del nombre
+			miLblAnalizar=new JLabel(((Oferta) p_elemento).getEmpresa());//Cuando Empresa sea una Clase hay q hacer el getter del nombre
 			miLblAnalizar.setBounds(364, 1, 117, 40);
 			add(miLblAnalizar);
 			miLblAbrir_Elemento=new JLabel(((Oferta)p_elemento).getInfo());

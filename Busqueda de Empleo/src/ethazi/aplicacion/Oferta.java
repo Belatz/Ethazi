@@ -1,5 +1,7 @@
 package ethazi.aplicacion;
 
+import ethazi.intefaz.Elemento_Listable;
+
 public class Oferta implements Elemento_Listable {
 	/*jon:esta clase solo es de pruebas*/
 	private String titulo;
@@ -23,7 +25,7 @@ public class Oferta implements Elemento_Listable {
 		this.titulo = titulo;
 	}
 
-	protected String getEmpresa() {
+	public String getEmpresa() {
 		return empresa;
 	}
 
