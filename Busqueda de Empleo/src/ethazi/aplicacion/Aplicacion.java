@@ -2,7 +2,6 @@ package ethazi.aplicacion;
 
 import java.awt.EventQueue;
 
-import ethazi.bd.Conexion;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
