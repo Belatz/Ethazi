@@ -47,12 +47,12 @@ import javax.swing.JSplitPane;
 public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JTextField txField_buscar;
-	private JPanel pa_contenedor = new JPanel();
+	private JPanel pa_contenedor = new JPanel(); 
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void ejecutar() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

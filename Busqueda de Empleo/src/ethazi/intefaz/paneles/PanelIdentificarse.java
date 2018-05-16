@@ -12,6 +12,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ethazi.intefaz.emergentes.RecuperarContrasena;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelIdentificarse extends JPanel {
 	private JPasswordField pssField_contrasena;
@@ -39,6 +41,12 @@ public class PanelIdentificarse extends JPanel {
 		this.add(btn_registrarse);
 
 		JButton btn_entrar = new JButton("Entrar");
+		btn_entrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Buscar usuario
+				// Aplicacion.setUsuario(usuario);
+			}
+		});
 		btn_entrar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btn_entrar.setBounds(84, 170, 126, 23);
 		this.add(btn_entrar);
