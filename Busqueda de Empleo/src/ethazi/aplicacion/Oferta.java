@@ -1,4 +1,4 @@
-package ethazi.intefaz;
+package ethazi.aplicacion;
 
 public class Oferta implements Elemento_Listable {
 	/*jon:esta clase solo es de pruebas*/
