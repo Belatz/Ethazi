@@ -12,6 +12,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ethazi.intefaz.emergentes.RecuperarContrasena;
+import ethazi.intefaz.frame.VentanaIdentificarse;
+import ethazi.intefaz.frame.VentanaPrincipal;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -44,7 +47,12 @@ public class PanelIdentificarse extends JPanel {
 		btn_entrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Buscar usuario
+				// Confirmar usuario
+				if (true) { // METER CONFIRMACION EN VEZ DE TRUE
 				// Aplicacion.setUsuario(usuario);
+					VentanaIdentificarse.cerrar();
+					VentanaPrincipal.ejecutar(); 
+				}
 			}
 		});
 		btn_entrar.setFont(new Font("Tahoma", Font.BOLD, 11));

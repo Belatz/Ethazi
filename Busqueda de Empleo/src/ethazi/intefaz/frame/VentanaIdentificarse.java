@@ -2,6 +2,8 @@ package ethazi.intefaz.frame;
 
 import java.awt.CardLayout;
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -32,6 +34,10 @@ public class VentanaIdentificarse extends JFrame {
 				}
 			}
 		});
+	}
+	
+	public static void cerrar() {
+		frame.setVisible(false);
 	}
 
 	/**
