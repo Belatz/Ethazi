@@ -25,62 +25,39 @@ public abstract class Usuario {
 		this.miTelefono = miTelefono;
 		this.miAniosExp = miAniosExp;
 	}
-
-	protected String getMiNick() {
+	
+	public String getMiNick() {
 		return miNick;
 	}
 
-	protected void setMiNick(String miNick) {
+	public void setMiNick(String miNick) {
 		this.miNick = miNick;
 	}
 
-	protected String getMiPassword() {
+	public String getMiPassword() {
 		return miPassword;
 	}
 
-	protected void setMiPassword(String miPassword) {
+	public void setMiPassword(String miPassword) {
 		this.miPassword = miPassword;
 	}
 
-	protected String getMiNombre() {
+	public String getMiNombre() {
 		return miNombre;
 	}
 
-	protected void setMiNombre(String miNombre) {
+	public void setMiNombre(String miNombre) {
 		this.miNombre = miNombre;
 	}
 
-	protected String getMiNumID() {
+	public String getMiNumID() {
 		return miNumID;
 	}
 
-	protected void setMiNumID(String miNumID) {
+	public void setMiNumID(String miNumID) {
 		this.miNumID = miNumID;
 	}
 
-	protected String getMiEmail() {
-		return miEmail;
-	}
-
-	protected void setMiEmail(String miEmail) {
-		this.miEmail = miEmail;
-	}
-
-	protected String getMiTelefono() {
-		return miTelefono;
-	}
-
-	protected void setMiTelefono(String miTelefono) {
-		this.miTelefono = miTelefono;
-	}
-
-	protected byte getMiAniosExp() {
-		return miAniosExp;
-	}
-
-	protected void setMiAniosExp(byte miAniosExp) {
-		this.miAniosExp = miAniosExp;
-	}
 	public String getMiDireccion() {
 		return miDireccion;
 	}
@@ -88,6 +65,39 @@ public abstract class Usuario {
 	public void setMiDireccion(String miDireccion) {
 		this.miDireccion = miDireccion;
 	}
+
+	public String getMiEmail() {
+		return miEmail;
+	}
+
+	public void setMiEmail(String miEmail) {
+		this.miEmail = miEmail;
+	}
+
+	public String getMiTelefono() {
+		return miTelefono;
+	}
+
+	public void setMiTelefono(String miTelefono) {
+		this.miTelefono = miTelefono;
+	}
+
+	public byte getMiAniosExp() {
+		return miAniosExp;
+	}
+
+	public void setMiAniosExp(byte miAniosExp) {
+		this.miAniosExp = miAniosExp;
+	}
+
+	public static ArrayList<String> getMiConocimientosTotales() {
+		return miConocimientosTotales;
+	}
+
+	public static void setMiConocimientosTotales(ArrayList<String> miConocimientosTotales) {
+		Usuario.miConocimientosTotales = miConocimientosTotales;
+	}
+
 	//Titulo puede ser solo una parte de el titulo y que el sistema busque titulos que lo contengan
 	public static void consultarOfertas( String _titulo, String _Lugar, Contrato _Tipo,
 		Empresa _Empresa, int _SueldoMax,int _SueldoMin, byte _AniosExp,
