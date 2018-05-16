@@ -22,31 +22,83 @@ public class Candidato extends Usuario {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void realizarSolicitud(Oferta oferta) {
-
-	}
-	
-	public static ArrayList<String> consulConoMasDemand(){
-		ArrayList<String> conMasDemand = null;
-		return conMasDemand;
-		
-	}
-	
-	public ArrayList<Oferta> consulOfertasAdecuadas() {
-		ArrayList<Oferta> ofertasAdecuadas = null;
-		return ofertasAdecuadas;
+	public String getApellidos() {
+		return apellidos;
 	}
 
-	@Override
-	public void editarPerfil() {
-		// TODO Auto-generated method stub
-
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 
-	@Override
-	public void verPerfil() {
-		// TODO Auto-generated method stub
-
+	public Calendar getFechaNac() {
+		return fechaNac;
 	}
 
+	public void setFechaNac(Calendar fechaNac) {
+		this.fechaNac = fechaNac;
+	}
+
+	public boolean isCarnet() {
+		return carnet;
+	}
+
+	public void setCarnet(boolean carnet) {
+		this.carnet = carnet;
+	}
+
+	public boolean isCochePropio() {
+		return cochePropio;
+	}
+
+	public void setCochePropio(boolean cochePropio) {
+		this.cochePropio = cochePropio;
+	}
+
+	public boolean isDisViajar() {
+		return disViajar;
+	}
+
+	public void setDisViajar(boolean disViajar) {
+		this.disViajar = disViajar;
+	}
+
+	public String getEstudios() {
+		return estudios;
+	}
+
+	public void setEstudios(String estudios) {
+		this.estudios = estudios;
+	}
+
+	public ArrayList<String> getConocimientos() {
+		return conocimientos;
+	}
+
+	public void setConocimientos(ArrayList<String> conocimientos) {
+		this.conocimientos = conocimientos;
+	}
+
+	public String getOtrosConocimientos() {
+		return otrosConocimientos;
+	}
+
+	public void setOtrosConocimientos(String otrosConocimientos) {
+		this.otrosConocimientos = otrosConocimientos;
+	}
+
+	public String getVidaLaboral() {
+		return vidaLaboral;
+	}
+
+	public void setVidaLaboral(String vidaLaboral) {
+		this.vidaLaboral = vidaLaboral;
+	}
+
+	public byte getExperienciaProfesional() {
+		return experienciaProfesional;
+	}
+
+	public void setExperienciaProfesional(byte experienciaProfesional) {
+		this.experienciaProfesional = experienciaProfesional;
+	}
 }
