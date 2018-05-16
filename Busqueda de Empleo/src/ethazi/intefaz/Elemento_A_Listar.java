@@ -14,7 +14,7 @@ public class Elemento_A_Listar extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JPanel miPaElemento_A_Listar;
+	//private JPanel miPaElemento_A_Listar;
 	
 	private JButton miBtnEliminar;
 	private JButton miBtnCambiar_Estado;
@@ -30,8 +30,8 @@ public class Elemento_A_Listar extends JPanel {
 	public final static byte C_BUSCAR_CANDIDATOS = 5;
 
 	public Elemento_A_Listar(Elemento_Listable p_elemento, byte p_constante_opcion) {
-		miPaElemento_A_Listar=new JPanel();
-		miPaElemento_A_Listar.setBounds(0, 0, 450, 50);
+		//miPaElemento_A_Listar=new JPanel();
+		/*miPaElemento_A_Listar.*/setBounds(0, 0, 450, 50);
 		setLayout(null);
 		
 		switch (p_constante_opcion) {
@@ -161,7 +161,10 @@ public class Elemento_A_Listar extends JPanel {
 			miLblAnalizar=new JLabel(((Solicitud)p_elemento).getInfo());
 			miLblAnalizar.setBounds(0, 33, 471, 28);
 			add(miLblAnalizar);
-			miLblAbrir_Elemento=new JLabel(((Solicitud)p_elemento).getDescrip().substring(0,50 )+"...");
+			if(((Solicitud)p_elemento).getInfo().length()>50)
+				miLblAbrir_Elemento=new JLabel(((Solicitud)p_elemento).getDescrip().substring(0,50 )+"...");
+			else
+				miLblAbrir_Elemento=new JLabel(((Solicitud)p_elemento).getDescrip()+"...");
 			miLblAbrir_Elemento.setBounds(0, 0, 471, 22);
 			add(miLblAbrir_Elemento);
 			//Codificar 
@@ -199,13 +202,13 @@ public class Elemento_A_Listar extends JPanel {
 		}
 	}
 
-	public JPanel getMiPaElemento_A_Listar() {
+	/*public JPanel getMiPaElemento_A_Listar() {
 		return miPaElemento_A_Listar;
 	}
 
 	public void setMiPaElemento_A_Listar(JPanel miPaElemento_A_Listar) {
 		this.miPaElemento_A_Listar = miPaElemento_A_Listar;
-	}
+	}*/
 
 	public JButton getMiBtnEliminar() {
 		return miBtnEliminar;

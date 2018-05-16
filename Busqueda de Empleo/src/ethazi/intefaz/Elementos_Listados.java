@@ -1,5 +1,6 @@
 package ethazi.intefaz;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
@@ -17,9 +18,14 @@ public class Elementos_Listados extends JPanel{
 		setLayout(null);
 		setAlignmentX(0);
 		setAlignmentY(0);
-		setPreferredSize(new Dimension(450,1100));
-		for(int i=0, coordenada=60;i< C_PANELESTOTALES;i++,coordenada+=100)
-			add(arrayElementosListables.get(i)).setBounds(10,coordenada,400,91);
+		setPreferredSize(new Dimension(600,1050));
+		for(int i=0, coordenada=0;i< C_PANELESTOTALES;i++,coordenada+=100)
+		{
+			arrayElementosListables.get(i).setBounds(10,coordenada,500,91);
+			add(arrayElementosListables.get(i));
+		}
+		
+			
 		
 	}
 

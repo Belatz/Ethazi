@@ -17,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
@@ -59,7 +60,7 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
-		lancarScrollPane();
+		//lanzarScrollPane(array); pasar un array de elementos paneles
 		
 
 		
@@ -83,22 +84,18 @@ public class VentanaPrincipal extends JFrame {
 		 */
 
 	}
-	public void lancarScrollPane() {
+	public void lanzarScrollPane(ArrayList<Elemento_A_Listar>array) {
 		
 		JScrollPane scroll = new JScrollPane();
-		ArrayList<Elemento_A_Listar> array=new ArrayList<Elemento_A_Listar>(20);
-		aux=new Elemento_A_Listar(new Solicitud(new Oferta("titulo", "empresa", "descripcion", 500), new Candidato("nestor", "echevarria"), "aaaaaa"),(byte)0);
-		for(int i=0;i<20;i++)
-			array.add(aux);
-		//PaneldePOfertas aux2=new PaneldePOfertas();
+		
 		Elementos_Listados aux2=new Elementos_Listados(array);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(5, 50, 500, 500);
 		scroll.getVerticalScrollBar().setUnitIncrement(16);
 		scroll.setViewportView(aux2);
-		
 		getContentPane().add(scroll);
 		contentPane.add(scroll);
 	}
+	
 }
