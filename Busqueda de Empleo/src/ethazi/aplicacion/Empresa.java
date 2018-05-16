@@ -17,6 +17,37 @@ public class Empresa extends Usuario {
 		this.miDescripcion = miDescripcion;
 		this.miOfertas = miOfertas;
 	}
+	
+	public void aniadirOferta(Oferta oferta) {
+		miOfertas.add(oferta);
+	}
+	public void borrarOferta(Oferta oferta) {
+
+	}
+
+	public String getMiContacto() {
+		return miContacto;
+	}
+
+
+
+	public void setMiContacto(String miContacto) {
+		this.miContacto = miContacto;
+	}
+
+
+
+	public String getMiDescripcion() {
+		return miDescripcion;
+	}
+
+
+
+	public void setMiDescripcion(String miDescripcion) {
+		this.miDescripcion = miDescripcion;
+	}
+
+
 
 	public void publicarOferta(Oferta p_Oferta) {
 
