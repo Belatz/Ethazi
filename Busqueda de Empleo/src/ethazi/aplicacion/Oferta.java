@@ -1,6 +1,8 @@
 package ethazi.aplicacion;
 
-public class Oferta {
+import ethazi.intefaz.Elemento_Listable;
+
+public class Oferta implements Elemento_Listable {
 	/*jon:esta clase solo es de pruebas*/
 	private String titulo;
 	private String empresa;
@@ -14,8 +16,8 @@ public class Oferta {
 		this.descripcion = descripcion;
 		this.salario = salario;
 	}
-
-	protected String getTitulo() {
+	@Override
+	public String getInfo() {
 		return titulo;
 	}
 
@@ -23,7 +25,7 @@ public class Oferta {
 		this.titulo = titulo;
 	}
 
-	protected String getEmpresa() {
+	public String getEmpresa() {
 		return empresa;
 	}
 
