@@ -12,21 +12,28 @@ public class Elementos_Listados extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1617775952182198487L;
-	public final static int C_PANELESTOTALES=10;
 
-	public Elementos_Listados(ArrayList<Elemento_A_Listar> arrayElementosListables) {
+
+	public Elementos_Listados(ArrayList<Elemento_A_Listar> arrayElementosListables, int limite) {
 		setLayout(null);
 		setAlignmentX(0);
 		setAlignmentY(0);
 		setPreferredSize(new Dimension(600,1050));
-		for(int i=0, coordenada=0;i< C_PANELESTOTALES;i++,coordenada+=100)
+		for(int i=0, coordenada=0;i< limite;i++,coordenada+=100)
 		{
 			arrayElementosListables.get(i).setBounds(10,coordenada,500,91);
 			add(arrayElementosListables.get(i));
-		}
-		
-			
-		
+		}	
 	}
-
+	
+	public void actualizar(ArrayList<Elemento_A_Listar> arrayElementosListables, int limite) {
+		removeAll();
+		for(int i=0, coordenada=0;i< limite;i++,coordenada+=100)
+		{
+			
+			arrayElementosListables.get(i).setBounds(10,coordenada,500,91);
+			
+			add(arrayElementosListables.get(i));
+		}	
+	}
 }

@@ -8,7 +8,9 @@ import javax.swing.border.EmptyBorder;
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Oferta;
-
+import ethazi.intefaz.Elemento_A_Listar;
+import ethazi.intefaz.Elemento_Listable;
+import ethazi.intefaz.Elementos_Listados;
 import ethazi.intefaz.paneles.PanelAbrirOfertaCandidato;
 import ethazi.intefaz.paneles.PanelAbrirOfertaEmpresa;
 import ethazi.intefaz.paneles.PanelAtrasAlante;
@@ -49,9 +51,11 @@ import javax.swing.JSplitPane;
 public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JTextField txField_buscar;
-	private JPanel pa_contenedor = new JPanel();
-	//variable de prueba
-	ArrayList<Oferta> ofertas = new ArrayList();
+	private static JPanel pa_contenedor = new JPanel();
+	static JPanel pa_buscarOfertas;
+	// variable de prueba
+	ArrayList<Elemento_Listable> ofertas = new ArrayList();
+
 	/**
 	 * Launch the application.
 	 */
@@ -81,30 +85,31 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
-
+		
 		lanzarBarraHerramientas();
 
 		// Crear contenedor
 		pa_contenedor.setBounds(0, 55, 762, 488);
 		contentPane.add(pa_contenedor);
 		pa_contenedor.setLayout(new CardLayout(0, 0));
-		/*Prueba jonor*/
+		/* Prueba jonor */
 		int cont = 0;
 		Oferta oferta;
-		
-		while(cont < 200) {
-			oferta = new Oferta ("Nombre"+cont, "Empresaaa"+cont,"descripppcciooooon"+cont,1000+cont);
+
+		while (cont < 27) {
+			oferta = new Oferta("Nombre" + cont, "Empresaaa" + cont, "descripppcciooooon" + cont, 1000 + cont);
 			ofertas.add(oferta);
 			cont++;
 		}
-		/*Prueba jonor*/
+		/* Prueba jonor */
 		crearPaneles();
 
 	}
 
 	public void crearPaneles() {
 		// Crear consultar ofertas
-	JPanel pa_buscarOfertas = new PanelConsultarOfertas(ofertas);
+		
+		pa_buscarOfertas = new PanelConsultarOfertas(ofertas);
 		pa_contenedor.add(pa_buscarOfertas);
 		// Crear analizar empresa
 
@@ -193,4 +198,14 @@ public class VentanaPrincipal extends JFrame {
 		combo_menu.setBounds(252, 0, 380, 50);
 		pa_barraHerramientas.add(combo_menu);
 	}
+
+	public static void addcont() {
+	
+	}
+	
+
+	public static void remcont() {
+		pa_contenedor.remove(pa_buscarOfertas);
+	}
+
 }
