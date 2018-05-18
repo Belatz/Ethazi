@@ -2,7 +2,7 @@ package ethazi.aplicacion;
 
 import java.util.ArrayList;
 
-public abstract class Usuario {
+public class Usuario {
 	private String miNick;
 	private String miPassword;
 	private String miNombre;
@@ -10,11 +10,10 @@ public abstract class Usuario {
 	private String miDireccion;
 	private String miEmail;
 	private String miTelefono;
-	private byte miAniosExp;
 	public static ArrayList<String> miConocimientosTotales;
 
 	public Usuario(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
-			String miEmail, String miTelefono, byte miAniosExp) throws NullPointerException {
+			String miEmail, String miTelefono) throws NullPointerException {
 		super();
 		this.miNick = miNick;
 		this.miPassword = miPassword;
@@ -23,7 +22,6 @@ public abstract class Usuario {
 		this.setMiDireccion(miDireccion);
 		this.miEmail = miEmail;
 		this.miTelefono = miTelefono;
-		this.miAniosExp = miAniosExp;
 	}
 	
 	public String getMiNick() {
@@ -82,14 +80,6 @@ public abstract class Usuario {
 		this.miTelefono = miTelefono;
 	}
 
-	public byte getMiAniosExp() {
-		return miAniosExp;
-	}
-
-	public void setMiAniosExp(byte miAniosExp) {
-		this.miAniosExp = miAniosExp;
-	}
-
 	public static ArrayList<String> getMiConocimientosTotales() {
 		return miConocimientosTotales;
 	}
@@ -112,7 +102,4 @@ public abstract class Usuario {
 	public void abrirOferta() {
 		
 	}
-
-	public abstract void editarPerfil ();
-	public abstract void verPerfil();
 }

@@ -6,7 +6,7 @@ import java.util.Calendar;
 public class Candidato extends Usuario {
 
 	private String apellidos;
-	private Calendar fechaNac;
+	private String fechaNac;
 	private boolean carnet;
 	private boolean cochePropio;
 	private boolean disViajar;
@@ -14,14 +14,26 @@ public class Candidato extends Usuario {
 	private ArrayList<String> conocimientos;
 	private String otrosConocimientos;
 	private String vidaLaboral;
-	private byte experienciaProfesional;
+	private float experienciaProfesional;
 
-	public Candidato(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
-			String miEmail, String miTelefono, byte miAniosExp) throws NullPointerException {
-		super(miNick, miPassword, miNombre, miNumID, miDireccion, miEmail, miTelefono, miAniosExp);
-		// TODO Auto-generated constructor stub
-	}
 	
+	public Candidato(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
+			String miEmail, String miTelefono, String apellidos, String fechaNac, boolean carnet, boolean cochePropio,
+			boolean disViajar, String estudios, ArrayList<String> conocimientos, String otrosConocimientos,
+			String vidaLaboral, float experienciaProfesional) throws NullPointerException {
+		super(miNick, miPassword, miNombre, miNumID, miDireccion, miEmail, miTelefono);
+		this.apellidos = apellidos;
+		this.fechaNac = fechaNac;
+		this.carnet = carnet;
+		this.cochePropio = cochePropio;
+		this.disViajar = disViajar;
+		this.estudios = estudios;
+		this.conocimientos = conocimientos;
+		this.otrosConocimientos = otrosConocimientos;
+		this.vidaLaboral = vidaLaboral;
+		this.experienciaProfesional = experienciaProfesional;
+	}
+
 	public String getApellidos() {
 		return apellidos;
 	}
@@ -29,12 +41,11 @@ public class Candidato extends Usuario {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-	//Hacer el método que devuelva la fecha como String
 	public String getFechaNac() {
 		return fechaNac.toString();
 	}
 
-	public void setFechaNac(Calendar fechaNac) {
+	public void setFechaNac(String fechaNac) {
 		this.fechaNac = fechaNac;
 	}
 
@@ -94,11 +105,11 @@ public class Candidato extends Usuario {
 		this.vidaLaboral = vidaLaboral;
 	}
 
-	public byte getExperienciaProfesional() {
+	public float getExperienciaProfesional() {
 		return experienciaProfesional;
 	}
 
-	public void setExperienciaProfesional(byte experienciaProfesional) {
+	public void setExperienciaProfesional(float experienciaProfesional) {
 		this.experienciaProfesional = experienciaProfesional;
 	}
 
@@ -116,17 +127,4 @@ public class Candidato extends Usuario {
 		ArrayList<Oferta> ofertasAdecuadas = null;
 		return ofertasAdecuadas;
 	}
-
-	@Override
-	public void editarPerfil() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void verPerfil() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

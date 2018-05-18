@@ -12,7 +12,7 @@ public class Empresa extends Usuario {
 	public Empresa(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
 			String miEmail, String miTelefono, byte miAniosExp, String miContacto, String miDescripcion,
 			ArrayList<Oferta> miOfertas) throws NullPointerException {
-		super(miNick, miPassword, miNombre, miNumID, miDireccion, miEmail, miTelefono, miAniosExp);
+		super(miNick, miPassword, miNombre, miNumID, miDireccion, miEmail, miTelefono);
 		this.miContacto = miContacto;
 		this.miDescripcion = miDescripcion;
 		this.miOfertas = miOfertas;
@@ -77,17 +77,4 @@ public class Empresa extends Usuario {
 	public void guardarCurriculum(Candidato _perfil) {
 		
 	}
-
-	@Override
-	public void editarPerfil() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void verPerfil() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

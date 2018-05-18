@@ -1,6 +1,7 @@
 package ethazi.intefaz.paneles;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -48,8 +49,13 @@ public class PanelFiltrosOferta extends JScrollPane {
 		JLabel lbl_conocimientos = new JLabel("Conocimientos:");
 		lbl_conocimientos.setBounds(10, 50, 211, 14);
 		pa_filtros.add(lbl_conocimientos);
-
-		JPanel pa_conocimientos = new PanelListaDoble();
+		
+		//Ejemplo
+				ArrayList<String> conocimientos=new ArrayList<String>();
+				for(int i=0;i<10;i++)
+					conocimientos.add("Ejemplo "+i);
+		//JPanel pa_conocimientos = new PanelListaDoble();
+		JPanel pa_conocimientos = new PanelListaDoble(conocimientos,null);
 		pa_conocimientos.setLocation(7, 66);
 		pa_filtros.add(pa_conocimientos);
 		
