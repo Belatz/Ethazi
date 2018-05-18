@@ -10,13 +10,14 @@ import javax.swing.JPanel;
 
 import ethazi.aplicacion.Oferta;
 import ethazi.intefaz.Elemento_Listable;
+import ethazi.intefaz.Elementos_Listados;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
 public class PanelAtrasAlante extends JPanel {
 
-	private int pagina = 1;
 
-	public PanelAtrasAlante(ArrayList<Elemento_Listable> ofertas, int maxPags ) {
+
+	public PanelAtrasAlante(Elementos_Listados panel_QueTieneLaLista) {
 		setLayout(null);
 		JButton btn_siguiente = new JButton("Siguiente");
 		JButton btn_anterior = new JButton("Anterior");
@@ -26,37 +27,37 @@ public class PanelAtrasAlante extends JPanel {
 		btn_anterior.setBounds(110, 0, 105, 34);
 		add(btn_anterior);
 		btn_anterior.setVisible(false);
-		if (pagina == maxPags) {
+		if (panel_QueTieneLaLista.getnPagina() == panel_QueTieneLaLista.getMaxPags()) {
 			btn_siguiente.setVisible(false);
 		}
 
 		btn_siguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// VentanaPrincipal.remcont();
-				if (pagina == 1) {
+
+				if (panel_QueTieneLaLista.getnPagina() == 1) {
 					btn_anterior.setVisible(true);
 				}
-				if (pagina == maxPags - 1) {
+				if (panel_QueTieneLaLista.getnPagina() == panel_QueTieneLaLista.getMaxPags() - 1) {
 					btn_siguiente.setVisible(false);
 				}
-				pagina++;
-				PanelConsultarOfertas.mostrar10(ofertas, pagina);
-				 VentanaPrincipal.addcont();
+				panel_QueTieneLaLista.sumarPagina();
+				panel_QueTieneLaLista.mostrarOtras10();
+
 			}
 		});
 
 		btn_anterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// VentanaPrincipal.remcont();
-				if (pagina == maxPags) {
+				if (panel_QueTieneLaLista.getnPagina() == panel_QueTieneLaLista.getMaxPags()) {
 					btn_siguiente.setVisible(true);
 				}
-				if (pagina == 2) {
+				if (panel_QueTieneLaLista.getnPagina() == 2) {
 					btn_anterior.setVisible(false);
 				}
 
-				pagina--;
-				PanelConsultarOfertas.mostrar10(ofertas, pagina);
+				panel_QueTieneLaLista.restarPagina();
+				panel_QueTieneLaLista.mostrarOtras10();
 	
 				// VentanaPrincipal.addcont();
 			}

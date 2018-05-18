@@ -96,7 +96,7 @@ public class VentanaPrincipal extends JFrame {
 		int cont = 0;
 		Oferta oferta;
 
-		while (cont < 27) {
+		while (cont < 5) {
 			oferta = new Oferta("Nombre" + cont, "Empresaaa" + cont, "descripppcciooooon" + cont, 1000 + cont);
 			ofertas.add(oferta);
 			cont++;
