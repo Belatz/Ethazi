@@ -3,6 +3,7 @@ package ethazi.aplicacion;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Utilidades {
 
@@ -70,5 +71,16 @@ public class Utilidades {
 //		_oferta = new Oferta(_rsOferta.getString("titulo"), toUsuario(_rsEmpresa), _rsOferta.getString("descripcion"),
 //				_rsOferta.getInt("salario_min"));
 		return _oferta;
+	}
+	
+	public static ArrayList<String> descargarConocimientos() throws SQLException {
+		ArrayList<String> _conocimientos = new ArrayList<>();
+		
+		ResultSet _rs = Aplicacion.getConexion().consultar("SELECT * FROM conocimientos;");
+		while(_rs.next()) {
+			_conocimientos.add(_rs.getString("nombre"));
+		}
+				
+		return _conocimientos;
 	}
 }
