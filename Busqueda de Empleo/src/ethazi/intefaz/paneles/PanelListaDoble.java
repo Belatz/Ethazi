@@ -2,6 +2,7 @@ package ethazi.intefaz.paneles;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -13,20 +14,23 @@ import javax.swing.ListSelectionModel;
 
 public class PanelListaDoble extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private JButton btn_anadir = new JButton();
 	private JButton btn_eliminar = new JButton();
-	private DefaultListModel modelo_anadidos = new DefaultListModel();
-	private DefaultListModel modelo_totales = new DefaultListModel();
-	private JList li_eleAnadidos = new JList(modelo_anadidos);
-	private JList li_eleTotales = new JList(modelo_totales);
+	private DefaultListModel<String> modelo_anadidos = new DefaultListModel<String>();
+	private DefaultListModel<String> modelo_totales = new DefaultListModel<String>();
+	private JList <String>li_eleAnadidos = new JList<String>(modelo_anadidos);
+	private JList <String>li_eleTotales = new JList<String>(modelo_totales);
 	private JScrollPane pa_anadidos = new JScrollPane();
 	private JScrollPane pa_totales = new JScrollPane();
 
-	public PanelListaDoble() {
-		// EJEMPLOS
-		for (int i = 0; i < 10; i++) {
-			modelo_totales.addElement("Ejemplo" + i);
-		}
+	public PanelListaDoble(ArrayList<String>listaIzquierda, ArrayList<String>listaDerecha) {
+		
+		actualizarListas(listaIzquierda, listaDerecha);
 		// ----------------
 		setLayout(null);
 		setBounds(0, 0, 214, 177);
@@ -65,7 +69,7 @@ public class PanelListaDoble extends JPanel {
 		li_eleTotales.setSelectedIndex(0);
 	}
 
-	public void anadirElemento(Object obj) {
+	public void anadirElemento(String obj) {
 		modelo_totales.addElement(obj);
 	}
 
@@ -79,5 +83,28 @@ public class PanelListaDoble extends JPanel {
 				modelo_totales.removeElementAt(i);
 			}
 		}
+	}
+	public JButton getBtn_anadir() {
+		return btn_anadir;
+	}
+
+	public JButton getBtn_eliminar() {
+		return btn_eliminar;
+	}
+	public void actualizarListas(ArrayList<String>listaIzquierda, ArrayList<String>listaDerecha)
+	{
+		modelo_totales.removeAllElements();
+		modelo_anadidos.removeAllElements();
+		for (int i = 0; i < listaIzquierda.size(); i++) {
+			int j=0;
+			while(listaDerecha!=null &&
+				j<listaDerecha.size() &&
+					listaDerecha.get(j).toLowerCase().compareTo(listaIzquierda.get(i).toLowerCase())==0)
+				j++;
+			if(listaDerecha==null || j<listaDerecha.size())
+				modelo_totales.addElement(listaIzquierda.get(i));
+		}
+		for(int i=0; i<listaDerecha.size();i++)
+			modelo_anadidos.addElement(listaDerecha.get(i));
 	}
 }
