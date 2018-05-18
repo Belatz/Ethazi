@@ -1,6 +1,6 @@
-package ethazi.intefaz;
+package ethazi.aplicacion;
 
-import ethazi.aplicacion.Oferta;
+import ethazi.intefaz.Elemento_Listable;
 
 public class Solicitud implements Elemento_Listable {
 

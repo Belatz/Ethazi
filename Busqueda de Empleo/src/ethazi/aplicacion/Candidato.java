@@ -3,7 +3,9 @@ package ethazi.aplicacion;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Candidato extends Usuario {
+import ethazi.intefaz.Elemento_Listable;
+
+public class Candidato extends Usuario implements Elemento_Listable {
 
 	private String apellidos;
 	private Calendar fechaNac;
@@ -17,9 +19,20 @@ public class Candidato extends Usuario {
 	private byte experienciaProfesional;
 
 	public Candidato(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
-			String miEmail, String miTelefono, byte miAniosExp) throws NullPointerException {
+			String miEmail, String miTelefono, byte miAniosExp, String apellidos, Calendar fechaNac, boolean carnet,
+			boolean cochePropio, boolean disViajar, String estudios, ArrayList<String> conocimientos,
+			String otrosConocimientos, String vidaLaboral, byte experienciaProfesional) throws NullPointerException {
 		super(miNick, miPassword, miNombre, miNumID, miDireccion, miEmail, miTelefono, miAniosExp);
-		// TODO Auto-generated constructor stub
+		this.apellidos = apellidos;
+		this.fechaNac = fechaNac;
+		this.carnet = carnet;
+		this.cochePropio = cochePropio;
+		this.disViajar = disViajar;
+		this.estudios = estudios;
+		this.conocimientos = conocimientos;
+		this.otrosConocimientos = otrosConocimientos;
+		this.vidaLaboral = vidaLaboral;
+		this.experienciaProfesional = experienciaProfesional;
 	}
 
 	public String getApellidos() {
@@ -100,5 +113,11 @@ public class Candidato extends Usuario {
 
 	public void setExperienciaProfesional(byte experienciaProfesional) {
 		this.experienciaProfesional = experienciaProfesional;
+	}
+
+	@Override
+	public String getInfo() {
+		// TODO Auto-generated method stub
+		return getNombre()+" "+apellidos;
 	}
 }

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import ethazi.aplicacion.Aplicacion;
 import ethazi.intefaz.emergentes.RecuperarContrasena;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
@@ -47,6 +50,11 @@ public class PanelIdentificarse extends JPanel {
 		btn_entrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Buscar usuario
+				try {
+					ResultSet _consulta = Aplicacion.getConexion().consultar("SELECT password FROM usuario WHERE nick='"+txField_usuario.getText()+"';");
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				// Confirmar usuario
 				if (true) { // METER CONFIRMACION EN VEZ DE TRUE
 				// Aplicacion.setUsuario(usuario);

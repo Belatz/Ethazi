@@ -1,5 +1,7 @@
 package ethazi.aplicacion;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public abstract class Usuario {
@@ -87,6 +89,12 @@ public abstract class Usuario {
 
 	public void setDireccion(String p_direccion) {
 		this.miDireccion = p_direccion;
+	}
+	
+	public static boolean esCandidato(String p_nick) throws SQLException {
+		ResultSet _rs;
+		_rs = Aplicacion.getConexion().consultar("SELECT COUNT(*) FROM candidato WHERE nick='" + p_nick + "';");
+		return _rs.next();
 	}
 	
 }
