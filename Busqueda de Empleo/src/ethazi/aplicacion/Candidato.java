@@ -20,7 +20,7 @@ public class Candidato extends Usuario implements Elemento_Listable {
 	public Candidato(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
 			String miEmail, String miTelefono, String apellidos, String fechaNac, boolean carnet, boolean cochePropio,
 			boolean disViajar, String estudios, ArrayList<String> conocimientos, String otrosConocimientos,
-			String vidaLaboral, float experienciaProfesional) throws NullPointerException {
+			String vidaLaboral, float experienciaProfesional) {
 		super(miNick, miPassword, miNombre, miNumID, miDireccion, miEmail, miTelefono);
 		this.apellidos = apellidos;
 		this.fechaNac = fechaNac;

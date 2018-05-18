@@ -5,16 +5,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Usuario {
+	public static ArrayList<String> misConocimientosTotales;
+
+	private String miNumID;
 	private String miNick;
 	private String miPassword;
 	private String miNombre;
-	private String miNumID;
 	private String miDireccion;
 	private String miEmail;
 	private String miTelefono;
-	public static ArrayList<String> miConocimientosTotales;
 
-	public Usuario(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
+	public Usuario(String miNumID, String miNick, String miPassword, String miNombre, String miDireccion,
 			String miEmail, String miTelefono) throws NullPointerException {
 		super();
 		this.miNick = miNick;
@@ -25,7 +26,7 @@ public class Usuario {
 		this.miEmail = miEmail;
 		this.miTelefono = miTelefono;
 	}
-	
+
 	public String getNick() {
 		return miNick;
 	}
@@ -45,6 +46,7 @@ public class Usuario {
 	public String getNombre() {
 		return miNombre;
 	}
+
 	public void setNombre(String miNombre) {
 		this.miNombre = miNombre;
 	}
@@ -64,6 +66,7 @@ public class Usuario {
 	public void setDireccion(String p_direccion) {
 		this.miDireccion = p_direccion;
 	}
+
 	public String getMiEmail() {
 		return miEmail;
 	}
@@ -80,18 +83,18 @@ public class Usuario {
 		this.miTelefono = miTelefono;
 	}
 
-	public static ArrayList<String> getMiConocimientosTotales() {
-		return miConocimientosTotales;
+	public static ArrayList<String> getConocimientosTotales() {
+		return misConocimientosTotales;
 	}
 
-	public static void setMiConocimientosTotales(ArrayList<String> miConocimientosTotales) {
-		Usuario.miConocimientosTotales = miConocimientosTotales;
+	public static void setConocimientosTotales(ArrayList<String> miConocimientosTotales) {
+		Usuario.misConocimientosTotales = miConocimientosTotales;
 	}
 
-	//Titulo puede ser solo una parte de el titulo y que el sistema busque titulos que lo contengan
-	public static void consultarOfertas( String _titulo, String _Lugar, Contrato _Tipo,
-		Empresa _Empresa, int _SueldoMax,int _SueldoMin, byte _AniosExp,
-		ArrayList<Conocimiento> _Conocimientos) {
+	// Titulo puede ser solo una parte de el titulo y que el sistema busque titulos
+	// que lo contengan
+	public static void consultarOfertas(String _titulo, String _Lugar, Contrato _Tipo, Empresa _Empresa, int _SueldoMax,
+			int _SueldoMin, byte _AniosExp, ArrayList<Conocimiento> _Conocimientos) {
 	}
 
 	public static boolean esCandidato(String p_nick) throws SQLException {
@@ -99,5 +102,5 @@ public class Usuario {
 		_rs = Aplicacion.getConexion().consultar("SELECT COUNT(*) FROM candidato WHERE nick='" + p_nick + "';");
 		return _rs.next();
 	}
-	
+
 }

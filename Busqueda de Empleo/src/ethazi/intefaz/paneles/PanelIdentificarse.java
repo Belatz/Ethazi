@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Usuario;
-import ethazi.aplicacion.Utilidades;
+import ethazi.aplicacion.UtilidadesBD;
 import ethazi.intefaz.emergentes.RecuperarContrasena;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
@@ -120,7 +120,7 @@ public class PanelIdentificarse extends JPanel {
 			} else {
 				_rs = Aplicacion.getConexion().consultar("SELECT * FROM empresa e, usuario u WHERE e.numid=u.numid AND u.nick='"+_nick+"';");
 			}
-			Aplicacion.setUsuario(Utilidades.toUsuario(_rs));
+			Aplicacion.setUsuario(UtilidadesBD.toUsuario(_rs));
 			_esValido = true;
 		} else {
 			_esValido = false;
