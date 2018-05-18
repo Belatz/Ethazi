@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Usuario {
+public abstract class Usuario {
 	public static ArrayList<String> misConocimientosTotales;
 
 	private String miNumID;
