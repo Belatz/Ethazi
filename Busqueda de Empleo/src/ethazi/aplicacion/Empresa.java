@@ -1,7 +1,6 @@
 package ethazi.aplicacion;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Empresa extends Usuario {
 
@@ -12,15 +11,16 @@ public class Empresa extends Usuario {
 	public Empresa(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
 			String miEmail, String miTelefono, byte miAniosExp, String miContacto, String miDescripcion,
 			ArrayList<Oferta> miOfertas) throws NullPointerException {
-		super(miNick, miPassword, miNombre, miNumID, miDireccion, miEmail, miTelefono, miAniosExp);
+		super(miNick, miPassword, miNombre, miNumID, miDireccion, miEmail, miTelefono);
 		this.miContacto = miContacto;
 		this.miDescripcion = miDescripcion;
 		this.miOfertas = miOfertas;
 	}
-	
+
 	public void aniadirOferta(Oferta oferta) {
 		miOfertas.add(oferta);
 	}
+
 	public void borrarOferta(Oferta oferta) {
 
 	}
@@ -29,19 +29,13 @@ public class Empresa extends Usuario {
 		return miContacto;
 	}
 
-
-
 	public void setContacto(String miContacto) {
 		this.miContacto = miContacto;
 	}
 
-
-
 	public String getDescripcion() {
 		return miDescripcion;
 	}
-
-
 
 	public void setDescripcion(String p_descripcion) {
 		this.miDescripcion = p_descripcion;
