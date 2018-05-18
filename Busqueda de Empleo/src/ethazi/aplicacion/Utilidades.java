@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 public class Utilidades {
 
+	/*
+	 * Falta arreglar los constructores
+	 */
 	public static Usuario toUsuario(ResultSet p_rs) throws SQLException {
 		Usuario _usr = null;
 		String _nick = p_rs.getString("nick");
@@ -45,6 +48,9 @@ public class Utilidades {
 		return _soli;
 	}
 
+	/*
+	 * Falta arreglar el constructor
+	 */
 	public static Candidato buscarCandidato(String p_numid) throws SQLException {
 		Candidato _candidato;
 		ResultSet _rs = Aplicacion.getConexion().consultar("SELECT * FROM candidato c, usuario u WHERE c.numid = u.numid AND c.numid='" + p_numid + "';");
@@ -63,6 +69,9 @@ public class Utilidades {
 		return _candidato;
 	}
 
+	/*
+	 * Falta arreglar el constructor
+	 */
 	public static Oferta buscarOferta(String p_cod) throws SQLException {
 		Oferta _oferta;
 		ResultSet _rsOferta = Aplicacion.getConexion().consultar("SELECT * FROM oferta WHERE cod_oferta='" + p_cod + "';");

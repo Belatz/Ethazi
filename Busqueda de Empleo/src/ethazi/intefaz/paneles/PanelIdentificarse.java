@@ -14,6 +14,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ethazi.aplicacion.Aplicacion;
+import ethazi.aplicacion.Usuario;
+import ethazi.aplicacion.Utilidades;
 import ethazi.intefaz.emergentes.RecuperarContrasena;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
@@ -22,8 +24,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class PanelIdentificarse extends JPanel {
-	private JPasswordField pssField_contrasena;
-	private JTextField txField_usuario;
+	private static JPasswordField pssField_contrasena;
+	private static JTextField txField_usuario;
 
 	/**
 	 * Create the panel.
@@ -49,17 +51,15 @@ public class PanelIdentificarse extends JPanel {
 		JButton btn_entrar = new JButton("Entrar");
 		btn_entrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Buscar usuario
 				try {
-					ResultSet _consulta = Aplicacion.getConexion().consultar("SELECT password FROM usuario WHERE nick='"+txField_usuario.getText()+"';");
+					if (validarUsuario()) {
+						VentanaIdentificarse.cerrar();
+						VentanaPrincipal.ejecutar();
+					} else {
+						// TODO Mostrar error
+					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
-				}
-				// Confirmar usuario
-				if (true) { // METER CONFIRMACION EN VEZ DE TRUE
-				// Aplicacion.setUsuario(usuario);
-					VentanaIdentificarse.cerrar();
-					VentanaPrincipal.ejecutar(); 
 				}
 			}
 		});
@@ -105,6 +105,27 @@ public class PanelIdentificarse extends JPanel {
 		lbl_usuarioErroneo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lbl_usuarioErroneo.setBounds(283, 79, 141, 14);
 		this.add(lbl_usuarioErroneo);
+	}
+
+	private static boolean validarUsuario() throws SQLException {
+		boolean _esValido;
+		String _nick = txField_usuario.getText();
+		String _pass = String.valueOf(pssField_contrasena.getPassword());
+		ResultSet _rs = Aplicacion.getConexion()
+				.consultar("SELECT * FROM usuario WHERE nick='" + _nick + "' AND password='" + _pass + "';");
+
+		if (_rs.next()) {
+			if (Usuario.esCandidato(_nick)) {
+				_rs = Aplicacion.getConexion().consultar("SELECT * FROM candidato c, usuario u WHERE c.numid=u.numid AND u.nick='"+_nick+"';");
+			} else {
+				_rs = Aplicacion.getConexion().consultar("SELECT * FROM empresa e, usuario u WHERE e.numid=u.numid AND u.nick='"+_nick+"';");
+			}
+			Aplicacion.setUsuario(Utilidades.toUsuario(_rs));
+			_esValido = true;
+		} else {
+			_esValido = false;
+		}
+		return _esValido;
 	}
 
 }
