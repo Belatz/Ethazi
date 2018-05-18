@@ -1,19 +1,29 @@
 package ethazi.aplicacion;
 
-import ethazi.bd.Conexion;
+import java.awt.EventQueue;
+
+import ethazi.intefaz.frame.VentanaIdentificarse;
 
 public class Aplicacion {
 
 	private static Usuario miUsuario;
-	
+	private static Conexion miConexion;
+
 	public static void main(String[] args) {
-		// Llamar a ventanaidentificarse, coger el usuario, llamar a ventana principal
-		Conexion conn = new Conexion();
-		conn.desconectar();
+		miConexion = new Conexion();
+		VentanaIdentificarse.ejecutar();
 	}
-	
+
 	public static Usuario getUsuario() {
 		return miUsuario;
+	}
+
+	public static void setUsuario(Usuario usr) {
+		miUsuario = usr;
+	}
+	
+	public static Conexion getConexion() {
+		return miConexion;
 	}
 
 }

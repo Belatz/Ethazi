@@ -1,4 +1,4 @@
-package ethazi.bd;
+package ethazi.aplicacion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
