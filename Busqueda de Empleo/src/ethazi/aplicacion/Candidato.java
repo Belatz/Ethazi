@@ -1,7 +1,6 @@
 package ethazi.aplicacion;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import ethazi.intefaz.Elemento_Listable;
 
@@ -22,7 +21,7 @@ public class Candidato extends Usuario implements Elemento_Listable {
 	public Candidato(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
 			String miEmail, String miTelefono, String apellidos, String fechaNac, boolean carnet, boolean cochePropio,
 			boolean disViajar, String estudios, ArrayList<String> conocimientos, String otrosConocimientos,
-			String vidaLaboral, float experienciaProfesional) throws NullPointerException {
+			String vidaLaboral, float experienciaProfesional) {
 		super(miNick, miPassword, miNombre, miNumID, miDireccion, miEmail, miTelefono);
 		this.apellidos = apellidos;
 		this.fechaNac = fechaNac;
@@ -36,6 +35,10 @@ public class Candidato extends Usuario implements Elemento_Listable {
 		this.experienciaProfesional = experienciaProfesional;
 	}
 
+	public void setFechaNac(String fechaNac) {
+		this.fechaNac = fechaNac;
+	}
+
 	public String getApellidos() {
 		return apellidos;
 	}
@@ -43,12 +46,9 @@ public class Candidato extends Usuario implements Elemento_Listable {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-	public String getFechaNac() {
-		return fechaNac.toString();
-	}
 
-	public void setFechaNac(String fechaNac) {
-		this.fechaNac = fechaNac;
+	public String getFechaNac() {
+		return fechaNac;
 	}
 
 	public boolean isCarnet() {
