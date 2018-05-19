@@ -1,7 +1,6 @@
 package ethazi.aplicacion;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Empresa extends Usuario {
 
@@ -17,64 +16,29 @@ public class Empresa extends Usuario {
 		this.miDescripcion = miDescripcion;
 		this.miOfertas = miOfertas;
 	}
-	
+
 	public void aniadirOferta(Oferta oferta) {
 		miOfertas.add(oferta);
 	}
+
 	public void borrarOferta(Oferta oferta) {
 
 	}
 
-	public String getMiContacto() {
+	public String getContacto() {
 		return miContacto;
 	}
 
-
-
-	public void setMiContacto(String miContacto) {
+	public void setContacto(String miContacto) {
 		this.miContacto = miContacto;
 	}
 
-
-
-	public String getMiDescripcion() {
+	public String getDescripcion() {
 		return miDescripcion;
 	}
 
-
-
-	public void setMiDescripcion(String miDescripcion) {
-		this.miDescripcion = miDescripcion;
+	public void setDescripcion(String p_descripcion) {
+		this.miDescripcion = p_descripcion;
 	}
 
-
-
-	public void publicarOferta(Oferta p_Oferta) {
-
-	}
-
-	public void crearConocimiento(String p_Conocimiento) {
-
-	}
-
-	public ArrayList<Oferta> consultarMisOfertas() {
-		ArrayList<Oferta> _ofertas = null;
-		return _ofertas;
-	}
-
-	public ArrayList<Candidato> buscarCandidatos(Calendar _FechaDeNacimiento, boolean _Coche, boolean _CarnetConducir,
-			boolean _DisponibilidadParaViajar, ArrayList<String> _Conocimientos, String _OtrosConocimientos, byte _ExperienciaLaboral, String _VidaLaboral) {
-		ArrayList<Candidato> _candidatos = null;
-		return _candidatos;
-	}
-	
-	public ArrayList<Oferta> verOfertasConSolicitud(){
-		ArrayList<Oferta> _ofertas = null;
-		return _ofertas;
-		
-	}
-	
-	public void guardarCurriculum(Candidato _perfil) {
-		
-	}
 }

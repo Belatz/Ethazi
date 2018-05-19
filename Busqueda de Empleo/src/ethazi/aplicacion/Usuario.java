@@ -1,5 +1,7 @@
 package ethazi.aplicacion;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Usuario {
@@ -19,65 +21,65 @@ public class Usuario {
 		this.miPassword = miPassword;
 		this.miNombre = miNombre;
 		this.miNumID = miNumID;
-		this.setMiDireccion(miDireccion);
+		this.miDireccion = miDireccion;
 		this.miEmail = miEmail;
 		this.miTelefono = miTelefono;
 	}
 	
-	public String getMiNick() {
+
+	public String getNick() {
 		return miNick;
 	}
 
-	public void setMiNick(String miNick) {
+	public void setNick(String miNick) {
 		this.miNick = miNick;
 	}
-
-	public String getMiPassword() {
+	public String getPassword() {
 		return miPassword;
 	}
 
-	public void setMiPassword(String miPassword) {
+	public void setPassword(String miPassword) {
 		this.miPassword = miPassword;
 	}
 
-	public String getMiNombre() {
+	public String getNombre() {
 		return miNombre;
 	}
 
-	public void setMiNombre(String miNombre) {
-		this.miNombre = miNombre;
+	public void setNombre(String p_nombre) {
+		this.miNombre = p_nombre;
 	}
 
-	public String getMiNumID() {
+	public String getNumID() {
 		return miNumID;
 	}
 
-	public void setMiNumID(String miNumID) {
-		this.miNumID = miNumID;
+	public void setNumID(String p_numID) {
+		this.miNumID = p_numID;
 	}
 
-	public String getMiDireccion() {
-		return miDireccion;
-	}
-
-	public void setMiDireccion(String miDireccion) {
-		this.miDireccion = miDireccion;
-	}
-
-	public String getMiEmail() {
+	public String getEmail() {
 		return miEmail;
 	}
 
-	public void setMiEmail(String miEmail) {
-		this.miEmail = miEmail;
+	public void setEmail(String p_email) {
+		this.miEmail = p_email;
 	}
 
-	public String getMiTelefono() {
+	public String getTelefono() {
 		return miTelefono;
 	}
 
-	public void setMiTelefono(String miTelefono) {
-		this.miTelefono = miTelefono;
+	public void setTelefono(String p_telefono) {
+		this.miTelefono = p_telefono;
+	}
+
+	public String getDireccion() {
+		return miDireccion;
+	}
+
+	public void setDireccion(String miDireccion) {
+		this.miDireccion = miDireccion;
 	}
 
 	public static ArrayList<String> getMiConocimientosTotales() {
@@ -95,11 +97,10 @@ public class Usuario {
 		
 	}
 
-	public void analizarEmpresa(Empresa _empresa) {
-		
+	public static boolean esCandidato(String p_nick) throws SQLException {
+		ResultSet _rs;
+		_rs = Aplicacion.getConexion().consultar("SELECT COUNT(*) FROM candidato WHERE nick='" + p_nick + "';");
+		return _rs.next();
 	}
 	
-	public void abrirOferta() {
-		
-	}
 }

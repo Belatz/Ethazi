@@ -3,7 +3,9 @@ package ethazi.aplicacion;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Candidato extends Usuario {
+import ethazi.intefaz.Elemento_Listable;
+
+public class Candidato extends Usuario implements Elemento_Listable {
 
 	private String apellidos;
 	private String fechaNac;
@@ -113,18 +115,9 @@ public class Candidato extends Usuario {
 		this.experienciaProfesional = experienciaProfesional;
 	}
 
-	public void realizarSolicitud(Oferta oferta) {
-
-	}
-	
-	public static ArrayList<String> consulConoMasDemand(){
-		ArrayList<String> conMasDemand = null;
-		return conMasDemand;
-		
-	}
-	
-	public ArrayList<Oferta> consulOfertasAdecuadas() {
-		ArrayList<Oferta> ofertasAdecuadas = null;
-		return ofertasAdecuadas;
+	@Override
+	public String getInfo() {
+		// TODO Auto-generated method stub
+		return getNombre()+" "+apellidos;
 	}
 }
