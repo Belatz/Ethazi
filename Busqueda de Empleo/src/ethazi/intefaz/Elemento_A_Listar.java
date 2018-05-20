@@ -16,8 +16,8 @@ public class Elemento_A_Listar extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	//private JPanel miPaElemento_A_Listar;
-	
+	// private JPanel miPaElemento_A_Listar;
+
 	private JButton miBtnEliminar;
 	private JButton miBtnCambiar_Estado;
 	private JLabel miLblAbrir_Elemento;
@@ -32,22 +32,24 @@ public class Elemento_A_Listar extends JPanel {
 	public final static byte C_BUSCAR_CANDIDATOS = 5;
 
 	public Elemento_A_Listar(Elemento_Listable p_elemento, byte p_constante_opcion) {
-		//miPaElemento_A_Listar=new JPanel();
-		/*miPaElemento_A_Listar.*/setBounds(0, 0, 450, 50);
+		// miPaElemento_A_Listar=new JPanel();
+		/* miPaElemento_A_Listar. */setBounds(0, 0, 450, 50);
 		setLayout(null);
-		
+
 		switch (p_constante_opcion) {
 		case 0: {
-			miBtnEliminar=new JButton("Retirar Oferta");
+			miBtnEliminar = new JButton("Retirar Oferta");
 			miBtnEliminar.setBounds(364, 44, 107, 30);
 			add(miBtnEliminar);
-			miLblAnalizar=new JLabel(((Solicitud)p_elemento).getOfer().getEmpresa());//Cuando Empresa sea una Clase hay q hacer el getter del nombre
+			miLblAnalizar = new JLabel(((Solicitud) p_elemento).getOfer().getEmpresa());// Cuando Empresa sea una Clase
+																						// hay q hacer el getter del
+																						// nombre
 			miLblAnalizar.setBounds(364, 1, 107, 40);
 			add(miLblAnalizar);
-			miLblAbrir_Elemento=new JLabel(((Solicitud)p_elemento).getInfo());
+			miLblAbrir_Elemento = new JLabel(((Solicitud) p_elemento).getInfo());
 			miLblAbrir_Elemento.setBounds(0, 1, 354, 40);
 			add(miLblAbrir_Elemento);
-			//Codificar 
+			// Codificar
 			miBtnEliminar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -55,7 +57,7 @@ public class Elemento_A_Listar extends JPanel {
 					super.mouseClicked(e);
 				}
 			});
-			//Codificar
+			// Codificar
 			miLblAnalizar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -63,7 +65,7 @@ public class Elemento_A_Listar extends JPanel {
 					super.mouseClicked(e);
 				}
 			});
-			//Codificar
+			// Codificar
 			miLblAbrir_Elemento.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -74,13 +76,14 @@ public class Elemento_A_Listar extends JPanel {
 		}
 			break;
 		case 1: {
-			miLblAnalizar=new JLabel(((Oferta) p_elemento).getEmpresa());//Cuando Empresa sea una Clase hay q hacer el getter del nombre
+			miLblAnalizar = new JLabel(((Oferta) p_elemento).getEmpresa());// Cuando Empresa sea una Clase hay q hacer
+																			// el getter del nombre
 			miLblAnalizar.setBounds(364, 1, 117, 40);
 			add(miLblAnalizar);
-			miLblAbrir_Elemento=new JLabel(((Oferta)p_elemento).getInfo());
+			miLblAbrir_Elemento = new JLabel(((Oferta) p_elemento).getInfo());
 			miLblAbrir_Elemento.setBounds(0, 1, 354, 40);
 			add(miLblAbrir_Elemento);
-			//Codificar 
+			// Codificar
 			miLblAnalizar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -88,7 +91,7 @@ public class Elemento_A_Listar extends JPanel {
 					super.mouseClicked(e);
 				}
 			});
-			//Codificar 
+			// Codificar
 			miLblAbrir_Elemento.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -99,10 +102,10 @@ public class Elemento_A_Listar extends JPanel {
 		}
 			break;
 		case 2: {
-			miLblAbrir_Elemento=new JLabel(((Oferta)p_elemento).getInfo());
-			miLblAbrir_Elemento.setBounds(0,0,471,50);
+			miLblAbrir_Elemento = new JLabel(((Oferta) p_elemento).getInfo());
+			miLblAbrir_Elemento.setBounds(0, 0, 471, 50);
 			add(miLblAbrir_Elemento);
-			//Codificar 
+			// Codificar
 			miLblAbrir_Elemento.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -113,19 +116,19 @@ public class Elemento_A_Listar extends JPanel {
 		}
 			break;
 		case 3: {
-			miLblAbrir_Elemento=new JLabel(((Oferta)p_elemento).getInfo());
+			miLblAbrir_Elemento = new JLabel(((Oferta) p_elemento).getInfo());
 			miLblAbrir_Elemento.setBounds(0, 0, 290, 50);
 			add(miLblAbrir_Elemento);
-			miBtnEliminar=new JButton();
+			miBtnEliminar = new JButton();
 			miBtnEliminar.setBounds(400, 0, 50, 50);
 			add(miBtnEliminar);
-			miBtnEditar=new JButton();
+			miBtnEditar = new JButton();
 			miBtnEditar.setBounds(300, 0, 50, 50);
 			add(miBtnEditar);
-			miBtnCambiar_Estado=new JButton();
+			miBtnCambiar_Estado = new JButton();
 			miBtnCambiar_Estado.setBounds(350, 0, 50, 50);
 			add(miBtnCambiar_Estado);
-			//Codificar 
+			// Codificar
 			miLblAbrir_Elemento.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -133,7 +136,7 @@ public class Elemento_A_Listar extends JPanel {
 					super.mouseClicked(e);
 				}
 			});
-			//Codificar 
+			// Codificar
 			miBtnEliminar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -141,7 +144,7 @@ public class Elemento_A_Listar extends JPanel {
 					super.mouseClicked(e);
 				}
 			});
-			//Codificar 
+			// Codificar
 			miBtnEditar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -149,7 +152,7 @@ public class Elemento_A_Listar extends JPanel {
 					super.mouseClicked(e);
 				}
 			});
-			//Codificar 
+			// Codificar
 			miBtnCambiar_Estado.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -160,16 +163,16 @@ public class Elemento_A_Listar extends JPanel {
 		}
 			break;
 		case 4: {
-			miLblAnalizar=new JLabel(((Solicitud)p_elemento).getInfo());
+			miLblAnalizar = new JLabel(((Solicitud) p_elemento).getInfo());
 			miLblAnalizar.setBounds(0, 33, 471, 28);
 			add(miLblAnalizar);
-			if(((Solicitud)p_elemento).getInfo().length()>50)
-				miLblAbrir_Elemento=new JLabel(((Solicitud)p_elemento).getDescrip().substring(0,50 )+"...");
+			if (((Solicitud) p_elemento).getInfo().length() > 50)
+				miLblAbrir_Elemento = new JLabel(((Solicitud) p_elemento).getDescrip().substring(0, 50) + "...");
 			else
-				miLblAbrir_Elemento=new JLabel(((Solicitud)p_elemento).getDescrip()+"...");
+				miLblAbrir_Elemento = new JLabel(((Solicitud) p_elemento).getDescrip() + "...");
 			miLblAbrir_Elemento.setBounds(0, 0, 471, 22);
 			add(miLblAbrir_Elemento);
-			//Codificar 
+			// Codificar
 			miLblAnalizar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -177,7 +180,7 @@ public class Elemento_A_Listar extends JPanel {
 					super.mouseClicked(e);
 				}
 			});
-			//Codificar 
+			// Codificar
 			miLblAbrir_Elemento.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -188,10 +191,10 @@ public class Elemento_A_Listar extends JPanel {
 		}
 			break;
 		case 5: {
-			miLblAnalizar=new JLabel(((Candidato)p_elemento).getInfo());
-			miLblAnalizar.setBounds(0,0,450,50);
+			miLblAnalizar = new JLabel(((Candidato) p_elemento).getInfo());
+			miLblAnalizar.setBounds(0, 0, 450, 50);
 			add(miLblAnalizar);
-			//Codificar 
+			// Codificar
 			miLblAnalizar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -204,13 +207,12 @@ public class Elemento_A_Listar extends JPanel {
 		}
 	}
 
-	/*public JPanel getMiPaElemento_A_Listar() {
-		return miPaElemento_A_Listar;
-	}
-
-	public void setMiPaElemento_A_Listar(JPanel miPaElemento_A_Listar) {
-		this.miPaElemento_A_Listar = miPaElemento_A_Listar;
-	}*/
+	/*
+	 * public JPanel getMiPaElemento_A_Listar() { return miPaElemento_A_Listar; }
+	 * 
+	 * public void setMiPaElemento_A_Listar(JPanel miPaElemento_A_Listar) {
+	 * this.miPaElemento_A_Listar = miPaElemento_A_Listar; }
+	 */
 
 	public JButton getMiBtnEliminar() {
 		return miBtnEliminar;
