@@ -13,6 +13,7 @@ import ethazi.aplicacion.excepciones.PanelNoDisponible;
 import ethazi.intefaz.paneles.PanelAbrirOfertaCandidato;
 import ethazi.intefaz.paneles.PanelAbrirOfertaEmpresa;
 import ethazi.intefaz.paneles.PanelBarraHerramientas;
+import ethazi.intefaz.paneles.PanelConocimientosBuscados;
 import ethazi.intefaz.paneles.PanelConsultarOfertas;
 import ethazi.intefaz.paneles.PanelEditarOferta;
 import ethazi.intefaz.paneles.PanelPublicarOferta;
@@ -29,7 +30,7 @@ public class VentanaPrincipal extends JFrame {
 	// Crear analizar empresa
 	// Crear consultar ofertas adecuadas
 	// Crear consultar sus solicitudes
-	// Crear consultar conocimientos mas buscados
+	private JPanel pa_conocimientosBuscados = null;
 	private JPanel pa_realizarSolicitud = null;
 	private JPanel pa_abrirOferta = null;
 	// Crear ver perfil
@@ -117,7 +118,7 @@ public class VentanaPrincipal extends JFrame {
 			// Crear consultar sus solicitudes
 
 			// Crear consultar conocimientos mas buscados
-
+			pa_conocimientosBuscados = new PanelConocimientosBuscados();
 			// Crear realizar solicitud
 			pa_realizarSolicitud = new PanelRealizarSolicitud();
 			pa_contenedor.add(pa_realizarSolicitud);
@@ -187,7 +188,7 @@ public class VentanaPrincipal extends JFrame {
 
 			break;
 		case C_CONOCIMIENTOS_BUSCADOS:
-
+			nuevoPanel = pa_conocimientosBuscados;
 			break;
 		case C_CONSULTAR_CANDIDATOS:
 
