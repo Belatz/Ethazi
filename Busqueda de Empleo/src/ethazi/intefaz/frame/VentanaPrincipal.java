@@ -39,7 +39,7 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JTextField txField_buscar;
 	private static JPanel pa_contenedor = new JPanel();
-	static GenericoDePanelesConLista pa_buscarOfertas;
+	private static GenericoDePanelesConLista pa_buscarOfertas;
 	// variable de prueba
 	//ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
 
