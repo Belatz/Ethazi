@@ -19,6 +19,7 @@ import ethazi.intefaz.paneles.PanelPublicarOferta;
 import ethazi.intefaz.paneles.PanelRealizarSolicitud;
 import ethazi.intefaz.paneles.PanelVerOfertasConSolicitudes;
 
+
 public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JPanel pa_contenedor = new JPanel();
@@ -58,7 +59,7 @@ public class VentanaPrincipal extends JFrame {
 	public static final short C_OFERTAS_CON_SOLICITUDES = 14;
 
 	/**
-	 * Launch the application.
+	 * Launches the frame
 	 */
 	public static void ejecutar() {
 		EventQueue.invokeLater(new Runnable() {
@@ -74,7 +75,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	/**
-	 * Create the frame
+	 * Create the frame and panels
 	 */
 	public VentanaPrincipal() {
 		setResizable(false);
@@ -99,6 +100,11 @@ public class VentanaPrincipal extends JFrame {
 
 	}
 
+	/**
+	 * Creates all the panels that could be used by the current user
+	 * 
+	 * @author belatz
+	 */
 	public void crearPaneles() {
 		// Crear consultar ofertas
 		pa_buscarOfertas = new PanelConsultarOfertas();
@@ -151,6 +157,15 @@ public class VentanaPrincipal extends JFrame {
 
 	}
 
+	/**
+	 * Switches between panels
+	 * 
+	 * @author belatz
+	 * @param p_nuevoPanel
+	 *            The new panel to show
+	 * @throws PanelNoDisponible
+	 *             If the choosen panel doesn't exist
+	 */
 	public void cambiarPanel(short p_nuevoPanel) throws PanelNoDisponible {
 		currentPanel.setVisible(false);
 		JPanel nuevoPanel = null;

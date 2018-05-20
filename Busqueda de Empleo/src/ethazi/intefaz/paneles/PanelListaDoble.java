@@ -12,13 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
+/**
+ * Crea un panel con dos listas y botones para agregar o eliminar elementos de una lista a la otra
+ * @author belatz
+ *
+ */
 public class PanelListaDoble extends JPanel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
 	private JButton btn_anadir = new JButton();
 	private JButton btn_eliminar = new JButton();
 	private DefaultListModel<String> modelo_anadidos = new DefaultListModel<String>();
@@ -75,7 +75,7 @@ public class PanelListaDoble extends JPanel {
 
 	public void filtrarElemento(String p_texto) {
 		if ("".equals(p_texto)) {
-			// Cargar modelo entero desde lista de conocimientos totales
+			// TODO Cargar modelo entero desde lista de conocimientos totales
 		}
 
 		for (int i = 0; i < modelo_totales.size(); i++) {
