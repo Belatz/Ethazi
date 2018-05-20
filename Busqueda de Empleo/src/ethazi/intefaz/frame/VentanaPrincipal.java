@@ -7,47 +7,43 @@ import javax.swing.border.EmptyBorder;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
-import ethazi.intefaz.PaneldePOfertas;
+import ethazi.aplicacion.Oferta;
+
+import ethazi.intefaz.Elemento_Listable;
+import ethazi.intefaz.paneles.GenericoDePanelesConLista;
 import ethazi.intefaz.paneles.PanelAbrirOfertaCandidato;
 import ethazi.intefaz.paneles.PanelAbrirOfertaEmpresa;
-import ethazi.intefaz.paneles.PanelAtrasAlante;
-import ethazi.intefaz.paneles.PanelConsultarOfertas;
+
 import ethazi.intefaz.paneles.PanelEditarOferta;
-import ethazi.intefaz.paneles.PanelFiltrosOferta;
+
 import ethazi.intefaz.paneles.PanelPublicarOferta;
-import ethazi.intefaz.paneles.PanelFiltrosOferta;
 
-import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JInternalFrame;
-import javax.swing.JLayeredPane;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.BorderLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
+
+import java.util.ArrayList;
+
+import java.awt.Font;
+
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import java.awt.CardLayout;
-import javax.swing.JSplitPane;
 
 public class VentanaPrincipal extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txField_buscar;
-	private JPanel pa_contenedor = new JPanel(); 
+
+	private static JPanel pa_contenedor = new JPanel();
+	private static GenericoDePanelesConLista pa_buscarOfertas;
+	// variable de prueba
+	//ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
+
 
 	/**
 	 * Launch the application.
@@ -71,7 +67,7 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 768, 566);
+		setBounds(100, 100, 768, 575);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -85,15 +81,25 @@ public class VentanaPrincipal extends JFrame {
 		pa_contenedor.setBounds(0, 55, 762, 488);
 		contentPane.add(pa_contenedor);
 		pa_contenedor.setLayout(new CardLayout(0, 0));
+		/* Prueba jonor 
+		int cont = 0;
+		Oferta oferta;
 
+		while (cont < 15) {
+			oferta = new Oferta("Nombre" + cont, "Empresaaa" + cont, "descripppcciooooon" + cont, 1000 + cont);
+			ofertas.add(oferta);
+			cont++;
+		}
+		Prueba jonor */
 		crearPaneles();
 
 	}
 
 	public void crearPaneles() {
 		// Crear consultar ofertas
-		JPanel pa_buscarOfertas = new PanelConsultarOfertas();
-		pa_contenedor.add(pa_buscarOfertas);
+
+		//pa_buscarOfertas = new GenericoDePanelesConLista(ofertas, (byte) 1);
+	//	pa_contenedor.add(pa_buscarOfertas);
 		// Crear analizar empresa
 
 		if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea sus posibles ventanas
@@ -175,10 +181,19 @@ public class VentanaPrincipal extends JFrame {
 		txField_buscar.setBounds(51, 0, 195, 50);
 		pa_barraHerramientas.add(txField_buscar);
 
-		JComboBox combo_menu = new JComboBox();
+		JComboBox<Object> combo_menu = new JComboBox<Object>();
 		combo_menu.setToolTipText("Men\u00FA");
 		combo_menu.setName("");
 		combo_menu.setBounds(252, 0, 380, 50);
 		pa_barraHerramientas.add(combo_menu);
 	}
+
+	public static void addcont() {
+
+	}
+
+	public static void remcont() {
+		pa_contenedor.remove(pa_buscarOfertas);
+	}
+
 }
