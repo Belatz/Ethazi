@@ -41,7 +41,7 @@ public class VentanaPrincipal extends JFrame {
 	private static JPanel pa_contenedor = new JPanel();
 	static GenericoDePanelesConLista pa_buscarOfertas;
 	// variable de prueba
-	ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
+	//ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
 
 	/**
 	 * Launch the application.
@@ -79,7 +79,7 @@ public class VentanaPrincipal extends JFrame {
 		pa_contenedor.setBounds(0, 55, 762, 488);
 		contentPane.add(pa_contenedor);
 		pa_contenedor.setLayout(new CardLayout(0, 0));
-		/* Prueba jonor */
+		/* Prueba jonor 
 		int cont = 0;
 		Oferta oferta;
 
@@ -88,7 +88,7 @@ public class VentanaPrincipal extends JFrame {
 			ofertas.add(oferta);
 			cont++;
 		}
-		/* Prueba jonor */
+		Prueba jonor */
 		crearPaneles();
 
 	}
@@ -96,8 +96,8 @@ public class VentanaPrincipal extends JFrame {
 	public void crearPaneles() {
 		// Crear consultar ofertas
 
-		pa_buscarOfertas = new GenericoDePanelesConLista(ofertas, (byte) 1);
-		pa_contenedor.add(pa_buscarOfertas);
+		//pa_buscarOfertas = new GenericoDePanelesConLista(ofertas, (byte) 1);
+	//	pa_contenedor.add(pa_buscarOfertas);
 		// Crear analizar empresa
 
 		if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea sus posibles ventanas
