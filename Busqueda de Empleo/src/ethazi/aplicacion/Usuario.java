@@ -107,6 +107,14 @@ public abstract class Usuario {
 		Usuario.misConocimientosTotales = miConocimientosTotales;
 	}
 
+	/**
+	 * Checks if the Usuario is Candidato or Empresa
+	 * 
+	 * @param p_nick The nick of the Usuario
+	 * @return True if it's Candidato, False if it's Empresa
+	 * @throws SQLException
+	 * @author belatz
+	 */
 	public static boolean esCandidato(String p_nick) throws SQLException {
 		ResultSet _rs;
 		_rs = Aplicacion.getConexion().consultar("SELECT COUNT(*) FROM candidato WHERE nick='" + p_nick + "';");

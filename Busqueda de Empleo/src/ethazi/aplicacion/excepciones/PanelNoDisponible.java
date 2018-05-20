@@ -1,5 +1,12 @@
 package ethazi.aplicacion.excepciones;
 
+/**
+ * Exception launched when a panel that hasn't been created has been called
+ * 
+ * @category Excepctions
+ * @author belatz
+ *
+ */
 public class PanelNoDisponible extends Exception {
 
 	public PanelNoDisponible() {

@@ -6,9 +6,10 @@ import java.util.ArrayList;
 
 /**
  * 
- * Clase con metodos estaticos utiles
- * @category utilidades
- *
+ * A collection of methods to deal with various database related activities.
+ * 
+ * @category Utilities, DataBase
+ * @author belatz
  */
 public abstract class UtilidadesBD {
 

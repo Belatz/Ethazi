@@ -6,6 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Makes the connection between the app and the database
+ * 
+ * @author belatz
+ * @category DataBase
+ */
 public class Conexion {
 
 	/*

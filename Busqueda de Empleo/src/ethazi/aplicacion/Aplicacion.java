@@ -4,6 +4,9 @@ import java.sql.SQLException;
 
 import ethazi.intefaz.frame.VentanaIdentificarse;
 
+/**
+ * @author Belatz Arce, Xabier Cabezuelo, Nestor Echebarria, Eduardo Garcia, Urtzi Lamikiz, Jon Ortigueira  
+ */
 public class Aplicacion {
 
 	private static Usuario miUsuario;
