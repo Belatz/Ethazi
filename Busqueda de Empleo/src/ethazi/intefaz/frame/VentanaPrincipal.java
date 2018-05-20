@@ -38,15 +38,17 @@ public class VentanaPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txField_buscar;
+
 	private static JPanel pa_contenedor = new JPanel();
 	private static GenericoDePanelesConLista pa_buscarOfertas;
 	// variable de prueba
 	//ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
 
+
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void ejecutar() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

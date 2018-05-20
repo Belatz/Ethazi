@@ -1,15 +1,18 @@
 package ethazi.intefaz.frame;
 
+import java.awt.CardLayout;
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import ethazi.intefaz.paneles.PanelIdentificarse;
 import ethazi.intefaz.paneles.PanelRegistroEmpresa;
-
-import java.awt.CardLayout;
 
 public class VentanaIdentificarse extends JFrame {
 
@@ -20,7 +23,7 @@ public class VentanaIdentificarse extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void ejecutar() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -31,6 +34,10 @@ public class VentanaIdentificarse extends JFrame {
 				}
 			}
 		});
+	}
+	
+	public static void cerrar() {
+		frame.setVisible(false);
 	}
 
 	/**
@@ -51,5 +58,4 @@ public class VentanaIdentificarse extends JFrame {
 		JPanel pa_registrarEmpresa = new PanelRegistroEmpresa();
 		contentPane.add(pa_registrarEmpresa);
 	}
-
 }

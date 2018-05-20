@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,7 +13,13 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import ethazi.aplicacion.Aplicacion;
 import ethazi.intefaz.emergentes.RecuperarContrasena;
+import ethazi.intefaz.frame.VentanaIdentificarse;
+import ethazi.intefaz.frame.VentanaPrincipal;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelIdentificarse extends JPanel {
 	private JPasswordField pssField_contrasena;
@@ -39,6 +47,22 @@ public class PanelIdentificarse extends JPanel {
 		this.add(btn_registrarse);
 
 		JButton btn_entrar = new JButton("Entrar");
+		btn_entrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Buscar usuario
+				try {
+					ResultSet _consulta = Aplicacion.getConexion().consultar("SELECT password FROM usuario WHERE nick='"+txField_usuario.getText()+"';");
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				// Confirmar usuario
+				if (true) { // METER CONFIRMACION EN VEZ DE TRUE
+				// Aplicacion.setUsuario(usuario);
+					VentanaIdentificarse.cerrar();
+					VentanaPrincipal.ejecutar(); 
+				}
+			}
+		});
 		btn_entrar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btn_entrar.setBounds(84, 170, 126, 23);
 		this.add(btn_entrar);
