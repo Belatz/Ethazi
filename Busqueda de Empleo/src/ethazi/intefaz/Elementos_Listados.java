@@ -6,41 +6,41 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Elementos_Listados.
+ * Clase Elementos_Listados.
  */
 public class Elementos_Listados extends JPanel {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1617775952182198487L;
-	
 	/** The array elementos A listar. */
 	private ArrayList<Elemento_A_Listar> arrayElementos_A_Listar = new ArrayList<Elemento_A_Listar>();
-	
+
 	/** The Constant C_LIMITEMAX. */
 	public static final int C_LIMITEMAX = 10;
-	
+
 	/** The limite. */
 	public int limite = C_LIMITEMAX;
-	
+
 	/** The max pags. */
 	private int maxPags;
-	
+
 	/** The n pagina. */
 	private int nPagina = 1;
-	
+
 	/** The tipo. */
 	private byte tipo;
-	
+
 	/** The lista de elementos listables. */
 	ArrayList<Elemento_Listable> listaDeElementosListables;
 
 	/**
 	 * Instantiates a new elementos listados.
 	 *
-	 * @param listaDeElementosListables the lista de elementos listables
-	 * @param tipo the tipo
+	 * @param listaDeElementosListables
+	 *            the lista de elementos listables
+	 * @param tipo
+	 *            the tipo
 	 */
 	public Elementos_Listados(ArrayList<Elemento_Listable> listaDeElementosListables, byte tipo) {
 		this.tipo = tipo;
