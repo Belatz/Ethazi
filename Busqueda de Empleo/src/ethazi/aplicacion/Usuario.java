@@ -5,18 +5,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public abstract class Usuario {
+	public static ArrayList<String> misConocimientosTotales;
+
+	private String miNumID;
 	private String miNick;
 	private String miPassword;
 	private String miNombre;
-	private String miNumID;
 	private String miDireccion;
 	private String miEmail;
 	private String miTelefono;
-	private byte miAniosExp;
-	public static ArrayList<String> miConocimientosTotales;
 
-	public Usuario(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
-			String miEmail, String miTelefono, byte miAniosExp) throws NullPointerException {
+	public Usuario(String miNumID, String miNick, String miPassword, String miNombre, String miDireccion,
+			String miEmail, String miTelefono) throws NullPointerException {
 		super();
 		this.miNick = miNick;
 		this.miPassword = miPassword;
@@ -25,64 +25,56 @@ public abstract class Usuario {
 		this.miDireccion = miDireccion;
 		this.miEmail = miEmail;
 		this.miTelefono = miTelefono;
-		this.miAniosExp = miAniosExp;
 	}
 
-	protected String getNick() {
+	public String getNick() {
 		return miNick;
 	}
 
-	protected void setNick(String p_nick) {
-		this.miNick = p_nick;
+	public void setNick(String miNick) {
+		this.miNick = miNick;
 	}
 
-	protected String getPassword() {
+	public String getPassword() {
 		return miPassword;
 	}
 
-	protected void setPassword(String p_password) {
-		this.miPassword = p_password;
+	public void setPassword(String miPassword) {
+		this.miPassword = miPassword;
 	}
 
-	protected String getNombre() {
+	public String getNombre() {
 		return miNombre;
 	}
 
-	protected void setNombre(String p_nombre) {
+	public void setNombre(String p_nombre) {
 		this.miNombre = p_nombre;
 	}
 
-	protected String getNumID() {
+	public String getNumID() {
 		return miNumID;
 	}
 
-	protected void setNumID(String p_numID) {
+	public void setNumID(String p_numID) {
 		this.miNumID = p_numID;
 	}
 
-	protected String getEmail() {
+	public String getEmail() {
 		return miEmail;
 	}
 
-	protected void setEmail(String p_email) {
+	public void setEmail(String p_email) {
 		this.miEmail = p_email;
 	}
 
-	protected String getTelefono() {
+	public String getTelefono() {
 		return miTelefono;
 	}
 
-	protected void setTelefono(String p_telefono) {
+	public void setTelefono(String p_telefono) {
 		this.miTelefono = p_telefono;
 	}
 
-	protected byte getAniosExp() {
-		return miAniosExp;
-	}
-
-	protected void setAniosExp(byte p_aniosExp) {
-		this.miAniosExp = p_aniosExp;
-	}
 	public String getDireccion() {
 		return miDireccion;
 	}
@@ -90,11 +82,43 @@ public abstract class Usuario {
 	public void setDireccion(String p_direccion) {
 		this.miDireccion = p_direccion;
 	}
-	
+
+	public String getMiEmail() {
+		return miEmail;
+	}
+
+	public void setMiEmail(String miEmail) {
+		this.miEmail = miEmail;
+	}
+
+	public String getMiTelefono() {
+		return miTelefono;
+	}
+
+	public void setMiTelefono(String miTelefono) {
+		this.miTelefono = miTelefono;
+	}
+
+	public static ArrayList<String> getConocimientosTotales() {
+		return misConocimientosTotales;
+	}
+
+	public static void setConocimientosTotales(ArrayList<String> miConocimientosTotales) {
+		Usuario.misConocimientosTotales = miConocimientosTotales;
+	}
+
+	/**
+	 * Checks if the Usuario is Candidato or Empresa
+	 * 
+	 * @param p_nick The nick of the Usuario
+	 * @return True if it's Candidato, False if it's Empresa
+	 * @throws SQLException
+	 * @author belatz
+	 */
 	public static boolean esCandidato(String p_nick) throws SQLException {
 		ResultSet _rs;
 		_rs = Aplicacion.getConexion().consultar("SELECT COUNT(*) FROM candidato WHERE nick='" + p_nick + "';");
 		return _rs.next();
 	}
-	
+
 }

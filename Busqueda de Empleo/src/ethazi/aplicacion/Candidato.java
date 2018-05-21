@@ -1,14 +1,13 @@
 package ethazi.aplicacion;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import ethazi.intefaz.Elemento_Listable;
 
 public class Candidato extends Usuario implements Elemento_Listable {
 
 	private String apellidos;
-	private Calendar fechaNac;
+	private String fechaNac;
 	private boolean carnet;
 	private boolean cochePropio;
 	private boolean disViajar;
@@ -16,13 +15,14 @@ public class Candidato extends Usuario implements Elemento_Listable {
 	private ArrayList<String> conocimientos;
 	private String otrosConocimientos;
 	private String vidaLaboral;
-	private byte experienciaProfesional;
+	private float experienciaProfesional;
 
+	
 	public Candidato(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
-			String miEmail, String miTelefono, byte miAniosExp, String apellidos, Calendar fechaNac, boolean carnet,
-			boolean cochePropio, boolean disViajar, String estudios, ArrayList<String> conocimientos,
-			String otrosConocimientos, String vidaLaboral, byte experienciaProfesional) throws NullPointerException {
-		super(miNick, miPassword, miNombre, miNumID, miDireccion, miEmail, miTelefono, miAniosExp);
+			String miEmail, String miTelefono, String apellidos, String fechaNac, boolean carnet, boolean cochePropio,
+			boolean disViajar, String estudios, ArrayList<String> conocimientos, String otrosConocimientos,
+			String vidaLaboral, float experienciaProfesional) {
+		super(miNick, miPassword, miNombre, miNumID, miDireccion, miEmail, miTelefono);
 		this.apellidos = apellidos;
 		this.fechaNac = fechaNac;
 		this.carnet = carnet;
@@ -35,6 +35,10 @@ public class Candidato extends Usuario implements Elemento_Listable {
 		this.experienciaProfesional = experienciaProfesional;
 	}
 
+	public void setFechaNac(String fechaNac) {
+		this.fechaNac = fechaNac;
+	}
+
 	public String getApellidos() {
 		return apellidos;
 	}
@@ -43,12 +47,8 @@ public class Candidato extends Usuario implements Elemento_Listable {
 		this.apellidos = apellidos;
 	}
 
-	public Calendar getFechaNac() {
+	public String getFechaNac() {
 		return fechaNac;
-	}
-
-	public void setFechaNac(Calendar fechaNac) {
-		this.fechaNac = fechaNac;
 	}
 
 	public boolean isCarnet() {
@@ -107,11 +107,11 @@ public class Candidato extends Usuario implements Elemento_Listable {
 		this.vidaLaboral = vidaLaboral;
 	}
 
-	public byte getExperienciaProfesional() {
+	public float getExperienciaProfesional() {
 		return experienciaProfesional;
 	}
 
-	public void setExperienciaProfesional(byte experienciaProfesional) {
+	public void setExperienciaProfesional(float experienciaProfesional) {
 		this.experienciaProfesional = experienciaProfesional;
 	}
 

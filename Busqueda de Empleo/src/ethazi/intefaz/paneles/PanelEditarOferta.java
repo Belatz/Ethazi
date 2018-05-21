@@ -11,6 +11,7 @@ import javax.swing.border.Border;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.util.ArrayList;
 
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
@@ -107,7 +108,13 @@ public class PanelEditarOferta extends JPanel {
 		lbl_conocimientos.setBounds(537, 125, 169, 14);
 		add(lbl_conocimientos);
 		
-		JPanel pa_conocimientos = new PanelListaDoble();
+		//Ejemplo
+				ArrayList<String> conocimientos=new ArrayList<String>();
+				for(int i=0;i<10;i++)
+					conocimientos.add("Ejemplo "+i);
+				
+		//JPanel pa_conocimientos = new PanelListaDoble();
+		PanelListaDoble pa_conocimientos = new PanelListaDoble(conocimientos,null);
 		pa_conocimientos.setBounds(537, 174, 215, 180);
 		add(pa_conocimientos);
 		

@@ -4,49 +4,77 @@ import ethazi.intefaz.Elemento_Listable;
 
 public class Oferta implements Elemento_Listable {
 	/*jon:esta clase solo es de pruebas*/
-	private String titulo;
-	private String empresa;
-	private String descripcion;
-	private int salario;
+	private int miCod;
+	private String miTitulo;
+	private String miDescripcion;
+	private String miLugar;
+	private int miSalarioMax;
+	private int miSalarioMin;
+	private int miExperiencia;
+	private String misAspectosAValorar;
+	private String misAspectosImprescindibles;
+	private boolean miVisibilidad;
+	private byte miContrato;
+	private Empresa miEmpresa;
 
-	public Oferta(String titulo, String empresa, String descripcion, int salario) {
+	
+	public Oferta(int miCod, String miTitulo, String miDescripcion, String miLugar, int miSalarioMax, int miSalarioMin,
+			int miExperiencia, String misAspectosAValorar, String misAspectosImprescindibles, boolean miVisibilidad,
+			byte miContrato, Empresa miEmpresa) {
 		super();
-		this.titulo = titulo;
-		this.empresa = empresa;
-		this.descripcion = descripcion;
-		this.salario = salario;
+		this.miCod = miCod;
+		this.miTitulo = miTitulo;
+		this.miDescripcion = miDescripcion;
+		this.miLugar = miLugar;
+		this.miSalarioMax = miSalarioMax;
+		this.miSalarioMin = miSalarioMin;
+		this.miExperiencia = miExperiencia;
+		this.misAspectosAValorar = misAspectosAValorar;
+		this.misAspectosImprescindibles = misAspectosImprescindibles;
+		this.miVisibilidad = miVisibilidad;
+		this.miContrato = miContrato;
+		this.miEmpresa = miEmpresa;
 	}
+
 	@Override
 	public String getInfo() {
-		return titulo;
+		return miTitulo;
 	}
 
-	protected void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setTitulo(String titulo) {
+		this.miTitulo = titulo;
 	}
 
-	public String getEmpresa() {
-		return empresa;
+	public Empresa getEmpresa() {
+		return miEmpresa;
 	}
 
-	protected void setEmpresa(String empresa) {
-		this.empresa = empresa;
+	public void setEmpresa(Empresa empresa) {
+		this.miEmpresa = empresa;
 	}
 
-	protected String getDescripcion() {
-		return descripcion;
+	public String getDescripcion() {
+		return miDescripcion;
 	}
 
-	protected void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescripcion(String descripcion) {
+		this.miDescripcion = descripcion;
 	}
 
-	protected int getSalario() {
-		return salario;
+	public int getSalarioMax() {
+		return miSalarioMax;
 	}
 
-	protected void setSalario(int salario) {
-		this.salario = salario;
+	public void setSalarioMax(int salario) {
+		this.miSalarioMax = salario;
+	}
+	
+	public int getSalarioMin() {
+		return miSalarioMin;
+	}
+
+	public void setSalarioMin(int salario) {
+		this.miSalarioMin = salario;
 	}
 
 }
