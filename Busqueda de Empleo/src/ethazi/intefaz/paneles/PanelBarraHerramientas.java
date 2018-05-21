@@ -9,6 +9,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+/**
+ *
+ * This bar appears in most of the panels so the user can use
+ * the tools which are provided by the bar. Like switch off the program, find an offer or 
+ * go to the user's profile.
+ * 
+ * @author Nestor
+ *
+ */
+
 public class PanelBarraHerramientas extends JPanel {
 	private JTextField txField_buscar;
 

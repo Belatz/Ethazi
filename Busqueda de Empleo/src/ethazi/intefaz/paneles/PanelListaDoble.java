@@ -13,8 +13,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 /**
- * Crea un panel con dos listas y botones para agregar o eliminar elementos de
- * una lista a la otra
+ * Creates a panel with two lists and buttons to add or delete elements from
+ * a list to another
  * 
  * @author belatz
  *

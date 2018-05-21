@@ -21,6 +21,12 @@ import javax.swing.UIManager;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
+/**
+ * 
+ * @author Belatz y Nestor
+ *
+ */
+
 public class PanelEditarOferta extends JPanel {
 	private JTextField txField_titulo;
 	private JTextField txField_sueldoMin;

@@ -11,6 +11,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * 
+ * @author Xabi
+ *
+ */
+
 public class PanelRegistroEmpresa extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
@@ -23,7 +29,9 @@ public class PanelRegistroEmpresa extends JPanel {
 	private JTextField textField_8;
 
 	/**
-	 * Create the panel.
+	 * The panel RegistroEmpresa will show the facts that the user will have to
+	 * fill, so he can register as a Empresa.
+	 * 
 	 */
 	public PanelRegistroEmpresa() {
 		setLayout(null);
