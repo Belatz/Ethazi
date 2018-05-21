@@ -118,4 +118,5 @@ public class GenericoDePanelesConLista extends JPanel {
 		add(_panelBotonAtrasYAlante);
 
 	}
+	
 }

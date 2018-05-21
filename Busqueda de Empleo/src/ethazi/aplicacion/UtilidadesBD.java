@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import ethazi.intefaz.Elemento_A_Listar;
+import ethazi.intefaz.Elemento_Listable;
+
 /**
  * 
  * A collection of methods to deal with various database related activities.
@@ -52,10 +55,12 @@ public abstract class UtilidadesBD {
 		ResultSet _rs;
 
 		if (Usuario.esCandidato(p_nick)) {
-			_rs = Aplicacion.getConexion().consultar(
+			Aplicacion.getConexion();
+			_rs = Conexion.consultar(
 					"SELECT * FROM usuario u, candidato c WHERE u.numid=c.numid AND u.nick='" + p_nick + "';");
 		} else {
-			_rs = Aplicacion.getConexion()
+			Aplicacion.getConexion();
+			_rs = Conexion
 					.consultar("SELECT * FROM usuario u, empresa e WHERE u.numid=e.numid AND u.nick='" + p_nick + "';");
 		}
 
@@ -90,7 +95,8 @@ public abstract class UtilidadesBD {
 	 */
 	public static Candidato buscarCandidato(String p_numid) throws SQLException {
 		Candidato _candidato;
-		ResultSet _rs = Aplicacion.getConexion().consultar(
+		Aplicacion.getConexion();
+		ResultSet _rs = Conexion.consultar(
 				"SELECT * FROM candidato c, usuario u WHERE c.numid = u.numid AND c.numid='" + p_numid + "';");
 
 		_candidato = new Candidato(_rs.getString("nick"), _rs.getString("password"), _rs.getString("nombre"),
@@ -112,9 +118,10 @@ public abstract class UtilidadesBD {
 	 */
 	public static Oferta buscarOferta(String p_cod) throws SQLException {
 		Oferta _oferta;
-		ResultSet _rsOferta = Aplicacion.getConexion()
-				.consultar("SELECT * FROM oferta WHERE cod_oferta='" + p_cod + "';");
-		ResultSet _rsEmpresa = Aplicacion.getConexion()
+		Aplicacion.getConexion();
+		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM oferta WHERE cod_oferta='" + p_cod + "';");
+		Aplicacion.getConexion();
+		ResultSet _rsEmpresa = Conexion
 				.consultar("SELECT * FROM empresa e, usuario u WHERE u.numid = e.numid AND numid='"
 						+ _rsOferta.getString("numid") + "';");
 
@@ -124,6 +131,27 @@ public abstract class UtilidadesBD {
 				_rsOferta.getString("aspectos_valorar"), _rsOferta.getString("aspectos_impres"),
 				_rsOferta.getBoolean("visible"), _rsOferta.getByte("tipo_contrato"), (Empresa) toUsuario(_rsEmpresa));
 		return _oferta;
+	}
+
+	public static ArrayList<Elemento_Listable> buscarOfertas(String titulo) throws SQLException {
+		ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
+
+		Oferta oferta;
+		Aplicacion.getConexion();
+		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM oferta WHERE titulo like '%" + titulo + "%';");
+		ResultSet _rsEmpresa = Conexion
+				.consultar("SELECT * FROM empresa e, usuario u WHERE u.numid = e.numid AND numid='"
+						+ _rsOferta.getString("numid") + "';");
+		while (_rsOferta.next()) {
+			oferta = new Oferta(_rsOferta.getInt("cod_oferta"), _rsOferta.getString("titulo"),
+					_rsOferta.getString("descripcion"), _rsOferta.getString("lugar"), _rsOferta.getInt("sueldo_max"),
+					_rsOferta.getInt("sueldo_min"), _rsOferta.getInt("experiencia"),
+					_rsOferta.getString("aspectos_valorar"), _rsOferta.getString("aspectos_impres"),
+					_rsOferta.getBoolean("visible"), _rsOferta.getByte("tipo_contrato"),
+					(Empresa) toUsuario(_rsEmpresa));
+			ofertas.add(oferta);
+		}
+		return ofertas;
 	}
 
 	/**
@@ -137,7 +165,8 @@ public abstract class UtilidadesBD {
 	public static ArrayList<String> descargarConocimientos() throws SQLException {
 		ArrayList<String> _conocimientos = new ArrayList<>();
 
-		ResultSet _rs = Aplicacion.getConexion().consultar("SELECT * FROM conocimientos;");
+		Aplicacion.getConexion();
+		ResultSet _rs = Conexion.consultar("SELECT * FROM conocimientos;");
 		while (_rs.next()) {
 			_conocimientos.add(_rs.getString("nombre"));
 		}
@@ -158,7 +187,8 @@ public abstract class UtilidadesBD {
 	public static ArrayList<String> descargarConocimientos(String p_numid) throws SQLException {
 		ArrayList<String> _conocimientos = new ArrayList<>();
 
-		ResultSet _rs = Aplicacion.getConexion()
+		Aplicacion.getConexion();
+		ResultSet _rs = Conexion
 				.consultar("SELECT * FROM candidato_conocimientos WHERE candidato_usuario_numid='" + p_numid + "';");
 		while (_rs.next()) {
 			_conocimientos.add(_rs.getString("conocimientos_nombre"));
