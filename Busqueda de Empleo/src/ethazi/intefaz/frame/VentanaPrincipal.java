@@ -20,8 +20,35 @@ import ethazi.intefaz.paneles.PanelPublicarOferta;
 import ethazi.intefaz.paneles.PanelRealizarSolicitud;
 import ethazi.intefaz.paneles.PanelVerOfertasConSolicitudes;
 
+import ethazi.aplicacion.Oferta;
+
+import ethazi.intefaz.Elemento_Listable;
+import ethazi.intefaz.paneles.GenericoDePanelesConLista;
+import ethazi.intefaz.paneles.PanelAbrirOfertaCandidato;
+import ethazi.intefaz.paneles.PanelAbrirOfertaEmpresa;
+
+import ethazi.intefaz.paneles.PanelEditarOferta;
+
+import ethazi.intefaz.paneles.PanelPublicarOferta;
+
+import javax.swing.JTextField;
+
+import javax.swing.JButton;
+
+import java.util.ArrayList;
+
+import java.awt.Font;
+
+import java.awt.Dimension;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+import java.awt.CardLayout;
 
 public class VentanaPrincipal extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel pa_contenedor = new JPanel();
 	private JPanel currentPanel;
@@ -59,6 +86,10 @@ public class VentanaPrincipal extends JFrame {
 	public static final short C_ANALIZAR_SOLICITUDES = 13;
 	public static final short C_OFERTAS_CON_SOLICITUDES = 14;
 
+  private static GenericoDePanelesConLista pa_buscarOfertas;
+	// variable de prueba
+	//ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
+
 	/**
 	 * Launches the frame
 	 */
@@ -81,7 +112,7 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 768, 566);
+		setBounds(100, 100, 768, 575);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -96,7 +127,16 @@ public class VentanaPrincipal extends JFrame {
 		pa_contenedor.setBounds(0, 55, 762, 488);
 		contentPane.add(pa_contenedor);
 		pa_contenedor.setLayout(new CardLayout(0, 0));
+		/* Prueba jonor 
+		int cont = 0;
+		Oferta oferta;
 
+		while (cont < 15) {
+			oferta = new Oferta("Nombre" + cont, "Empresaaa" + cont, "descripppcciooooon" + cont, 1000 + cont);
+			ofertas.add(oferta);
+			cont++;
+		}
+		Prueba jonor */
 		crearPaneles();
 
 	}
@@ -108,8 +148,8 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public void crearPaneles() {
 		// Crear consultar ofertas
-		pa_buscarOfertas = new PanelConsultarOfertas();
-		pa_contenedor.add(pa_buscarOfertas);
+		//  pa_buscarOfertas = new GenericoDePanelesConLista(ofertas, (byte) 1);
+   	//	pa_contenedor.add(pa_buscarOfertas);
 		// Crear analizar empresa
 
 		if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea sus posibles ventanas
@@ -229,4 +269,13 @@ public class VentanaPrincipal extends JFrame {
 		nuevoPanel.setVisible(true);
 		currentPanel = nuevoPanel;
 	}
+
+	public static void addcont() {
+
+	}
+
+	public static void remcont() {
+		pa_contenedor.remove(pa_buscarOfertas);
+	}
+
 }
