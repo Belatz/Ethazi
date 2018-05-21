@@ -12,6 +12,11 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
+import ethazi.datos.UtilidadesBD;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 /**
  * Crea un panel con una lista de atributos pensada para filtrar busquedas
  * 
@@ -43,10 +48,6 @@ public class PanelFiltrosOferta extends JScrollPane {
 		pa_filtros.setPreferredSize(new Dimension(228, 550));
 		pa_filtros.setLayout(null);
 
-		JButton btn_aplicar = new JButton("Aplicar");
-		btn_aplicar.setBounds(66, 11, 89, 23);
-		pa_filtros.add(btn_aplicar);
-
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 45, 226, 10);
 		pa_filtros.add(separator);
@@ -68,7 +69,7 @@ public class PanelFiltrosOferta extends JScrollPane {
 		lbl_lugar.setBounds(7, 250, 118, 14);
 		pa_filtros.add(lbl_lugar);
 
-		JComboBox combo_lugar = new JComboBox();
+		JComboBox<String> combo_lugar = new JComboBox<>();
 		combo_lugar.setBounds(7, 264, 118, 23);
 		pa_filtros.add(combo_lugar);
 
@@ -76,7 +77,7 @@ public class PanelFiltrosOferta extends JScrollPane {
 		lbl_contrato.setBounds(7, 295, 118, 14);
 		pa_filtros.add(lbl_contrato);
 
-		JComboBox combo_contrato = new JComboBox();
+		JComboBox<String> combo_contrato = new JComboBox<>();
 		combo_contrato.setBounds(7, 309, 118, 23);
 		pa_filtros.add(combo_contrato);
 
@@ -115,6 +116,20 @@ public class PanelFiltrosOferta extends JScrollPane {
 		txField_empresa.setColumns(10);
 		txField_empresa.setBounds(10, 485, 162, 20);
 		pa_filtros.add(txField_empresa);
+
+		JButton btn_aplicar = new JButton("Aplicar");
+		btn_aplicar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO crear el campo titulo
+				// TODO hacer algo con la lista de ofertas
+				// TODO tratar la lista de conocimientos en un arraylist
+				UtilidadesBD.filtrarOfertas(txField_titulo.getText(), combo_lugar.getSelectedItem(),
+						txField_sueldoMax.getText(), txField_sueldoMin.getText(), txFiedl_experiencia.getText(),
+						combo_contrato.getSelectedItem(), txField_empresa.getText(), p_conocimientos);
+			}
+		});
+		btn_aplicar.setBounds(66, 11, 89, 23);
+		pa_filtros.add(btn_aplicar);
 
 		return pa_filtros;
 	}

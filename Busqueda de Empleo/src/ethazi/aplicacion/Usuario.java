@@ -16,7 +16,7 @@ public abstract class Usuario {
 	private String miTelefono;
 
 	public Usuario(String miNumID, String miNick, String miPassword, String miNombre, String miDireccion,
-			String miEmail, String miTelefono) throws NullPointerException {
+			String miEmail, String miTelefono) throws nullPointerException {
 		super();
 		this.miNick = miNick;
 		this.miPassword = miPassword;

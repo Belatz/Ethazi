@@ -2,7 +2,7 @@ package ethazi.pruebas;
 
 import java.sql.SQLException;
 
-import ethazi.aplicacion.Conexion;
+import ethazi.datos.Conexion;
 
 public class PruebasBD {
 

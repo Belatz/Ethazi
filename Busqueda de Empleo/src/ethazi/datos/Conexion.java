@@ -1,4 +1,4 @@
-package ethazi.aplicacion;
+package ethazi.datos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -70,7 +70,7 @@ public class Conexion {
 	 */
 	public int actualizar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
-		return _comando.executeUpdate(sql);
+		return _comando.executeUpdate(sql.toUpperCase());
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class Conexion {
 	 */
 	public ResultSet consultar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
-		return _comando.executeQuery(sql);
+		return _comando.executeQuery(sql.toUpperCase());
 	}
 
 }

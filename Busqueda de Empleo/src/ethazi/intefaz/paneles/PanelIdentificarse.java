@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Usuario;
-import ethazi.aplicacion.UtilidadesBD;
+import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.emergentes.RecuperarContrasena;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
