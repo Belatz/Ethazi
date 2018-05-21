@@ -42,7 +42,7 @@ public class PruebasBD {
 			conn.actualizar("INSERT INTO conocimientos VALUES 'Electricista'");
 			conn.actualizar("INSERT INTO conocimientos VALUES 'Contabilidad'");
 			
-			//Datos ofertas
+			//Datos ofertas 
 			conn.actualizar("INSERT INTO oferta VALUES 'Programacion','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'66666666Z',12");
 			conn.actualizar("INSERT INTO oferta VALUES 'Programacion','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'88888888X',12");
 			conn.actualizar("INSERT INTO oferta VALUES 'Programacion','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'77777777B',12");
