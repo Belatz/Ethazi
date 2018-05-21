@@ -15,8 +15,6 @@ import ethazi.intefaz.frame.VentanaPrincipal;
 
 public class PanelAtrasAlante extends JPanel {
 
-
-
 	public PanelAtrasAlante(Elementos_Listados panel_QueTieneLaLista) {
 		setLayout(null);
 		JButton btn_siguiente = new JButton("Siguiente");
@@ -58,7 +56,7 @@ public class PanelAtrasAlante extends JPanel {
 
 				panel_QueTieneLaLista.restarPagina();
 				panel_QueTieneLaLista.mostrarOtras10();
-	
+
 				// VentanaPrincipal.addcont();
 			}
 		});

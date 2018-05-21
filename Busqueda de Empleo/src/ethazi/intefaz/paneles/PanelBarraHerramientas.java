@@ -11,14 +11,14 @@ import javax.swing.SwingConstants;
 
 public class PanelBarraHerramientas extends JPanel {
 	private JTextField txField_buscar;
-	
+
 	public PanelBarraHerramientas() {
 		setLayout(null);
 		JButton btn_buscar = new JButton("");
 		btn_buscar.setBounds(0, 0, 50, 50);
 		add(btn_buscar);
 		setBounds(0, 0, 762, 50);
-		
+
 		JButton btn_perfil = new JButton("");
 		btn_perfil.setToolTipText("Ver Perfil");
 		btn_perfil.setPreferredSize(new Dimension(33, 9));

@@ -52,14 +52,15 @@ public class PanelVerPerfil extends JPanel {
 	private JCheckBox chckbxDisponibilidadParaViajar;
 	private JTextArea informacionContactotextArea;
 	private JTextArea descripciontextArea;
-	private JComboBox <Integer> diacomboBox;
-	private JComboBox <Integer> mescomboBox;
-	private JComboBox <Integer> aniocomboBox;
+	private JComboBox<Integer> diacomboBox;
+	private JComboBox<Integer> mescomboBox;
+	private JComboBox<Integer> aniocomboBox;
 	private PanelListaDoble conocimientosEditar;
 	private ArrayList<String> conocimientosTenidos;
-	
-	//Ejemplo
+
+	// Ejemplo
 	private ArrayList<String> conocimientosTotales;
+
 	public PanelVerPerfil(Usuario user) {
 		setPreferredSize(new Dimension(762, 488));
 		setLayout(null);
@@ -69,7 +70,7 @@ public class PanelVerPerfil extends JPanel {
 
 		nickTextField = new JTextField();
 		nickTextField.setBounds(46, 62, 130, 20);
-		
+
 		nickTextField.setEditable(false);
 		add(nickTextField);
 		nickTextField.setColumns(10);
@@ -80,7 +81,7 @@ public class PanelVerPerfil extends JPanel {
 
 		nombretextField = new JTextField();
 		nombretextField.setBounds(274, 62, 159, 20);
-		
+
 		nombretextField.setEditable(false);
 		add(nombretextField);
 		nombretextField.setColumns(10);
@@ -91,7 +92,7 @@ public class PanelVerPerfil extends JPanel {
 
 		numIdtextField = new JTextField();
 		numIdtextField.setBounds(46, 90, 85, 20);
-		
+
 		numIdtextField.setEditable(false);
 		add(numIdtextField);
 		numIdtextField.setColumns(10);
@@ -102,7 +103,7 @@ public class PanelVerPerfil extends JPanel {
 
 		dirtextField = new JTextField();
 		dirtextField.setBounds(186, 90, 314, 20);
-		
+
 		dirtextField.setEditable(false);
 		add(dirtextField);
 		dirtextField.setColumns(10);
@@ -113,7 +114,7 @@ public class PanelVerPerfil extends JPanel {
 
 		emailtextField = new JTextField();
 		emailtextField.setBounds(186, 121, 280, 20);
-		
+
 		emailtextField.setEditable(false);
 		add(emailtextField);
 		emailtextField.setColumns(10);
@@ -124,13 +125,11 @@ public class PanelVerPerfil extends JPanel {
 
 		teltextField = new JTextField();
 		teltextField.setBounds(46, 121, 85, 20);
-		
+
 		teltextField.setEditable(false);
 		add(teltextField);
 		teltextField.setColumns(10);
-		
-		
-		
+
 		if (user instanceof Candidato) {
 			JLabel milblApellidos = new JLabel("Apellidos: ");
 			milblApellidos.setBounds(456, 65, 78, 14);
@@ -138,7 +137,7 @@ public class PanelVerPerfil extends JPanel {
 
 			apellidostextField = new JTextField();
 			apellidostextField.setBounds(527, 62, 225, 20);
-			
+
 			apellidostextField.setEditable(false);
 			add(apellidostextField);
 			apellidostextField.setColumns(10);
@@ -146,51 +145,49 @@ public class PanelVerPerfil extends JPanel {
 			JLabel milblFechaNac = new JLabel("Fecha Nacimiento: ");
 			milblFechaNac.setBounds(10, 148, 121, 14);
 			add(milblFechaNac);
-			
-			diacomboBox= new JComboBox <Integer> ();
+
+			diacomboBox = new JComboBox<Integer>();
 			diacomboBox.setBounds(123, 148, 46, 20);
 			add(diacomboBox);
-			
-			mescomboBox = new JComboBox <Integer> ();
+
+			mescomboBox = new JComboBox<Integer>();
 			mescomboBox.setBounds(187, 148, 46, 20);
 			add(mescomboBox);
-			
-			aniocomboBox = new JComboBox <Integer> ();
+
+			aniocomboBox = new JComboBox<Integer>();
 			aniocomboBox.setBounds(246, 148, 85, 20);
 			add(aniocomboBox);
-			
 
 			JLabel lblEstudios = new JLabel("Estudios:");
 			lblEstudios.setBounds(10, 198, 58, 14);
 			add(lblEstudios);
 
-			estudiostextArea= new TextArea();
+			estudiostextArea = new TextArea();
 			estudiostextArea.setEditable(false);
-			
+
 			estudiostextArea.setBounds(83, 198, 653, 58);
 			add(estudiostextArea);
 
 			JLabel lblConocimientos = new JLabel("Conocimientos:");
 			lblConocimientos.setBounds(10, 254, 102, 14);
 			add(lblConocimientos);
-			//Ejemplo:
-			conocimientosTotales=new ArrayList<String>();
-			for(int i=0; i<10;i++)
-				conocimientosTotales.add("Ejemplo "+i);
-			conocimientosTenidos=new ArrayList<String>();
-			for(int i=0; i<10;i++)
-				conocimientosTenidos.add("ejemplo "+(i*2));
-			conocimientosEditar=new PanelListaDoble(conocimientosTotales, conocimientosTenidos);
+			// Ejemplo:
+			conocimientosTotales = new ArrayList<String>();
+			for (int i = 0; i < 10; i++)
+				conocimientosTotales.add("Ejemplo " + i);
+			conocimientosTenidos = new ArrayList<String>();
+			for (int i = 0; i < 10; i++)
+				conocimientosTenidos.add("ejemplo " + (i * 2));
+			conocimientosEditar = new PanelListaDoble(conocimientosTotales, conocimientosTenidos);
 			conocimientosEditar.setBounds(60, 270, 214, 177);
 			add(conocimientosEditar);
-			
 
 			JLabel lblOtrosConocimientos = new JLabel("Otros Conocimientos:");
 			lblOtrosConocimientos.setBounds(325, 264, 125, 14);
 			add(lblOtrosConocimientos);
 
-			otrosConocimientostextArea= new TextArea();
-			
+			otrosConocimientostextArea = new TextArea();
+
 			otrosConocimientostextArea.setEditable(false);
 			otrosConocimientostextArea.setBounds(456, 264, 280, 51);
 			add(otrosConocimientostextArea);
@@ -199,8 +196,8 @@ public class PanelVerPerfil extends JPanel {
 			lblVidaLaboral.setBounds(325, 323, 108, 14);
 			add(lblVidaLaboral);
 
-			vidaLaboraltextArea= new TextArea();
-			
+			vidaLaboraltextArea = new TextArea();
+
 			vidaLaboraltextArea.setEditable(false);
 			vidaLaboraltextArea.setBounds(456, 321, 280, 51);
 			add(vidaLaboraltextArea);
@@ -210,13 +207,13 @@ public class PanelVerPerfil extends JPanel {
 			add(lblExperienciaProfesional);
 
 			experienciaProfesionaltextField = new JTextField();
-			
+
 			experienciaProfesionaltextField.setEditable(false);
 			experienciaProfesionaltextField.setColumns(10);
 			experienciaProfesionaltextField.setBounds(647, 169, 39, 20);
 			add(experienciaProfesionaltextField);
 
-			chckbxCarnet= new JCheckBox("Carnet de Conducir");
+			chckbxCarnet = new JCheckBox("Carnet de Conducir");
 			chckbxCarnet.setEnabled(false);
 			chckbxCarnet.setBounds(10, 171, 157, 23);
 			add(chckbxCarnet);
@@ -226,30 +223,28 @@ public class PanelVerPerfil extends JPanel {
 			chckbxCoche.setBounds(186, 168, 118, 23);
 			add(chckbxCoche);
 
-			chckbxDisponibilidadParaViajar= new JCheckBox("Disponibilidad para Viajar");
+			chckbxDisponibilidadParaViajar = new JCheckBox("Disponibilidad para Viajar");
 			chckbxDisponibilidadParaViajar.setEnabled(((Candidato) user).isDisViajar());
 			chckbxDisponibilidadParaViajar.setBounds(303, 171, 174, 23);
 			add(chckbxDisponibilidadParaViajar);
-		}
-		else
-		{
+		} else {
 			JLabel lblInformacinDeContacto = new JLabel("Informaci\u00F3n de Contacto de Recursos Humanos:");
 			lblInformacinDeContacto.setBounds(46, 203, 239, 20);
 			add(lblInformacinDeContacto);
-			
+
 			informacionContactotextArea = new JTextArea();
-			
-			informacionContactotextArea.setText(((Empresa)user).getMiContacto());
+
+			informacionContactotextArea.setText(((Empresa) user).getContacto());
 			informacionContactotextArea.setBounds(46, 234, 239, 213);
 			add(informacionContactotextArea);
-			
+
 			JLabel lblDescripcin = new JLabel("Descripci\u00F3n:");
 			lblDescripcin.setBounds(343, 203, 239, 20);
 			add(lblDescripcin);
-			
+
 			descripciontextArea = new JTextArea();
-			
-			descripciontextArea.setText(((Empresa)user).getMiDescripcion());
+
+			descripciontextArea.setText(((Empresa) user).getDescripcion());
 			descripciontextArea.setBounds(343, 234, 239, 213);
 			add(descripciontextArea);
 		}
@@ -268,7 +263,7 @@ public class PanelVerPerfil extends JPanel {
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.setToolTipText("Editar Perfil");
 		btnEditar.setBounds(693, 454, 67, 23);
-		add(btnEditar);		
+		add(btnEditar);
 		habilitarODes(false, user);
 		btnEditar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -285,7 +280,7 @@ public class PanelVerPerfil extends JPanel {
 				btnValidar.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						
+
 					}
 				});
 				btnCancelar.addMouseListener(new MouseAdapter() {
@@ -298,28 +293,27 @@ public class PanelVerPerfil extends JPanel {
 						inicializarDatos(user);
 					}
 				});
-				
-				
-				}
+
+			}
 		});
 	}
-	private void inicializarDatos(Usuario user)
-	{
+
+	private void inicializarDatos(Usuario user) {
 		nickTextField.setText(user.getMiNick());
 		nombretextField.setText(user.getMiNombre());
 		numIdtextField.setText(user.getMiNumID());
-		dirtextField.setText(user.getMiDireccion()); 
+		dirtextField.setText(user.getMiDireccion());
 		emailtextField.setText(user.getMiEmail());
 		teltextField.setText(user.getMiTelefono());
-		if (user instanceof Candidato)
-		{
+		if (user instanceof Candidato) {
 			apellidostextField.setText(((Candidato) user).getApellidos());
-			
+
 			estudiostextArea.setText(((Candidato) user).getEstudios());
-			for(int i=Calendar.getInstance().get(Calendar.YEAR);i>=(Calendar.getInstance().get(Calendar.YEAR)-90);i--)
+			for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= (Calendar.getInstance().get(Calendar.YEAR)
+					- 90); i--)
 				aniocomboBox.addItem(Integer.valueOf(i));
 			aniocomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(6)));
-			for(int i=1;i<=12;i++)
+			for (int i = 1; i <= 12; i++)
 				mescomboBox.addItem(Integer.valueOf(i));
 			mescomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(3, 5)));
 			mescomboBox.addMouseListener(new MouseAdapter() {
@@ -334,64 +328,67 @@ public class PanelVerPerfil extends JPanel {
 					actualizarDia();
 				}
 			});
-			int total=0;
+			int total = 0;
 			actualizarDia();
 			diacomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(0, 2)));
-			
+
 			otrosConocimientostextArea.setText(((Candidato) user).getOtrosConocimientos());
 			vidaLaboraltextArea.setText(((Candidato) user).getVidaLaboral());
 			experienciaProfesionaltextField.setText(String.valueOf(((Candidato) user).getExperienciaProfesional()));
 			chckbxCarnet.setSelected(((Candidato) user).isCarnet());
-			chckbxCoche.setSelected(((Candidato)user).isCochePropio());
-			chckbxDisponibilidadParaViajar.setSelected(((Candidato)user).isDisViajar());
+			chckbxCoche.setSelected(((Candidato) user).isCochePropio());
+			chckbxDisponibilidadParaViajar.setSelected(((Candidato) user).isDisViajar());
 			conocimientosEditar.actualizarListas(conocimientosTotales, conocimientosTenidos);
-		}
-		else
-		{
+		} else {
 			informacionContactotextArea.setEditable(false);
 			descripciontextArea.setEditable(false);
 		}
 	}
-	private void actualizarDia()
-	{
-		int total=0;
-		switch(((Integer)mescomboBox.getSelectedItem()).intValue())
-		{
-		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-			total=31;
+
+	private void actualizarDia() {
+		int total = 0;
+		switch (((Integer) mescomboBox.getSelectedItem()).intValue()) {
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			total = 31;
 			break;
-		case 4: case 6: case 9: case 11:
-			total=30;
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			total = 30;
 			break;
 		case 2:
-			if(((Integer)aniocomboBox.getSelectedIndex()).intValue()%4==0
-			&& ((Integer)aniocomboBox.getSelectedIndex()).intValue()%100!=0
-			|| ((Integer)aniocomboBox.getSelectedIndex()).intValue()%400==0)
-				total=29;
+			if (((Integer) aniocomboBox.getSelectedIndex()).intValue() % 4 == 0
+					&& ((Integer) aniocomboBox.getSelectedIndex()).intValue() % 100 != 0
+					|| ((Integer) aniocomboBox.getSelectedIndex()).intValue() % 400 == 0)
+				total = 29;
 			else
-				total=28;
+				total = 28;
 		}
 		diacomboBox.removeAllItems();
-		
-		for(int i=1;i<=total;i++)
+
+		for (int i = 1; i <= total; i++)
 			diacomboBox.addItem(Integer.valueOf(i));
 	}
-	private void habilitarODes(boolean hab, Usuario user)
-	{
+
+	private void habilitarODes(boolean hab, Usuario user) {
 		nombretextField.setEditable(hab);
 		dirtextField.setEditable(hab);
 		teltextField.setEditable(hab);
 		emailtextField.setEditable(hab);
-		
-		if(user instanceof Empresa)
-		{
+
+		if (user instanceof Empresa) {
 			descripciontextArea.setEditable(hab);
 			informacionContactotextArea.setEditable(hab);
-		}
-		else
-		{
+		} else {
 			apellidostextField.setEditable(hab);
-			
+
 			chckbxDisponibilidadParaViajar.setEnabled(hab);
 			chckbxCarnet.setEnabled(hab);
 			chckbxCoche.setEnabled(hab);

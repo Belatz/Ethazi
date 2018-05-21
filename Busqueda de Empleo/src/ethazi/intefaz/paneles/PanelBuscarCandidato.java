@@ -14,9 +14,9 @@ public class PanelBuscarCandidato extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelBuscarCandidato() {
-		setPreferredSize(new Dimension(762,488));
+		setPreferredSize(new Dimension(762, 488));
 		setLayout(null);
-		
+
 		/* Lanzar panel de listado */
 		JScrollPane pa_listado = new JScrollPane();
 		PaneldePOfertas pOfertas_1 = new PaneldePOfertas();
@@ -28,12 +28,12 @@ public class PanelBuscarCandidato extends JPanel {
 		pa_listado.setViewportView(pOfertas_1);
 		// getContentPane().add(scroll);
 		add(pa_listado);
-		
+
 		/* Lanzar panel de filtros */
 		JScrollPane pa_filtros = new PanelFiltrosCandidato();
 		pa_filtros.setBounds(512, 0, 247, 482);
 		add(pa_filtros);
-		
+
 		/* Lanzar panel de atras y alante */
 		JPanel _panelBotonAtrasYAlante = new PanelAtrasAlante(PanelAtrasAlante.C_CENTRAL);
 		_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);

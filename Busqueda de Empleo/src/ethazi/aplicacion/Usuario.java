@@ -110,7 +110,8 @@ public abstract class Usuario {
 	/**
 	 * Checks if the Usuario is Candidato or Empresa
 	 * 
-	 * @param p_nick The nick of the Usuario
+	 * @param p_nick
+	 *            The nick of the Usuario
 	 * @return True if it's Candidato, False if it's Empresa
 	 * @throws SQLException
 	 * @author belatz
