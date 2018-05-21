@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 
 /**
- * @author Belatz Arce, Xabier Cabezuelo, Nestor Echebarria, Eduardo Garcia, Urtzi Lamikiz, Jon Ortigueira  
+ * @author Belatz Arce, Xabier Cabezuelo, Nestor Echebarria, Eduardo Garcia,
+ *         Urtzi Lamikiz, Jon Ortigueira
  */
 public class Aplicacion {
 
@@ -16,7 +17,7 @@ public class Aplicacion {
 		try {
 			miConexion = new Conexion();
 			Usuario.setConocimientosTotales(UtilidadesBD.descargarConocimientos());
-			
+
 			VentanaIdentificarse.ejecutar();
 		} catch (SQLException e) {
 			e.printStackTrace();

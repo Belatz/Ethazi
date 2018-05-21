@@ -19,97 +19,113 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * 
+ * @author Urtzi
+ *
+ */
+
 public class PanelRegistroCandidato extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_11;
+	private JTextField txFieldNombreUsuario;
+	private JTextField txFieldContrasena;
+	private JTextField txFieldNombre;
+	private JTextField txFieldDNI;
+	private JTextField txFieldDireccion;
+	private JTextField txFieldEmail;
+	private JTextField txFieldTelefono;
+	private JTextField txFieldApellidos;
+	private JTextField txFieldFechaNacimiento;
+	private JTextField txFieldVidaLaboral;
+	private JTextField txFieldEstudios;
 	String mensaje = "¿Estas seguro?";
 
 	/**
-	 * Create the panel.
+	 * The panel RegistroCandidato will show the facts that the user will have to
+	 * fill, so he can register as a Candidato.
+	 * 
 	 */
+	
 	public PanelRegistroCandidato() {
 		setLayout(null);
 
-		JLabel lblNombreDeUsuario = new JLabel("Nombre de Usuario:");
-		lblNombreDeUsuario.setBounds(10, 70, 111, 14);
-		add(lblNombreDeUsuario);
+		JLabel lbl_NombreDeUsuario = new JLabel("Nombre de Usuario:");
+		lbl_NombreDeUsuario.setBounds(10, 70, 111, 14);
+		add(lbl_NombreDeUsuario);
 
-		JLabel lblContrasea = new JLabel("Contrasena:");
-		lblContrasea.setBounds(320, 70, 74, 14);
-		add(lblContrasea);
+		JLabel lbl_Contrasea = new JLabel("Contrasena:");
+		lbl_Contrasea.setBounds(320, 70, 74, 14);
+		add(lbl_Contrasea);
 
-		JLabel lblCorreoElectronico = new JLabel("Correo electronico:");
-		lblCorreoElectronico.setBounds(10, 193, 111, 14);
-		add(lblCorreoElectronico);
+		JLabel lbl_CorreoElectronico = new JLabel("Correo electronico:");
+		lbl_CorreoElectronico.setBounds(10, 193, 111, 14);
+		add(lbl_CorreoElectronico);
 
-		JLabel lblNewLabel = new JLabel("Registro del Candidato");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel.setBounds(188, 11, 278, 24);
-		add(lblNewLabel);
+		JLabel lbl_titulo = new JLabel("Registro del Candidato");
+		lbl_titulo.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lbl_titulo.setBounds(188, 11, 278, 24);
+		add(lbl_titulo);
 
-		JLabel lblNewLabel_1 = new JLabel("Nombre:");
-		lblNewLabel_1.setBounds(10, 111, 94, 14);
-		add(lblNewLabel_1);
+		JLabel lbl_Nombre = new JLabel("Nombre:");
+		lbl_Nombre.setBounds(10, 111, 94, 14);
+		add(lbl_Nombre);
 
-		JLabel lblNewLabel_2 = new JLabel("DNI:");
-		lblNewLabel_2.setBounds(320, 111, 46, 14);
-		add(lblNewLabel_2);
+		JLabel lbl_DNI = new JLabel("DNI:");
+		lbl_DNI.setBounds(320, 111, 46, 14);
+		add(lbl_DNI);
 
-		JLabel lblNewLabel_3 = new JLabel("Direccion:");
-		lblNewLabel_3.setBounds(10, 149, 58, 14);
-		add(lblNewLabel_3);
+		JLabel lbl_Direccion = new JLabel("Direccion:");
+		lbl_Direccion.setBounds(10, 149, 58, 14);
+		add(lbl_Direccion);
 
-		JLabel lblNewLabel_4 = new JLabel("Telefono:");
-		lblNewLabel_4.setBounds(320, 193, 46, 14);
-		add(lblNewLabel_4);
+		JLabel lbl_Telefono = new JLabel("Telefono:");
+		lbl_Telefono.setBounds(320, 193, 46, 14);
+		add(lbl_Telefono);
 
-		textField = new JTextField();
-		textField.setBounds(116, 68, 136, 17);
-		add(textField);
-		textField.setColumns(10);
+		txFieldNombreUsuario = new JTextField();
+		txFieldNombreUsuario.setEditable(false);
+		txFieldNombreUsuario.setBounds(116, 68, 136, 17);
+		add(txFieldNombreUsuario);
+		txFieldNombreUsuario.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(404, 68, 136, 17);
-		add(textField_1);
+		txFieldContrasena = new JTextField();
+		txFieldContrasena.setEditable(false);
+		txFieldContrasena.setColumns(10);
+		txFieldContrasena.setBounds(404, 68, 136, 17);
+		add(txFieldContrasena);
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(116, 108, 136, 17);
-		add(textField_2);
+		txFieldNombre = new JTextField();
+		txFieldNombre.setEditable(false);
+		txFieldNombre.setColumns(10);
+		txFieldNombre.setBounds(116, 108, 136, 17);
+		add(txFieldNombre);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(404, 108, 136, 17);
-		add(textField_3);
+		txFieldDNI = new JTextField();
+		txFieldDNI.setEditable(false);
+		txFieldDNI.setColumns(10);
+		txFieldDNI.setBounds(404, 108, 136, 17);
+		add(txFieldDNI);
 
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(116, 147, 424, 17);
-		add(textField_4);
+		txFieldDireccion = new JTextField();
+		txFieldDireccion.setEditable(false);
+		txFieldDireccion.setColumns(10);
+		txFieldDireccion.setBounds(116, 147, 424, 17);
+		add(txFieldDireccion);
 
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(116, 191, 181, 17);
-		add(textField_5);
+		txFieldEmail = new JTextField();
+		txFieldEmail.setEditable(false);
+		txFieldEmail.setColumns(10);
+		txFieldEmail.setBounds(116, 191, 181, 17);
+		add(txFieldEmail);
 
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(404, 190, 136, 17);
-		add(textField_6);
+		txFieldTelefono = new JTextField();
+		txFieldTelefono.setEditable(false);
+		txFieldTelefono.setColumns(10);
+		txFieldTelefono.setBounds(404, 190, 136, 17);
+		add(txFieldTelefono);
 
-		JLabel lblConocimientosTotales = new JLabel("Conocimientos:");
-		lblConocimientosTotales.setBounds(10, 242, 124, 14);
-		add(lblConocimientosTotales);
+		JLabel lbl_ConocimientosTotales = new JLabel("Conocimientos:");
+		lbl_ConocimientosTotales.setBounds(10, 242, 124, 14);
+		add(lbl_ConocimientosTotales);
 
 		String[] conocimientos = { "", "Java", "C", "C#", "C++", "Javascript", "CSS", "XML", "HTML", "XQuery" };
 
@@ -119,65 +135,57 @@ public class PanelRegistroCandidato extends JPanel {
 		comboBox.setBounds(126, 237, 119, 24);
 		add(comboBox);
 
-		JTextArea txtrConocimientos = new JTextArea();
-		txtrConocimientos.setBounds(293, 262, 247, 146);
-		add(txtrConocimientos);
+		JLabel lbl_Conocimientos = new JLabel("Lista de conocimientos:");
+		lbl_Conocimientos.setBounds(293, 242, 173, 14);
+		add(lbl_Conocimientos);
 
-		JLabel lblConocimientos = new JLabel("Lista de conocimientos:");
-		lblConocimientos.setBounds(293, 242, 173, 14);
-		add(lblConocimientos);
+		JLabel lbl_Apellidos = new JLabel("Apellidos:");
+		lbl_Apellidos.setBounds(10, 516, 46, 14);
+		add(lbl_Apellidos);
 
-		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 229, 530, 2);
-		add(separator);
+		txFieldApellidos = new JTextField();
+		txFieldApellidos.setEditable(false);
+		txFieldApellidos.setBounds(116, 513, 136, 20);
+		add(txFieldApellidos);
+		txFieldApellidos.setColumns(10);
 
-		JLabel lblApellidos = new JLabel("Apellidos:");
-		lblApellidos.setBounds(10, 516, 46, 14);
-		add(lblApellidos);
+		JLabel lbl_FechaNacimiento = new JLabel("Fecha de nacimiento:");
+		lbl_FechaNacimiento.setBounds(10, 560, 102, 14);
+		add(lbl_FechaNacimiento);
 
-		textField_7 = new JTextField();
-		textField_7.setBounds(116, 513, 136, 20);
-		add(textField_7);
-		textField_7.setColumns(10);
+		txFieldFechaNacimiento = new JTextField();
+		txFieldFechaNacimiento.setEditable(false);
+		txFieldFechaNacimiento.setBounds(116, 557, 136, 20);
+		add(txFieldFechaNacimiento);
+		txFieldFechaNacimiento.setColumns(10);
 
-		JLabel lblNewLabel_5 = new JLabel("Fecha de nacimiento:");
-		lblNewLabel_5.setBounds(10, 560, 102, 14);
-		add(lblNewLabel_5);
+		JLabel lbl_Estudios = new JLabel("Vida laboral:");
+		lbl_Estudios.setBounds(10, 601, 74, 14);
+		add(lbl_Estudios);
 
-		textField_8 = new JTextField();
-		textField_8.setBounds(116, 557, 136, 20);
-		add(textField_8);
-		textField_8.setColumns(10);
+		txFieldVidaLaboral = new JTextField();
+		txFieldVidaLaboral.setEditable(false);
+		txFieldVidaLaboral.setBounds(116, 598, 424, 20);
+		add(txFieldVidaLaboral);
+		txFieldVidaLaboral.setColumns(10);
 
-		JLabel lblEstudios = new JLabel("Vida laboral:");
-		lblEstudios.setBounds(10, 601, 74, 14);
-		add(lblEstudios);
+		JLabel lbl_OtrosConocimientos = new JLabel("Otros conocimientos:");
+		lbl_OtrosConocimientos.setBounds(293, 438, 136, 14);
+		add(lbl_OtrosConocimientos);
 
-		textField_9 = new JTextField();
-		textField_9.setBounds(116, 598, 136, 20);
-		add(textField_9);
-		textField_9.setColumns(10);
+		JLabel lbl_VidaLaboral = new JLabel("Estudios:");
+		lbl_VidaLaboral.setBounds(10, 643, 74, 14);
+		add(lbl_VidaLaboral);
 
-		JLabel lblOtrosConocimientos = new JLabel("Otros conocimientos:");
-		lblOtrosConocimientos.setBounds(293, 438, 136, 14);
-		add(lblOtrosConocimientos);
-
-		JLabel lblVidaLaboral = new JLabel("Estudios:");
-		lblVidaLaboral.setBounds(10, 643, 74, 14);
-		add(lblVidaLaboral);
-
-		textField_11 = new JTextField();
-		textField_11.setColumns(10);
-		textField_11.setBounds(116, 640, 424, 20);
-		add(textField_11);
+		txFieldEstudios = new JTextField();
+		txFieldEstudios.setEditable(false);
+		txFieldEstudios.setColumns(10);
+		txFieldEstudios.setBounds(116, 640, 424, 20);
+		add(txFieldEstudios);
 
 		JButton button = new JButton("+");
 		button.setBounds(243, 237, 46, 24);
 		add(button);
-
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(293, 463, 247, 146);
-		add(textArea);
 
 		JRadioButton rdbtnSi = new JRadioButton("Si");
 		rdbtnSi.setBounds(160, 391, 38, 23);
@@ -203,23 +211,23 @@ public class PanelRegistroCandidato extends JPanel {
 		radioButton_3.setBounds(220, 464, 46, 23);
 		add(radioButton_3);
 
-		JLabel lblCarnetDeConducir = new JLabel("Carnet de conducir");
-		lblCarnetDeConducir.setBounds(10, 394, 102, 14);
-		add(lblCarnetDeConducir);
+		JLabel lbl_CarnetDeConducir = new JLabel("Carnet de conducir");
+		lbl_CarnetDeConducir.setBounds(10, 394, 102, 14);
+		add(lbl_CarnetDeConducir);
 
-		JLabel lblCochePropio = new JLabel("Coche propio");
-		lblCochePropio.setBounds(10, 433, 74, 14);
-		add(lblCochePropio);
+		JLabel lbl_CochePropio = new JLabel("Coche propio");
+		lbl_CochePropio.setBounds(10, 433, 74, 14);
+		add(lbl_CochePropio);
 
-		JLabel lblDisponibilidadParaViajar = new JLabel("Disponibilidad para viajar");
-		lblDisponibilidadParaViajar.setBounds(10, 468, 136, 14);
-		add(lblDisponibilidadParaViajar);
+		JLabel lbl_DisponibilidadParaViajar = new JLabel("Disponibilidad para viajar");
+		lbl_DisponibilidadParaViajar.setBounds(10, 468, 136, 14);
+		add(lbl_DisponibilidadParaViajar);
 
-		JButton btnRegistrarse = new JButton("Registrarse");
-		btnRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnRegistrarse.setBounds(416, 710, 124, 29);
-		add(btnRegistrarse);
-		btnRegistrarse.addMouseListener(new MouseAdapter() {
+		JButton btn_Registrarse = new JButton("Registrarse");
+		btn_Registrarse.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btn_Registrarse.setBounds(416, 710, 124, 29);
+		add(btn_Registrarse);
+		btn_Registrarse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				JOptionPane aux = new JOptionPane();
@@ -228,8 +236,8 @@ public class PanelRegistroCandidato extends JPanel {
 			}
 		});
 
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addMouseListener(new MouseAdapter() {
+		JButton btn_Cancelar = new JButton("Cancelar");
+		btn_Cancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				JOptionPane aux = new JOptionPane();
@@ -237,8 +245,8 @@ public class PanelRegistroCandidato extends JPanel {
 				d.setVisible(true);
 			}
 		});
-		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnCancelar.setBounds(29, 710, 124, 29);
-		add(btnCancelar);
+		btn_Cancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btn_Cancelar.setBounds(29, 710, 124, 29);
+		add(btn_Cancelar);
 	}
 }

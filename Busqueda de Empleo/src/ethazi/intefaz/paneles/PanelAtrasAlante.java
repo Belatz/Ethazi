@@ -13,9 +13,13 @@ import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.Elementos_Listados;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
+/**
+ * 
+ * @author JonOr
+ *
+ */
+
 public class PanelAtrasAlante extends JPanel {
-
-
 
 	public PanelAtrasAlante(Elementos_Listados panel_QueTieneLaLista) {
 		setLayout(null);
@@ -58,7 +62,7 @@ public class PanelAtrasAlante extends JPanel {
 
 				panel_QueTieneLaLista.restarPagina();
 				panel_QueTieneLaLista.mostrarOtras10();
-	
+
 				// VentanaPrincipal.addcont();
 			}
 		});
