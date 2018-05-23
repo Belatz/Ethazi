@@ -39,5 +39,4 @@ public class PanelMenu extends JPanel {
 	}
 	
 
-
 }

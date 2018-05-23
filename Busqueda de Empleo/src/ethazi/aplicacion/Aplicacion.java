@@ -2,6 +2,8 @@ package ethazi.aplicacion;
 
 import java.sql.SQLException;
 
+import ethazi.datos.Conexion;
+import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
@@ -15,6 +17,7 @@ public class Aplicacion {
 	private static Conexion miConexion;
 
 	public static void main(String[] args) {
+		System.out.println("ola");
 		try {
 			miConexion = new Conexion();
 			Usuario.setConocimientosTotales(UtilidadesBD.descargarConocimientos());

@@ -2,19 +2,20 @@ package ethazi.intefaz.paneles;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import ethazi.aplicacion.excepciones.PanelNoDisponible;
+import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.frame.VentanaPrincipal;
-
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.ActionEvent;
 
 /**
  *
@@ -25,11 +26,20 @@ import java.awt.event.ActionEvent;
  * @author Nestor
  *
  */
-
 public class PanelBarraHerramientas extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txField_buscar;
+
+/*	public static ArrayList<Elemento_Listable> listaDeOfertas = new ArrayList<Elemento_Listable>();
+	
+	public PanelBarraHerramientas(GenericoDePanelesConLista pa_buscarOfertas) {*/
+
 	private static boolean menu = true;
 	static JButton btnMenu;
+
 	public PanelBarraHerramientas() {
 		setLayout(null);
 		JButton btn_buscar = new JButton("");
@@ -43,6 +53,31 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_perfil.setMinimumSize(new Dimension(33, 9));
 		btn_perfil.setMaximumSize(new Dimension(33, 9));
 		btn_perfil.setBounds(642, 0, 50, 50);
+		btn_perfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+				pa_buscarOfertas.removeAll();
+				}
+				catch (Exception e) {
+					
+				}
+				try {
+					listaDeOfertas = UtilidadesBD.buscarOfertas(txField_buscar.getText());
+				} catch (SQLException e1) {
+					
+					e1.printStackTrace();
+				}
+				VentanaPrincipal.actualizar(listaDeOfertas);
+			
+				try {
+					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA);
+				} catch (PanelNoDisponible e) {
+					
+					e.printStackTrace();
+				}
+
+			}
+		});
 		add(btn_perfil);
 
 		JButton btn_apagar = new JButton("");
