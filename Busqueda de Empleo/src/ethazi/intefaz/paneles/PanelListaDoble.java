@@ -6,32 +6,33 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 /**
- * Creates a panel with two lists and buttons to add or delete elements from
- * a list to another
- * 
+ * Crea un panel con dos listas y botones para agregar o eliminar elementos de una lista a la otra
  * @author belatz
  *
  */
 public class PanelListaDoble extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JButton btn_anadir = new JButton();
 	private JButton btn_eliminar = new JButton();
 	private DefaultListModel<String> modelo_anadidos = new DefaultListModel<String>();
 	private DefaultListModel<String> modelo_totales = new DefaultListModel<String>();
-	private JList<String> li_eleAnadidos = new JList<String>(modelo_anadidos);
-	private JList<String> li_eleTotales = new JList<String>(modelo_totales);
+	private JList <String>li_eleAnadidos = new JList<String>(modelo_anadidos);
+	private JList <String>li_eleTotales = new JList<String>(modelo_totales);
 	private JScrollPane pa_anadidos = new JScrollPane();
 	private JScrollPane pa_totales = new JScrollPane();
 
-	public PanelListaDoble(ArrayList<String> listaIzquierda, ArrayList<String> listaDerecha) {
-
+	public PanelListaDoble(ArrayList<String>listaIzquierda, ArrayList<String>listaDerecha) {
+		
 		actualizarListas(listaIzquierda, listaDerecha);
 		// ----------------
 		setLayout(null);
@@ -86,7 +87,6 @@ public class PanelListaDoble extends JPanel {
 			}
 		}
 	}
-
 	public JButton getBtn_anadir() {
 		return btn_anadir;
 	}
@@ -94,19 +94,21 @@ public class PanelListaDoble extends JPanel {
 	public JButton getBtn_eliminar() {
 		return btn_eliminar;
 	}
-
-	public void actualizarListas(ArrayList<String> listaIzquierda, ArrayList<String> listaDerecha) {
+	public void actualizarListas(ArrayList<String>listaIzquierda, ArrayList<String>listaDerecha)
+	{
 		modelo_totales.removeAllElements();
 		modelo_anadidos.removeAllElements();
 		for (int i = 0; i < listaIzquierda.size(); i++) {
-			int j = 0;
-			while (listaDerecha != null && j < listaDerecha.size()
-					&& listaDerecha.get(j).toLowerCase().compareTo(listaIzquierda.get(i).toLowerCase()) == 0)
+			int j=0;
+			while(listaDerecha!=null &&
+				j<listaDerecha.size() &&
+					listaDerecha.get(j).toLowerCase().compareTo(listaIzquierda.get(i).toLowerCase())==0)
 				j++;
-			if (listaDerecha == null || j < listaDerecha.size())
+			if(listaDerecha==null || j<listaDerecha.size())
 				modelo_totales.addElement(listaIzquierda.get(i));
 		}
-		for (int i = 0; i < listaDerecha.size(); i++)
-			modelo_anadidos.addElement(listaDerecha.get(i));
+		if(listaDerecha!=null)
+			for(int i=0; i<listaDerecha.size();i++)
+				modelo_anadidos.addElement(listaDerecha.get(i));
 	}
 }

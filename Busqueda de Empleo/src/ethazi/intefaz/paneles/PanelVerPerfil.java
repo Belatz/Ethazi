@@ -5,37 +5,32 @@ import javax.swing.JPanel;
 import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Usuario;
-import ethazi.intefaz.emergentes.ValidarCodigo;
 
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.JFormattedTextField;
 import java.awt.TextArea;
-import javax.swing.JTable;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JCheckBox;
-import java.awt.Checkbox;
 import javax.swing.JSeparator;
 import java.awt.Label;
 import java.awt.Font;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Calendar;
-import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
-import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 
 public class PanelVerPerfil extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField nickTextField;
 	private JTextField dirtextField;
 	private JTextField nombretextField;
@@ -56,12 +51,8 @@ public class PanelVerPerfil extends JPanel {
 	private JComboBox<Integer> mescomboBox;
 	private JComboBox<Integer> aniocomboBox;
 	private PanelListaDoble conocimientosEditar;
-	private ArrayList<String> conocimientosTenidos;
 
-	// Ejemplo
-	private ArrayList<String> conocimientosTotales;
-
-	public PanelVerPerfil(Usuario user) {
+	public PanelVerPerfil(Usuario user, boolean propio) {
 		setPreferredSize(new Dimension(762, 488));
 		setLayout(null);
 		JLabel milblNick = new JLabel("Nick: ");
@@ -86,7 +77,7 @@ public class PanelVerPerfil extends JPanel {
 		add(nombretextField);
 		nombretextField.setColumns(10);
 
-		JLabel milblNumId = new JLabel(((user instanceof Candidato) ? "DNI: " : "CIF:"));
+		JLabel milblNumId = new JLabel("CIF:");
 		milblNumId.setBounds(10, 90, 26, 14);
 		add(milblNumId);
 
@@ -171,14 +162,8 @@ public class PanelVerPerfil extends JPanel {
 			JLabel lblConocimientos = new JLabel("Conocimientos:");
 			lblConocimientos.setBounds(10, 254, 102, 14);
 			add(lblConocimientos);
-			// Ejemplo:
-			conocimientosTotales = new ArrayList<String>();
-			for (int i = 0; i < 10; i++)
-				conocimientosTotales.add("Ejemplo " + i);
-			conocimientosTenidos = new ArrayList<String>();
-			for (int i = 0; i < 10; i++)
-				conocimientosTenidos.add("ejemplo " + (i * 2));
-			conocimientosEditar = new PanelListaDoble(conocimientosTotales, conocimientosTenidos);
+	
+			conocimientosEditar = new PanelListaDoble(Usuario.getConocimientosTotales(), ((Candidato)user).getConocimientos());
 			conocimientosEditar.setBounds(60, 270, 214, 177);
 			add(conocimientosEditar);
 
@@ -259,52 +244,99 @@ public class PanelVerPerfil extends JPanel {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 50, 742, 2);
 		add(separator);
+		if (propio) {
+			JButton btnEditar = new JButton("Editar");
+			btnEditar.setToolTipText("Editar Perfil");
+			btnEditar.setBounds(693, 454, 67, 23);
+			add(btnEditar);
+			habilitarODes(false, user);
+			btnEditar.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					btnEditar.setVisible(false);
+					JButton btnValidar = new JButton("Guardar");
+					btnValidar.setToolTipText("Guardar Cambios");
+					btnValidar.setBounds(677, 454, 83, 23);
+					add(btnValidar);
+					JButton btnCancelar = new JButton("Cancelar");
+					btnCancelar.setBounds(2, 454, 86, 23);
+					add(btnCancelar);
+					habilitarODes(true, user);
+					btnValidar.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							//TODO dar funcionalidad a validar y guardar datos
+						}
+					});
+					btnCancelar.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							habilitarODes(false, user);
+							btnValidar.removeAll();
+							btnCancelar.removeAll();
+							btnEditar.setVisible(true);
+							inicializarDatos(user);
+						}
+					});
 
-		JButton btnEditar = new JButton("Editar");
-		btnEditar.setToolTipText("Editar Perfil");
-		btnEditar.setBounds(693, 454, 67, 23);
-		add(btnEditar);
-		habilitarODes(false, user);
-		btnEditar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				btnEditar.setVisible(false);
-				JButton btnValidar = new JButton("Guardar");
-				btnValidar.setToolTipText("Guardar Cambios");
-				btnValidar.setBounds(677, 454, 83, 23);
-				add(btnValidar);
-				JButton btnCancelar = new JButton("Cancelar");
-				btnCancelar.setBounds(2, 454, 86, 23);
-				add(btnCancelar);
-				habilitarODes(true, user);
-				btnValidar.addMouseListener(new MouseAdapter() {
+				}
+			});
+		} else {
+			if (user instanceof Candidato) {
+				JButton btnGuardarCV = new JButton("Guardar CV");
+				btnGuardarCV.setToolTipText("Guarda el Curr\u00EDculum Vitae");
+				btnGuardarCV.setBounds(693, 454, 67, 23);
+				btnGuardarCV.setVisible(true);
+
+				btnGuardarCV.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
+						File cv = new File(user.getNombre() + "-" + ((Candidato) user).getApellidos() + "-CV");
+						if (cv.exists()) {
+							cv.delete();
+						}
+						PrintWriter pw;
+						try {
+							pw = new PrintWriter(new FileWriter(cv));
+							pw.println(user.getNombre() + " " + ((Candidato) user).getApellidos());
+							pw.println(user.getNumID());
+							pw.println(user.getDireccion());
+							pw.println(((Candidato) user).getFechaNac());
+							pw.println(user.getTelefono());
+							pw.println(user.getEmail());
+							pw.println("Carnet de Conducir: " + (((Candidato) user).isCarnet() ? "Sí" : "No"));
+							pw.println("Coche Propio: " + (((Candidato) user).isCarnet() ? "Sí" : "No"));
+							pw.println("Disponibilidad para Viajar: " + (((Candidato) user).isCarnet() ? "Sí" : "No"));
+							pw.println("Estudios: " + ((Candidato) user).getEstudios());
+							pw.println("Conocimientos: ");
+							for (int i = 0; i < ((Candidato) user).getConocimientos().size(); i++) {
+								pw.println(((Candidato) user).getConocimientos().get(i));
+							}
+							pw.println("Otros Conocimientos:");
+							pw.println(((Candidato) user).getOtrosConocimientos());
+							pw.println("Vida Laboral: " + ((Candidato) user).getVidaLaboral());
+							pw.print(
+									"Experiencia Profesional: " + ((Candidato) user).getExperienciaProfesional() + " años");
+							pw.close();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
 
 					}
 				});
-				btnCancelar.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						habilitarODes(false, user);
-						btnValidar.setVisible(false);
-						btnEditar.setVisible(true);
-						btnCancelar.setVisible(false);
-						inicializarDatos(user);
-					}
-				});
-
 			}
-		});
+		}
 	}
 
 	private void inicializarDatos(Usuario user) {
-		nickTextField.setText(user.getMiNick());
-		nombretextField.setText(user.getMiNombre());
-		numIdtextField.setText(user.getMiNumID());
-		dirtextField.setText(user.getMiDireccion());
-		emailtextField.setText(user.getMiEmail());
-		teltextField.setText(user.getMiTelefono());
+		nickTextField.setText(user.getNick());
+		nombretextField.setText(user.getNombre());
+		numIdtextField.setText(user.getNumID());
+		dirtextField.setText(user.getDireccion());
+		emailtextField.setText(user.getEmail());
+		teltextField.setText(user.getTelefono());
 		if (user instanceof Candidato) {
 			apellidostextField.setText(((Candidato) user).getApellidos());
 
@@ -328,7 +360,6 @@ public class PanelVerPerfil extends JPanel {
 					actualizarDia();
 				}
 			});
-			int total = 0;
 			actualizarDia();
 			diacomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(0, 2)));
 
@@ -338,7 +369,7 @@ public class PanelVerPerfil extends JPanel {
 			chckbxCarnet.setSelected(((Candidato) user).isCarnet());
 			chckbxCoche.setSelected(((Candidato) user).isCochePropio());
 			chckbxDisponibilidadParaViajar.setSelected(((Candidato) user).isDisViajar());
-			conocimientosEditar.actualizarListas(conocimientosTotales, conocimientosTenidos);
+			conocimientosEditar.actualizarListas(Usuario.getConocimientosTotales(), ((Candidato)user).getConocimientos());
 		} else {
 			informacionContactotextArea.setEditable(false);
 			descripciontextArea.setEditable(false);
