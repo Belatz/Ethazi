@@ -116,9 +116,11 @@ public class PanelIdentificarse extends JPanel {
 
 		if (_rs.next()) {
 			if (Usuario.esCandidato(_nick)) {
-				_rs = Aplicacion.getConexion().consultar("SELECT * FROM candidato c, usuario u WHERE c.numid=u.numid AND u.nick='"+_nick+"';");
+				_rs = Aplicacion.getConexion().consultar(
+						"SELECT * FROM candidato c, usuario u WHERE c.numid=u.numid AND u.nick='" + _nick + "';");
 			} else {
-				_rs = Aplicacion.getConexion().consultar("SELECT * FROM empresa e, usuario u WHERE e.numid=u.numid AND u.nick='"+_nick+"';");
+				_rs = Aplicacion.getConexion().consultar(
+						"SELECT * FROM empresa e, usuario u WHERE e.numid=u.numid AND u.nick='" + _nick + "';");
 			}
 			Aplicacion.setUsuario(UtilidadesBD.toUsuario(_rs));
 			_esValido = true;

@@ -3,7 +3,7 @@ package ethazi.aplicacion;
 import ethazi.intefaz.Elemento_Listable;
 
 public class Oferta implements Elemento_Listable {
-	/*jon:esta clase solo es de pruebas*/
+	/* jon:esta clase solo es de pruebas */
 	private int miCod;
 	private String miTitulo;
 	private String miDescripcion;
@@ -17,7 +17,6 @@ public class Oferta implements Elemento_Listable {
 	private byte miContrato;
 	private Empresa miEmpresa;
 
-	
 	public Oferta(int miCod, String miTitulo, String miDescripcion, String miLugar, int miSalarioMax, int miSalarioMin,
 			int miExperiencia, String misAspectosAValorar, String misAspectosImprescindibles, boolean miVisibilidad,
 			byte miContrato, Empresa miEmpresa) {
@@ -68,7 +67,7 @@ public class Oferta implements Elemento_Listable {
 	public void setSalarioMax(int salario) {
 		this.miSalarioMax = salario;
 	}
-	
+
 	public int getSalarioMin() {
 		return miSalarioMin;
 	}

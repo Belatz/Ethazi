@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+<<<<<<< HEAD
 import com.mysql.jdbc.Statement;
 
 import ethazi.aplicacion.Conexion;
@@ -22,7 +23,15 @@ import ethazi.aplicacion.excepciones.PanelNoDisponible;
 import ethazi.intefaz.Elemento_A_Listar;
 import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.frame.VentanaPrincipal;
-
+/**
+ *
+ * This bar appears in most of the panels so the user can use
+ * the tools which are provided by the bar. Like switch off the program, find an offer or 
+ * go to the user's profile.
+ * 
+ * @author Nestor
+ *
+ */
 public class PanelBarraHerramientas extends JPanel {
 	/**
 	 * 
@@ -30,15 +39,17 @@ public class PanelBarraHerramientas extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField txField_buscar;
 
-	public static ArrayList<Elemento_Listable> listaDeOfertas = new ArrayList<Elemento_Listable>();
+/*	public static ArrayList<Elemento_Listable> listaDeOfertas = new ArrayList<Elemento_Listable>();
 	
-	public PanelBarraHerramientas(GenericoDePanelesConLista pa_buscarOfertas) {
+	public PanelBarraHerramientas(GenericoDePanelesConLista pa_buscarOfertas) {*/
+
+	public PanelBarraHerramientas() {
 		setLayout(null);
 		JButton btn_buscar = new JButton("");
 		btn_buscar.setBounds(0, 0, 50, 50);
 		add(btn_buscar);
 		setBounds(0, 0, 762, 50);
-		
+
 		JButton btn_perfil = new JButton("");
 		btn_perfil.setToolTipText("Ver Perfil");
 		btn_perfil.setPreferredSize(new Dimension(33, 9));

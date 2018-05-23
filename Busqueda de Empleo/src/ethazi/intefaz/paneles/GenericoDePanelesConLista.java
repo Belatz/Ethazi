@@ -11,11 +11,14 @@ import ethazi.intefaz.Elemento_A_Listar;
 import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.Elementos_Listados;
 
-public class GenericoDePanelesConLista extends JPanel {
+/**
+ * 
+ * @author JonOr
+ *
+ */
 
-	/**
-	 * 
-	 */
+public class GenericoDePanelesConLista extends JPanel {
+	
 	private static final long serialVersionUID = 1L;
 
 	public GenericoDePanelesConLista(ArrayList<Elemento_Listable> listaDeElementosListables, byte tipo) {

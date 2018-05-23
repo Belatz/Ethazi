@@ -17,7 +17,6 @@ public class Candidato extends Usuario implements Elemento_Listable {
 	private String vidaLaboral;
 	private float experienciaProfesional;
 
-	
 	public Candidato(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
 			String miEmail, String miTelefono, String apellidos, String fechaNac, boolean carnet, boolean cochePropio,
 			boolean disViajar, String estudios, ArrayList<String> conocimientos, String otrosConocimientos,
@@ -118,6 +117,6 @@ public class Candidato extends Usuario implements Elemento_Listable {
 	@Override
 	public String getInfo() {
 		// TODO Auto-generated method stub
-		return getNombre()+" "+apellidos;
+		return getNombre() + " " + apellidos;
 	}
 }

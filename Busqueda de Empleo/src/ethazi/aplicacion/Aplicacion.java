@@ -17,23 +17,26 @@ public class Aplicacion {
 	public static void main(String[] args) {
 		System.out.println("ola");
 		try {
-			// miConexion = new Conexion();
-			// Usuario.setConocimientosTotales(UtilidadesBD.descargarConocimientos());
+			miConexion = new Conexion();
+			Usuario.setConocimientosTotales(UtilidadesBD.descargarConocimientos());
 
 			VentanaPrincipal.ejecutar();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	
-	 public static Usuario getUsuario() { return miUsuario; }
-	  
-	  public static void setUsuario(Usuario usr) { miUsuario = usr; }
-	  
-	  public static Conexion getConexion() { return miConexion; }
-	 
-	
+	public static Usuario getUsuario() {
+		return miUsuario;
+	}
+
+	public static void setUsuario(Usuario usr) {
+		miUsuario = usr;
+	}
+
+	public static Conexion getConexion() {
+		return miConexion;
+	}
 
 }

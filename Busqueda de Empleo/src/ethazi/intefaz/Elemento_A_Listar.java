@@ -9,6 +9,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * This class selects the elements that are actually listables one by one.
+ * @author Nestor
+ *
+ */
+
 public class Elemento_A_Listar extends JPanel {
 
 	/**

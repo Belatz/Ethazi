@@ -13,7 +13,7 @@ import java.sql.Statement;
  * @category DataBase
  */
 public class Conexion {
-
+	// TODO constantes y toUpper
 	/*
 	 * =====================
 	 * 
@@ -35,7 +35,7 @@ public class Conexion {
 	public Conexion() {
 		miConexion = null;
 		try {
-			Class.forName(C_DRIVER);
+			Class.forName(C_DRIVER); //No es necesario
 			miConexion = DriverManager.getConnection(C_URL, C_USUARIO, C_CONTRASENA);
 
 			if (miConexion != null) {
@@ -51,7 +51,7 @@ public class Conexion {
 	}
 
 	public void desconectar() {
-		miConexion = null;
+		miConexion = null; //MAL
 		if (miConexion == null) {
 			System.out.println("Conexion con la base de datos terminada..");
 		}

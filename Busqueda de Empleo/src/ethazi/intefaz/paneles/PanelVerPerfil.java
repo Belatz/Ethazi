@@ -305,6 +305,7 @@ public class PanelVerPerfil extends JPanel {
 		dirtextField.setText(user.getDireccion());
 		emailtextField.setText(user.getMiEmail());
 		teltextField.setText(user.getMiTelefono());
+		
 		if (user instanceof Candidato) {
 			apellidostextField.setText(((Candidato) user).getApellidos());
 

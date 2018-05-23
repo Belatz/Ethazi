@@ -84,8 +84,6 @@ public class VentanaPrincipal extends JFrame {
 	public static final short C_ANALIZAR_SOLICITUDES = 13;
 	public static final short C_OFERTAS_CON_SOLICITUDES = 14;
 
-	
-
 	// variable de prueba
 	// ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
 
