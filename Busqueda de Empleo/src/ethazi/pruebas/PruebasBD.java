@@ -66,7 +66,27 @@ public class PruebasBD {
 			conn.actualizar("INSERT INTO oferta VALUES 'Programacion','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'88888888X',12");
 			
 			//Datos solicitudes
-			conn.actualizar("INSERT INTO oferta VALUES");
+			conn.actualizar("INSERT INTO solicitudes VALUES 1234,'11111111D','Buenos dias: Estaria encantado de colaborar con vosotros'");
+			conn.actualizar("INSERT INTO solicitudes VALUES 1111,'11111111D','Buenos tardes: Estoy con muy poco dinero y tengo una gran urgencia de trabajar'");
+			conn.actualizar("INSERT INTO solicitudes VALUES 2222,'22222222L','Tengo gran interes en trabajar con ustedes'");
+			conn.actualizar("INSERT INTO solicitudes VALUES 5345,'33333333K','Buenos dias: Tengo gran interes en los proyectos que estan haciendo actualmente'");
+			conn.actualizar("INSERT INTO solicitudes VALUES 2345,'44444444A',' '");
+			conn.actualizar("INSERT INTO solicitudes VALUES 2345,'11111111D','Estoy muy interesado en su oferta'");
+			conn.actualizar("INSERT INTO solicitudes VALUES 1234,'11111111D','Buenos dias: Estaria encantado de colaborar con vosotros'");
+			conn.actualizar("INSERT INTO solicitudes VALUES 1875,'11111111D','Buenos dias: Estoy muy interesado en su oferta'");
+			conn.actualizar("INSERT INTO solicitudes VALUES 8955,'55555555P','Buenos tardes: Mi situacion economica no es muy buena y necesito trabajar'");
+			conn.actualizar("INSERT INTO solicitudes VALUES 3256,'55555555P','Buenos tardes: Mi situacion economica no es muy buena y necesito trabajar'");
+			
+			//Datos conocimientos
+			conn.actualizar("INSERT INTO conocimientos VALUES 'Programacion en Java'");
+			conn.actualizar("INSERT INTO conocimientos VALUES 'Programacion en C'");
+			conn.actualizar("INSERT INTO conocimientos VALUES 'Programacion en C++'");
+			conn.actualizar("INSERT INTO conocimientos VALUES 'Programacion en Python'");
+			conn.actualizar("INSERT INTO conocimientos VALUES 'Especialista en electronica'");
+			conn.actualizar("INSERT INTO conocimientos VALUES 'Especialista en mecanica general'");
+			conn.actualizar("INSERT INTO conocimientos VALUES 'Marketing'");
+			conn.actualizar("INSERT INTO conocimientos VALUES 'Contabilidad Avanzada'");
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
