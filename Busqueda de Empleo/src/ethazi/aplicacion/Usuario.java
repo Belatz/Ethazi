@@ -123,7 +123,8 @@ public abstract class Usuario {
 	 */
 	public static boolean esCandidato(String p_nick) throws SQLException {
 		ResultSet _rs;
-		_rs = Aplicacion.getConexion().consultar("SELECT COUNT(*) FROM candidato WHERE nick='" + p_nick + "';");
+		Aplicacion.getConexion();
+		_rs = Conexion.consultar("SELECT * FROM candidato WHERE numid='" + p_nick + "';");
 		return _rs.next();
 	}
 

@@ -13,6 +13,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -119,8 +120,9 @@ public class VentanaPrincipal extends JFrame {
 
 	/**
 	 * Create the frame and panels
+	 * @throws SQLException 
 	 */
-	public VentanaPrincipal() {
+	public VentanaPrincipal() throws SQLException {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 768, 575);
@@ -386,8 +388,8 @@ public class VentanaPrincipal extends JFrame {
 		menu.setVisible(true);
 		menu.requestFocus();
 	}
-	public static void cargarOfertas() {
-		Oferta oferta;
+	public static void cargarOfertas() throws SQLException {
+	/*	Oferta oferta;
 		Empresa empresa;
 		empresa = new Empresa("ASD","asd","asd","asd","asd","asd","asd","asd","asd");
 		ArrayList<String> con = new ArrayList<String>();
@@ -395,10 +397,14 @@ public class VentanaPrincipal extends JFrame {
 		int cont = 0;
 		while (cont < 12) {
 			oferta  = new Oferta(2+cont, "titulo"+cont,"sd", "sdf",4,4,3, "sdf","asdf",true,(byte)1,empresa,con);
-			VentanaPrincipal.listaDeOfertas.add(oferta);
+			listaDeOfertas.add(oferta);
 			cont++;
-			VentanaPrincipal.pa_buscarOfertas = new GenericoDePanelesConLista(VentanaPrincipal.listaDeOfertas, (byte)1);
+			pa_buscarOfertas = new GenericoDePanelesConLista(listaDeOfertas, (byte)1);
 		}
+		*/
+		listaDeOfertas = UtilidadesBD.buscarOfertas("Pr");
+		pa_buscarOfertas = new GenericoDePanelesConLista(listaDeOfertas, (byte)1);
+		
 	}
 
 }

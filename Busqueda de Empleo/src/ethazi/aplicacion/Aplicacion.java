@@ -2,7 +2,6 @@ package ethazi.aplicacion;
 
 import java.sql.SQLException;
 
-import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
 /**

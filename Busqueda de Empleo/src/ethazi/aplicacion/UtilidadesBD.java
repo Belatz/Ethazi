@@ -15,7 +15,7 @@ import ethazi.intefaz.Elemento_Listable;
  * @author belatz
  */
 public abstract class UtilidadesBD {
-
+//________________toUsuario necesita ser arreglado (si es candidato)
 	/**
 	 * Devuelve un objeto Usuario a partir de un ResultSet pasado por parametro
 	 * 
@@ -26,7 +26,11 @@ public abstract class UtilidadesBD {
 	 */
 	public static Usuario toUsuario(ResultSet p_rs) throws SQLException {
 		Usuario _usr = null;
-		String _nick = p_rs.getString("nick");
+		Aplicacion.getConexion();
+		ResultSet _rsUsuario = Conexion
+				.consultar("SELECT * FROM usuario WHERE numid='" +p_rs.getString("numid") + "';");
+		_rsUsuario.next();
+		String _nick = _rsUsuario.getString("numid");
 
 		if (Usuario.esCandidato(_nick)) {
 			_usr = new Candidato(_nick, p_rs.getString("password"), p_rs.getString("nombre"), p_rs.getString("numid"),
@@ -36,8 +40,8 @@ public abstract class UtilidadesBD {
 					p_rs.getString("estudios"), descargarConocimientos(_nick), p_rs.getString("otros_conocimientos"),
 					p_rs.getString("vida_laboral"), p_rs.getInt("experiencia_laboral"));
 		} else {
-			_usr = new Empresa(_nick, p_rs.getString("password"), p_rs.getString("nombre"), p_rs.getString("numid"),
-					p_rs.getString("direccion"), p_rs.getString("email"), p_rs.getString("telefono"),
+			_usr = new Empresa(_nick, _rsUsuario.getString("password"), _rsUsuario.getString("nombre"), p_rs.getString("numid"),
+					_rsUsuario.getString("direccion"), _rsUsuario.getString("email"), _rsUsuario.getString("telefono"),
 					p_rs.getString("contacto"), p_rs.getString("descripcion"));
 		}
 		return _usr;
@@ -123,8 +127,7 @@ public abstract class UtilidadesBD {
 		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM oferta WHERE cod_oferta='" + p_cod + "';");
 		Aplicacion.getConexion();
 		ResultSet _rsEmpresa = Conexion
-				.consultar("SELECT * FROM empresa e, usuario u WHERE u.numid = e.numid AND numid='"
-						+ _rsOferta.getString("numid") + "';");
+				.consultar("SELECT * FROM empresa e, usuario u WHERE u.numid = e.numid AND numid='" + _rsOferta.getString("empresa_numid") + "';");
 		Aplicacion.getConexion();
 		ResultSet _rsConocimientos = Conexion
 				.consultar("SELECT conocimientos_nombre FROM oferta WHERE cod_oferta='" + p_cod + "';");
@@ -145,29 +148,37 @@ public abstract class UtilidadesBD {
 		ArrayList<String> conocimientos = new ArrayList<>();
 		Oferta oferta;
 		ResultSet _rsConocimientos;
-		
+		System.out.println("consulta");
 		Aplicacion.getConexion();
 		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM oferta WHERE titulo like '%" + titulo + "%';");
-		ResultSet _rsEmpresa = Conexion
-				.consultar("SELECT * FROM empresa WHERE numid ='"
-						+ _rsOferta.getString("empresa_numid") + "';");
+System.out.println("acabaconsulta");
 		
+System.out.println("array");
 		while (_rsOferta.next()) {
 		Aplicacion.getConexion();
 		_rsConocimientos = Conexion
-				.consultar("SELECT conocimientos_nombre FROM oferta WHERE cod_oferta='" + _rsOferta.getInt("cod_oferta") + "';");
-			while (_rsConocimientos.next()) {
+				.consultar("SELECT conocimientos_nombre FROM oferta_conocimientos WHERE oferta_cod_oferta='" + _rsOferta.getInt("cod_oferta") + "';");
+		ResultSet _rsEmpresa = Conexion
+				.consultar("SELECT * FROM empresa WHERE numid ='" + _rsOferta.getString("empresa_numid") + "';");
+
+		while (_rsConocimientos.next()) {
 				conocimientos.add(_rsConocimientos.getString("conocimientos_nombre"));
 			}
+			if(_rsEmpresa.next()) {
+				
+			
+			
 			oferta = new Oferta(_rsOferta.getInt("cod_oferta"), _rsOferta.getString("titulo"),
 					_rsOferta.getString("descripcion"), _rsOferta.getString("lugar"), _rsOferta.getInt("sueldo_max"),
 					_rsOferta.getInt("sueldo_min"), _rsOferta.getInt("experiencia"),
 					_rsOferta.getString("aspectos_valorar"), _rsOferta.getString("aspectos_impres"),
 					_rsOferta.getBoolean("visible"), _rsOferta.getByte("tipo_contrato"),
 					(Empresa) toUsuario(_rsEmpresa),conocimientos);
+			oferta.toString();
 			ofertas.add(oferta);
+			}
 		}
-		
+		System.out.println("acabaarray");
 		return ofertas;
 	}
 

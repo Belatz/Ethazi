@@ -55,7 +55,7 @@ public class PanelBarraHerramientas extends JPanel {
 	private static boolean menu = true;
 	static JButton btnMenu;
 
-	public PanelBarraHerramientas() {
+	public PanelBarraHerramientas() throws SQLException {
 		VentanaPrincipal.cargarOfertas();
 		setLayout(null);
 		JButton btn_buscar = new JButton("");
