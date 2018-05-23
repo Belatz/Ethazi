@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Usuario;
+import ethazi.datos.Tablas;
 import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.emergentes.RecuperarContrasena;
 import ethazi.intefaz.frame.VentanaIdentificarse;
@@ -111,18 +112,19 @@ public class PanelIdentificarse extends JPanel {
 		boolean _esValido;
 		String _nick = txField_usuario.getText();
 		String _pass = String.valueOf(pssField_contrasena.getPassword());
+		ResultSet _usuario;
 		ResultSet _rs = Aplicacion.getConexion()
-				.consultar("SELECT * FROM usuario WHERE nick='" + _nick + "' AND password='" + _pass + "';");
+				.consultar("SELECT * FROM "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_USUARIO_NICK+"='" + _nick + "' AND "+Tablas.C_USUARIO_PASSWORD+"='" + _pass + "';");
 
 		if (_rs.next()) {
 			if (Usuario.esCandidato(_nick)) {
-				_rs = Aplicacion.getConexion().consultar(
-						"SELECT * FROM candidato c, usuario u WHERE c.numid=u.numid AND u.nick='" + _nick + "';");
+				_usuario = Aplicacion.getConexion().consultar(
+						"SELECT * FROM "+Tablas.C_CANDIDATO_TABLA+", "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_CANDIDATO_NUMID+"="+Tablas.C_USUARIO_NUMID+" AND "+Tablas.C_USUARIO_NICK+"='" + _nick + "';");
 			} else {
-				_rs = Aplicacion.getConexion().consultar(
-						"SELECT * FROM empresa e, usuario u WHERE e.numid=u.numid AND u.nick='" + _nick + "';");
+				_usuario = Aplicacion.getConexion().consultar(
+						"SELECT * FROM "+Tablas.C_EMPRESA_TABLA+", "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_EMPRESA_NUMID+"="+Tablas.C_USUARIO_NUMID+" AND "+Tablas.C_USUARIO_NICK+"='" + _nick + "';");
 			}
-			Aplicacion.setUsuario(UtilidadesBD.toUsuario(_rs));
+			Aplicacion.setUsuario(UtilidadesBD.toUsuario(_usuario));
 			_esValido = true;
 		} else {
 			_esValido = false;
