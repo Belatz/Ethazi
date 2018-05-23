@@ -299,12 +299,13 @@ public class PanelVerPerfil extends JPanel {
 	}
 
 	private void inicializarDatos(Usuario user) {
-		nickTextField.setText(user.getMiNick());
-		nombretextField.setText(user.getMiNombre());
-		numIdtextField.setText(user.getMiNumID());
-		dirtextField.setText(user.getMiDireccion());
+		nickTextField.setText(user.getNick());
+		nombretextField.setText(user.getNombre());
+		numIdtextField.setText(user.getNumID());
+		dirtextField.setText(user.getDireccion());
 		emailtextField.setText(user.getMiEmail());
 		teltextField.setText(user.getMiTelefono());
+		
 		if (user instanceof Candidato) {
 			apellidostextField.setText(((Candidato) user).getApellidos());
 

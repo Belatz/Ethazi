@@ -82,7 +82,7 @@ public class Conexion {
 	 * @throws SQLException
 	 *             Si ha habido algun error en la base de datos o en la consulta
 	 */
-	public ResultSet consultar(String sql) throws SQLException {
+	public static ResultSet consultar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
 		return _comando.executeQuery(sql);
 	}
