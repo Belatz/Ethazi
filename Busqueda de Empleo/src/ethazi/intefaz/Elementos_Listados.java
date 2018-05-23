@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
- * 
+ * This class receives elements from the class Elementos_A_Listar
  * @author Nestor
  *
  */
-
 public class Elementos_Listados extends JPanel {
 
 	/** The Constant serialVersionUID. */
@@ -22,28 +21,28 @@ public class Elementos_Listados extends JPanel {
 	/** The Constant C_LIMITEMAX. */
 	public static final int C_LIMITEMAX = 10;
 
-	/** The limit. */
+	/** The limite. */
 	public int limite = C_LIMITEMAX;
 
-	/** The max pages. */
+	/** The max pags. */
 	private int maxPags;
 
-	/** The n of pages. */
+	/** The n pagina. */
 	private int nPagina = 1;
 
-	/** The type. */
+	/** The tipo. */
 	private byte tipo;
 
-	/** The list of elementos listables. */
+	/** The lista de elementos listables. */
 	ArrayList<Elemento_Listable> listaDeElementosListables;
 
 	/**
 	 * Instantiates a new elementos listados.
 	 *
 	 * @param listaDeElementosListables
-	 *            the list of elementos listables
+	 *            the lista de elementos listables
 	 * @param tipo
-	 *            the type
+	 *            the tipo
 	 */
 	public Elementos_Listados(ArrayList<Elemento_Listable> listaDeElementosListables, byte tipo) {
 		this.tipo = tipo;
@@ -62,7 +61,7 @@ public class Elementos_Listados extends JPanel {
 	}
 
 	/**
-	 * Upgrade.
+	 * Actualizar.
 	 */
 	public void actualizar() {
 		removeAll();
@@ -74,7 +73,7 @@ public class Elementos_Listados extends JPanel {
 	}
 
 	/**
-	 * Show 10.
+	 * Mostrar 10.
 	 */
 	public void mostrar10() {
 		int cont = 0;
@@ -94,7 +93,7 @@ public class Elementos_Listados extends JPanel {
 	}
 
 	/**
-	 * Show other 10.
+	 * Mostrar otras 10.
 	 */
 	public void mostrarOtras10() {
 		int cont = 0;
@@ -117,32 +116,32 @@ public class Elementos_Listados extends JPanel {
 	}
 
 	/**
-	 * Gets the max page.
+	 * Gets the max pags.
 	 *
-	 * @return the max page.
+	 * @return the max pags
 	 */
 	public int getMaxPags() {
 		return maxPags;
 	}
 
 	/**
-	 * Gets the n of pages.
+	 * Gets the n pagina.
 	 *
-	 * @return the n of page.
+	 * @return the n pagina
 	 */
 	public int getnPagina() {
 		return nPagina;
 	}
 
 	/**
-	 * Sums the page.
+	 * Sumar pagina.
 	 */
 	public void sumarPagina() {
 		this.nPagina++;
 	}
 
 	/**
-	 * Substracts the page.
+	 * Restar pagina.
 	 */
 	public void restarPagina() {
 		this.nPagina--;

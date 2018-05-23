@@ -1,4 +1,4 @@
-package ethazi.datos;
+package ethazi.aplicacion;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +10,9 @@ import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Solicitud;
 import ethazi.aplicacion.Usuario;
+import ethazi.datos.Conexion;
+import ethazi.datos.Tablas;
+import ethazi.intefaz.Elemento_Listable;
 
 /**
  * 
@@ -140,6 +143,27 @@ public abstract class UtilidadesBD {
 				_rsOferta.getBoolean(Tablas.C_OFERTA_VISIBLE), _rsOferta.getByte(Tablas.C_OFERTA_TIPO_CONTRATO),
 				(Empresa) toUsuario(_rsEmpresa));
 		return _oferta;
+	}
+
+	public static ArrayList<Elemento_Listable> buscarOfertas(String titulo) throws SQLException {
+		ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
+
+		Oferta oferta;
+		Aplicacion.getConexion();
+		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM oferta WHERE titulo like '%" + titulo + "%';");
+		ResultSet _rsEmpresa = Conexion
+				.consultar("SELECT * FROM empresa e, usuario u WHERE u.numid = e.numid AND numid='"
+						+ _rsOferta.getString("numid") + "';");
+		while (_rsOferta.next()) {
+			oferta = new Oferta(_rsOferta.getInt("cod_oferta"), _rsOferta.getString("titulo"),
+					_rsOferta.getString("descripcion"), _rsOferta.getString("lugar"), _rsOferta.getInt("sueldo_max"),
+					_rsOferta.getInt("sueldo_min"), _rsOferta.getInt("experiencia"),
+					_rsOferta.getString("aspectos_valorar"), _rsOferta.getString("aspectos_impres"),
+					_rsOferta.getBoolean("visible"), _rsOferta.getByte("tipo_contrato"),
+					(Empresa) toUsuario(_rsEmpresa));
+			ofertas.add(oferta);
+		}
+		return ofertas;
 	}
 
 	/**

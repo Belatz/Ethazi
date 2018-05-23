@@ -1,12 +1,11 @@
 package ethazi.intefaz;
 
 /**
- * This abstract method gives information about the listable elements.
- * @author Nestor
  * 
+ * @author Nestor
+ * This method gives information about the Elemento_Listable
+ *
  */
-
-
 public interface Elemento_Listable {
 	public String getInfo();
 }

@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * Crea un panel con una lista de atributos pensada para filtrar busquedas
+ * Generates a panel with a list of attributes to filter the searches
  * 
  * @author belatz
  *
@@ -43,6 +43,10 @@ public class PanelFiltrosOferta extends JScrollPane {
 
 	}
 
+	/**
+	 * Generates a filter panel.
+	 * @return
+	 */
 	public JPanel crearPanelFiltros() {
 		JPanel pa_filtros = new JPanel();
 
