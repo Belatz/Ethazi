@@ -1,6 +1,8 @@
 package ethazi.intefaz.paneles;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -11,6 +13,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+
+import ethazi.datos.UtilidadesBD;
+
 import javax.swing.JCheckBox;
 
 /**
@@ -34,7 +39,6 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		setBounds(10, 60, 247, 550);
 		getVerticalScrollBar().setUnitIncrement(16);
 		setViewportView(pa_filtros);
-
 	}
 
 	/**
@@ -46,10 +50,6 @@ public class PanelFiltrosCandidato extends JScrollPane {
 
 		pa_filtros.setPreferredSize(new Dimension(228, 550));
 		pa_filtros.setLayout(null);
-
-		JButton btn_aplicar = new JButton("Aplicar");
-		btn_aplicar.setBounds(66, 11, 89, 23);
-		pa_filtros.add(btn_aplicar);
 
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 45, 226, 10);
@@ -115,6 +115,19 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		JCheckBox chBox_viajes = new JCheckBox("Disponible para viajes");
 		chBox_viajes.setBounds(7, 408, 148, 23);
 		pa_filtros.add(chBox_viajes);
+
+		JButton btn_aplicar = new JButton("Aplicar");
+		btn_aplicar.setBounds(66, 11, 89, 23);
+		btn_aplicar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO hacer algo con la lista de candidatos
+				// TODO tratar la lista de conocimientos en un arraylist
+				UtilidadesBD.filtrarCandidatos(txField_nombreApe.getText(), txField_nick.getText(),
+						txField_experiencia.getText(), txField_residencia.getText(), chBox_carne.isSelected(),
+						chBox_coche.isSelected(), chBox_viajes.isSelected(), p_conocimientos);
+			}
+		});
+		pa_filtros.add(btn_aplicar);
 
 		return pa_filtros;
 	}

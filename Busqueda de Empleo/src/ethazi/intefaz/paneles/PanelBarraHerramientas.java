@@ -4,35 +4,19 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import com.mysql.jdbc.Statement;
-
-import ethazi.aplicacion.Conexion;
-import ethazi.aplicacion.UtilidadesBD;
 import ethazi.aplicacion.excepciones.PanelNoDisponible;
-import ethazi.intefaz.Elemento_A_Listar;
-import ethazi.intefaz.Elemento_Listable;
-import ethazi.intefaz.frame.VentanaPrincipal;
-=======
+import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.ActionEvent;
-
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
 /**
  *
  * This bar appears in most of the panels so the user can use
@@ -48,16 +32,14 @@ public class PanelBarraHerramientas extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txField_buscar;
-<<<<<<< HEAD
 
 /*	public static ArrayList<Elemento_Listable> listaDeOfertas = new ArrayList<Elemento_Listable>();
 	
 	public PanelBarraHerramientas(GenericoDePanelesConLista pa_buscarOfertas) {*/
 
-=======
 	private static boolean menu = true;
 	static JButton btnMenu;
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
+
 	public PanelBarraHerramientas() {
 		setLayout(null);
 		JButton btn_buscar = new JButton("");

@@ -15,7 +15,6 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
 import ethazi.aplicacion.Usuario;
-import ethazi.intefaz.emergentes.EmergenteCambios;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
