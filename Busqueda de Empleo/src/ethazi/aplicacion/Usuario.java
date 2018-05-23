@@ -6,7 +6,13 @@ import java.util.ArrayList;
 
 public abstract class Usuario {
 	public static ArrayList<String> misConocimientosTotales;
-
+	//Ejemplo
+	{
+		misConocimientosTotales=new ArrayList<String>();
+		misConocimientosTotales.add("Java");
+		misConocimientosTotales.add("C");
+		misConocimientosTotales.add("C++");
+	}
 	private String miNumID;
 	private String miNick;
 	private String miPassword;
@@ -110,8 +116,7 @@ public abstract class Usuario {
 	/**
 	 * Checks if the Usuario is Candidato or Empresa
 	 * 
-	 * @param p_nick
-	 *            The nick of the Usuario
+	 * @param p_nick The nick of the Usuario
 	 * @return True if it's Candidato, False if it's Empresa
 	 * @throws SQLException
 	 * @author belatz

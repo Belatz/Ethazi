@@ -3,17 +3,11 @@ package ethazi.intefaz;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import ethazi.aplicacion.Oferta;
+import ethazi.aplicacion.*;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-/**
- * This class selects the elements that are actually listables one by one.
- * @author Nestor
- *
- */
 
 public class Elemento_A_Listar extends JPanel {
 
@@ -47,9 +41,7 @@ public class Elemento_A_Listar extends JPanel {
 			miBtnEliminar = new JButton("Retirar Oferta");
 			miBtnEliminar.setBounds(364, 44, 107, 30);
 			add(miBtnEliminar);
-			miLblAnalizar = new JLabel(((Solicitud) p_elemento).getOfer().getEmpresa());// Cuando Empresa sea una Clase
-																						// hay q hacer el getter del
-																						// nombre
+			miLblAnalizar = new JLabel(((Solicitud) p_elemento).getOfer().getEmpresa().getNombre());
 			miLblAnalizar.setBounds(364, 1, 107, 40);
 			add(miLblAnalizar);
 			miLblAbrir_Elemento = new JLabel(((Solicitud) p_elemento).getInfo());
@@ -82,8 +74,7 @@ public class Elemento_A_Listar extends JPanel {
 		}
 			break;
 		case 1: {
-			miLblAnalizar = new JLabel(((Oferta) p_elemento).getEmpresa());// Cuando Empresa sea una Clase hay q hacer
-																			// el getter del nombre
+			miLblAnalizar = new JLabel(((Oferta) p_elemento).getEmpresa().getNombre());
 			miLblAnalizar.setBounds(364, 1, 117, 40);
 			add(miLblAnalizar);
 			miLblAbrir_Elemento = new JLabel(((Oferta) p_elemento).getInfo());

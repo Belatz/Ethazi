@@ -1,7 +1,5 @@
 package ethazi.aplicacion;
 
-import java.util.ArrayList;
-
 public class Empresa extends Usuario {
 
 	private String miContacto;
