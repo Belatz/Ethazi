@@ -118,39 +118,56 @@ public abstract class UtilidadesBD {
 	 */
 	public static Oferta buscarOferta(String p_cod) throws SQLException {
 		Oferta _oferta;
+		ArrayList<String> conocimientos = new ArrayList<>();
 		Aplicacion.getConexion();
 		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM oferta WHERE cod_oferta='" + p_cod + "';");
 		Aplicacion.getConexion();
 		ResultSet _rsEmpresa = Conexion
 				.consultar("SELECT * FROM empresa e, usuario u WHERE u.numid = e.numid AND numid='"
 						+ _rsOferta.getString("numid") + "';");
-
+		Aplicacion.getConexion();
+		ResultSet _rsConocimientos = Conexion
+				.consultar("SELECT conocimientos_nombre FROM oferta WHERE cod_oferta='" + p_cod + "';");
+		while (_rsConocimientos.next()) {
+			conocimientos.add(_rsConocimientos.getString("conocimientos_nombre"));
+		}
 		_oferta = new Oferta(_rsOferta.getInt("cod_oferta"), _rsOferta.getString("titulo"),
 				_rsOferta.getString("descripcion"), _rsOferta.getString("lugar"), _rsOferta.getInt("sueldo_max"),
 				_rsOferta.getInt("sueldo_min"), _rsOferta.getInt("experiencia"),
 				_rsOferta.getString("aspectos_valorar"), _rsOferta.getString("aspectos_impres"),
-				_rsOferta.getBoolean("visible"), _rsOferta.getByte("tipo_contrato"), (Empresa) toUsuario(_rsEmpresa));
+				_rsOferta.getBoolean("visible"), _rsOferta.getByte("tipo_contrato"), (Empresa) toUsuario(_rsEmpresa),
+				conocimientos);
 		return _oferta;
 	}
 
 	public static ArrayList<Elemento_Listable> buscarOfertas(String titulo) throws SQLException {
 		ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
-
+		ArrayList<String> conocimientos = new ArrayList<>();
 		Oferta oferta;
+		ResultSet _rsConocimientos;
+		
 		Aplicacion.getConexion();
 		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM oferta WHERE titulo like '%" + titulo + "%';");
 		ResultSet _rsEmpresa = Conexion
-				.consultar("SELECT * FROM empresa e, usuario u WHERE u.numid = e.numid AND numid='"
-						+ _rsOferta.getString("numid") + "';");
+				.consultar("SELECT * FROM empresa WHERE numid ='"
+						+ _rsOferta.getString("empresa_numid") + "';");
+		
 		while (_rsOferta.next()) {
+		Aplicacion.getConexion();
+		_rsConocimientos = Conexion
+				.consultar("SELECT conocimientos_nombre FROM oferta WHERE cod_oferta='" + _rsOferta.getInt("cod_oferta") + "';");
+			while (_rsConocimientos.next()) {
+				conocimientos.add(_rsConocimientos.getString("conocimientos_nombre"));
+			}
 			oferta = new Oferta(_rsOferta.getInt("cod_oferta"), _rsOferta.getString("titulo"),
 					_rsOferta.getString("descripcion"), _rsOferta.getString("lugar"), _rsOferta.getInt("sueldo_max"),
 					_rsOferta.getInt("sueldo_min"), _rsOferta.getInt("experiencia"),
 					_rsOferta.getString("aspectos_valorar"), _rsOferta.getString("aspectos_impres"),
 					_rsOferta.getBoolean("visible"), _rsOferta.getByte("tipo_contrato"),
-					(Empresa) toUsuario(_rsEmpresa));
+					(Empresa) toUsuario(_rsEmpresa),conocimientos);
 			ofertas.add(oferta);
 		}
+		
 		return ofertas;
 	}
 

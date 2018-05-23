@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ethazi.intefaz.Elemento_Listable;
 
 public class Oferta implements Elemento_Listable {
-	/*jon:esta clase solo es de pruebas*/
+	private int miCod_oferta;
 	private String miTitulo;
 	private String miDescripcion;
 	private String miLugar;
@@ -20,10 +20,11 @@ public class Oferta implements Elemento_Listable {
 	private ArrayList<String> misConocimientos;
 
 	
-	public Oferta(String miTitulo, String miDescripcion, String miLugar, int miSalarioMax, int miSalarioMin,
+	public Oferta(int cod_oferta, String miTitulo, String miDescripcion, String miLugar, int miSalarioMax, int miSalarioMin,
 			int miExperiencia, String misAspectosAValorar, String misAspectosImprescindibles, boolean miVisibilidad,
 			byte miContrato, Empresa miEmpresa, ArrayList<String> conocimientos) {
 		super();
+		this.miCod_oferta = cod_oferta;
 		this.miTitulo = miTitulo;
 		this.miDescripcion = miDescripcion;
 		this.miLugar = miLugar;

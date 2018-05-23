@@ -94,11 +94,12 @@ public class Elementos_Listados extends JPanel {
 	 * Mostrar otras 10.
 	 */
 	public void mostrarOtras10() {
+		limite=10;
 		int cont = 0;
 		arrayElementos_A_Listar.clear();
 		arrayElementos_A_Listar = new ArrayList<Elemento_A_Listar>();
 		int elemento = (nPagina * C_LIMITEMAX) - C_LIMITEMAX;
-		int sobra = listaDeElementosListables.size() % 10;
+		int sobra = listaDeElementosListables.size() % limite;
 
 		if (sobra != 0 && maxPags == nPagina) {
 			this.limite = sobra;

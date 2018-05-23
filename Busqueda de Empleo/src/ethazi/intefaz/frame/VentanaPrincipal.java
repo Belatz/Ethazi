@@ -1,11 +1,11 @@
 package ethazi.intefaz.frame;
 
 import java.awt.CardLayout;
-<<<<<<< HEAD
+
 import ethazi.aplicacion.*;
-=======
+
 import java.awt.Component;
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
+
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,40 +17,24 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-<<<<<<< HEAD
 
 import com.mysql.jdbc.UpdatableResultSet;
 
-=======
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
-import ethazi.aplicacion.Aplicacion;
-import ethazi.aplicacion.Candidato;
+
 import ethazi.aplicacion.excepciones.PanelNoDisponible;
 
 import ethazi.intefaz.paneles.PanelBarraHerramientas;
 import ethazi.intefaz.paneles.PanelConocimientosBuscados;
-<<<<<<< HEAD
-=======
 
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
 import ethazi.intefaz.paneles.PanelEditarOferta;
 import ethazi.intefaz.paneles.PanelMenu;
 import ethazi.intefaz.paneles.PanelPublicarOferta;
 import ethazi.intefaz.paneles.PanelRealizarSolicitud;
-<<<<<<< HEAD
-=======
-
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
-import ethazi.aplicacion.Oferta;
 import ethazi.intefaz.Elemento_A_Listar;
 import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.paneles.GenericoDePanelesConLista;
-
-import ethazi.intefaz.paneles.PanelEditarOferta;
-
-import ethazi.intefaz.paneles.PanelPublicarOferta;
 
 import javax.swing.JTextField;
 
@@ -69,18 +53,14 @@ public class VentanaPrincipal extends JFrame {
 	/**
 	 * 
 	 */
+	static boolean creado = false;
 	private static byte visMenu = 0;
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	private static JPanel contentPane;
 	private JPanel pa_contenedor = new JPanel();
-<<<<<<< HEAD
 	private static JPanel currentPanel;
 	public static GenericoDePanelesConLista pa_buscarOfertas = null;
-=======
-	private JPanel currentPanel;
 
-	private JPanel pa_buscarOfertas1 = null;
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
 	// Crear analizar empresa
 	// Crear consultar ofertas adecuadas
 	// Crear consultar sus solicitudes
@@ -91,18 +71,17 @@ public class VentanaPrincipal extends JFrame {
 	// Crear editar perfil
 	// Crear consultar candidatos
 	// Crear consultar sus ofertas
-	public static GenericoDePanelesConLista panelDeOfertas;
+
 	private static JPanel pa_publicarOferta = null;
 	private static JPanel pa_editarOferta = null;
 	// Crear analizar candidato
 	// Crear analizar solicitudes
-<<<<<<< HEAD
-	private static JPanel pa_ofertasConSolici = null;
 
-=======
-	private JPanel pa_ofertasConSolici = null;
+	private static JPanel pa_ofertasConSolici = null;
 	private static PanelMenu menu;
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
+	public static ArrayList<Elemento_Listable> listaDeOfertas = new ArrayList<Elemento_Listable>();
+	static boolean genericousado = false;
+	
 	public static final short C_BUSCAR_OFERTA = 0;
 	public static final short C_ANALIZAR_EMPRESA = 1;
 	public static final short C_ANALIZAR_CANDIDATO = 2;
@@ -156,28 +135,31 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(menu);
 		menu.setLayout(null);
 
-<<<<<<< HEAD
-		JPanel pa_barraHerramientas = new PanelBarraHerramientas(pa_buscarOfertas);
-		contentPane.add(pa_barraHerramientas);
-=======
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
-
 		// Crear contenedor
 		pa_contenedor.setBounds(0, 55, 762, 488);
 		contentPane.add(pa_contenedor);
 		pa_contenedor.setLayout(new CardLayout(0, 0));
-
+		//Prueba jonor: si lo borrais moris
+		/*Oferta oferta;
+		Empresa empresa;
+		empresa = new Empresa("ASD","asd","asd","asd","asd","asd","asd","asd","asd");
+		ArrayList<String> con = new ArrayList<String>();
+		con.add("asd");
+		int cont = 0;
+		while (cont < 12) {
+			oferta  = new Oferta(2+cont, "titulo"+cont,"sd", "sdf",4,4,3, "sdf","asdf",true,(byte)1,empresa,con);
+			listaDeOfertas.add(oferta);
+			cont++;
+			pa_buscarOfertas = new GenericoDePanelesConLista(listaDeOfertas, (byte)1);
+		}*/
 		JPanel pa_barraHerramientas = new PanelBarraHerramientas();
 		pa_barraHerramientas.setLocation(0, 0);
+		
 		contentPane.add(pa_barraHerramientas);
+		pa_contenedor.add(pa_buscarOfertas);
+		contentPane.add(pa_contenedor);
 
-		/*
-		 * Prueba jonor int cont = 0; Oferta oferta;
-		 * 
-		 * while (cont < 15) { oferta = new Oferta("Nombre" + cont, "Empresaaa" + cont,
-		 * "descripppcciooooon" + cont, 1000 + cont); ofertas.add(oferta); cont++; }
-		 * Prueba jonor
-		 */
+
 
 		MouseListener ml = new MouseListener() {
 
@@ -224,45 +206,42 @@ public class VentanaPrincipal extends JFrame {
 		// pa_buscarOfertas = new GenericoDePanelesConLista(ofertas, (byte) 1);
 		// pa_contenedor.add(pa_buscarOfertas);
 		// Crear analizar empresa
+/*
+		if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea
+			// sus posibles ventanas // Crear consultar ofertas adecuadas
 
-<<<<<<< HEAD
+			// Crear consultar sus solicitudes
 
-		  if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea
-		// sus posibles ventanas // Crear consultar ofertas adecuadas
-		  
-		  // Crear consultar sus solicitudes
-		  
-		  // Crear consultar conocimientos mas buscados 
-		pa_conocimientosBuscados = new PanelConocimientosBuscados(); // Crear realizar solicitud
-		  pa_realizarSolicitud = new PanelRealizarSolicitud();
-		  pa_contenedor.add(pa_realizarSolicitud); // Crear abrir oferta
-		  
-		  pa_abrirOferta = new PanelAbrirOfertaCandidato(); pa_contenedor.add(pa_abrirOferta); //
-		//  Crear ver perfil
-		  
-		  // Crear editar perfil
-		  
-		  } else { // Si es empresa crea sus posibles ventanas // Crear consultar
-		 // candidatos
-		  
-		  // Crear consultar sus ofertas
-		 
-		  // Crear publicar oferta pa_publicarOferta = new PanelPublicarOferta();
-		  pa_contenedor.add(pa_publicarOferta); // Crear editar oferta 
-		  pa_editarOferta = new PanelEditarOferta(); pa_contenedor.add(pa_editarOferta); // Crear
-		//  analizar candidato
-		 
-		  // Crear analizar solicitudes
-		 
-		  // Crear consultar ofertas con solicitudes // Crear abrir oferta
-		  pa_abrirOferta = new PanelAbrirOfertaEmpresa();
-		 pa_contenedor.add(pa_abrirOferta); // Crear ver perfil
-		  
-		  // Crear editar perfil
-		  
-		  }
-	
-=======
+			// Crear consultar conocimientos mas buscados
+			pa_conocimientosBuscados = new PanelConocimientosBuscados(); // Crear realizar solicitud
+			pa_realizarSolicitud = new PanelRealizarSolicitud();
+			pa_contenedor.add(pa_realizarSolicitud); // Crear abrir oferta
+
+			// Crear ver perfil
+
+			// Crear editar perfil
+
+		} else { // Si es empresa crea sus posibles ventanas // Crear consultar
+			// candidatos
+
+			// Crear consultar sus ofertas
+
+			// Crear publicar oferta pa_publicarOferta = new PanelPublicarOferta();
+			pa_contenedor.add(pa_publicarOferta); // Crear editar oferta
+			pa_editarOferta = new PanelEditarOferta();
+			pa_contenedor.add(pa_editarOferta); // Crear
+			// analizar candidato
+
+			// Crear analizar solicitudes
+
+			// Crear consultar ofertas con solicitudes // Crear abrir oferta
+
+			pa_contenedor.add(pa_abrirOferta); // Crear ver perfil
+
+			// Crear editar perfil
+
+		}
+
 		if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea sus posibles ventanas
 			// Crear consultar ofertas adecuadas
 
@@ -305,8 +284,7 @@ public class VentanaPrincipal extends JFrame {
 			// Crear editar perfil
 
 		}
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
-
+*/
 	}
 
 	/**
@@ -319,7 +297,7 @@ public class VentanaPrincipal extends JFrame {
 	 *             If the choosen panel doesn't exist
 	 */
 	public static void cambiarPanel(short p_nuevoPanel) throws PanelNoDisponible {
-		currentPanel.setVisible(false);
+		//currentPanel.setVisible(false);
 		JPanel nuevoPanel = null;
 
 		switch (p_nuevoPanel) {
@@ -336,8 +314,15 @@ public class VentanaPrincipal extends JFrame {
 
 			break;
 		case C_BUSCAR_OFERTA:
-			pa_buscarOfertas.updateUI();;
+			
+				if (!genericousado) {
+					contentPane.add(pa_buscarOfertas);
+				}
+				else {
+					pa_buscarOfertas.updateUI();
+				}
 			pa_buscarOfertas.setVisible(true);
+			genericousado = true;
 			break;
 		case C_CONOCIMIENTOS_BUSCADOS:
 			nuevoPanel = pa_conocimientosBuscados;
@@ -381,20 +366,39 @@ public class VentanaPrincipal extends JFrame {
 		nuevoPanel.setVisible(true);
 		currentPanel = nuevoPanel;
 	}
-<<<<<<< HEAD
+
 	public static void actualizar(ArrayList<Elemento_Listable> listaDeOfertas) {
-		pa_buscarOfertas.updateUI();
-		pa_buscarOfertas = new GenericoDePanelesConLista(listaDeOfertas, (byte)1);
+		if(creado) {
+			try {	
+			pa_buscarOfertas.updateUI();
+			}
+			catch(Exception e) {
+			}
+		}
+		else {
+			creado = false;
+		}
+		pa_buscarOfertas = new GenericoDePanelesConLista(listaDeOfertas, (byte) 1);
 	}
-=======
 
 	public static void visibilidadMenu() {
 		visMenu = 0;
 		menu.setVisible(true);
 		menu.requestFocus();
 	}
-
-
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
+	public static void cargarOfertas() {
+		Oferta oferta;
+		Empresa empresa;
+		empresa = new Empresa("ASD","asd","asd","asd","asd","asd","asd","asd","asd");
+		ArrayList<String> con = new ArrayList<String>();
+		con.add("asd");
+		int cont = 0;
+		while (cont < 12) {
+			oferta  = new Oferta(2+cont, "titulo"+cont,"sd", "sdf",4,4,3, "sdf","asdf",true,(byte)1,empresa,con);
+			VentanaPrincipal.listaDeOfertas.add(oferta);
+			cont++;
+			VentanaPrincipal.pa_buscarOfertas = new GenericoDePanelesConLista(VentanaPrincipal.listaDeOfertas, (byte)1);
+		}
+	}
 
 }

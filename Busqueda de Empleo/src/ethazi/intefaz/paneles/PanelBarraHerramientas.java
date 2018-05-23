@@ -14,17 +14,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import com.mysql.jdbc.Statement;
 
 import ethazi.aplicacion.Conexion;
+import ethazi.aplicacion.Empresa;
+import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.UtilidadesBD;
 import ethazi.aplicacion.excepciones.PanelNoDisponible;
 import ethazi.intefaz.Elemento_A_Listar;
 import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.frame.VentanaPrincipal;
-=======
+
 import ethazi.intefaz.frame.VentanaPrincipal;
 
 import java.awt.event.ActionListener;
@@ -32,7 +33,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
+
 /**
  *
  * This bar appears in most of the panels so the user can use
@@ -48,17 +49,14 @@ public class PanelBarraHerramientas extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txField_buscar;
-<<<<<<< HEAD
-
-/*	public static ArrayList<Elemento_Listable> listaDeOfertas = new ArrayList<Elemento_Listable>();
 	
-	public PanelBarraHerramientas(GenericoDePanelesConLista pa_buscarOfertas) {*/
+	
 
-=======
 	private static boolean menu = true;
 	static JButton btnMenu;
->>>>>>> 581b6581a4b7aeedc505b8a34c8869d9871fdec8
+
 	public PanelBarraHerramientas() {
+		VentanaPrincipal.cargarOfertas();
 		setLayout(null);
 		JButton btn_buscar = new JButton("");
 		btn_buscar.setBounds(0, 0, 50, 50);
@@ -71,21 +69,25 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_perfil.setMinimumSize(new Dimension(33, 9));
 		btn_perfil.setMaximumSize(new Dimension(33, 9));
 		btn_perfil.setBounds(642, 0, 50, 50);
-		btn_perfil.addActionListener(new ActionListener() {
+		
+		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-				pa_buscarOfertas.removeAll();
+					VentanaPrincipal.pa_buscarOfertas.removeAll();
 				}
 				catch (Exception e) {
 					
 				}
+				
+	
 				try {
-					listaDeOfertas = UtilidadesBD.buscarOfertas(txField_buscar.getText());
-				} catch (SQLException e1) {
-					
-					e1.printStackTrace();
+					VentanaPrincipal.cargarOfertas();
+					//VentanaPrincipal.listaDeOfertas = UtilidadesBD.buscarOfertas(txField_buscar.getText());
+				} catch (Exception e) {
+					//SQLException e1
+					//e1.printStackTrace();
 				}
-				VentanaPrincipal.actualizar(listaDeOfertas);
+				VentanaPrincipal.actualizar(VentanaPrincipal.listaDeOfertas);
 			
 				try {
 					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA);

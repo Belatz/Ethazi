@@ -17,7 +17,7 @@ public class PruebasBD {
 			conn.actualizar("INSERT INTO usuario VALUES '33333333K','Jon9L','AAAA','Pepe','Lehendakari Aguirre','jon01@yahoo.com','610000000'");
 			conn.actualizar("INSERT INTO usuario VALUES '44444444A','Manuela','MAN','Manu','Maria Diaz de Haro','manuguapi@hotmail.com','600000001'");
 			conn.actualizar("INSERT INTO usuario VALUES '55555555P','Kike','KK','Kike','Calle Pozas','juan69@hotmail.com','699999000'");
-			conn.actualizar("INSERT INTO usuario VALUES '66666666Z','InfoPepe','abcd','Informática Pepiño S.L','Av. Universidades 5''pepeinfor@gmail.com','987654321'");
+			conn.actualizar("INSERT INTO usuario VALUES '66666666Z','InfoPepe','abcd','Informática Pepino S.L','Av. Universidades 5', 'pepeinfor@gmail.com','987654321'");
 			conn.actualizar("INSERT INTO usuario VALUES '77777777B','FrutMan','12345678','Fruterías Manoli','Calle Arenal 12','frutasmanoli@hotmail.com','611111111'");
 			conn.actualizar("INSERT INTO usuario VALUES '88888888X','SuperPaco','2345','Supermercado Paquito','Calle Perdida S/N','superpaquitopaco@hotmail.com','900123456'");
 			conn.actualizar("INSERT INTO usuario VALUES '99999999L','TallChema','0000','Talleres Mecánicos Chema','Calle Blas de Otero nº50','talleres chemita@yahoo.es','981234567'");
@@ -43,7 +43,7 @@ public class PruebasBD {
 			conn.actualizar("INSERT INTO conocimientos VALUES 'Contabilidad'");
 			
 			//Datos ofertas 
-			conn.actualizar("INSERT INTO oferta VALUES 'Programacion','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'66666666Z',12");
+			conn.actualizar("INSERT INTO oferta VALUES '458','Programacion','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'66666666Z',12");
 			conn.actualizar("INSERT INTO oferta VALUES 'Programacion','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'88888888X',12");
 			conn.actualizar("INSERT INTO oferta VALUES 'Programacion','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'77777777B',12");
 			conn.actualizar("INSERT INTO oferta VALUES 'Programacion','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'66666666Z',12");
