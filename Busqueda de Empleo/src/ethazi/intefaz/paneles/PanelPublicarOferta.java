@@ -23,9 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class PanelPublicarOferta extends JPanel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JTextField txField_titulo;
 	private JTextField txField_sueldoMin;
@@ -35,7 +33,7 @@ public class PanelPublicarOferta extends JPanel {
 	private JTextField txField_lugar;
 
 	/**
-	 * Create the panel.
+	 * This panel adds a new offer to the data base.
 	 */
 	public PanelPublicarOferta() {
 		setPreferredSize(new Dimension(762,488));

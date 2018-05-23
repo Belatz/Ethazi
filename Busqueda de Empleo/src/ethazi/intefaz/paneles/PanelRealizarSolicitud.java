@@ -7,9 +7,18 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+/**
+ * 
+ * @author Nestor
+ *
+ */
+
 public class PanelRealizarSolicitud extends JPanel {
 	private JTextField textField;
 
+	/**
+	 * Adds a request to the data base.
+	 */
 	public PanelRealizarSolicitud() {
 		setLayout(null);
 

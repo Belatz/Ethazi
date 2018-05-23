@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
- * Clase Elementos_Listados.
+ * This class receives elements from the class Elementos_A_Listar
+ * @author Nestor
+ *
  */
 public class Elementos_Listados extends JPanel {
 

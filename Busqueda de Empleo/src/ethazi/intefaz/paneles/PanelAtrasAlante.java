@@ -20,7 +20,10 @@ import ethazi.intefaz.frame.VentanaPrincipal;
  */
 
 public class PanelAtrasAlante extends JPanel {
-
+	/**
+	 * Generates btn_siguiente and btn_anterior buttons
+	 * @param panel_QueTieneLaLista
+	 */
 	public PanelAtrasAlante(Elementos_Listados panel_QueTieneLaLista) {
 		setLayout(null);
 		JButton btn_siguiente = new JButton("Siguiente");
@@ -35,6 +38,9 @@ public class PanelAtrasAlante extends JPanel {
 			btn_siguiente.setVisible(false);
 		}
 
+		/**
+		 * Gives function to the btn_siguiente button
+		 */
 		btn_siguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -50,6 +56,9 @@ public class PanelAtrasAlante extends JPanel {
 			}
 		});
 
+		/**
+		 * Gives function to the btn_anterior button
+		 */
 		btn_anterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// VentanaPrincipal.remcont();
