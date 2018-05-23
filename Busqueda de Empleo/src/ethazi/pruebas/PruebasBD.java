@@ -77,7 +77,7 @@ public class PruebasBD {
 			conn.actualizar("INSERT INTO solicitudes VALUES 8955,'55555555P','Buenos tardes: Mi situacion economica no es muy buena y necesito trabajar'");
 			conn.actualizar("INSERT INTO solicitudes VALUES 3256,'55555555P','Buenos tardes: Mi situacion economica no es muy buena y necesito trabajar'");
 			
-			//Datos conocimientos
+			//Conocimientos
 			conn.actualizar("INSERT INTO conocimientos VALUES 'Programacion en Java'");
 			conn.actualizar("INSERT INTO conocimientos VALUES 'Programacion en C'");
 			conn.actualizar("INSERT INTO conocimientos VALUES 'Programacion en C++'");
