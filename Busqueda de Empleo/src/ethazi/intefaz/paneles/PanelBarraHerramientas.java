@@ -48,7 +48,7 @@ public class PanelBarraHerramientas extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txField_buscar;
+	public static JTextField txField_buscar;
 	
 	
 
@@ -56,7 +56,7 @@ public class PanelBarraHerramientas extends JPanel {
 	static JButton btnMenu;
 
 	public PanelBarraHerramientas() throws SQLException {
-		VentanaPrincipal.cargarOfertas();
+		
 		setLayout(null);
 		JButton btn_buscar = new JButton("");
 		btn_buscar.setBounds(0, 0, 50, 50);
@@ -72,27 +72,11 @@ public class PanelBarraHerramientas extends JPanel {
 		
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					VentanaPrincipal.pa_buscarOfertas.removeAll();
-				}
-				catch (Exception e) {
-					
-				}
-				
-	
-				try {
-					VentanaPrincipal.cargarOfertas();
-					//VentanaPrincipal.listaDeOfertas = UtilidadesBD.buscarOfertas(txField_buscar.getText());
-				} catch (Exception e) {
-					//SQLException e1
-					//e1.printStackTrace();
-				}
-				VentanaPrincipal.actualizar(VentanaPrincipal.listaDeOfertas);
+				VentanaPrincipal.actualizarOfertas();
 			
 				try {
 					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA);
 				} catch (PanelNoDisponible e) {
-					
 					e.printStackTrace();
 				}
 

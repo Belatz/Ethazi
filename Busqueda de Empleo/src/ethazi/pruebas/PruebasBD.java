@@ -9,18 +9,7 @@ public class PruebasBD {
 	public static void main(String[] args) {
 		Conexion conn = new Conexion();
 		int cont = 0;
-		try {
-		
-			while (cont < 3000) {
-				conn.actualizar(
-						"INSERT INTO oferta VALUES ('48"+cont+61+"','Programacio565"+cont+71+ "','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'88888888X',12)");
-						cont++;
-			}
-			
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
 		try {
 			// Datos Usuario
 			conn.actualizar(
@@ -69,6 +58,19 @@ public class PruebasBD {
 			conn.actualizar("INSERT INTO conocimientos VALUES ('Contabilidad')");
 
 			// Datos ofertas
+			
+			try {
+				
+				while (cont < 3000) {
+					conn.actualizar(
+							"INSERT INTO oferta VALUES ('48"+cont+61+"','Programacio565"+cont+71+ "','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'88888888X',12)");
+							cont++;
+				}
+				
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			conn.actualizar(
 					"INSERT INTO oferta VALUES ('458','Programacion','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'66666666Z',12)");
 			conn.actualizar(

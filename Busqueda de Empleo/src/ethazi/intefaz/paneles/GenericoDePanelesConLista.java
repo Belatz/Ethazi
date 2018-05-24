@@ -21,6 +21,9 @@ public class GenericoDePanelesConLista extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 
+	public GenericoDePanelesConLista() {
+		
+	}
 	public GenericoDePanelesConLista(ArrayList<Elemento_Listable> listaDeElementosListables, byte tipo) {
 		Elementos_Listados panel_QueTieneLaLista = null;
 		JPanel _panelBotonAtrasYAlante = null;
