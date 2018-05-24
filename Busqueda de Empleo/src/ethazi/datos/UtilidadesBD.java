@@ -22,11 +22,11 @@ import ethazi.intefaz.Elemento_Listable;
 public abstract class UtilidadesBD {
 
 	/**
-	 * Devuelve un objeto Usuario a partir de un ResultSet pasado por parametro
+	 * Returns and object Usuario through a ResultSet by parameter
 	 * 
 	 * @param p_rs
-	 *            ResultSet con la informacion del usuario
-	 * @return Devuelve un Usuario con los datos sacados del ResultSet
+	 *            ResultSet with user's information
+	 * @return Returns a Usuario with ResultSet's data
 	 * @throws SQLException
 	 */
 	public static Usuario toUsuario(ResultSet p_rs) throws SQLException {
@@ -59,11 +59,11 @@ public abstract class UtilidadesBD {
 	}
 
 	/**
-	 * Devuelve un objeto Usuario a partir de un nick pasado por parametro
+	 * Returns and object Usuario through a nick by parameter
 	 * 
 	 * @param p_nick
-	 *            String con el nick del usuario
-	 * @return Devuelve un Usuario con los datos sacados del nick pasado
+	 *            String with user's nick
+	 * @return Returns a Usuario with last nick's data
 	 * @throws SQLException
 	 */
 	public static Usuario toUsuario(String p_nick) throws SQLException {
@@ -85,11 +85,11 @@ public abstract class UtilidadesBD {
 	}
 
 	/**
-	 * Devuelve un objeto Solicitud a partir de un ResultSet
+	 * Returns and object Solicitud through a ResultSet by parameter
 	 * 
 	 * @param p_rs
-	 *            ResultSet con la informacion de la solicitud
-	 * @return Devuelve una Solicitud con los datos almacenados en el ResultSets
+	 *            ResultSet with request's information
+	 * @return Returns a Solicitud with ResultSet's data
 	 * @throws SQLException
 	 */
 	public static Solicitud toSolicitud(ResultSet p_rs) throws SQLException {
@@ -103,12 +103,11 @@ public abstract class UtilidadesBD {
 	}
 
 	/**
-	 * Busca un candidato en la base de datos a partir de su numero de
-	 * identificacion
+	 * Searches a Candidato in the data base by his id number
 	 * 
 	 * @param p_numid
-	 *            Numero de identificacion necesario para la busqueda
-	 * @return Devuelve el Candidato con el numero de id recibido
+	 *            Num id necessary for the search
+	 * @return Returns the Candidato with the received id number
 	 * @throws SQLException
 	 */
 	public static Candidato buscarCandidato(String p_numid) throws SQLException {
@@ -121,11 +120,11 @@ public abstract class UtilidadesBD {
 	}
 
 	/**
-	 * Busca una oferta en la base de datos a partir de su codigo
-	 * 
+	 * Searches an offer in the data base through its code
+	 *  
 	 * @param p_cod
-	 *            Codigo de la oferta necesario para la busqueda
-	 * @return Devuelve la Oferta con el codigo recibido
+	 *            Offer's code necessary for the search
+	 * @return Returns the Offer with the received code
 	 * @throws SQLException
 	 */
 	public static Oferta buscarOferta(String p_cod) throws SQLException {
@@ -169,11 +168,9 @@ public abstract class UtilidadesBD {
 	}
 
 	/**
-	 * Metodo encargado de descargar en un ArrayList la lista de conocimientos
-	 * disponibles
+	 * This method downloads in an ArrayList the list of available conocimientos
 	 * 
-	 * @return Devuelve un ArrayList de String con los nombres de los conocimientos
-	 *         almacenados en la base de datos
+	 * @return Returns an ArrayList of String with the names of the conocimientos stored in the data base
 	 * @throws SQLException
 	 */
 	public static ArrayList<String> descargarConocimientos() throws SQLException {
@@ -188,13 +185,11 @@ public abstract class UtilidadesBD {
 	}
 
 	/**
-	 * Metodo encargado de descargar en un ArrayList la lista de conocimientos de un
-	 * Candidato
+	 * This method downloads in an ArrayList the list of a Candidato's conocimientos
 	 * 
 	 * @param p_numid
-	 *            Numero de identificacion de un Candidato
-	 * @return Devuelve un ArrayList de String con los nombres de los conocimientos
-	 *         que posee el Candidato
+	 *            A Candidato's num id
+	 * @return Returns an ArrayList of String with the names of the conocimientos of the Candidato
 	 * @throws SQLException
 	 */
 	public static ArrayList<String> descargarConocimientos(String p_numid) throws SQLException {

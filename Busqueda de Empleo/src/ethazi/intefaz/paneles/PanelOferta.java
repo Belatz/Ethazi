@@ -23,9 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 public class PanelOferta extends JPanel implements TieneEmergente{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JTextField txField_Empresa;
 	private JTextField txField_sueldoMin;
@@ -47,8 +45,10 @@ public class PanelOferta extends JPanel implements TieneEmergente{
 	private JButton btnRetirar;
 	private JButton btnEliminar;
 	private JButton btn_crear;
+	
 	/**
-	 * Create the panel.
+	 * This panel will show the data that will be filled to create an offer.
+	 * @param ofer
 	 */
 	public PanelOferta(Oferta ofer) {
 		setPreferredSize(new Dimension(762,488));

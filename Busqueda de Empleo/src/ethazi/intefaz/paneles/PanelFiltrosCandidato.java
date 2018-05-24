@@ -30,10 +30,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 	private JTextField txField_experiencia;
 	private JTextField txField_nick;
 	private JTextField txField_nombreApe;
-
-	/**
-	 * Create the panel.
-	 */
+	
 	public PanelFiltrosCandidato() {
 		JPanel pa_filtros = crearPanelFiltros();
 		setBounds(10, 60, 247, 550);
@@ -43,7 +40,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 
 	/**
 	 * Generates a filter panel.
-	 * @return
+	 * @return pa_filtros
 	 */
 	public JPanel crearPanelFiltros() {
 		JPanel pa_filtros = new JPanel();
@@ -77,7 +74,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		pa_filtros.add(txField_residencia);
 		txField_residencia.setColumns(10);
 
-		JLabel lbl_experiencia = new JLabel("A\u00F1os de experiencia minimos:");
+		JLabel lbl_experiencia = new JLabel("Anos de experiencia minimos:");
 		lbl_experiencia.setBounds(7, 476, 211, 14);
 		pa_filtros.add(lbl_experiencia);
 
