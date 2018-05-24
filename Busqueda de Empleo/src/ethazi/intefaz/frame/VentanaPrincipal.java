@@ -22,11 +22,11 @@ import ethazi.intefaz.paneles.PanelMenu;
 import ethazi.intefaz.paneles.PanelPublicarOferta;
 import ethazi.intefaz.paneles.PanelRealizarSolicitud;
 
-
 public class VentanaPrincipal extends JFrame {
 	/**
 	 * 
 	 */
+	static VentanaPrincipal frame;
 	private static byte visMenu = 0;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -79,7 +79,7 @@ public class VentanaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaPrincipal frame = new VentanaPrincipal();
+					frame = new VentanaPrincipal();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -102,7 +102,11 @@ public class VentanaPrincipal extends JFrame {
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
 		menu = new PanelMenu();
-		menu.setBounds(350, 0, 251, 115);
+		if (Aplicacion.getUsuario() instanceof Candidato) {
+			menu.setBounds(350, 0, 251, 115);
+		} else {
+			menu.setBounds(350, 0, 251, 147);
+		}
 		contentPane.add(menu);
 		menu.setLayout(null);
 
@@ -169,7 +173,7 @@ public class VentanaPrincipal extends JFrame {
 	public void crearPaneles() {
 
 		menu.setVisible(false);
-	
+
 		if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea sus posibles ventanas
 			// Crear consultar ofertas adecuadas
 
@@ -193,11 +197,11 @@ public class VentanaPrincipal extends JFrame {
 			// Crear consultar sus ofertas
 
 			// Crear publicar oferta
-			 pa_publicarOferta = new PanelPublicarOferta();
-			 pa_contenedor.add(pa_publicarOferta);
+			pa_publicarOferta = new PanelPublicarOferta();
+			pa_contenedor.add(pa_publicarOferta);
 			// Crear editar oferta
-			 pa_editarOferta = new PanelEditarOferta();
-			 pa_contenedor.add(pa_editarOferta);
+			pa_editarOferta = new PanelEditarOferta();
+			pa_contenedor.add(pa_editarOferta);
 			// Crear analizar candidato
 
 			// Crear analizar solicitudes
@@ -298,6 +302,14 @@ public class VentanaPrincipal extends JFrame {
 		visMenu = 0;
 		menu.setVisible(true);
 		menu.requestFocus();
+	}
+
+	public static void cerrar() {
+		frame.setVisible(false);
+	}
+
+	public static void abrir() {
+		frame.setVisible(true);
 	}
 
 }
