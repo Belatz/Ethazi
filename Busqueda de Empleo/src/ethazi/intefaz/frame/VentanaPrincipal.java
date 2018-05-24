@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -12,46 +13,48 @@ import javax.swing.border.EmptyBorder;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
+import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.excepciones.PanelNoDisponible;
+import ethazi.datos.Tablas;
+import ethazi.datos.UtilidadesBD;
+import ethazi.intefaz.Elemento_A_Listar;
 import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.paneles.GenericoDePanelesConLista;
+import ethazi.intefaz.paneles.PanelAnalizarCandidato;
 import ethazi.intefaz.paneles.PanelBarraHerramientas;
 import ethazi.intefaz.paneles.PanelConocimientosBuscados;
-import ethazi.intefaz.paneles.PanelEditarOferta;
 import ethazi.intefaz.paneles.PanelMenu;
 import ethazi.intefaz.paneles.PanelPublicarOferta;
 import ethazi.intefaz.paneles.PanelRealizarSolicitud;
+import ethazi.intefaz.paneles.PanelVerPerfil;
 
 public class VentanaPrincipal extends JFrame {
 	/**
 	 * 
 	 */
-	static VentanaPrincipal frame;
-	private static byte visMenu = 0;
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JPanel pa_contenedor = new JPanel();
+	private static byte visMenu = 0;
+	private static VentanaPrincipal frame;
 	private static JPanel currentPanel;
-	public static GenericoDePanelesConLista pa_buscarOfertas = null;
 
-	private JPanel pa_buscarOfertas1 = null;
-	// Crear analizar empresa
-	// Crear consultar ofertas adecuadas
-	// Crear consultar sus solicitudes
+	private static JPanel contentPane;
+	private static JPanel pa_contenedor = new JPanel();
+
+	private static JPanel pa_buscarOfertas = null;
+	private static JPanel pa_ofertasAdecuadas = null;
+	private static JPanel pa_susSolicitudes = null;
 	private static JPanel pa_conocimientosBuscados = null;
 	private static JPanel pa_realizarSolicitud = null;
 	private static JPanel pa_abrirOferta = null;
-	// Crear ver perfil
-	// Crear editar perfil
-	// Crear consultar candidatos
-	// Crear consultar sus ofertas
-	public static GenericoDePanelesConLista panelDeOfertas;
+	private static JPanel pa_verPerfil = null;
+	private static JPanel pa_consultarCandidatos = null;
+	private static JPanel pa_susOfertas;
+	private static JPanel panelDeOfertas;
 	private static JPanel pa_publicarOferta = null;
-	private static JPanel pa_editarOferta = null;
-	// Crear analizar candidato
-	// Crear analizar solicitudes
+	private static JPanel pa_analizarCandidato = null;
+	private static JPanel pa_analizarSolicitudes = null;
 	private static JPanel pa_ofertasConSolici = null;
-	private static PanelMenu menu;
+	private static JPanel menu;
 
 	public static final short C_BUSCAR_OFERTA = 0;
 	public static final short C_ANALIZAR_EMPRESA = 1;
@@ -63,7 +66,6 @@ public class VentanaPrincipal extends JFrame {
 	public static final short C_REALIZAR_SOLICITUD = 7;
 	public static final short C_PUBLICAR_OFERTA = 8;
 	public static final short C_ABRIR_OFERTA = 9;
-	public static final short C_EDITAR_OFERTA = 10;
 	public static final short C_VER_PERFIL = 11;
 	public static final short C_CONSULTAR_CANDIDATOS = 12;
 	public static final short C_ANALIZAR_SOLICITUDES = 13;
@@ -95,12 +97,15 @@ public class VentanaPrincipal extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 768, 575);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
+
+		// Menu desplegable
 		menu = new PanelMenu();
 		if (Aplicacion.getUsuario() instanceof Candidato) {
 			menu.setBounds(350, 0, 251, 115);
@@ -109,31 +114,8 @@ public class VentanaPrincipal extends JFrame {
 		}
 		contentPane.add(menu);
 		menu.setLayout(null);
-
-		/*
-		 * JPanel pa_barraHerramientas = new PanelBarraHerramientas(pa_buscarOfertas);
-		 * contentPane.add(pa_barraHerramientas);
-		 */
-
-		// Crear contenedor
-		pa_contenedor.setBounds(0, 55, 762, 488);
-		contentPane.add(pa_contenedor);
-		pa_contenedor.setLayout(new CardLayout(0, 0));
-
-		JPanel pa_barraHerramientas = new PanelBarraHerramientas();
-		pa_barraHerramientas.setLocation(0, 0);
-		contentPane.add(pa_barraHerramientas);
-
-		/*
-		 * Prueba jonor int cont = 0; Oferta oferta;
-		 * 
-		 * while (cont < 15) { oferta = new Oferta("Nombre" + cont, "Empresaaa" + cont,
-		 * "descripppcciooooon" + cont, 1000 + cont); ofertas.add(oferta); cont++; }
-		 * Prueba jonor
-		 */
-
+		menu.setVisible(false);
 		MouseListener ml = new MouseListener() {
-
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 
@@ -161,24 +143,49 @@ public class VentanaPrincipal extends JFrame {
 			}
 		};
 		menu.addMouseListener(ml);
-		crearPaneles();
 
+		// Crear contenedor
+		pa_contenedor.setBounds(0, 55, 762, 488);
+		contentPane.add(pa_contenedor);
+		pa_contenedor.setLayout(new CardLayout(0, 0));
+
+		// Barra de herramientas
+		JPanel pa_barraHerramientas = new PanelBarraHerramientas();
+		pa_barraHerramientas.setLocation(0, 0);
+		contentPane.add(pa_barraHerramientas);
+
+		//crearPaneles();
+	}
+
+	public static void crearPrimerPanel() {
+		if (Aplicacion.getUsuario() instanceof Candidato) {
+			// TODO buscar ofertas adecuadas
+			pa_ofertasAdecuadas = new GenericoDePanelesConLista(listaDeElementosListables, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
+			pa_contenedor.add(pa_ofertasAdecuadas);
+		} else {
+			ArrayList<Oferta> _ofertas = UtilidadesBD.buscarOfertasEmpresa(Aplicacion.getUsuario().getNumID());
+			
+			if (_ofertas.isEmpty()) { // Si no tiene ofertas publicadas
+				pa_publicarOferta = new PanelPublicarOferta();
+				pa_contenedor.add(pa_publicarOferta);
+			} else {
+				// TODO buscar ofertas con solicitudes
+				pa_ofertasConSolici = new GenericoDePanelesConLista(listaDeElementosListables, Elemento_A_Listar.C_VER_OFERTAS_CON_SOLICITUD);
+				pa_contenedor.add(pa_ofertasConSolici);
+			}
+		}
 	}
 
 	/**
 	 * Creates all the panels that could be used by the current user
 	 * 
+	 * @deprecated
 	 * @author belatz
 	 */
 	public void crearPaneles() {
-
-		menu.setVisible(false);
-
 		if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea sus posibles ventanas
 			// Crear consultar ofertas adecuadas
-
 			// Crear consultar sus solicitudes
-
 			// Crear consultar conocimientos mas buscados
 			pa_conocimientosBuscados = new PanelConocimientosBuscados();
 			// Crear realizar solicitud
@@ -188,35 +195,25 @@ public class VentanaPrincipal extends JFrame {
 			pa_abrirOferta = new JPanel();
 			pa_contenedor.add(pa_abrirOferta);
 			// Crear ver perfil
-
-			// Crear editar perfil
-
+			pa_verPerfil = new PanelVerPerfil(Aplicacion.getUsuario(), true);
+			pa_contenedor.add(pa_verPerfil);
 		} else { // Si es empresa crea sus posibles ventanas
 			// Crear consultar candidatos
-
 			// Crear consultar sus ofertas
-
 			// Crear publicar oferta
 			pa_publicarOferta = new PanelPublicarOferta();
 			pa_contenedor.add(pa_publicarOferta);
-			// Crear editar oferta
-			pa_editarOferta = new PanelEditarOferta();
-			pa_contenedor.add(pa_editarOferta);
 			// Crear analizar candidato
-
+			pa_analizarCandidato = new PanelAnalizarCandidato();
+			pa_contenedor.add(pa_analizarCandidato);
 			// Crear analizar solicitudes
-
 			// Crear consultar ofertas con solicitudes
 			// pa_contenedor.add(pa_ofertasConSolici);
 			// Crear abrir oferta
-
 			// pa_contenedor.add(pa_abrirOferta);
 			// Crear ver perfil
-
 			// Crear editar perfil
-
 		}
-
 	}
 
 	/**
@@ -255,9 +252,6 @@ public class VentanaPrincipal extends JFrame {
 			break;
 		case C_CONSULTAR_CANDIDATOS:
 
-			break;
-		case C_EDITAR_OFERTA:
-			nuevoPanel = pa_editarOferta;
 			break;
 		case C_OFERTAS_ADECUADAS:
 
@@ -304,10 +298,16 @@ public class VentanaPrincipal extends JFrame {
 		menu.requestFocus();
 	}
 
+	/**
+	 * Quita la visibilidad a la ventana
+	 */
 	public static void cerrar() {
 		frame.setVisible(false);
 	}
 
+	/**
+	 * Hace visible la ventana
+	 */
 	public static void abrir() {
 		frame.setVisible(true);
 	}
