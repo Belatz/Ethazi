@@ -1,4 +1,4 @@
-package ethazi.aplicacion;
+package ethazi.datos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,8 +10,6 @@ import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Solicitud;
 import ethazi.aplicacion.Usuario;
-import ethazi.datos.Conexion;
-import ethazi.datos.Tablas;
 import ethazi.intefaz.Elemento_Listable;
 
 /**
@@ -32,6 +30,9 @@ public abstract class UtilidadesBD {
 	 * @throws SQLException
 	 */
 	public static Usuario toUsuario(ResultSet p_rs) throws SQLException {
+		if (!p_rs.next()) {
+			throw new SQLException("ResultSet vacio");
+		}
 		Usuario _usr = null;
 		String _nick = p_rs.getString(Tablas.C_USUARIO_NICK);
 
@@ -53,6 +54,7 @@ public abstract class UtilidadesBD {
 					p_rs.getString(Tablas.C_USUARIO_TELEFONO), p_rs.getString(Tablas.C_EMPRESA_CONTACTO),
 					p_rs.getString(Tablas.C_EMPRESA_DESCRIPCION));
 		}
+		
 		return _usr;
 	}
 
