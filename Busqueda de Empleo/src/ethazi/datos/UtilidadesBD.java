@@ -10,7 +10,7 @@ import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Solicitud;
 import ethazi.aplicacion.Usuario;
-import ethazi.aplicacion.excepciones.ResultSetVacio;
+import ethazi.excepciones.ResultSetVacio;
 import ethazi.intefaz.Elemento_Listable;
 
 /**

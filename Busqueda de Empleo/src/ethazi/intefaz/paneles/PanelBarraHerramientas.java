@@ -14,8 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ethazi.aplicacion.Aplicacion;
-import ethazi.aplicacion.excepciones.PanelNoDisponible;
 import ethazi.datos.UtilidadesBD;
+import ethazi.excepciones.PanelNoDisponible;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 

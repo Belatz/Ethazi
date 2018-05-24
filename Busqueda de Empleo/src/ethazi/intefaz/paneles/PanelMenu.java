@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
-import ethazi.aplicacion.excepciones.PanelNoDisponible;
+import ethazi.excepciones.PanelNoDisponible;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
 import javax.swing.JButton;

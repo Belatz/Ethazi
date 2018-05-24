@@ -1,4 +1,4 @@
-package ethazi.aplicacion.excepciones;
+package ethazi.excepciones;
 
 public class ResultSetVacio extends Exception {
 
