@@ -23,11 +23,11 @@ public class PruebasBD {
 			conn.actualizar("INSERT INTO usuario VALUES ('99999999L','TallChema','0000','Talleres Mecánicos Chema','Calle Blas de Otero nº50','tallereschemita@yahoo.es','981234567')");
 			
 			//Datos Candidato
-			conn.actualizar("INSERT INTO candidato VALUES ('Perez Lopez',20/04/2000,1,1,0,'Contable','Informática','11111111D')");
-			conn.actualizar("INSERT INTO candidato VALUES ('Garcia Lopez',31/01/1990,0,0,1,'Programador','Inglés','22222222L')");
-			conn.actualizar("INSERT INTO candidato VALUES ('Garcia Garcia',01/02/2002,1,1,1,'Limpiadora','Euskera y Ingles','33333333K')");
-			conn.actualizar("INSERT INTO candidato VALUES ('Sanchez Iglesias',05/05/1995,0,0,0,'Director RRHH','Curso RCP','44444444A')");
-			conn.actualizar("INSERT INTO candidato VALUES ('López Vázquez',10/09/19960,1,0,1,'Secretaria','Mecanografía','55555555P')");
+			conn.actualizar("INSERT INTO candidato VALUES ('Perez Lopez',20/04/2000,1,1,0,'Contable','Informática','He trabajado 7 años como responsable de finanzas en una multinacional',10.3,'11111111D')");
+			conn.actualizar("INSERT INTO candidato VALUES ('Garcia Lopez',31/01/1990,0,0,1,'Programador','Inglés',5.6,'22222222L')");
+			conn.actualizar("INSERT INTO candidato VALUES ('Garcia Garcia',01/02/2002,1,1,1,'Limpiadora','Euskera y Ingles',1.9,'33333333K')");
+			conn.actualizar("INSERT INTO candidato VALUES ('Sanchez Iglesias',05/05/1995,0,0,0,'Director RRHH','Curso RCP',2.2,'44444444A')");
+			conn.actualizar("INSERT INTO candidato VALUES ('López Vázquez',10/09/19960,1,0,1,'Secretaria','Mecanografía',25.8,'55555555P')");
 			
 			//Datos Empresa
 			conn.actualizar("INSERT INTO empresa VALUES ('Pepe Rodríguez','Gerente','66666666Z')");
