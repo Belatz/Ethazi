@@ -27,15 +27,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class PanelIdentificarse extends JPanel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private static JPasswordField pssField_contrasena;
 	private static JTextField txField_usuario;
 
 	/**
-	 * Create the panel.
+	 * This panel is used by the user to identify as a Candidato or a Empresa.
 	 */
 	public PanelIdentificarse() {
 		this.setLayout(null);

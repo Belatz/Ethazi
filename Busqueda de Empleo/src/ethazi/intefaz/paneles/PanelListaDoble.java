@@ -18,9 +18,6 @@ import javax.swing.ListSelectionModel;
  */
 public class PanelListaDoble extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JButton btn_anadir = new JButton();
 	private JButton btn_eliminar = new JButton();

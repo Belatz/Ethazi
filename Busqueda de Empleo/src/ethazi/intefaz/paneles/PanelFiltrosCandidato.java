@@ -124,7 +124,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 				// TODO tratar la lista de conocimientos en un arraylist
 				UtilidadesBD.filtrarCandidatos(txField_nombreApe.getText(), txField_nick.getText(),
 						txField_experiencia.getText(), txField_residencia.getText(), chBox_carne.isSelected(),
-						chBox_coche.isSelected(), chBox_viajes.isSelected(), p_conocimientos);
+						chBox_coche.isSelected(), chBox_viajes.isSelected(), pa_conocimientos);
 			}
 		});
 		pa_filtros.add(btn_aplicar);
