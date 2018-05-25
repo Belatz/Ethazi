@@ -66,7 +66,7 @@ public class Conexion {
 	 * @throws SQLException
 	 *             If there has been any error in the data base or in the query
 	 */
-	public int actualizar(String sql) throws SQLException {
+	public static int actualizar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
 		return _comando.executeUpdate(sql.toUpperCase());
 	}

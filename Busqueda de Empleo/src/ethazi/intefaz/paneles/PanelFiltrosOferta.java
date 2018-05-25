@@ -68,7 +68,7 @@ public class PanelFiltrosOferta extends JScrollPane {
 		for (int i = 0; i < 10; i++)
 			conocimientos.add("Ejemplo " + i);
 		PanelListaDoble pa_conocimientos = new PanelListaDoble(conocimientos, null);
-		pa_conocimientos.setLocation(7, 66);
+		pa_conocimientos.setLocation(9, 140);
 		pa_filtros.add(pa_conocimientos);
 
 		JLabel lbl_lugar = new JLabel("Lugar de trabajo:");

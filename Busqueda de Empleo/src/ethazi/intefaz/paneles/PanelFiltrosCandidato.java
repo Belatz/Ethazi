@@ -66,7 +66,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 			conocimientos.add("Ejemplo " + i);
 
 		PanelListaDoble pa_conocimientos = new PanelListaDoble(conocimientos, null);
-		pa_conocimientos.setLocation(7, 172);
+		pa_conocimientos.setLocation(9, 172);
 		pa_filtros.add(pa_conocimientos);
 
 		JLabel lbl_residencia = new JLabel("Lugar de residencia:");

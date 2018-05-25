@@ -316,7 +316,7 @@ public abstract class UtilidadesBD {
 		boolean _primeraCondicion = true;
 		String _sentencia = "SELECT " + Tablas.C_OFERTA_CODIGO + " FROM " + Tablas.C_OFERTA_TABLA;
 
-		if (p_titulo != null || !p_titulo.equals("")) {
+		if (null != p_titulo && !p_titulo.isEmpty()) {
 			if (_primeraCondicion) {
 				_primeraCondicion = false;
 				_sentencia += " WHERE ";
@@ -325,7 +325,7 @@ public abstract class UtilidadesBD {
 			}
 			_sentencia += Tablas.C_OFERTA_TITULO + " LIKE '%" + p_titulo + "%'";
 		}
-		if (p_lugar != null || !p_lugar.equals("")) {
+		if (p_lugar != null && !p_lugar.isEmpty()) {
 			if (_primeraCondicion) {
 				_primeraCondicion = false;
 				_sentencia += " WHERE ";
@@ -334,7 +334,7 @@ public abstract class UtilidadesBD {
 			}
 			_sentencia += Tablas.C_OFERTA_LUGAR + " LIKE '%" + p_lugar + "%'";
 		}
-		if (p_salarioMax != null || !p_salarioMax.equals("")) {
+		if (p_salarioMax != null && !p_salarioMax.isEmpty()) {
 			if (_primeraCondicion) {
 				_primeraCondicion = false;
 				_sentencia += " WHERE ";
@@ -343,7 +343,7 @@ public abstract class UtilidadesBD {
 			}
 			_sentencia += Tablas.C_OFERTA_SUELDO_MAX + " >= " + p_salarioMax;
 		}
-		if (p_salarioMin != null || !p_salarioMin.equals("")) {
+		if (p_salarioMin != null && !p_salarioMin.isEmpty()) {
 			if (_primeraCondicion) {
 				_primeraCondicion = false;
 				_sentencia += " WHERE ";
@@ -352,7 +352,7 @@ public abstract class UtilidadesBD {
 			}
 			_sentencia += Tablas.C_OFERTA_SUELDO_MIN + " >= " + p_salarioMin;
 		}
-		if (p_experiencia != null || !p_experiencia.equals("")) {
+		if (p_experiencia != null && p_experiencia.isEmpty()) {
 			if (_primeraCondicion) {
 				_primeraCondicion = false;
 				_sentencia += " WHERE ";
@@ -361,7 +361,7 @@ public abstract class UtilidadesBD {
 			}
 			_sentencia += Tablas.C_OFERTA_EXPERIENCIA + " >= " + p_experiencia;
 		}
-		if (p_contrato != null || !p_contrato.equals("")) {
+		if (p_contrato != null && !p_contrato.isEmpty()) {
 			if (_primeraCondicion) {
 				_primeraCondicion = false;
 				_sentencia += " WHERE ";
@@ -370,7 +370,7 @@ public abstract class UtilidadesBD {
 			}
 			_sentencia += Tablas.C_OFERTA_TIPO_CONTRATO + " = " + p_contrato; // TODO Controlarlo con la enumeracion
 		}
-		if (p_empresa != null || !p_empresa.equals("")) {
+		if (p_empresa != null && !p_empresa.isEmpty()) {
 			if (_primeraCondicion) {
 				_primeraCondicion = false;
 				_sentencia += " WHERE ";
@@ -380,7 +380,7 @@ public abstract class UtilidadesBD {
 			_sentencia += Tablas.C_OFERTA_EMPRESA + " LIKE '%" + p_empresa + "%'"; // TODO Pasar de Nombre de empresa a
 																					// numid con subselect
 		}
-		if (p_conocimientos != null || p_conocimientos.size() > 0) {
+		if (p_conocimientos != null && p_conocimientos.size() > 0) {
 			if (_primeraCondicion) {
 				_primeraCondicion = false;
 				_sentencia += " WHERE ";
@@ -392,7 +392,6 @@ public abstract class UtilidadesBD {
 																								// posibles
 		}
 		_sentencia += ";";
-
 		// Busca todas las ofertas que concuerden con los filtros, las combierte en
 		// Objetos y las mete en el array
 		ResultSet _rs = Conexion.consultar(_sentencia);
