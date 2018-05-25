@@ -2,38 +2,57 @@ package ethazi.intefaz.paneles;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import ethazi.aplicacion.Aplicacion;
+import ethazi.aplicacion.Empresa;
+import ethazi.intefaz.emergentes.EmergenteCambios;
+import ethazi.intefaz.emergentes.TieneEmergente;
+import ethazi.intefaz.frame.VentanaIdentificarse;
+import ethazi.intefaz.frame.VentanaPrincipal;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 /**
- * The panel RegistroEmpresa will show the data that the user will have to
- * fill, so he can register as a Empresa.
+ * The panel RegistroEmpresa will show the data that the user will have to fill,
+ * so he can register as a Empresa.
+ * 
  * @author Xabi
  *
  */
 
-public class PanelRegistroEmpresa extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
+public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTextField textFieldNick;
+	private JTextField textFieldPass;
+	private JTextField textFieldNombre;
+	private JTextField textFieldCif;
+	private JTextField textFieldDir;
+	private JTextField textFieldEmail;
+	private JTextField textFieldTel;
+	private JTextField textFieldContact;
+	private JPanel padre;
+	private JTextArea textAreaDesc;
 
 	public PanelRegistroEmpresa() {
+		padre = this;
 		setLayout(null);
 
 		JLabel lblNombreDeUsuario = new JLabel("Nick:");
-		lblNombreDeUsuario.setBounds(10, 70, 111, 14);
+		lblNombreDeUsuario.setBounds(10, 70, 46, 14);
 		add(lblNombreDeUsuario);
 
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
@@ -49,8 +68,8 @@ public class PanelRegistroEmpresa extends JPanel {
 		lblNewLabel.setBounds(133, 11, 278, 24);
 		add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("Nombre completo de la empresa:");
-		lblNewLabel_1.setBounds(10, 95, 165, 14);
+		JLabel lblNewLabel_1 = new JLabel("Nombre de la empresa:");
+		lblNewLabel_1.setBounds(10, 95, 136, 14);
 		add(lblNewLabel_1);
 
 		JLabel lblNewLabel_2 = new JLabel("CIF:");
@@ -58,74 +77,113 @@ public class PanelRegistroEmpresa extends JPanel {
 		add(lblNewLabel_2);
 
 		JLabel lblNewLabel_3 = new JLabel("Direcci\u00F3n:");
-		lblNewLabel_3.setBounds(10, 120, 58, 14);
+		lblNewLabel_3.setBounds(10, 120, 63, 14);
 		add(lblNewLabel_3);
 
-		textField = new JTextField();
-		textField.setBounds(35, 68, 165, 17);
-		add(textField);
-		textField.setColumns(10);
+		textFieldNick = new JTextField();
+		textFieldNick.setBounds(44, 68, 165, 17);
+		add(textFieldNick);
+		textFieldNick.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(275, 68, 265, 17);
-		add(textField_1);
+		textFieldPass = new JTextField();
+		textFieldPass.setColumns(10);
+		textFieldPass.setBounds(294, 68, 265, 17);
+		add(textFieldPass);
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(169, 95, 199, 17);
-		add(textField_2);
+		textFieldNombre = new JTextField();
+		textFieldNombre.setColumns(10);
+		textFieldNombre.setBounds(156, 95, 199, 17);
+		add(textFieldNombre);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(404, 93, 136, 17);
-		add(textField_3);
+		textFieldCif = new JTextField();
+		textFieldCif.setColumns(10);
+		textFieldCif.setBounds(404, 93, 136, 17);
+		add(textFieldCif);
 
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(60, 120, 480, 17);
-		add(textField_4);
+		textFieldDir = new JTextField();
+		textFieldDir.setColumns(10);
+		textFieldDir.setBounds(83, 120, 457, 17);
+		add(textFieldDir);
 
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(108, 143, 230, 17);
-		add(textField_5);
+		textFieldEmail = new JTextField();
+		textFieldEmail.setColumns(10);
+		textFieldEmail.setBounds(125, 143, 230, 17);
+		add(textFieldEmail);
 
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(404, 143, 136, 17);
-		add(textField_6);
+		textFieldTel = new JTextField();
+		textFieldTel.setColumns(10);
+		textFieldTel.setBounds(404, 143, 136, 17);
+		add(textFieldTel);
 
 		JLabel lblNewLabel_6 = new JLabel("Persona contacto:");
-		lblNewLabel_6.setBounds(10, 170, 94, 14);
+		lblNewLabel_6.setBounds(10, 170, 111, 14);
 		add(lblNewLabel_6);
 
-		textField_7 = new JTextField();
-		textField_7.setBounds(98, 170, 191, 20);
-		add(textField_7);
-		textField_7.setColumns(10);
+		textFieldContact = new JTextField();
+		textFieldContact.setBounds(118, 167, 191, 20);
+		add(textFieldContact);
+		textFieldContact.setColumns(10);
 
 		JLabel lblDescripcion = new JLabel("Descripcion de la empresa:");
-		lblDescripcion.setBounds(10, 193, 148, 14);
+		lblDescripcion.setBounds(10, 193, 190, 14);
 		add(lblDescripcion);
 
-		textField_8 = new JTextField();
-		textField_8.setBounds(10, 218, 530, 121);
-		add(textField_8);
-		textField_8.setColumns(10);
-
 		JButton btnRegistarEmpresa = new JButton("Registrar empresa");
-		btnRegistarEmpresa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnRegistarEmpresa.setToolTipText("Registrar los Datos");
+		btnRegistarEmpresa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EmergenteCambios.createWindow("¿Desea registrar estos datos de la Empresa?", (TieneEmergente) padre);
 			}
 		});
 		btnRegistarEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnRegistarEmpresa.setBounds(386, 350, 154, 23);
 		add(btnRegistarEmpresa);
 
-		JLabel lblTelefono = new JLabel("Telefono:");
-		lblTelefono.setBounds(348, 145, 46, 14);
+		JLabel lblTelefono = new JLabel("Tel:");
+		lblTelefono.setBounds(365, 145, 46, 14);
 		add(lblTelefono);
+
+		JButton buttonRetroceder = new JButton("<--");
+		buttonRetroceder.setToolTipText("Volver a la Ventana de Identificaci\u00F3n");
+		buttonRetroceder.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				textFieldCif.setText("");
+				textFieldContact.setText("");
+				textFieldDir.setText("");
+				textFieldEmail.setText("");
+				textFieldNick.setText("");
+				textFieldNombre.setText("");
+				textFieldPass.setText("");
+				textFieldTel.setText("");
+				textAreaDesc.setText("");
+				VentanaIdentificarse.getPa_registrarEmpresa().setVisible(false);
+				VentanaIdentificarse.getPa_identificarse().setVisible(true);
+				VentanaIdentificarse.cambiarTam(new Dimension(300, 300));
+			}
+		});
+		buttonRetroceder.setBounds(10, 350, 89, 23);
+		add(buttonRetroceder);
+
+		textAreaDesc = new JTextArea();
+		textAreaDesc.setBounds(10, 218, 530, 120);
+		add(textAreaDesc);
+
+	}
+
+	@Override
+	public void funcionalidad(boolean aceptado) {
+		if (aceptado) {
+			Empresa aux = new Empresa(textFieldNick.getText(), textFieldPass.getText(), textFieldNombre.getText(),
+					textFieldCif.getText(), textFieldDir.getText(), textFieldEmail.getText(), textFieldDir.getText(),
+					textFieldContact.getText(), textAreaDesc.getText());
+			// TODO guardar en la base de datos la empresa
+			//TODO mandar correo y validar
+			VentanaIdentificarse.cerrar();
+			VentanaPrincipal.ejecutar();
+			Aplicacion.setUsuario(aux);
+		}
 
 	}
 }

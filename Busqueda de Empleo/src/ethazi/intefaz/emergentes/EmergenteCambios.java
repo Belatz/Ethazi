@@ -40,13 +40,13 @@ public class EmergenteCambios extends JDialog{
 		labelTexto.setHorizontalAlignment(SwingConstants.CENTER);
 		labelTexto.setText(texto);
 		labelTexto.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelTexto.setBounds(69, 44, 292, 77);
+		labelTexto.setBounds(10, 44, 414, 77);
 		contentPanel.add(labelTexto);
 	}
 	
 	public static void createWindow(String texto, TieneEmergente p_padre)
 	{	
-		VentanaPrincipal.desHabVentana(false);
+		VentanaPrincipal.desHabVentana(false, ((JPanel)p_padre).getParent());
 		EmergenteCambios ventanaEmergente=new EmergenteCambios(texto);
 		ventanaEmergente.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		ventanaEmergente.setVisible(true);
@@ -56,7 +56,7 @@ public class EmergenteCambios extends JDialog{
 				ventanaEmergente.setVisible(false);
 				ventanaEmergente.removeAll();
 				p_padre.funcionalidad(true);
-				VentanaPrincipal.desHabVentana(true);
+				VentanaPrincipal.desHabVentana(true, ((JPanel)p_padre).getParent());
 			}
 		});
 		ventanaEmergente.getBtnCancelar().addMouseListener(new MouseAdapter() {
@@ -65,13 +65,13 @@ public class EmergenteCambios extends JDialog{
 				ventanaEmergente.setVisible(false);
 				ventanaEmergente.removeAll();
 				p_padre.funcionalidad(false);
-				VentanaPrincipal.desHabVentana(true);
+				VentanaPrincipal.desHabVentana(true, ((JPanel)p_padre).getParent());
 			}
 		});
 		ventanaEmergente.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				VentanaPrincipal.desHabVentana(true);
+				VentanaPrincipal.desHabVentana(true, ((JPanel)p_padre).getParent());
 			}
 		});
 	}
