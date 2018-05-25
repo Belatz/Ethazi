@@ -68,7 +68,7 @@ public class Conexion {
 	 */
 	public static int actualizar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
-		return _comando.executeUpdate(sql.toUpperCase());
+		return _comando.executeUpdate(sql);
 	}
 
 	/**
@@ -82,7 +82,8 @@ public class Conexion {
 	 */
 	public static ResultSet consultar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
-		return _comando.executeQuery(sql.toUpperCase());
+		System.out.println("Realiar consulta: "+sql+" ...");
+		return _comando.executeQuery(sql);
 	}
 
 }

@@ -250,7 +250,7 @@ public abstract class UtilidadesBD {
 		ArrayList<Oferta> _ofertas = new ArrayList<>();
 
 		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE "
-				+ Tablas.C_OFERTA_EMPRESA + "=" + p_empresaNumid + ";");
+				+ Tablas.C_OFERTA_EMPRESA + "='" + p_empresaNumid + "';");
 		while (_rs.next()) {
 			_ofertas.add(toOferta(_rs.getString(Tablas.C_OFERTA_CODIGO)));
 		}
