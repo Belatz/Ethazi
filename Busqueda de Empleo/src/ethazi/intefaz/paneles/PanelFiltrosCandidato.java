@@ -3,6 +3,7 @@ package ethazi.intefaz.paneles;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -60,13 +61,15 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		lbl_conocimientos.setBounds(7, 156, 211, 14);
 		pa_filtros.add(lbl_conocimientos);
 
-		// Ejemplo
-		ArrayList<String> conocimientos = new ArrayList<String>();
-		for (int i = 0; i < 10; i++)
-			conocimientos.add("Ejemplo " + i);
+		ArrayList<String> conocimientos = new ArrayList<>();
+		try {
+			conocimientos = UtilidadesBD.descargarConocimientos();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 
 		PanelListaDoble pa_conocimientos = new PanelListaDoble(conocimientos, null);
-		pa_conocimientos.setLocation(7, 172);
+		pa_conocimientos.setLocation(9, 172);
 		pa_filtros.add(pa_conocimientos);
 
 		JLabel lbl_residencia = new JLabel("Lugar de residencia:");

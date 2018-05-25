@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import ethazi.datos.Conexion;
 import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.frame.VentanaIdentificarse;
+import ethazi.pruebas.PruebasBD;
 import ethazi.pruebas.UsuariosDummy;
 
 /**
@@ -20,10 +21,9 @@ public class Aplicacion {
 	private static Conexion miConexion;
 
 	public static void main(String[] args) {
-		System.out.println("ola");
 		try {
 			miConexion = new Conexion();
-			UsuariosDummy.crear();
+			PruebasBD.insertar();
 			Usuario.setConocimientosTotales(UtilidadesBD.descargarConocimientos());
 
 			VentanaIdentificarse.ejecutar();
