@@ -129,7 +129,7 @@ public class PanelFiltrosOferta extends JScrollPane {
 				// TODO tratar la lista de conocimientos en un arraylist
 				UtilidadesBD.filtrarOfertas(txField_titulo.getText(), combo_lugar.getSelectedItem(),
 						txField_sueldoMax.getText(), txField_sueldoMin.getText(), txFiedl_experiencia.getText(),
-						combo_contrato.getSelectedItem(), txField_empresa.getText(), p_conocimientos);
+						combo_contrato.getSelectedItem(), txField_empresa.getText(), pa_conocimientos);
 			}
 		});
 		btn_aplicar.setBounds(66, 11, 89, 23);
