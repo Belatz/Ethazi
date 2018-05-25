@@ -11,6 +11,9 @@ import java.util.ArrayList;
 
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
+
+import ethazi.aplicacion.Contrato;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -147,7 +150,7 @@ public class PanelEditarOferta extends JPanel {
 		lbl_contrato.setBounds(411, 86, 93, 14);
 		add(lbl_contrato);
 
-		JComboBox<String> combo_contrato = new JComboBox<>(); //TODO cambiarlo por la enum
+		JComboBox<Contrato> combo_contrato = new JComboBox<>(); 
 		combo_contrato.setBounds(506, 83, 159, 20);
 		add(combo_contrato);
 

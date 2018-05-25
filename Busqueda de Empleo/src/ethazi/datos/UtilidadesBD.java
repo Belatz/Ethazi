@@ -10,6 +10,7 @@ import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Solicitud;
 import ethazi.aplicacion.Usuario;
+import ethazi.excepciones.NoQuedanFilas;
 import ethazi.excepciones.ResultSetVacio;
 import ethazi.intefaz.Elemento_Listable;
 
@@ -29,10 +30,15 @@ public abstract class UtilidadesBD {
 	 *            ResultSet with user's information
 	 * @return Returns a Usuario with ResultSet's data
 	 * @throws SQLException
+	 * @throws NoQuedanFilas
 	 */
-	public static Usuario toUsuario(ResultSet p_rs) throws SQLException, ResultSetVacio {
+	public static Usuario toUsuario(ResultSet p_rs) throws SQLException, ResultSetVacio, NoQuedanFilas {
 		if (!p_rs.next()) {
-			throw new ResultSetVacio();
+			if (p_rs.isAfterLast()) {
+				throw new NoQuedanFilas();
+			} else {
+				throw new ResultSetVacio();
+			}
 		}
 		Usuario _usr = null;
 		String _nick = p_rs.getString(Tablas.C_USUARIO_NICK);
@@ -61,25 +67,15 @@ public abstract class UtilidadesBD {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Returns and object Usuario through a nick by parameter
-=======
 	 * Devuelve un objeto Usuario a partir de un nick o un numid pasado por
 	 * parametro
->>>>>>> branch 'master' of https://github.com/Belatz/Ethazi.git
 	 * 
-<<<<<<< HEAD
-	 * @param p_nick
-	 *            String with user's nick
-	 * @return Returns a Usuario with last nick's data
-=======
 	 * @param p_identificador
 	 *            String con el nick o el numid del usuario
 	 * @param p_esNick
 	 *            boolean que determina el tipo de texto que le pasamos, true si es
 	 *            un nick, false si es un numid
-	 * @return Devuelve un Usuario con los datos sacados del nick pasado
->>>>>>> branch 'master' of https://github.com/Belatz/Ethazi.git
+	 * @return Returns a Usuario with the data obtained from the identificator
 	 * @throws SQLException
 	 */
 	public static Usuario toUsuario(String p_identificador, boolean p_esNick) throws SQLException {
@@ -112,6 +108,7 @@ public abstract class UtilidadesBD {
 			usr = toUsuario(_rs);
 		} catch (ResultSetVacio e) {
 			System.out.println("No se han encontrado usuarios con esos datos"); // TODO manejar error por interfaz
+		} catch (NoQuedanFilas e) {
 		}
 
 		return usr;
@@ -124,10 +121,15 @@ public abstract class UtilidadesBD {
 	 *            ResultSet with request's information
 	 * @return Returns a Solicitud with ResultSet's data
 	 * @throws SQLException
+	 * @throws NoQuedanFilas
 	 */
-	public static Solicitud toSolicitud(ResultSet p_rs) throws SQLException, ResultSetVacio {
+	public static Solicitud toSolicitud(ResultSet p_rs) throws SQLException, ResultSetVacio, NoQuedanFilas {
 		if (!p_rs.next()) {
-			throw new ResultSetVacio();
+			if (p_rs.isAfterLast()) {
+				throw new NoQuedanFilas();
+			} else {
+				throw new ResultSetVacio();
+			}
 		}
 
 		Solicitud _soli;
@@ -139,9 +141,13 @@ public abstract class UtilidadesBD {
 		return _soli;
 	}
 
-	public static Oferta toOferta(ResultSet p_rs) throws SQLException, ResultSetVacio {
+	public static Oferta toOferta(ResultSet p_rs) throws SQLException, ResultSetVacio, NoQuedanFilas {
 		if (!p_rs.next()) {
-			throw new ResultSetVacio();
+			if (p_rs.isAfterLast()) {
+				throw new NoQuedanFilas();
+			} else {
+				throw new ResultSetVacio();
+			}
 		}
 
 		Oferta _ofer;
@@ -166,6 +172,7 @@ public abstract class UtilidadesBD {
 			ofer = toOferta(_rs);
 		} catch (ResultSetVacio e) {
 			System.out.println("No se han encontrado ofertas con ese codigo"); // TODO tratar error
+		} catch (NoQuedanFilas e) {
 		}
 		return ofer;
 	}
@@ -188,6 +195,7 @@ public abstract class UtilidadesBD {
 			usr = (Candidato) toUsuario(_rs);
 		} catch (ResultSetVacio e) {
 			System.out.println("No se han encontrado usuarios con esos datos"); // TODO tratar error
+		} catch (NoQuedanFilas e) {
 		}
 
 		return usr;
@@ -195,7 +203,7 @@ public abstract class UtilidadesBD {
 
 	/**
 	 * Searches an offer in the data base through its code
-	 *  
+	 * 
 	 * @param p_cod
 	 *            Offer's code necessary for the search
 	 * @return Returns the Offer with the received code
@@ -219,28 +227,34 @@ public abstract class UtilidadesBD {
 			_oferta = new Oferta(_rsOferta.getInt(Tablas.C_OFERTA_CODIGO), _rsOferta.getString(Tablas.C_OFERTA_TITULO),
 					_rsOferta.getString(Tablas.C_OFERTA_DESCRIPCION), _rsOferta.getString(Tablas.C_OFERTA_LUGAR),
 					_rsOferta.getInt(Tablas.C_OFERTA_SUELDO_MAX), _rsOferta.getInt(Tablas.C_OFERTA_SUELDO_MIN),
-					_rsOferta.getInt(Tablas.C_OFERTA_EXPERIENCIA), _rsOferta.getString(Tablas.C_OFERTA_ASPECTOS_VALORAR),
+					_rsOferta.getInt(Tablas.C_OFERTA_EXPERIENCIA),
+					_rsOferta.getString(Tablas.C_OFERTA_ASPECTOS_VALORAR),
 					_rsOferta.getString(Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES),
 					_rsOferta.getBoolean(Tablas.C_OFERTA_VISIBLE), _rsOferta.getByte(Tablas.C_OFERTA_TIPO_CONTRATO),
 					(Empresa) toUsuario(_rsEmpresa), _conocimientos);
 		} catch (ResultSetVacio e) {
 			System.out.println("No se han encontrado usuarios con esos datos");
+		} catch (NoQuedanFilas e) {
 		}
 		return _oferta;
 	}
 
 	public static ArrayList<Elemento_Listable> buscarOfertas(String titulo) throws SQLException {
+		boolean fin = false;
 		ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
 
 		// Decargar ofertas
 		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE "
 				+ Tablas.C_OFERTA_TITULO + " like '%" + titulo + "%';");
 
-		while (_rsOferta.next()) {
+		while (!fin) {
 			try {
 				ofertas.add(toOferta(_rsOferta));
 			} catch (ResultSetVacio e) {
 				System.out.println("No se han encontrado ofertas con esos datos");
+				fin = true;
+			} catch (NoQuedanFilas e) {
+				fin = true;
 			}
 		}
 		return ofertas;
@@ -258,10 +272,54 @@ public abstract class UtilidadesBD {
 		return _ofertas;
 	}
 
+	public static ArrayList<Oferta> buscarOfertasConSolicitud(String p_empresaNumid) throws SQLException {
+		boolean fin = false;
+		ArrayList<Oferta> _ofertas = new ArrayList<>();
+
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + ", " + Tablas.C_SOLICITUD_TABLA
+				+ " WHERE " + Tablas.C_OFERTA_CODIGO + "=" + Tablas.C_SOLICITUD_OFERTA + " AND "
+				+ Tablas.C_OFERTA_EMPRESA + "='" + p_empresaNumid + "' ;");
+		while (!fin) {
+			try {
+				_ofertas.add(toOferta(_rs));
+			} catch (ResultSetVacio e) {
+				System.out.println("No se han encontrado ofertas con solicitudes");
+				fin = true;
+			} catch (NoQuedanFilas e) {
+				fin = true;
+			}
+		}
+
+		return _ofertas;
+	}
+
+	public static ArrayList<Empresa> buscarEmpresas(String p_nombre) throws SQLException {
+		boolean fin = false;
+		ArrayList<Empresa> _empresas = new ArrayList<>();
+
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_EMPRESA_TABLA + ", " + Tablas.C_USUARIO_TABLA
+				+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_EMPRESA_NUMID + " AND " + Tablas.C_USUARIO_NOMBRE
+				+ " LIKE '%" + p_nombre + "%';");
+
+		while (!fin) {
+			try {
+				_empresas.add((Empresa) toUsuario(_rs));
+			} catch (ResultSetVacio e) {
+				System.out.println("No se ha encontrado ninguna empresa");
+				fin = true;
+			} catch (NoQuedanFilas e) {
+				fin = true;
+			}
+		}
+
+		return _empresas;
+	}
+
 	/**
 	 * This method downloads in an ArrayList the list of available conocimientos
 	 * 
-	 * @return Returns an ArrayList of String with the names of the conocimientos stored in the data base
+	 * @return Returns an ArrayList of String with the names of the conocimientos
+	 *         stored in the data base
 	 * @throws SQLException
 	 */
 	public static ArrayList<String> descargarConocimientos() throws SQLException {
@@ -281,7 +339,8 @@ public abstract class UtilidadesBD {
 	 * 
 	 * @param p_numid
 	 *            A Candidato's num id
-	 * @return Returns an ArrayList of String with the names of the conocimientos of the Candidato
+	 * @return Returns an ArrayList of String with the names of the conocimientos of
+	 *         the Candidato
 	 * @throws SQLException
 	 */
 	public static ArrayList<String> descargarConocimientosCandidato(String p_numid) throws SQLException {
@@ -313,84 +372,68 @@ public abstract class UtilidadesBD {
 			ArrayList<String> p_conocimientos) throws SQLException {
 
 		ArrayList<Oferta> _ofertas = new ArrayList<>();
-		boolean _primeraCondicion = true;
-		String _sentencia = "SELECT " + Tablas.C_OFERTA_CODIGO + " FROM " + Tablas.C_OFERTA_TABLA;
+		String _sentencia = "SELECT " + Tablas.C_OFERTA_CODIGO + " FROM " + Tablas.C_OFERTA_TABLA + ", "
+				+ Tablas.C_OFER_CONO_TABLA + " WHERE " + Tablas.C_OFERTA_CODIGO + "=" + Tablas.C_OFER_CONO_OFERTA;
 
 		if (null != p_titulo && !p_titulo.isEmpty()) {
-			if (_primeraCondicion) {
-				_primeraCondicion = false;
-				_sentencia += " WHERE ";
-			} else {
-				_sentencia += " AND ";
-			}
+			_sentencia += " AND ";
 			_sentencia += Tablas.C_OFERTA_TITULO + " LIKE '%" + p_titulo + "%'";
 		}
 		if (p_lugar != null && !p_lugar.isEmpty()) {
-			if (_primeraCondicion) {
-				_primeraCondicion = false;
-				_sentencia += " WHERE ";
-			} else {
-				_sentencia += " AND ";
-			}
+			_sentencia += " AND ";
 			_sentencia += Tablas.C_OFERTA_LUGAR + " LIKE '%" + p_lugar + "%'";
 		}
 		if (p_salarioMax != null && !p_salarioMax.isEmpty()) {
-			if (_primeraCondicion) {
-				_primeraCondicion = false;
-				_sentencia += " WHERE ";
-			} else {
-				_sentencia += " AND ";
-			}
+			_sentencia += " AND ";
 			_sentencia += Tablas.C_OFERTA_SUELDO_MAX + " >= " + p_salarioMax;
 		}
 		if (p_salarioMin != null && !p_salarioMin.isEmpty()) {
-			if (_primeraCondicion) {
-				_primeraCondicion = false;
-				_sentencia += " WHERE ";
-			} else {
-				_sentencia += " AND ";
-			}
+			_sentencia += " AND ";
 			_sentencia += Tablas.C_OFERTA_SUELDO_MIN + " >= " + p_salarioMin;
 		}
 		if (p_experiencia != null && p_experiencia.isEmpty()) {
-			if (_primeraCondicion) {
-				_primeraCondicion = false;
-				_sentencia += " WHERE ";
-			} else {
-				_sentencia += " AND ";
-			}
+			_sentencia += " AND ";
 			_sentencia += Tablas.C_OFERTA_EXPERIENCIA + " >= " + p_experiencia;
 		}
 		if (p_contrato != null && !p_contrato.isEmpty()) {
-			if (_primeraCondicion) {
-				_primeraCondicion = false;
-				_sentencia += " WHERE ";
-			} else {
-				_sentencia += " AND ";
-			}
-			_sentencia += Tablas.C_OFERTA_TIPO_CONTRATO + " = " + p_contrato; // TODO Controlarlo con la enumeracion
+			_sentencia += " AND ";
+			_sentencia += Tablas.C_OFERTA_TIPO_CONTRATO + " = '" + p_contrato + "'"; // TODO Controlarlo con la
+																						// enumeracion
 		}
 		if (p_empresa != null && !p_empresa.isEmpty()) {
-			if (_primeraCondicion) {
-				_primeraCondicion = false;
-				_sentencia += " WHERE ";
-			} else {
+			ArrayList<Empresa> _empresas = buscarEmpresas(p_empresa);
+			boolean _primeraEmpresa = true;
+
+			if (!_empresas.isEmpty()) { // Si hay ofertas con ese titulo
 				_sentencia += " AND ";
+				_sentencia += Tablas.C_OFERTA_EMPRESA + " IN (";
+				for (Empresa empresa : _empresas) {
+					if (!_primeraEmpresa) { // Si el primer elemento en IN( ) no pongas coma
+						_sentencia += ", ";
+					} else {
+						_primeraEmpresa = false;
+					}
+					_sentencia += "'" + empresa.getNumID() + "'";
+				}
+				_sentencia += ")";
 			}
-			_sentencia += Tablas.C_OFERTA_EMPRESA + " LIKE '%" + p_empresa + "%'"; // TODO Pasar de Nombre de empresa a
-																					// numid con subselect
 		}
 		if (p_conocimientos != null && p_conocimientos.size() > 0) {
-			if (_primeraCondicion) {
-				_primeraCondicion = false;
-				_sentencia += " WHERE ";
-			} else {
-				_sentencia += " AND ";
+			boolean _primerConocimiento = true;
+
+			_sentencia += " AND ";
+			_sentencia += Tablas.C_OFER_CONO_CONOCIMIENTO + " IN (";
+			for (String conocimiento : p_conocimientos) {
+				if (!_primerConocimiento) { // Si el primer elemento en IN( ) no pongas coma
+					_sentencia += ", ";
+				} else {
+					_primerConocimiento = false;
+				}
+				_sentencia += "'" + conocimiento + "'";
 			}
-			_sentencia += Tablas.C_OFER_CONO_CONOCIMIENTO + " IN '%" + p_conocimientos + "%'"; // TODO Controlar todos
-																								// los conocimientos
-																								// posibles
+			_sentencia += ")";
 		}
+
 		_sentencia += ";";
 		// Busca todas las ofertas que concuerden con los filtros, las combierte en
 		// Objetos y las mete en el array
@@ -404,8 +447,28 @@ public abstract class UtilidadesBD {
 
 	public static void filtrarCandidatos(String text, String text2, String text3, String text4, boolean selected,
 			boolean selected2, boolean selected3, ArrayList<String> conocimientos) {
-		// TODO Auto-generated method stub
-		
+		// TODO Filtrar candidatos
+
+	}
+
+	public static ArrayList<Solicitud> descargarSolicitudes(Candidato candidato) throws SQLException {
+		boolean fin = false;
+		ArrayList<Solicitud> _solicitudes = new ArrayList<>();
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_SOLICITUD_TABLA + " WHERE "
+				+ Tablas.C_SOLICITUD_CANDIDATO + "='" + candidato.getNumID() + "';");
+
+		while (!fin) {
+			try {
+				_solicitudes.add(toSolicitud(_rs));
+			} catch (ResultSetVacio e) {
+				System.out.println("No se han encontrado solicitudes");
+				fin = true;
+			} catch (NoQuedanFilas e) {
+				fin = true;
+			}
+		}
+
+		return _solicitudes;
 	}
 
 }

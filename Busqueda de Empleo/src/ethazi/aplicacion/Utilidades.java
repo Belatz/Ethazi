@@ -20,5 +20,20 @@ public abstract class Utilidades {
 		
 		return _elementos;
 	}
+	
+	/**
+	 * @author Belatz
+	 * @param p_solicitudes
+	 * @return
+	 */
+	public static ArrayList<Elemento_Listable> cambiarSolicitudAElemento(ArrayList<Solicitud> p_solicitudes) {
+		ArrayList<Elemento_Listable> _elementos = new ArrayList<>();
+		
+		for (Solicitud solitud : p_solicitudes) {
+			_elementos.add(solitud);
+		}
+		
+		return _elementos;
+	}
 
 }
