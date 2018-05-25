@@ -34,6 +34,7 @@ public class PanelIdentificarse extends JPanel {
 
 	/**
 	 * This panel is used by the user to identify as a Candidato or a Empresa.
+	 * 
 	 * @author Edu
 	 */
 	public PanelIdentificarse() {
