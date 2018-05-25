@@ -20,6 +20,8 @@ import ethazi.intefaz.emergentes.TieneEmergente;
 import javax.swing.UIManager;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelOferta extends JPanel implements TieneEmergente{
 

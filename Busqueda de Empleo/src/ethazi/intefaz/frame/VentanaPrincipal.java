@@ -1,6 +1,7 @@
 package ethazi.intefaz.frame;
 
 import java.awt.CardLayout;
+import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -37,12 +38,11 @@ public class VentanaPrincipal extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static JPanel contentPane;
+	private static JPanel pa_contenedor = new JPanel();
 	private static byte visMenu = 0;
 	private static VentanaPrincipal frame;
 	private static JPanel currentPanel;
-
-	private static JPanel contentPane;
-	private static JPanel pa_contenedor = new JPanel();
 
 	private static JPanel pa_buscarOfertas = null;
 	private static JPanel pa_ofertasAdecuadas = null;
@@ -326,7 +326,17 @@ public class VentanaPrincipal extends JFrame {
 		menu.setVisible(true);
 		menu.requestFocus();
 	}
-
+	public static void desHabVentana(boolean hab, Container pane)
+	{
+		for(int i=0; i<pane.getComponentCount();i++)
+		{
+			pane.getComponent(i).setEnabled(hab);
+			if(pane.getComponent(i) instanceof JPanel)
+			{
+				desHabVentana(hab, (JPanel) pane.getComponent(i));
+			}
+		}
+	}
 	/**
 	 * Quita la visibilidad a la ventana
 	 */
@@ -340,5 +350,4 @@ public class VentanaPrincipal extends JFrame {
 	public static void abrir() {
 		frame.setVisible(true);
 	}
-
 }
