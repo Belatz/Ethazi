@@ -77,7 +77,7 @@ public class PanelVerPerfil extends JPanel {
 		add(nombretextField);
 		nombretextField.setColumns(10);
 
-		JLabel milblNumId = new JLabel("CIF:");
+		JLabel milblNumId = new JLabel(user instanceof Empresa?"CIF:":"DNI:");
 		milblNumId.setBounds(10, 90, 26, 14);
 		add(milblNumId);
 
