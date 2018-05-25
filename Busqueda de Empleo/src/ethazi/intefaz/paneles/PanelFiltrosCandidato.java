@@ -26,6 +26,10 @@ import javax.swing.JCheckBox;
  */
 public class PanelFiltrosCandidato extends JScrollPane {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txField_residencia;
 	private JTextField txField_experiencia;
 	private JTextField txField_nick;
@@ -64,7 +68,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		for (int i = 0; i < 10; i++)
 			conocimientos.add("Ejemplo " + i);
 
-		JPanel pa_conocimientos = new PanelListaDoble(conocimientos, null);
+		PanelListaDoble pa_conocimientos = new PanelListaDoble(conocimientos, null);
 		pa_conocimientos.setLocation(7, 172);
 		pa_filtros.add(pa_conocimientos);
 
@@ -121,10 +125,9 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		btn_aplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO hacer algo con la lista de candidatos
-				// TODO tratar la lista de conocimientos en un arraylist
 				UtilidadesBD.filtrarCandidatos(txField_nombreApe.getText(), txField_nick.getText(),
 						txField_experiencia.getText(), txField_residencia.getText(), chBox_carne.isSelected(),
-						chBox_coche.isSelected(), chBox_viajes.isSelected(), p_conocimientos);
+						chBox_coche.isSelected(), chBox_viajes.isSelected(), pa_conocimientos.getConocimientos());
 			}
 		});
 		pa_filtros.add(btn_aplicar);

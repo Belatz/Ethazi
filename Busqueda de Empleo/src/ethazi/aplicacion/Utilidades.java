@@ -4,8 +4,13 @@ import java.util.ArrayList;
 
 import ethazi.intefaz.Elemento_Listable;
 
-public class Utilidades {
+public abstract class Utilidades {
 	
+	/**
+	 * @author Belatz
+	 * @param p_ofertas
+	 * @return
+	 */
 	public static ArrayList<Elemento_Listable> cambiarOfertaAElemento(ArrayList<Oferta> p_ofertas) {
 		ArrayList<Elemento_Listable> _elementos = new ArrayList<>();
 		
