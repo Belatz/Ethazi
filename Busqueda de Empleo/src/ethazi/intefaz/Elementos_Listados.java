@@ -67,6 +67,7 @@ public class Elementos_Listados extends JPanel {
 
 			arrayElementos_A_Listar.get(i).setBounds(10, coordenada, 500, 91);
 			add(arrayElementos_A_Listar.get(i));
+			
 		}
 	}
 

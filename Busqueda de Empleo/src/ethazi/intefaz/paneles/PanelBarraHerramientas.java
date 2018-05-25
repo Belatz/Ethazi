@@ -72,7 +72,7 @@ public class PanelBarraHerramientas extends JPanel {
 		
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaPrincipal.actualizarOfertas();
+				
 			
 				try {
 					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA);

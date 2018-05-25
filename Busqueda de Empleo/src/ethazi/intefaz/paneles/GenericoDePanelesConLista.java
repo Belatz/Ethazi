@@ -3,6 +3,7 @@ package ethazi.intefaz.paneles;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -18,16 +19,29 @@ import ethazi.intefaz.Elementos_Listados;
  */
 
 public class GenericoDePanelesConLista extends JPanel {
-	
+	public Elementos_Listados panel_QueTieneLaLista = null;
+	public JPanel _panelBotonAtrasYAlante = null;
+	public JScrollPane pa_listado;
+	public JLabel sinResultados;
 	private static final long serialVersionUID = 1L;
 
 	public GenericoDePanelesConLista() {
-		
+
 	}
+
 	public GenericoDePanelesConLista(ArrayList<Elemento_Listable> listaDeElementosListables, byte tipo) {
-		Elementos_Listados panel_QueTieneLaLista = null;
-		JPanel _panelBotonAtrasYAlante = null;
-		JScrollPane pa_listado;
+
+		construir(listaDeElementosListables, tipo);
+	}
+
+	public void actualizar(ArrayList<Elemento_Listable> listaDeElementosListables, byte tipo) {
+		removeAll();
+		construir(listaDeElementosListables, tipo);
+		updateUI();
+	}
+
+	public void construir(ArrayList<Elemento_Listable> listaDeElementosListables, byte tipo) {
+
 		pa_listado = new JScrollPane();
 		setLayout(null);
 		pa_listado.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -47,6 +61,13 @@ public class GenericoDePanelesConLista extends JPanel {
 			break;
 
 		case Elemento_A_Listar.C_CONSULTAR_OFERTAS:
+			if (listaDeElementosListables.size() == 0) {
+				sinResultados = new JLabel("No se encontraron ofertas con esa busqueda");
+				sinResultados.setBounds(100,100,500,30);
+				add(sinResultados);
+				
+			}
+			else {
 			panel_QueTieneLaLista = new Elementos_Listados(listaDeElementosListables,
 					Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 
@@ -56,7 +77,7 @@ public class GenericoDePanelesConLista extends JPanel {
 
 			_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
 			_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
-
+			}
 			JScrollPane pa_filtrosOferta = new PanelFiltrosOferta();
 			pa_filtrosOferta.setBounds(512, 0, 247, 482);
 			add(pa_filtrosOferta);
@@ -122,7 +143,6 @@ public class GenericoDePanelesConLista extends JPanel {
 		pa_listado.setViewportView(panel_QueTieneLaLista);
 		add(pa_listado);
 		add(_panelBotonAtrasYAlante);
-
 	}
-	
+
 }
