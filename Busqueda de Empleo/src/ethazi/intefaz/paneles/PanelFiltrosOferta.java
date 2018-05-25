@@ -44,7 +44,7 @@ public class PanelFiltrosOferta extends JScrollPane {
 	}
 
 	/**
-	 * Generates a filter panel.
+	 * Creates a filter panel.
 	 * @return
 	 */
 	public JPanel crearPanelFiltros() {

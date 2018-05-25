@@ -23,7 +23,7 @@ import javax.swing.JComboBox;
 
 /**
  * 
- * @author Belatz y Nestor
+ * @author Belatz and Nestor
  *
  */
 
@@ -36,7 +36,7 @@ public class PanelEditarOferta extends JPanel {
 	private JTextField txField_lugar;
 
 	/**
-	 * Create the panel.
+	 * This panel is opened through PanelAbrirOferta to edit the offer's containing data
 	 */
 	public PanelEditarOferta() {
 		setPreferredSize(new Dimension(762, 488));

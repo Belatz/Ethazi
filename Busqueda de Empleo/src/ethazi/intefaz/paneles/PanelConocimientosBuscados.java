@@ -17,9 +17,7 @@ import javax.swing.JLabel;
 import java.awt.Color;
 
 public class PanelConocimientosBuscados extends JPanel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private JLabel lblqueEsLo;
