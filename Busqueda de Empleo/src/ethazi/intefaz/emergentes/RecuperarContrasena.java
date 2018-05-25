@@ -19,6 +19,10 @@ import javax.swing.JTextField;
 public class RecuperarContrasena extends JDialog {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * This is recover password window, it send a code to a email account that we
 	 * write.
 	 */

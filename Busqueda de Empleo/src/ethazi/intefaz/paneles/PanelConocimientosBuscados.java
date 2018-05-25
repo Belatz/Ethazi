@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import ethazi.aplicacion.Usuario;
 
 import javax.swing.JScrollPane;
-import javax.print.attribute.Size2DSyntax;
 import javax.swing.JLabel;
 import java.awt.Color;
 
@@ -53,7 +52,7 @@ public class PanelConocimientosBuscados extends JPanel {
 		add(lblqueEsLo);
 	}
 
-	public static Vector conocimientosMasBuscados(int cantidad) {
+	public static Vector<String> conocimientosMasBuscados(int cantidad) {
 		// TODO consulta a la base de datos con un arrayBidi de conocimientos y el
 		// número
 		ArrayList<String> conocimientosMasBuscados = new ArrayList<String>();

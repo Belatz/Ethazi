@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,7 +13,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ethazi.aplicacion.Aplicacion;
-import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;

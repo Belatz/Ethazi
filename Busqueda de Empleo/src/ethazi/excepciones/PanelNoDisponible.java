@@ -9,6 +9,11 @@ package ethazi.excepciones;
  */
 public class PanelNoDisponible extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public PanelNoDisponible() {
 		// TODO Auto-generated constructor stub
 	}

@@ -2,6 +2,11 @@ package ethazi.excepciones;
 
 public class ResultSetVacio extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ResultSetVacio() {
 		// TODO Auto-generated constructor stub
 	}

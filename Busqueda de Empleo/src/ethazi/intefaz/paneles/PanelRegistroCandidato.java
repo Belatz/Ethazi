@@ -8,16 +8,10 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.JSeparator;
-import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 /**
  * The panel RegistroCandidato will show the facts that the user will have to
@@ -27,6 +21,10 @@ import java.awt.event.ActionEvent;
  */
 
 public class PanelRegistroCandidato extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txFieldNombreUsuario;
 	private JTextField txFieldContrasena;
 	private JTextField txFieldNombre;

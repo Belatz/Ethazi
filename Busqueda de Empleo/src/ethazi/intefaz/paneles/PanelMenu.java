@@ -14,6 +14,11 @@ import java.awt.event.ActionEvent;
 public class PanelMenu extends JPanel {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * This panel is used in the BarraHerramientas, which is opened with the mouse, passing over the menu.
 	 * @autor JonOr
 	 */

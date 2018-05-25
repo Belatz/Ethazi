@@ -20,6 +20,10 @@ import java.awt.Color;
  */
 public class ValidarCodigo extends JDialog {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * This is validate code window, validate the code send to email.
 	 */
 

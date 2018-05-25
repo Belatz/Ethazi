@@ -1,7 +1,6 @@
 package ethazi.intefaz;
 
 import java.awt.Dimension;
-import java.awt.LayoutManager;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
