@@ -63,10 +63,12 @@ public class PanelFiltrosOferta extends JScrollPane {
 		lbl_conocimientos.setBounds(15, 121, 211, 14);
 		pa_filtros.add(lbl_conocimientos);
 
-		// Ejemplo
-		ArrayList<String> conocimientos = new ArrayList<String>();
-		for (int i = 0; i < 10; i++)
-			conocimientos.add("Ejemplo " + i);
+		ArrayList<String> conocimientos = new ArrayList<>();
+		try {
+			conocimientos = UtilidadesBD.descargarConocimientos();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 		PanelListaDoble pa_conocimientos = new PanelListaDoble(conocimientos, null);
 		pa_conocimientos.setLocation(9, 140);
 		pa_filtros.add(pa_conocimientos);
