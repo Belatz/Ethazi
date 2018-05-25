@@ -18,9 +18,6 @@ import javax.swing.ListSelectionModel;
  */
 public class PanelListaDoble extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JButton btn_anadir = new JButton();
 	private JButton btn_eliminar = new JButton();
@@ -38,7 +35,7 @@ public class PanelListaDoble extends JPanel {
 		setLayout(null);
 		setBounds(0, 0, 214, 177);
 		// Boton anadir
-		btn_anadir.setText("A\u00F1adir >>");
+		btn_anadir.setText("Anadir >>");
 		btn_anadir.setBounds(new Rectangle(0, 140, 98, 36));
 		btn_anadir.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {

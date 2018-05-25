@@ -31,9 +31,6 @@ public class PanelFiltrosOferta extends JScrollPane {
 	private JTextField txField_empresa;
 	private JTextField txField_titulo;
 
-	/**
-	 * Create the panel.
-	 */
 	public PanelFiltrosOferta() {
 		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		JPanel pa_filtros = crearPanelFiltros();

@@ -35,7 +35,7 @@ public class PanelIdentificarse extends JPanel {
 	private static JTextField txField_usuario;
 
 	/**
-	 * Create the panel.
+	 * This panel is used by the user to identify as a Candidato or a Empresa.
 	 */
 	public PanelIdentificarse() {
 		this.setLayout(null);
