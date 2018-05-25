@@ -12,7 +12,16 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextField;
 
+/**
+ * @author Eduardo
+ */
+
 public class RecuperarContrasena extends JDialog {
+
+	/**
+	 * This is recover password window, it send a code to a email account that we
+	 * write.
+	 */
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txField_correo;

@@ -15,7 +15,13 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 import java.awt.Color;
 
+/**
+ * @author Eduardo
+ */
 public class ValidarCodigo extends JDialog {
+	/**
+	 * This is validate code window, validate the code send to email.
+	 */
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txField_codigo;
