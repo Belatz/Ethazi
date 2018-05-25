@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import ethazi.datos.Conexion;
 import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.frame.VentanaIdentificarse;
-import ethazi.intefaz.frame.VentanaPrincipal;
+import ethazi.pruebas.UsuariosDummy;
 
 /**
  * @author Belatz Arce, Xabier Cabezuelo, Nestor Echebarria, Eduardo Garcia,
@@ -23,9 +23,10 @@ public class Aplicacion {
 		System.out.println("ola");
 		try {
 			miConexion = new Conexion();
+			UsuariosDummy.crear();
 			Usuario.setConocimientosTotales(UtilidadesBD.descargarConocimientos());
 
-			VentanaPrincipal.ejecutar();
+			VentanaIdentificarse.ejecutar();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

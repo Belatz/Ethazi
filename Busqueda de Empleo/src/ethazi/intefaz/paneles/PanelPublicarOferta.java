@@ -9,20 +9,21 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
 import ethazi.aplicacion.Usuario;
+import ethazi.intefaz.emergentes.EmergenteCambios;
+import ethazi.intefaz.emergentes.TieneEmergente;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class PanelPublicarOferta extends JPanel {
-	
+public class PanelPublicarOferta extends JPanel implements TieneEmergente{
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txField_titulo;
 	private JTextField txField_sueldoMin;
@@ -30,9 +31,9 @@ public class PanelPublicarOferta extends JPanel {
 	private JTextField txField_experiencia;
 	private JTextField txField_buscarCono;
 	private JTextField txField_lugar;
-
+	private final JPanel padre=this;
 	/**
-	 * This panel adds a new offer to the data base.
+	 * Create the panel.
 	 */
 	public PanelPublicarOferta() {
 		setPreferredSize(new Dimension(762,488));
@@ -152,8 +153,7 @@ public class PanelPublicarOferta extends JPanel {
 		btn_publicar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				EmergenteCambios preguntarSeguridad=new EmergenteCambios("¿Seguro desea guardar los datos presentados?");
-				preguntarSeguridad.setVisible(true);
+				EmergenteCambios.createWindow("¿Desea publicar esta oferta?",(TieneEmergente) padre);
 			}
 		});
 		btn_publicar.setBounds(627, 436, 125, 41);
@@ -178,12 +178,13 @@ public class PanelPublicarOferta extends JPanel {
 				pa_conocimientos.actualizarListas(Usuario.misConocimientosTotales, null);
 			}
 		});
-		btn_publicar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				EmergenteCambios guardarDatos=new EmergenteCambios("¿Deseas guardar esta oferta?");
-				guardarDatos.setVisible(true);
-			}
-		});
+	}
+	@Override
+	public void funcionalidad(boolean aceptado) {
+		if(aceptado)
+		{
+			//TODO guardar oferta
+		}
+		
 	}
 }

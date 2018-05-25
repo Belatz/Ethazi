@@ -8,10 +8,13 @@ import ethazi.intefaz.Elemento_Listable;
  * @author Jonor
  */
 public class Oferta implements Elemento_Listable {
+
 	/**
 	 * Shows all the contents of the offer
 	 */
 	/* jon:esta clase solo es de pruebas */
+
+	private int miCodigo;
 	private String miTitulo;
 	private String miDescripcion;
 	private String miLugar;
@@ -39,11 +42,12 @@ public class Oferta implements Elemento_Listable {
 	 * @param miContrato
 	 * @param miEmpresa
 	 * @param conocimientos
-	 */
-	public Oferta(String miTitulo, String miDescripcion, String miLugar, int miSalarioMax, int miSalarioMin,
-			int miExperiencia, String misAspectosAValorar, String misAspectosImprescindibles, boolean miVisibilidad,
+	 */	
+	public Oferta(int miCodigo, String miTitulo, String miDescripcion, String miLugar, int miSalarioMax, int miSalarioMin,
+		  int miExperiencia, String misAspectosAValorar, String misAspectosImprescindibles, boolean miVisibilidad,
 			byte miContrato, Empresa miEmpresa, ArrayList<String> conocimientos) {
 		super();
+		this.miCodigo = miCodigo;
 		this.miTitulo = miTitulo;
 		this.miDescripcion = miDescripcion;
 		this.miLugar = miLugar;
@@ -56,6 +60,14 @@ public class Oferta implements Elemento_Listable {
 		this.miContrato = miContrato;
 		this.miEmpresa = miEmpresa;
 		this.misConocimientos = conocimientos;
+	}
+
+	public int getCodigo() {
+		return miCodigo;
+	}
+
+	public void setCodigo(int miCodigo) {
+		this.miCodigo = miCodigo;
 	}
 
 	@Override

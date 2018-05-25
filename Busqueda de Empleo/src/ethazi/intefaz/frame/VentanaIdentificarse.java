@@ -18,7 +18,7 @@ public class VentanaIdentificarse extends JFrame {
 
 	private JPanel contentPane;
 
-	public static VentanaIdentificarse frame;
+	private static VentanaIdentificarse frame;
 
 	/**
 	 * Launch the application.
@@ -38,6 +38,9 @@ public class VentanaIdentificarse extends JFrame {
 	
 	public static void cerrar() {
 		frame.setVisible(false);
+	}
+	public static void abrir() {
+		frame.setVisible(true);
 	}
 
 	/**

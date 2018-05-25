@@ -4,11 +4,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 /**
  * 
  * @author Jonor
  *
  */
+
+import ethazi.datos.Tablas;
+
+
 public abstract class Usuario {
 	/**
 	 * Class gets and set user personal data 
@@ -223,7 +228,8 @@ public abstract class Usuario {
 	 */
 	public static boolean esCandidato(String p_nick) throws SQLException {
 		ResultSet _rs;
-		_rs = Aplicacion.getConexion().consultar("SELECT COUNT(*) FROM candidato WHERE nick='" + p_nick + "';");
+		_rs = Aplicacion.getConexion().consultar("SELECT * FROM "+Tablas.C_CANDIDATO_TABLA+", "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_USUARIO_NUMID+"="+Tablas.C_CANDIDATO_NUMID+" AND "+Tablas.C_USUARIO_NICK+"='" + p_nick + "';");
+		
 		return _rs.next();
 	}
 
