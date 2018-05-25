@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -14,6 +15,9 @@ import javax.swing.border.EmptyBorder;
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Oferta;
+import ethazi.aplicacion.Usuario;
+import ethazi.aplicacion.Utilidades;
+import ethazi.datos.Conexion;
 import ethazi.datos.Tablas;
 import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
@@ -154,23 +158,44 @@ public class VentanaPrincipal extends JFrame {
 		pa_barraHerramientas.setLocation(0, 0);
 		contentPane.add(pa_barraHerramientas);
 
-		//crearPaneles();
+		// Crear panel inicial
+		try {
+			crearPrimerPanel();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		// crearPaneles();
 	}
 
-	public static void crearPrimerPanel() {
+	public static void crearPrimerPanel() throws SQLException {
+		Usuario usr = Aplicacion.getUsuario();
 		if (Aplicacion.getUsuario() instanceof Candidato) {
-			// TODO buscar ofertas adecuadas
-			pa_ofertasAdecuadas = new GenericoDePanelesConLista(listaDeElementosListables, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
+			// Buscar ofertas adecuadas
+			Candidato _usr = (Candidato) usr;
+			ArrayList<Elemento_Listable> _ofertas = Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(null,
+					null, null, null, String.valueOf(_usr.getExperienciaProfesional()), null, null,
+					UtilidadesBD.descargarConocimientosCandidato(_usr.getNumID())));
+			
+			pa_ofertasAdecuadas = new GenericoDePanelesConLista(_ofertas, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 			pa_contenedor.add(pa_ofertasAdecuadas);
 		} else {
 			ArrayList<Oferta> _ofertas = UtilidadesBD.buscarOfertasEmpresa(Aplicacion.getUsuario().getNumID());
-			
+
 			if (_ofertas.isEmpty()) { // Si no tiene ofertas publicadas
 				pa_publicarOferta = new PanelPublicarOferta();
 				pa_contenedor.add(pa_publicarOferta);
 			} else {
-				// TODO buscar ofertas con solicitudes
-				pa_ofertasConSolici = new GenericoDePanelesConLista(listaDeElementosListables, Elemento_A_Listar.C_VER_OFERTAS_CON_SOLICITUD);
+				// Buscar ofertas con solicitudes
+				ArrayList<Elemento_Listable> _ofertasConSolicitud = new ArrayList<>();
+				ResultSet _rs = Conexion.consultar("SELECT "+Tablas.C_OFERTA_CODIGO+" FROM "+Tablas.C_OFERTA_TABLA+", "+Tablas.C_SOLICITUD_TABLA+" WHERE "+Tablas.C_OFERTA_CODIGO+"="+Tablas.C_SOLICITUD_OFERTA+";");
+				
+				while(_rs.next()) {
+					_ofertas.add(UtilidadesBD.toOferta(_rs.getString(Tablas.C_OFERTA_CODIGO)));
+				}
+				
+				pa_ofertasConSolici = new GenericoDePanelesConLista(_ofertasConSolicitud,
+						Elemento_A_Listar.C_VER_OFERTAS_CON_SOLICITUD);
 				pa_contenedor.add(pa_ofertasConSolici);
 			}
 		}
