@@ -27,13 +27,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class PanelIdentificarse extends JPanel {
-	
+
 	private static final long serialVersionUID = 1L;
 	private static JPasswordField pssField_contrasena;
 	private static JTextField txField_usuario;
 
 	/**
 	 * This panel is used by the user to identify as a Candidato or a Empresa.
+	 * @author Edu
 	 */
 	public PanelIdentificarse() {
 		this.setLayout(null);
@@ -112,21 +113,30 @@ public class PanelIdentificarse extends JPanel {
 		this.add(lbl_usuarioErroneo);
 	}
 
+	/**
+	 * This method validates the user to check if it's valid or not.
+	 * 
+	 * @return if the user in valid or not
+	 * @throws SQLException
+	 */
+
 	private static boolean validarUsuario() throws SQLException {
 		boolean _esValido;
 		String _nick = txField_usuario.getText();
 		String _pass = String.valueOf(pssField_contrasena.getPassword());
 		ResultSet _usuario;
-		ResultSet _rs = Conexion
-				.consultar("SELECT * FROM "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_USUARIO_NICK+"='" + _nick + "' AND "+Tablas.C_USUARIO_PASSWORD+"='" + _pass + "';");
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + " WHERE " + Tablas.C_USUARIO_NICK
+				+ "='" + _nick + "' AND " + Tablas.C_USUARIO_PASSWORD + "='" + _pass + "';");
 
 		if (_rs.next()) {
 			if (Usuario.esCandidato(_nick)) {
-				_usuario = Conexion.consultar(
-						"SELECT * FROM "+Tablas.C_CANDIDATO_TABLA+", "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_CANDIDATO_NUMID+"="+Tablas.C_USUARIO_NUMID+" AND "+Tablas.C_USUARIO_NICK+"='" + _nick + "';");
+				_usuario = Conexion.consultar("SELECT * FROM " + Tablas.C_CANDIDATO_TABLA + ", "
+						+ Tablas.C_USUARIO_TABLA + " WHERE " + Tablas.C_CANDIDATO_NUMID + "=" + Tablas.C_USUARIO_NUMID
+						+ " AND " + Tablas.C_USUARIO_NICK + "='" + _nick + "';");
 			} else {
-				_usuario = Conexion.consultar(
-						"SELECT * FROM "+Tablas.C_EMPRESA_TABLA+", "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_EMPRESA_NUMID+"="+Tablas.C_USUARIO_NUMID+" AND "+Tablas.C_USUARIO_NICK+"='" + _nick + "';");
+				_usuario = Conexion.consultar("SELECT * FROM " + Tablas.C_EMPRESA_TABLA + ", " + Tablas.C_USUARIO_TABLA
+						+ " WHERE " + Tablas.C_EMPRESA_NUMID + "=" + Tablas.C_USUARIO_NUMID + " AND "
+						+ Tablas.C_USUARIO_NICK + "='" + _nick + "';");
 			}
 			try {
 				Aplicacion.setUsuario(UtilidadesBD.toUsuario(_usuario));

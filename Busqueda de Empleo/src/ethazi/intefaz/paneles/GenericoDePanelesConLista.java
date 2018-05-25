@@ -12,13 +12,15 @@ import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.Elementos_Listados;
 
 /**
+ * This panel is used as a multi-panel that shows Candidato's, Oferta's and
+ * Solicitud's followed with a filter.
  * 
  * @author JonOr
  *
  */
 
 public class GenericoDePanelesConLista extends JPanel {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public GenericoDePanelesConLista(ArrayList<Elemento_Listable> listaDeElementosListables, byte tipo) {
@@ -121,5 +123,5 @@ public class GenericoDePanelesConLista extends JPanel {
 		add(_panelBotonAtrasYAlante);
 
 	}
-	
+
 }
