@@ -168,6 +168,10 @@ public class VentanaPrincipal extends JFrame {
 		// crearPaneles();
 	}
 
+	/**
+	 * @author belatz
+	 * @throws SQLException
+	 */
 	public static void crearPrimerPanel() throws SQLException {
 		Usuario usr = Aplicacion.getUsuario();
 		if (Aplicacion.getUsuario() instanceof Candidato) {

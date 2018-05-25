@@ -402,7 +402,11 @@ public abstract class UtilidadesBD {
 
 		return _ofertas;
 	}
-	// TODO crear filtrarCandidatos(String,String,String, String, boolean, boolean,
-	// boolean, ArrayList<String>)
+
+	public static void filtrarCandidatos(String text, String text2, String text3, String text4, boolean selected,
+			boolean selected2, boolean selected3, ArrayList<String> conocimientos) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
