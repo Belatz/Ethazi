@@ -28,7 +28,7 @@ public class VentanaIdentificarse extends JFrame {
 	private static JPanel pa_registrarEmpresa;
 	private static JPanel pa_registrarCandidato;
 
-	public static VentanaIdentificarse frame;
+	private static VentanaIdentificarse frame;
 
 	/**
 	 * Launch the application.
@@ -49,6 +49,9 @@ public class VentanaIdentificarse extends JFrame {
 	
 	public static void cerrar() {
 		frame.setVisible(false);
+	}
+	public static void abrir() {
+		frame.setVisible(true);
 	}
 
 	/**

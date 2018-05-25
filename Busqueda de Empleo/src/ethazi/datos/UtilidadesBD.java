@@ -10,6 +10,7 @@ import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Solicitud;
 import ethazi.aplicacion.Usuario;
+import ethazi.excepciones.ResultSetVacio;
 import ethazi.intefaz.Elemento_Listable;
 
 /**
@@ -22,16 +23,16 @@ import ethazi.intefaz.Elemento_Listable;
 public abstract class UtilidadesBD {
 
 	/**
-	 * Devuelve un objeto Usuario a partir de un ResultSet pasado por parametro
+	 * Returns and object Usuario through a ResultSet by parameter
 	 * 
 	 * @param p_rs
-	 *            ResultSet con la informacion del usuario
-	 * @return Devuelve un Usuario con los datos sacados del ResultSet
+	 *            ResultSet with user's information
+	 * @return Returns a Usuario with ResultSet's data
 	 * @throws SQLException
 	 */
-	public static Usuario toUsuario(ResultSet p_rs) throws SQLException {
+	public static Usuario toUsuario(ResultSet p_rs) throws SQLException, ResultSetVacio {
 		if (!p_rs.next()) {
-			throw new SQLException("ResultSet vacio");
+			throw new ResultSetVacio();
 		}
 		Usuario _usr = null;
 		String _nick = p_rs.getString(Tablas.C_USUARIO_NICK);
@@ -43,7 +44,8 @@ public abstract class UtilidadesBD {
 					p_rs.getString(Tablas.C_USUARIO_TELEFONO), p_rs.getString(Tablas.C_CANDIDATO_APELLIDOS),
 					p_rs.getDate(Tablas.C_CANDIDATO_FECHA_NAC).toString(), p_rs.getBoolean(Tablas.C_CANDIDATO_CARNET),
 					p_rs.getBoolean(Tablas.C_CANDIDATO_COCHE), p_rs.getBoolean(Tablas.C_CANDIDATO_VIAJES),
-					p_rs.getString(Tablas.C_CANDIDATO_ESTUDIOS), descargarConocimientos(_nick),
+					p_rs.getString(Tablas.C_CANDIDATO_ESTUDIOS),
+					descargarConocimientosCandidato(Tablas.C_CANDIDATO_NUMID),
 					p_rs.getString(Tablas.C_CANDIDATO_OTROS_CONOCIMIENTOS),
 					p_rs.getString(Tablas.C_CANDIDATO_VIDA_LABORAL),
 					p_rs.getInt(Tablas.C_CANDIDATO_EXPERIENCIA_LABORAL));
@@ -54,45 +56,80 @@ public abstract class UtilidadesBD {
 					p_rs.getString(Tablas.C_USUARIO_TELEFONO), p_rs.getString(Tablas.C_EMPRESA_CONTACTO),
 					p_rs.getString(Tablas.C_EMPRESA_DESCRIPCION));
 		}
-		
+
 		return _usr;
 	}
 
 	/**
-	 * Devuelve un objeto Usuario a partir de un nick pasado por parametro
+<<<<<<< HEAD
+	 * Returns and object Usuario through a nick by parameter
+=======
+	 * Devuelve un objeto Usuario a partir de un nick o un numid pasado por
+	 * parametro
+>>>>>>> branch 'master' of https://github.com/Belatz/Ethazi.git
 	 * 
+<<<<<<< HEAD
 	 * @param p_nick
-	 *            String con el nick del usuario
+	 *            String with user's nick
+	 * @return Returns a Usuario with last nick's data
+=======
+	 * @param p_identificador
+	 *            String con el nick o el numid del usuario
+	 * @param p_esNick
+	 *            boolean que determina el tipo de texto que le pasamos, true si es
+	 *            un nick, false si es un numid
 	 * @return Devuelve un Usuario con los datos sacados del nick pasado
+>>>>>>> branch 'master' of https://github.com/Belatz/Ethazi.git
 	 * @throws SQLException
 	 */
-	public static Usuario toUsuario(String p_nick) throws SQLException {
+	public static Usuario toUsuario(String p_identificador, boolean p_esNick) throws SQLException {
+		Usuario usr = null;
 		ResultSet _rs;
 
-		if (Usuario.esCandidato(p_nick)) {
-			_rs = Aplicacion.getConexion()
-					.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_CANDIDATO_TABLA + " WHERE "
-							+ Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND " + Tablas.C_USUARIO_NICK
-							+ "='" + p_nick + "';");
+		if (p_esNick) {
+			if (Usuario.esCandidato(p_identificador)) {
+				_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_CANDIDATO_TABLA
+						+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND "
+						+ Tablas.C_USUARIO_NICK + "='" + p_identificador + "';");
+			} else {
+				_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_EMPRESA_TABLA
+						+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_EMPRESA_NUMID + " AND "
+						+ Tablas.C_USUARIO_NICK + "='" + p_identificador + "';");
+			}
 		} else {
-			_rs = Aplicacion.getConexion()
-					.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_EMPRESA_TABLA + " WHERE "
-							+ Tablas.C_USUARIO_NUMID + "=" + Tablas.C_EMPRESA_NUMID + " AND " + Tablas.C_USUARIO_NICK
-							+ "='" + p_nick + "';");
+			if (Usuario.esCandidato(p_identificador)) {
+				_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_CANDIDATO_TABLA
+						+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND "
+						+ Tablas.C_USUARIO_NUMID + "='" + p_identificador + "';");
+			} else {
+				_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_EMPRESA_TABLA
+						+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_EMPRESA_NUMID + " AND "
+						+ Tablas.C_USUARIO_NUMID + "='" + p_identificador + "';");
+			}
 		}
 
-		return toUsuario(_rs);
+		try {
+			usr = toUsuario(_rs);
+		} catch (ResultSetVacio e) {
+			System.out.println("No se han encontrado usuarios con esos datos"); // TODO manejar error por interfaz
+		}
+
+		return usr;
 	}
 
 	/**
-	 * Devuelve un objeto Solicitud a partir de un ResultSet
+	 * Returns and object Solicitud through a ResultSet by parameter
 	 * 
 	 * @param p_rs
-	 *            ResultSet con la informacion de la solicitud
-	 * @return Devuelve una Solicitud con los datos almacenados en el ResultSets
+	 *            ResultSet with request's information
+	 * @return Returns a Solicitud with ResultSet's data
 	 * @throws SQLException
 	 */
-	public static Solicitud toSolicitud(ResultSet p_rs) throws SQLException {
+	public static Solicitud toSolicitud(ResultSet p_rs) throws SQLException, ResultSetVacio {
+		if (!p_rs.next()) {
+			throw new ResultSetVacio();
+		}
+
 		Solicitud _soli;
 
 		_soli = new Solicitud(buscarOferta(p_rs.getString(Tablas.C_SOLICITUD_OFERTA)),
@@ -102,84 +139,136 @@ public abstract class UtilidadesBD {
 		return _soli;
 	}
 
-	/**
-	 * Busca un candidato en la base de datos a partir de su numero de
-	 * identificacion
-	 * 
-	 * @param p_numid
-	 *            Numero de identificacion necesario para la busqueda
-	 * @return Devuelve el Candidato con el numero de id recibido
-	 * @throws SQLException
-	 */
-	public static Candidato buscarCandidato(String p_numid) throws SQLException {
-		ResultSet _rs = Aplicacion.getConexion()
-				.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_CANDIDATO_TABLA + " WHERE "
-						+ Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND " + Tablas.C_USUARIO_NUMID
-						+ "='" + p_numid + "';");
+	public static Oferta toOferta(ResultSet p_rs) throws SQLException, ResultSetVacio {
+		if (!p_rs.next()) {
+			throw new ResultSetVacio();
+		}
 
-		return (Candidato) toUsuario(_rs);
+		Oferta _ofer;
+
+		_ofer = new Oferta(p_rs.getInt(Tablas.C_OFERTA_CODIGO), p_rs.getString(Tablas.C_OFERTA_TITULO),
+				p_rs.getString(Tablas.C_OFERTA_DESCRIPCION), p_rs.getString(Tablas.C_OFERTA_LUGAR),
+				p_rs.getInt(Tablas.C_OFERTA_SUELDO_MAX), p_rs.getInt(Tablas.C_OFERTA_SUELDO_MIN),
+				p_rs.getInt(Tablas.C_OFERTA_EXPERIENCIA), p_rs.getString(Tablas.C_OFERTA_ASPECTOS_VALORAR),
+				p_rs.getString(Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES), p_rs.getBoolean(Tablas.C_OFERTA_VISIBLE),
+				p_rs.getByte(Tablas.C_OFERTA_TIPO_CONTRATO),
+				(Empresa) (toUsuario(p_rs.getString(Tablas.C_OFERTA_EMPRESA), false)),
+				descargarConocimientosOferta(Tablas.C_OFERTA_CODIGO));
+
+		return _ofer;
+	}
+
+	public static Oferta toOferta(String p_codOFerta) throws SQLException {
+		Oferta ofer = null;
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE " + Tablas.C_OFERTA_CODIGO
+				+ "=" + p_codOFerta + ";");
+		try {
+			ofer = toOferta(_rs);
+		} catch (ResultSetVacio e) {
+			System.out.println("No se han encontrado ofertas con ese codigo"); // TODO tratar error
+		}
+		return ofer;
 	}
 
 	/**
-	 * Busca una oferta en la base de datos a partir de su codigo
+	 * Searches a Candidato in the data base by his id number
 	 * 
+	 * @param p_numid
+	 *            Num id necessary for the search
+	 * @return Returns the Candidato with the received id number
+	 * @throws SQLException
+	 */
+	public static Candidato buscarCandidato(String p_numid) throws SQLException {
+		Candidato usr = null;
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_CANDIDATO_TABLA
+				+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND " + Tablas.C_USUARIO_NUMID
+				+ "='" + p_numid + "';");
+
+		try {
+			usr = (Candidato) toUsuario(_rs);
+		} catch (ResultSetVacio e) {
+			System.out.println("No se han encontrado usuarios con esos datos"); // TODO tratar error
+		}
+
+		return usr;
+	}
+
+	/**
+	 * Searches an offer in the data base through its code
+	 *  
 	 * @param p_cod
-	 *            Codigo de la oferta necesario para la busqueda
-	 * @return Devuelve la Oferta con el codigo recibido
+	 *            Offer's code necessary for the search
+	 * @return Returns the Offer with the received code
 	 * @throws SQLException
 	 */
 	public static Oferta buscarOferta(String p_cod) throws SQLException {
-		Oferta _oferta;
-		ResultSet _rsOferta = Aplicacion.getConexion().consultar(
-				"SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE " + Tablas.C_OFERTA_CODIGO + "='" + p_cod + "';");
-		ResultSet _rsEmpresa = Aplicacion.getConexion()
-				.consultar("SELECT * FROM " + Tablas.C_EMPRESA_TABLA + ", " + Tablas.C_EMPRESA_TABLA + " WHERE "
-						+ Tablas.C_USUARIO_NUMID + " = " + Tablas.C_EMPRESA_NUMID + " AND " + Tablas.C_EMPRESA_NUMID
-						+ "='" + _rsOferta.getString(Tablas.C_OFERTA_EMPRESA) + "';");
+		Oferta _oferta = null;
+		ArrayList<String> _conocimientos;
 
-		_oferta = new Oferta(_rsOferta.getInt(Tablas.C_OFERTA_CODIGO), _rsOferta.getString(Tablas.C_OFERTA_TITULO),
-				_rsOferta.getString(Tablas.C_OFERTA_DESCRIPCION), _rsOferta.getString(Tablas.C_OFERTA_LUGAR),
-				_rsOferta.getInt(Tablas.C_OFERTA_SUELDO_MAX), _rsOferta.getInt(Tablas.C_OFERTA_SUELDO_MIN),
-				_rsOferta.getInt(Tablas.C_OFERTA_EXPERIENCIA), _rsOferta.getString(Tablas.C_OFERTA_ASPECTOS_VALORAR),
-				_rsOferta.getString(Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES),
-				_rsOferta.getBoolean(Tablas.C_OFERTA_VISIBLE), _rsOferta.getByte(Tablas.C_OFERTA_TIPO_CONTRATO),
-				(Empresa) toUsuario(_rsEmpresa));
+		// Descargar oferta
+		ResultSet _rsOferta = Conexion.consultar(
+				"SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE " + Tablas.C_OFERTA_CODIGO + "='" + p_cod + "';");
+		// Descargar conocimientos
+		_conocimientos = descargarConocimientosOferta(_rsOferta.getString(Tablas.C_OFERTA_CODIGO));
+		// Descargar empresa de la oferta
+		ResultSet _rsEmpresa = Conexion.consultar("SELECT * FROM " + Tablas.C_EMPRESA_TABLA + ", "
+				+ Tablas.C_EMPRESA_TABLA + " WHERE " + Tablas.C_USUARIO_NUMID + " = " + Tablas.C_EMPRESA_NUMID + " AND "
+				+ Tablas.C_EMPRESA_NUMID + "='" + _rsOferta.getString(Tablas.C_OFERTA_EMPRESA) + "';");
+
+		try {
+			_oferta = new Oferta(_rsOferta.getInt(Tablas.C_OFERTA_CODIGO), _rsOferta.getString(Tablas.C_OFERTA_TITULO),
+					_rsOferta.getString(Tablas.C_OFERTA_DESCRIPCION), _rsOferta.getString(Tablas.C_OFERTA_LUGAR),
+					_rsOferta.getInt(Tablas.C_OFERTA_SUELDO_MAX), _rsOferta.getInt(Tablas.C_OFERTA_SUELDO_MIN),
+					_rsOferta.getInt(Tablas.C_OFERTA_EXPERIENCIA), _rsOferta.getString(Tablas.C_OFERTA_ASPECTOS_VALORAR),
+					_rsOferta.getString(Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES),
+					_rsOferta.getBoolean(Tablas.C_OFERTA_VISIBLE), _rsOferta.getByte(Tablas.C_OFERTA_TIPO_CONTRATO),
+					(Empresa) toUsuario(_rsEmpresa), _conocimientos);
+		} catch (ResultSetVacio e) {
+			System.out.println("No se han encontrado usuarios con esos datos");
+		}
 		return _oferta;
 	}
 
 	public static ArrayList<Elemento_Listable> buscarOfertas(String titulo) throws SQLException {
 		ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
 
-		Oferta oferta;
-		Aplicacion.getConexion();
-		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM oferta WHERE titulo like '%" + titulo + "%';");
-		ResultSet _rsEmpresa = Conexion
-				.consultar("SELECT * FROM empresa e, usuario u WHERE u.numid = e.numid AND numid='"
-						+ _rsOferta.getString("numid") + "';");
+		// Decargar ofertas
+		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE "
+				+ Tablas.C_OFERTA_TITULO + " like '%" + titulo + "%';");
+
 		while (_rsOferta.next()) {
-			oferta = new Oferta(_rsOferta.getInt("cod_oferta"), _rsOferta.getString("titulo"),
-					_rsOferta.getString("descripcion"), _rsOferta.getString("lugar"), _rsOferta.getInt("sueldo_max"),
-					_rsOferta.getInt("sueldo_min"), _rsOferta.getInt("experiencia"),
-					_rsOferta.getString("aspectos_valorar"), _rsOferta.getString("aspectos_impres"),
-					_rsOferta.getBoolean("visible"), _rsOferta.getByte("tipo_contrato"),
-					(Empresa) toUsuario(_rsEmpresa));
-			ofertas.add(oferta);
+			try {
+				ofertas.add(toOferta(_rsOferta));
+			} catch (ResultSetVacio e) {
+				System.out.println("No se han encontrado ofertas con esos datos");
+			}
 		}
 		return ofertas;
 	}
 
+	public static ArrayList<Oferta> buscarOfertasEmpresa(String p_empresaNumid) throws SQLException {
+		ArrayList<Oferta> _ofertas = new ArrayList<>();
+
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE "
+				+ Tablas.C_OFERTA_EMPRESA + "=" + p_empresaNumid + ";");
+		while (_rs.next()) {
+			_ofertas.add(toOferta(_rs.getString(Tablas.C_OFERTA_CODIGO)));
+		}
+
+		return _ofertas;
+	}
+
 	/**
-	 * Metodo encargado de descargar en un ArrayList la lista de conocimientos
-	 * disponibles
+	 * This method downloads in an ArrayList the list of available conocimientos
 	 * 
-	 * @return Devuelve un ArrayList de String con los nombres de los conocimientos
-	 *         almacenados en la base de datos
+	 * @return Returns an ArrayList of String with the names of the conocimientos stored in the data base
 	 * @throws SQLException
 	 */
 	public static ArrayList<String> descargarConocimientos() throws SQLException {
 		ArrayList<String> _conocimientos = new ArrayList<>();
 
-		ResultSet _rs = Aplicacion.getConexion().consultar("SELECT * FROM " + Tablas.C_CONOCIMIENTOS_TABLA + ";");
+		Aplicacion.getConexion();
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_CONOCIMIENTOS_TABLA + ";");
 		while (_rs.next()) {
 			_conocimientos.add(_rs.getString(Tablas.C_CONOCIMIENTOS_NOMBRE));
 		}
@@ -188,22 +277,32 @@ public abstract class UtilidadesBD {
 	}
 
 	/**
-	 * Metodo encargado de descargar en un ArrayList la lista de conocimientos de un
-	 * Candidato
+	 * This method downloads in an ArrayList the list of a Candidato's conocimientos
 	 * 
 	 * @param p_numid
-	 *            Numero de identificacion de un Candidato
-	 * @return Devuelve un ArrayList de String con los nombres de los conocimientos
-	 *         que posee el Candidato
+	 *            A Candidato's num id
+	 * @return Returns an ArrayList of String with the names of the conocimientos of the Candidato
 	 * @throws SQLException
 	 */
-	public static ArrayList<String> descargarConocimientos(String p_numid) throws SQLException {
+	public static ArrayList<String> descargarConocimientosCandidato(String p_numid) throws SQLException {
 		ArrayList<String> _conocimientos = new ArrayList<>();
 
-		ResultSet _rs = Aplicacion.getConexion().consultar("SELECT * FROM " + Tablas.C_CANDI_CONO_TABLA + " WHERE "
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_CANDI_CONO_TABLA + " WHERE "
 				+ Tablas.C_CANDI_CONO_CANDIDATO + "='" + p_numid + "';");
 		while (_rs.next()) {
 			_conocimientos.add(_rs.getString(Tablas.C_CANDI_CONO_CONOCIMIENTO));
+		}
+
+		return _conocimientos;
+	}
+
+	public static ArrayList<String> descargarConocimientosOferta(String p_codOferta) throws SQLException {
+		ArrayList<String> _conocimientos = new ArrayList<>();
+
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_OFER_CONO_TABLA + " WHERE "
+				+ Tablas.C_OFER_CONO_OFERTA + "='" + p_codOferta + "';");
+		while (_rs.next()) {
+			_conocimientos.add(_rs.getString(Tablas.C_OFER_CONO_CONOCIMIENTO));
 		}
 
 		return _conocimientos;
@@ -296,13 +395,18 @@ public abstract class UtilidadesBD {
 
 		// Busca todas las ofertas que concuerden con los filtros, las combierte en
 		// Objetos y las mete en el array
-		ResultSet _rs = Aplicacion.getConexion().consultar(_sentencia);
+		ResultSet _rs = Conexion.consultar(_sentencia);
 		while (_rs.next()) {
-			_ofertas.add(toOferta(_rs.getString(Tablas.C_OFERTA_CODIGO))); // TODO metodo toOferta(String)
+			_ofertas.add(toOferta(_rs.getString(Tablas.C_OFERTA_CODIGO)));
 		}
 
 		return _ofertas;
 	}
-	// TODO crear filtrarCandidatos(String,String,String, String, boolean, boolean,
-	// boolean, ArrayList<String>)
+
+	public static void filtrarCandidatos(String text, String text2, String text3, String text4, boolean selected,
+			boolean selected2, boolean selected3, ArrayList<String> conocimientos) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

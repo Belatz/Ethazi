@@ -71,7 +71,7 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 		txField_sueldoMax.setBounds(93, 112, 93, 20);
 		add(txField_sueldoMax);
 		
-		JLabel lbl_experiencia = new JLabel("A\u00F1os de experiencia minimos:");
+		JLabel lbl_experiencia = new JLabel("Anos de experiencia minimos:");
 		lbl_experiencia.setBounds(10, 143, 152, 14);
 		add(lbl_experiencia);
 		

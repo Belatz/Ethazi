@@ -26,14 +26,15 @@ import javax.swing.JCheckBox;
  */
 public class PanelFiltrosCandidato extends JScrollPane {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txField_residencia;
 	private JTextField txField_experiencia;
 	private JTextField txField_nick;
 	private JTextField txField_nombreApe;
-
-	/**
-	 * Create the panel.
-	 */
+	
 	public PanelFiltrosCandidato() {
 		JPanel pa_filtros = crearPanelFiltros();
 		setBounds(10, 60, 247, 550);
@@ -43,7 +44,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 
 	/**
 	 * Generates a filter panel.
-	 * @return
+	 * @return pa_filtros
 	 */
 	public JPanel crearPanelFiltros() {
 		JPanel pa_filtros = new JPanel();
@@ -64,7 +65,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		for (int i = 0; i < 10; i++)
 			conocimientos.add("Ejemplo " + i);
 
-		JPanel pa_conocimientos = new PanelListaDoble(conocimientos, null);
+		PanelListaDoble pa_conocimientos = new PanelListaDoble(conocimientos, null);
 		pa_conocimientos.setLocation(7, 172);
 		pa_filtros.add(pa_conocimientos);
 
@@ -77,7 +78,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		pa_filtros.add(txField_residencia);
 		txField_residencia.setColumns(10);
 
-		JLabel lbl_experiencia = new JLabel("A\u00F1os de experiencia minimos:");
+		JLabel lbl_experiencia = new JLabel("Anos de experiencia minimos:");
 		lbl_experiencia.setBounds(7, 476, 211, 14);
 		pa_filtros.add(lbl_experiencia);
 
@@ -121,10 +122,9 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		btn_aplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO hacer algo con la lista de candidatos
-				// TODO tratar la lista de conocimientos en un arraylist
 				UtilidadesBD.filtrarCandidatos(txField_nombreApe.getText(), txField_nick.getText(),
 						txField_experiencia.getText(), txField_residencia.getText(), chBox_carne.isSelected(),
-						chBox_coche.isSelected(), chBox_viajes.isSelected(), p_conocimientos);
+						chBox_coche.isSelected(), chBox_viajes.isSelected(), pa_conocimientos.getConocimientos());
 			}
 		});
 		pa_filtros.add(btn_aplicar);

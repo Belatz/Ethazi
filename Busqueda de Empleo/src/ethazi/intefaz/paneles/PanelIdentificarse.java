@@ -16,8 +16,10 @@ import javax.swing.JTextField;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Usuario;
+import ethazi.datos.Conexion;
 import ethazi.datos.Tablas;
 import ethazi.datos.UtilidadesBD;
+import ethazi.excepciones.ResultSetVacio;
 import ethazi.intefaz.emergentes.RecuperarContrasena;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
@@ -28,13 +30,17 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 
 public class PanelIdentificarse extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static JPasswordField pssField_contrasena;
 	private static JTextField txField_usuario;
 	private JLabel lbl_contrasenaErronea;
 	
 
 	/**
-	 * Create the panel.
+	 * This panel is used by the user to identify as a Candidato or a Empresa.
 	 */
 	public PanelIdentificarse() {
 		this.setLayout(null);
@@ -132,18 +138,22 @@ public class PanelIdentificarse extends JPanel {
 		String _nick = txField_usuario.getText();
 		String _pass = String.valueOf(pssField_contrasena.getPassword());
 		ResultSet _usuario;
-		ResultSet _rs = Aplicacion.getConexion()
+		ResultSet _rs = Conexion
 				.consultar("SELECT * FROM "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_USUARIO_NICK+"='" + _nick + "' AND "+Tablas.C_USUARIO_PASSWORD+"='" + _pass + "';");
 
 		if (_rs.next()) {
 			if (Usuario.esCandidato(_nick)) {
-				_usuario = Aplicacion.getConexion().consultar(
+				_usuario = Conexion.consultar(
 						"SELECT * FROM "+Tablas.C_CANDIDATO_TABLA+", "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_CANDIDATO_NUMID+"="+Tablas.C_USUARIO_NUMID+" AND "+Tablas.C_USUARIO_NICK+"='" + _nick + "';");
 			} else {
-				_usuario = Aplicacion.getConexion().consultar(
+				_usuario = Conexion.consultar(
 						"SELECT * FROM "+Tablas.C_EMPRESA_TABLA+", "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_EMPRESA_NUMID+"="+Tablas.C_USUARIO_NUMID+" AND "+Tablas.C_USUARIO_NICK+"='" + _nick + "';");
 			}
-			Aplicacion.setUsuario(UtilidadesBD.toUsuario(_usuario));
+			try {
+				Aplicacion.setUsuario(UtilidadesBD.toUsuario(_usuario));
+			} catch (ResultSetVacio e) {
+				System.out.println("No existe ese usuario");
+			}
 			_esValido = true;
 		} else {
 			_esValido = false;

@@ -24,7 +24,16 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * @author Eduardo
+ */
+
 public class RecuperarContrasena extends JDialog {
+
+	/**
+	 * This is recover password window, it send a code to a email account that we
+	 * write.
+	 */
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txField_correo;

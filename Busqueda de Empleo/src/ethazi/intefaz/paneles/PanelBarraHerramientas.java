@@ -13,15 +13,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import ethazi.aplicacion.excepciones.PanelNoDisponible;
+import ethazi.aplicacion.Aplicacion;
 import ethazi.datos.UtilidadesBD;
+import ethazi.excepciones.PanelNoDisponible;
+import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
 /**
  *
- * This bar appears in most of the panels so the user can use
- * the tools which are provided by the bar. Like switch off the program, find an offer or 
- * go to the user's profile.
+ * This bar appears in most of the panels so the user can use the tools which
+ * are provided by the bar. Like switch off the program, find an offer or go to
+ * the user's profile.
  * 
  * @author Nestor
  *
@@ -33,9 +35,12 @@ public class PanelBarraHerramientas extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField txField_buscar;
 
-/*	public static ArrayList<Elemento_Listable> listaDeOfertas = new ArrayList<Elemento_Listable>();
-	
-	public PanelBarraHerramientas(GenericoDePanelesConLista pa_buscarOfertas) {*/
+	/*
+	 * public static ArrayList<Elemento_Listable> listaDeOfertas = new
+	 * ArrayList<Elemento_Listable>();
+	 * 
+	 * public PanelBarraHerramientas(GenericoDePanelesConLista pa_buscarOfertas) {
+	 */
 
 	private static boolean menu = true;
 	static JButton btnMenu;
@@ -43,6 +48,16 @@ public class PanelBarraHerramientas extends JPanel {
 	public PanelBarraHerramientas() {
 		setLayout(null);
 		JButton btn_buscar = new JButton("");
+		btn_buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA);
+					// TODO en el panel de consultar ofertas coger el texto de la barra de busqueda
+				} catch (PanelNoDisponible e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
 		btn_buscar.setBounds(0, 0, 50, 50);
 		add(btn_buscar);
 		setBounds(0, 0, 762, 50);
@@ -56,31 +71,24 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_perfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-				pa_buscarOfertas.removeAll();
-				}
-				catch (Exception e) {
-					
-				}
-				try {
-					listaDeOfertas = UtilidadesBD.buscarOfertas(txField_buscar.getText());
-				} catch (SQLException e1) {
-					
-					e1.printStackTrace();
-				}
-				VentanaPrincipal.actualizar(listaDeOfertas);
-			
-				try {
-					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA);
+					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_VER_PERFIL);
 				} catch (PanelNoDisponible e) {
-					
 					e.printStackTrace();
 				}
-
 			}
 		});
 		add(btn_perfil);
 
 		JButton btn_apagar = new JButton("");
+		btn_apagar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// Borrar el usuario
+				Aplicacion.setUsuario(null);
+				// Abrir la ventana identificarse
+				VentanaPrincipal.cerrar();
+				VentanaIdentificarse.abrir();
+			}
+		});
 		btn_apagar.setToolTipText("Cerrar Sesi\u00F3n");
 		btn_apagar.setAlignmentY(0.0f);
 		btn_apagar.setAlignmentX(1.0f);
@@ -88,7 +96,7 @@ public class PanelBarraHerramientas extends JPanel {
 		add(btn_apagar);
 
 		txField_buscar = new JTextField();
-		txField_buscar.setHorizontalAlignment(SwingConstants.RIGHT); 
+		txField_buscar.setHorizontalAlignment(SwingConstants.RIGHT);
 		txField_buscar.setToolTipText("");
 		txField_buscar.setText("Introduzca el nombre de la Oferta....\r\n");
 		txField_buscar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -96,7 +104,7 @@ public class PanelBarraHerramientas extends JPanel {
 		txField_buscar.setColumns(10);
 		txField_buscar.setBounds(51, 0, 277, 50);
 		add(txField_buscar);
-		
+
 		btnMenu = new JButton("Otras cosas");
 		btnMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -106,7 +114,7 @@ public class PanelBarraHerramientas extends JPanel {
 		});
 		btnMenu.setBounds(368, 9, 229, 31);
 		add(btnMenu);
-		
+
 		MouseListener ml = new MouseListener() {
 
 			@Override
@@ -121,8 +129,7 @@ public class PanelBarraHerramientas extends JPanel {
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
-				
-			
+
 			}
 
 			@Override
@@ -138,12 +145,12 @@ public class PanelBarraHerramientas extends JPanel {
 		};
 		btnMenu.addMouseListener(ml);
 	}
+
 	public static void botonMenuInv() {
 		if (menu) {
-			menu=false;
+			menu = false;
 			btnMenu.setVisible(false);
-		}
-		else {
+		} else {
 			menu = true;
 			btnMenu.setVisible(true);
 		}
