@@ -14,7 +14,8 @@ import java.awt.event.ActionEvent;
 public class PanelMenu extends JPanel {
 
 	/**
-	 * Create the panel.
+	 * This panel is used in the BarraHerramientas, which is opened with the mouse, passing over the menu.
+	 * @autor JonOr
 	 */
 	public PanelMenu() {
 		setLayout(null);

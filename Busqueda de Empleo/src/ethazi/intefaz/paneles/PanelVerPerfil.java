@@ -27,8 +27,10 @@ import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 
 public class PanelVerPerfil extends JPanel {
+	
 	/**
-	 * 
+	 * This panel is used to show the data of the correspondent user: Empresa or Candidato
+	 * @author Nestor
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField nickTextField;
