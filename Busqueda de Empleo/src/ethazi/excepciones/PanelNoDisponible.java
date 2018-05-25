@@ -1,4 +1,4 @@
-package ethazi.aplicacion.excepciones;
+package ethazi.excepciones;
 
 /**
  * Exception launched when a panel that hasn't been created has been called

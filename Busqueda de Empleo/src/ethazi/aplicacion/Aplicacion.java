@@ -12,6 +12,9 @@ import ethazi.pruebas.UsuariosDummy;
  *         Urtzi Lamikiz, Jon Ortigueira
  */
 public class Aplicacion {
+	/**
+	 * This is the main class that start all the project
+	 */
 
 	private static Usuario miUsuario;
 	private static Conexion miConexion;
@@ -30,14 +33,30 @@ public class Aplicacion {
 
 	}
 
+	/**
+	 * Method return user name
+	 * 
+	 * @return miUsuario
+	 */
+
 	public static Usuario getUsuario() {
 		return miUsuario;
 	}
 
+	/**
+	 * Method save the user name as usr parameter
+	 * 
+	 * @param usr
+	 */
 	public static void setUsuario(Usuario usr) {
 		miUsuario = usr;
 	}
 
+	/**
+	 * Method return connection state
+	 * 
+	 * @return miConexion
+	 */
 	public static Conexion getConexion() {
 		return miConexion;
 	}
