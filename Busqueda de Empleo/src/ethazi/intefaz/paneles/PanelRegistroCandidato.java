@@ -2,33 +2,22 @@ package ethazi.intefaz.paneles;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.TextArea;
 
 import javax.swing.JTextField;
 
-import ethazi.aplicacion.Aplicacion;
-import ethazi.aplicacion.Candidato;
-import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Usuario;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.JSeparator;
-import javax.swing.JCheckBox;
 import javax.swing.JButton;
-import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
+import javax.swing.JTextArea;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Calendar;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 /**
  * The panel RegistroCandidato will show the facts that the user will have to
@@ -37,8 +26,10 @@ import java.awt.event.ActionEvent;
  * @author Urtzi
  *
  */
-
 public class PanelRegistroCandidato extends JPanel {
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField nickTextField;
 	private JTextField dirtextField;
@@ -218,7 +209,7 @@ public class PanelRegistroCandidato extends JPanel {
 				estudiostextArea.setText("");
 				otrosConocimientostextArea.setText("");
 				vidaLaboraltextArea.setText("");
-				conocimientosEditar.actualizarListas(Aplicacion.getUsuario().getConocimientosTotales(), null);
+				conocimientosEditar.actualizarListas(Usuario.getConocimientosTotales(), null);
 				VentanaIdentificarse.getPa_registrarCandidato().setVisible(false);
 				VentanaIdentificarse.getPa_identificarse().setVisible(true);
 				VentanaIdentificarse.cambiarTam(new Dimension(300, 300));

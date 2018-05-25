@@ -44,7 +44,7 @@ public class Elemento_A_Listar extends JPanel {
 		setLayout(null);
 
 		switch (p_constante_opcion) {
-		case 0: {
+		case C_CONSULTAR_SUS_SOLICITUDES: {
 			miBtnEliminar = new JButton("Retirar Oferta");
 			miBtnEliminar.setBounds(364, 44, 107, 30);
 			add(miBtnEliminar);
@@ -80,7 +80,7 @@ public class Elemento_A_Listar extends JPanel {
 			});
 		}
 			break;
-		case 1: {
+		case C_CONSULTAR_OFERTAS: {
 			miLblAnalizar = new JLabel(((Oferta) p_elemento).getEmpresa().getNombre());
 			miLblAnalizar.setBounds(364, 1, 117, 40);
 			add(miLblAnalizar);
@@ -105,7 +105,7 @@ public class Elemento_A_Listar extends JPanel {
 			});
 		}
 			break;
-		case 2: {
+		case C_VER_OFERTAS_CON_SOLICITUD: {
 			miLblAbrir_Elemento = new JLabel(((Oferta) p_elemento).getInfo());
 			miLblAbrir_Elemento.setBounds(0, 0, 471, 50);
 			add(miLblAbrir_Elemento);
@@ -119,7 +119,7 @@ public class Elemento_A_Listar extends JPanel {
 			});
 		}
 			break;
-		case 3: {
+		case C_CONSULTAR_SUS_OFERTAS: {
 			miLblAbrir_Elemento = new JLabel(((Oferta) p_elemento).getInfo());
 			miLblAbrir_Elemento.setBounds(0, 0, 290, 50);
 			add(miLblAbrir_Elemento);
@@ -166,7 +166,7 @@ public class Elemento_A_Listar extends JPanel {
 			});
 		}
 			break;
-		case 4: {
+		case C_ANALIZAR_SOLICITUDES: {
 			miLblAnalizar = new JLabel(((Solicitud) p_elemento).getInfo());
 			miLblAnalizar.setBounds(0, 33, 471, 28);
 			add(miLblAnalizar);
@@ -194,7 +194,7 @@ public class Elemento_A_Listar extends JPanel {
 			});
 		}
 			break;
-		case 5: {
+		case C_BUSCAR_CANDIDATOS: {
 			miLblAnalizar = new JLabel(((Candidato) p_elemento).getInfo());
 			miLblAnalizar.setBounds(0, 0, 450, 50);
 			add(miLblAnalizar);

@@ -1,23 +1,19 @@
 package ethazi.intefaz.paneles;
 
-import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Insets;
 import java.util.ArrayList;
 
 import javax.swing.JTextArea;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.UIManager;
+
+import ethazi.aplicacion.Contrato;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -28,6 +24,10 @@ import javax.swing.JComboBox;
  */
 
 public class PanelEditarOferta extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txField_titulo;
 	private JTextField txField_sueldoMin;
 	private JTextField txField_sueldoMax;
@@ -150,7 +150,7 @@ public class PanelEditarOferta extends JPanel {
 		lbl_contrato.setBounds(411, 86, 93, 14);
 		add(lbl_contrato);
 
-		JComboBox combo_contrato = new JComboBox();
+		JComboBox<Contrato> combo_contrato = new JComboBox<>(); 
 		combo_contrato.setBounds(506, 83, 159, 20);
 		add(combo_contrato);
 

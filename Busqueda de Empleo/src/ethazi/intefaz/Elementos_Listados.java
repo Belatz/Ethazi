@@ -1,13 +1,13 @@
 package ethazi.intefaz;
 
 import java.awt.Dimension;
-import java.awt.LayoutManager;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
 /**
  * This class receives elements from the class Elementos_A_Listar
+ * 
  * @author Nestor
  *
  */
@@ -53,10 +53,14 @@ public class Elementos_Listados extends JPanel {
 		setAlignmentX(0);
 		setAlignmentY(0);
 		setPreferredSize(new Dimension(600, 1050));
-		mostrar10();
-		for (int i = 0, coordenada = 0; i < limite; i++, coordenada += 100) {
-			arrayElementos_A_Listar.get(i).setBounds(10, coordenada, 500, 91);
-			add(arrayElementos_A_Listar.get(i));
+		// TODO temporal belatz
+		if (!listaDeElementosListables.isEmpty()) {
+			mostrar10();
+
+			for (int i = 0, coordenada = 0; i < limite; i++, coordenada += 100) {
+				arrayElementos_A_Listar.get(i).setBounds(10, coordenada, 500, 91);
+				add(arrayElementos_A_Listar.get(i));
+			}
 		}
 	}
 

@@ -3,15 +3,12 @@ package ethazi.intefaz.paneles;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import ethazi.aplicacion.Oferta;
-import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.Elementos_Listados;
-import ethazi.intefaz.frame.VentanaPrincipal;
+
 
 /**
  * 
@@ -20,6 +17,11 @@ import ethazi.intefaz.frame.VentanaPrincipal;
  */
 
 public class PanelAtrasAlante extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Generates btn_siguiente and btn_anterior buttons
 	 * @param panel_QueTieneLaLista

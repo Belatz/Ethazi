@@ -6,7 +6,6 @@ import ethazi.datos.Conexion;
 import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.pruebas.PruebasBD;
-import ethazi.pruebas.UsuariosDummy;
 
 /**
  * @author Belatz Arce, Xabier Cabezuelo, Nestor Echebarria, Eduardo Garcia,

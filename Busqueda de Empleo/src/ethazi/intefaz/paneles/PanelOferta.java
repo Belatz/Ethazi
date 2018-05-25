@@ -16,7 +16,6 @@ import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Usuario;
 import ethazi.intefaz.emergentes.EmergenteCambios;
 import ethazi.intefaz.emergentes.TieneEmergente;
-import ethazi.intefaz.frame.VentanaPrincipal;
 
 import javax.swing.UIManager;
 import javax.swing.JButton;

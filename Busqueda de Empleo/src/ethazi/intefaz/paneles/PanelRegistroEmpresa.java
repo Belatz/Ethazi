@@ -14,14 +14,10 @@ import ethazi.intefaz.emergentes.TieneEmergente;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
-import javax.swing.JComboBox;
 import javax.swing.JTextArea;
-import javax.swing.JSeparator;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
 
 /**
  * The panel RegistroEmpresa will show the data that the user will have to fill,
@@ -30,8 +26,7 @@ import java.awt.event.ActionEvent;
  * @author Xabi
  *
  */
-
-public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
+	public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
 	/**
 	 * 
 	 */

@@ -19,6 +19,7 @@ import ethazi.aplicacion.Usuario;
 import ethazi.datos.Conexion;
 import ethazi.datos.Tablas;
 import ethazi.datos.UtilidadesBD;
+import ethazi.excepciones.NoQuedanFilas;
 import ethazi.excepciones.ResultSetVacio;
 import ethazi.intefaz.emergentes.RecuperarContrasena;
 import ethazi.intefaz.frame.VentanaIdentificarse;
@@ -37,21 +38,20 @@ public class PanelIdentificarse extends JPanel {
 	private static JPasswordField pssField_contrasena;
 	private static JTextField txField_usuario;
 	private JLabel lbl_contrasenaErronea;
-	
 
 	/**
 	 * This panel is used by the user to identify as a Candidato or a Empresa.
 	 */
 	public PanelIdentificarse() {
 		this.setLayout(null);
-		
-		lbl_contrasenaErronea= new JLabel("Credenciales Incorrectas");
+
+		lbl_contrasenaErronea = new JLabel("Credenciales Incorrectas");
 		lbl_contrasenaErronea.setForeground(new Color(128, 0, 0));
 		lbl_contrasenaErronea.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lbl_contrasenaErronea.setBounds(219, 129, 141, 14);
 		lbl_contrasenaErronea.setVisible(false);
 		add(lbl_contrasenaErronea);
-		
+
 		JLabel lbl_usuario = new JLabel("Usuario:");
 		lbl_usuario.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lbl_usuario.setBounds(84, 48, 189, 14);
@@ -66,14 +66,10 @@ public class PanelIdentificarse extends JPanel {
 		btn_registrarse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				limpiarTextos();
 				VentanaIdentificarse.getPa_identificarse().setVisible(false);
 				VentanaIdentificarse.getSelect().setVisible(true);
-				VentanaIdentificarse.cambiarTam(new Dimension(600,600));
-			}
-		});
-		btn_registrarse.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+				VentanaIdentificarse.cambiarTam(new Dimension(600, 600));
 			}
 		});
 		btn_registrarse.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -92,10 +88,8 @@ public class PanelIdentificarse extends JPanel {
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
-				}
-				finally {
-					txField_usuario.setText("");
-					pssField_contrasena.setText("");
+				} finally {
+					limpiarTextos();
 				}
 			}
 		});
@@ -110,7 +104,7 @@ public class PanelIdentificarse extends JPanel {
 		pssField_contrasena.setBounds(84, 125, 126, 20);
 		pssField_contrasena.setText("");
 		this.add(pssField_contrasena);
-		
+
 		txField_usuario = new JTextField();
 		txField_usuario.setText("");
 		txField_usuario.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -138,21 +132,24 @@ public class PanelIdentificarse extends JPanel {
 		String _nick = txField_usuario.getText();
 		String _pass = String.valueOf(pssField_contrasena.getPassword());
 		ResultSet _usuario;
-		ResultSet _rs = Conexion
-				.consultar("SELECT * FROM "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_USUARIO_NICK+"='" + _nick + "' AND "+Tablas.C_USUARIO_PASSWORD+"='" + _pass + "';");
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + " WHERE " + Tablas.C_USUARIO_NICK
+				+ "='" + _nick + "' AND " + Tablas.C_USUARIO_PASSWORD + "='" + _pass + "';");
 
 		if (_rs.next()) {
 			if (Usuario.esCandidato(_nick)) {
-				_usuario = Conexion.consultar(
-						"SELECT * FROM "+Tablas.C_CANDIDATO_TABLA+", "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_CANDIDATO_NUMID+"="+Tablas.C_USUARIO_NUMID+" AND "+Tablas.C_USUARIO_NICK+"='" + _nick + "';");
+				_usuario = Conexion.consultar("SELECT * FROM " + Tablas.C_CANDIDATO_TABLA + ", "
+						+ Tablas.C_USUARIO_TABLA + " WHERE " + Tablas.C_CANDIDATO_NUMID + "=" + Tablas.C_USUARIO_NUMID
+						+ " AND " + Tablas.C_USUARIO_NICK + "='" + _nick + "';");
 			} else {
-				_usuario = Conexion.consultar(
-						"SELECT * FROM "+Tablas.C_EMPRESA_TABLA+", "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_EMPRESA_NUMID+"="+Tablas.C_USUARIO_NUMID+" AND "+Tablas.C_USUARIO_NICK+"='" + _nick + "';");
+				_usuario = Conexion.consultar("SELECT * FROM " + Tablas.C_EMPRESA_TABLA + ", " + Tablas.C_USUARIO_TABLA
+						+ " WHERE " + Tablas.C_EMPRESA_NUMID + "=" + Tablas.C_USUARIO_NUMID + " AND "
+						+ Tablas.C_USUARIO_NICK + "='" + _nick + "';");
 			}
 			try {
 				Aplicacion.setUsuario(UtilidadesBD.toUsuario(_usuario));
 			} catch (ResultSetVacio e) {
 				System.out.println("No existe ese usuario");
+			} catch (NoQuedanFilas e) {
 			}
 			_esValido = true;
 		} else {
@@ -160,6 +157,10 @@ public class PanelIdentificarse extends JPanel {
 		}
 		return _esValido;
 	}
-	
+
+	private static void limpiarTextos() {
+		txField_usuario.setText("");
+		pssField_contrasena.setText("");
+	}
 
 }
