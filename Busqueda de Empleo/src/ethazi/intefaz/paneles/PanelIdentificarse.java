@@ -45,7 +45,7 @@ public class PanelIdentificarse extends JPanel {
 		lbl_usuario.setBounds(84, 48, 189, 14);
 		add(lbl_usuario);
 
-		JLabel lbl_contrasena = new JLabel("Contraseña:");
+		JLabel lbl_contrasena = new JLabel("Contrasena:");
 		lbl_contrasena.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lbl_contrasena.setBounds(84, 103, 189, 14);
 		this.add(lbl_contrasena);
