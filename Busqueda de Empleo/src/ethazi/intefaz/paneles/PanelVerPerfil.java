@@ -2,11 +2,10 @@ package ethazi.intefaz.paneles;
 
 import javax.swing.JPanel;
 
+import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Empresa;
-import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Usuario;
-import ethazi.datos.UtilidadesBD;
 
 import java.awt.Dimension;
 
@@ -24,7 +23,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.Calendar;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
@@ -56,16 +54,10 @@ public class PanelVerPerfil extends JPanel {
 	private JComboBox<Integer> aniocomboBox;
 	private PanelListaDoble conocimientosEditar;
 	
-	private Usuario miUsuario;
-	private boolean esPropio;
+	private Usuario miUsuario = Aplicacion.getUsuario();
+	private boolean esPropio = true;
 
 	public PanelVerPerfil() {
-		try {
-			miUsuario = UtilidadesBD.toUsuario("Dummy1",true);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}		
-		
 		setPreferredSize(new Dimension(762, 488));
 		setLayout(null);
 		JLabel milblNick = new JLabel("Nick: ");
