@@ -158,6 +158,24 @@ public class PruebasBD {
 						+ ",'55555555P','Buenos tardes: Mi situacion economica no es muy buena y necesito trabajar')");
 				Conexion.actualizar("INSERT INTO solicitudes VALUES (" + (codigo + 8)
 						+ ",'55555555P','Buenos tardes: Mi situacion economica no es muy buena y necesito trabajar')");
+				
+				//Datos candidato_conocimientos
+				Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('11111111D','Mecanico')");
+				Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('11111111D','Electricista')");
+				Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('22222222L','Dependiente')");
+				Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('33333333K','Contabilidad')");
+				Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('44444444A','Programador')");
+				Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('44444444A','Marketing')");
+				Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('55555555P','Especialista en electronica')");
+				
+				//Datos oferta_conocimientos
+				Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES ("+codigo+",'Mecanico')");
+				Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES ("+(codigo+1)+ ",'Dependiente')");
+				Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES ("+(codigo+2)+ ",'Contabilidad avanzada')");
+				Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES ("+(codigo+3)+ ",'Especialista en mecanica general')");
+				Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES ("+(codigo+4)+ ",'Programacion en Python')");
+				Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES ("+(codigo+5)+ ",'Especialista en electronica')");
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
