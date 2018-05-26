@@ -183,6 +183,7 @@ public class VentanaPrincipal extends JFrame {
 
 			if (_ofertas.isEmpty()) { // Si no tiene ofertas publicadas
 				currentPanel = pa_publicarOferta;
+				System.out.println("LOG: PANEL ACTUAL -- Publicar Oferta");
 			} else {
 				// Buscar ofertas con solicitudes
 				currentPanel = pa_ofertasConSolici;
@@ -340,6 +341,7 @@ public class VentanaPrincipal extends JFrame {
 
 		nuevoPanel.setVisible(true);
 		currentPanel = nuevoPanel;
+		System.out.println("LOG: PANEL ACTUAL -- " + currentPanel.getName());	
 	}
 
 	public static void actualizar(ArrayList<Elemento_Listable> listaDeOfertas) {

@@ -20,7 +20,7 @@ import javax.swing.JComboBox;
 /**
  * 
  * @author Belatz y Nestor
- *
+ * @deprecated
  */
 
 public class PanelEditarOferta extends JPanel {
@@ -36,7 +36,8 @@ public class PanelEditarOferta extends JPanel {
 	private JTextField txField_lugar;
 
 	/**
-	 * This panel is opened by the button Editar of Oferta that allows you to edit the corresponding offer 
+	 * This panel is opened by the button Editar of Oferta that allows you to edit
+	 * the corresponding offer
 	 */
 	public PanelEditarOferta() {
 		setPreferredSize(new Dimension(762, 488));
@@ -150,7 +151,7 @@ public class PanelEditarOferta extends JPanel {
 		lbl_contrato.setBounds(411, 86, 93, 14);
 		add(lbl_contrato);
 
-		JComboBox<Contrato> combo_contrato = new JComboBox<>(); 
+		JComboBox<Contrato> combo_contrato = new JComboBox<>();
 		combo_contrato.setBounds(506, 83, 159, 20);
 		add(combo_contrato);
 

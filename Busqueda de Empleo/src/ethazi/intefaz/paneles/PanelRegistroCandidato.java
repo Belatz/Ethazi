@@ -52,6 +52,7 @@ public class PanelRegistroCandidato extends JPanel {
 	private JButton btnRegistrar;
 
 	public PanelRegistroCandidato() {
+		setName("Registro candidato");
 		setLayout(null);
 		JLabel milblNick = new JLabel("Nick: ");
 		milblNick.setBounds(10, 21, 46, 14);

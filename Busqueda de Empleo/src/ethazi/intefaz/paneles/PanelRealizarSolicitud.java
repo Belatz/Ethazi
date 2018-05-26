@@ -24,6 +24,7 @@ public class PanelRealizarSolicitud extends JPanel {
 	 * Adds a request to the data base.
 	 */
 	public PanelRealizarSolicitud() {
+		setName("Realizar Solicitud");
 		setLayout(null);
 
 		JLabel lblPresentacionCandidato = new JLabel("Presentacion candidato");

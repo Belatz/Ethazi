@@ -28,6 +28,7 @@ public class PanelConocimientosBuscados extends JPanel {
 	 */
 	public PanelConocimientosBuscados() {
 		// Tamaño del JPanel
+		setName("Conocimientos mas buscados");
 		setLayout(null);
 		setPreferredSize(new Dimension(762, 488));
 		JScrollPane scrollPane = new JScrollPane();

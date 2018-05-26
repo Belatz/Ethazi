@@ -20,13 +20,7 @@ public abstract class Usuario {
 	 * Class gets and set user personal data 
 	 */
 	public static ArrayList<String> misConocimientosTotales;
-	// Ejemplo
-	{
-		misConocimientosTotales = new ArrayList<String>();
-		misConocimientosTotales.add("Java");
-		misConocimientosTotales.add("C");
-		misConocimientosTotales.add("C++");
-	}
+
 	private String miNumID;
 	private String miNick;
 	private String miPassword;

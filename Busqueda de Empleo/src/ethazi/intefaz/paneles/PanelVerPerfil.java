@@ -58,6 +58,7 @@ public class PanelVerPerfil extends JPanel {
 	private boolean esPropio = true;
 
 	public PanelVerPerfil() {
+		setName("Ver Perfil");
 		setPreferredSize(new Dimension(762, 488));
 		setLayout(null);
 		JLabel milblNick = new JLabel("Nick: ");
