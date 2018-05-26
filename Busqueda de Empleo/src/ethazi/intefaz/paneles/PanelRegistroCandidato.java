@@ -20,7 +20,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * 
+ * The panel RegistroCandidato will show the facts that the user will have to
+ * fill, so he can register as a Candidato.
  * @author Urtzi
  *
  */
@@ -38,12 +39,6 @@ public class PanelRegistroCandidato extends JPanel {
 	private JTextField txFieldVidaLaboral;
 	private JTextField txFieldEstudios;
 	String mensaje = "¿Estas seguro?";
-
-	/**
-	 * The panel RegistroCandidato will show the facts that the user will have to
-	 * fill, so he can register as a Candidato.
-	 * 
-	 */
 	
 	public PanelRegistroCandidato() {
 		setLayout(null);

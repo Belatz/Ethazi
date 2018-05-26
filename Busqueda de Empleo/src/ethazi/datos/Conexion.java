@@ -1,4 +1,4 @@
-package ethazi.aplicacion;
+package ethazi.datos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -58,33 +58,31 @@ public class Conexion {
 	}
 
 	/**
-	 * Metodo que vale para hacer actualizaciones (Insert, Delete o Update) a la
-	 * base de datos
+	 * This method is used to update (Insert, Delete o Update) to the data base
 	 * 
 	 * @param sql
-	 *            Recibe como parametro la instruccion SQL en forma de String
-	 * @return Devuelve (1) si la actualizacion ha afectado a alguna fila, o (0) si
-	 *         no ha afectado a ninguna fila
+	 *            Returns as parameter the instruction SQL as String
+	 * @return Returns (1) if the update has affected to any line or (0) if not.
 	 * @throws SQLException
-	 *             Si ha habido algun error en la base de datos o en la consulta
+	 *             If there has been any error in the data base or in the query
 	 */
-	public int actualizar(String sql) throws SQLException {
+	public static int actualizar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
-		return _comando.executeUpdate(sql);
+		return _comando.executeUpdate(sql.toUpperCase());
 	}
 
 	/**
-	 * Metodo que vale para hacer consultas (Select) a la base de datos
+	 * This method is used to make queries (Select) to the data base
 	 * 
 	 * @param sql
-	 *            Recibe como parametro la instruccion SQL en forma de String
-	 * @return Devuelve el resultado de la consulta en forma de ResultSet
+	 *            Receives as parameter the SQL instruction as String
+	 * @return Returns the query's result as ResultSet
 	 * @throws SQLException
-	 *             Si ha habido algun error en la base de datos o en la consulta
+	 *             If there has been any error in the data base or in the query
 	 */
 	public static ResultSet consultar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
-		return _comando.executeQuery(sql);
+		return _comando.executeQuery(sql.toUpperCase());
 	}
 
 }

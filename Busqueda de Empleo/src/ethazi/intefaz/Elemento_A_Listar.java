@@ -9,11 +9,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author Nestor
+ *
+ */
 public class Elemento_A_Listar extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	// private JPanel miPaElemento_A_Listar;
@@ -31,6 +33,11 @@ public class Elemento_A_Listar extends JPanel {
 	public final static byte C_ANALIZAR_SOLICITUDES = 4;
 	public final static byte C_BUSCAR_CANDIDATOS = 5;
 
+	/**
+	 * Generates an element so it can be listed in the class Elementos_listados
+	 * @param p_elemento
+	 * @param p_constante_opcion
+	 */
 	public Elemento_A_Listar(Elemento_Listable p_elemento, byte p_constante_opcion) {
 		// miPaElemento_A_Listar=new JPanel();
 		/* miPaElemento_A_Listar. */setBounds(0, 0, 450, 50);

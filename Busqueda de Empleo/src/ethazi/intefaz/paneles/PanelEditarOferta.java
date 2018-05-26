@@ -36,7 +36,7 @@ public class PanelEditarOferta extends JPanel {
 	private JTextField txField_lugar;
 
 	/**
-	 * Create the panel.
+	 * This panel is opened by the button Editar of Oferta that allows you to edit the corresponding offer 
 	 */
 	public PanelEditarOferta() {
 		setPreferredSize(new Dimension(762, 488));

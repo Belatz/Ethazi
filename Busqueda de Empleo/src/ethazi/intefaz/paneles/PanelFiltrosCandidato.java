@@ -1,6 +1,8 @@
 package ethazi.intefaz.paneles;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -11,41 +13,44 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+
+import ethazi.datos.UtilidadesBD;
+
 import javax.swing.JCheckBox;
 
 /**
- * Crea un panel con una lista de atributos pensada para filtrar busquedas
+ * Generates a panel with a list of attributes to filter the searches
  * 
  * @author belatz
  *
  */
 public class PanelFiltrosCandidato extends JScrollPane {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txField_residencia;
 	private JTextField txField_experiencia;
 	private JTextField txField_nick;
 	private JTextField txField_nombreApe;
-
-	/**
-	 * Create the panel.
-	 */
+	
 	public PanelFiltrosCandidato() {
 		JPanel pa_filtros = crearPanelFiltros();
 		setBounds(10, 60, 247, 550);
 		getVerticalScrollBar().setUnitIncrement(16);
 		setViewportView(pa_filtros);
-
 	}
 
+	/**
+	 * Generates a filter panel.
+	 * @return pa_filtros
+	 */
 	public JPanel crearPanelFiltros() {
 		JPanel pa_filtros = new JPanel();
 
 		pa_filtros.setPreferredSize(new Dimension(228, 550));
 		pa_filtros.setLayout(null);
-
-		JButton btn_aplicar = new JButton("Aplicar");
-		btn_aplicar.setBounds(66, 11, 89, 23);
-		pa_filtros.add(btn_aplicar);
 
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 45, 226, 10);
@@ -60,7 +65,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		for (int i = 0; i < 10; i++)
 			conocimientos.add("Ejemplo " + i);
 
-		JPanel pa_conocimientos = new PanelListaDoble(conocimientos, null);
+		PanelListaDoble pa_conocimientos = new PanelListaDoble(conocimientos, null);
 		pa_conocimientos.setLocation(7, 172);
 		pa_filtros.add(pa_conocimientos);
 
@@ -73,7 +78,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		pa_filtros.add(txField_residencia);
 		txField_residencia.setColumns(10);
 
-		JLabel lbl_experiencia = new JLabel("A\u00F1os de experiencia minimos:");
+		JLabel lbl_experiencia = new JLabel("Anos de experiencia minimos:");
 		lbl_experiencia.setBounds(7, 476, 211, 14);
 		pa_filtros.add(lbl_experiencia);
 
@@ -111,6 +116,18 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		JCheckBox chBox_viajes = new JCheckBox("Disponible para viajes");
 		chBox_viajes.setBounds(7, 408, 148, 23);
 		pa_filtros.add(chBox_viajes);
+
+		JButton btn_aplicar = new JButton("Aplicar");
+		btn_aplicar.setBounds(66, 11, 89, 23);
+		btn_aplicar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO hacer algo con la lista de candidatos
+				UtilidadesBD.filtrarCandidatos(txField_nombreApe.getText(), txField_nick.getText(),
+						txField_experiencia.getText(), txField_residencia.getText(), chBox_carne.isSelected(),
+						chBox_coche.isSelected(), chBox_viajes.isSelected(), pa_conocimientos.getConocimientos());
+			}
+		});
+		pa_filtros.add(btn_aplicar);
 
 		return pa_filtros;
 	}
