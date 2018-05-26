@@ -11,14 +11,16 @@ import ethazi.aplicacion.Candidato;
 import ethazi.excepciones.PanelNoDisponible;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
+/**
+ * This panel is used in the BarraHerramientas, which is opened with the mouse,
+ * passing over the menu.
+ * 
+ * @autor JonOr
+ */
 public class PanelMenu extends JPanel {
 
-	/**
-	 * This panel is used in the BarraHerramientas, which is opened with the mouse,
-	 * passing over the menu.
-	 * 
-	 * @autor JonOr
-	 */
+	private static final long serialVersionUID = 1L;
+
 	public PanelMenu() {
 		setLayout(null);
 

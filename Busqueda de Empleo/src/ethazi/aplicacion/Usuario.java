@@ -20,13 +20,7 @@ public abstract class Usuario {
 	 * Class gets and set user personal data 
 	 */
 	public static ArrayList<String> misConocimientosTotales;
-	// Ejemplo
-	{
-		misConocimientosTotales = new ArrayList<String>();
-		misConocimientosTotales.add("Java");
-		misConocimientosTotales.add("C");
-		misConocimientosTotales.add("C++");
-	}
+
 	private String miNumID;
 	private String miNick;
 	private String miPassword;
@@ -174,38 +168,6 @@ public abstract class Usuario {
 	 * 
 	 * @return
 	 */
-	public String getMiEmail() {
-		return miEmail;
-	}
-
-	/**
-	 * 
-	 * @param miEmail
-	 */
-	public void setMiEmail(String miEmail) {
-		this.miEmail = miEmail;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String getMiTelefono() {
-		return miTelefono;
-	}
-
-	/**
-	 * 
-	 * @param miTelefono
-	 */
-	public void setMiTelefono(String miTelefono) {
-		this.miTelefono = miTelefono;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
 	public static ArrayList<String> getConocimientosTotales() {
 		return misConocimientosTotales;
 	}
@@ -229,8 +191,7 @@ public abstract class Usuario {
 	 */
 	public static boolean esCandidato(String p_nick) throws SQLException {
 		ResultSet _rs;
-		_rs = Conexion.consultar("SELECT * FROM candidato WHERE numid='" + p_nick + "';");
-		
+		_rs = Conexion.consultar("SELECT * FROM "+Tablas.C_CANDIDATO_TABLA+", "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_USUARIO_NUMID+"="+Tablas.C_CANDIDATO_NUMID+" AND "+Tablas.C_USUARIO_NICK+"='" + p_nick + "';");
 		return _rs.next();
 	}
 

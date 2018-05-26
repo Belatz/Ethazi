@@ -51,10 +51,12 @@ public class Conexion {
 	}
 
 	public void desconectar() {
-		miConexion = null; //MAL
-		if (miConexion == null) {
+		try {
+			miConexion.close();
+			miConexion = null;
 			System.out.println("Conexion con la base de datos terminada..");
-		}
+		} catch (SQLException e) {
+		} 
 	}
 
 	/**
@@ -68,7 +70,8 @@ public class Conexion {
 	 */
 	public static int actualizar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
-		return _comando.executeUpdate(sql.toUpperCase());
+		System.out.println("LOG: ACTUALIZACION -- "+sql+" ...");
+		return _comando.executeUpdate(sql);
 	}
 
 	/**
@@ -82,7 +85,9 @@ public class Conexion {
 	 */
 	public static ResultSet consultar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
-		return _comando.executeQuery(sql.toUpperCase());
+
+		System.out.println("LOG: CONSULTA -- "+sql+" ...");
+		return _comando.executeQuery(sql);
 	}
 
 }

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import ethazi.datos.Conexion;
 import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.frame.VentanaIdentificarse;
-import ethazi.pruebas.UsuariosDummy;
+import ethazi.pruebas.PruebasBD;
 
 /**
  * @author Belatz Arce, Xabier Cabezuelo, Nestor Echebarria, Eduardo Garcia,
@@ -21,9 +21,9 @@ public class Aplicacion {
 
 	public static void main(String[] args) {
 		try {
-			miConexion = new Conexion();
-			UsuariosDummy.crear();
-			Usuario.setConocimientosTotales(UtilidadesBD.descargarConocimientos());
+			miConexion = new Conexion(); // Crear la conexion con la base de datos
+			PruebasBD.insertar(); // Crear los datos de prueba si no estan ya metidos
+			Usuario.setConocimientosTotales(UtilidadesBD.descargarConocimientos()); // Descargar los conocimientos totales
 
 			VentanaIdentificarse.ejecutar();
 		} catch (SQLException e) {

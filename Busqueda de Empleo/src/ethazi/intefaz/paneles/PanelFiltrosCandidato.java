@@ -3,16 +3,15 @@ package ethazi.intefaz.paneles;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 
 import ethazi.datos.UtilidadesBD;
 
@@ -60,13 +59,15 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		lbl_conocimientos.setBounds(7, 156, 211, 14);
 		pa_filtros.add(lbl_conocimientos);
 
-		// Ejemplo
-		ArrayList<String> conocimientos = new ArrayList<String>();
-		for (int i = 0; i < 10; i++)
-			conocimientos.add("Ejemplo " + i);
+		ArrayList<String> conocimientos = new ArrayList<>();
+		try {
+			conocimientos = UtilidadesBD.descargarConocimientos();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 
 		PanelListaDoble pa_conocimientos = new PanelListaDoble(conocimientos, null);
-		pa_conocimientos.setLocation(7, 172);
+		pa_conocimientos.setLocation(9, 172);
 		pa_filtros.add(pa_conocimientos);
 
 		JLabel lbl_residencia = new JLabel("Lugar de residencia:");
@@ -122,9 +123,13 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		btn_aplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO hacer algo con la lista de candidatos
-				UtilidadesBD.filtrarCandidatos(txField_nombreApe.getText(), txField_nick.getText(),
-						txField_experiencia.getText(), txField_residencia.getText(), chBox_carne.isSelected(),
-						chBox_coche.isSelected(), chBox_viajes.isSelected(), pa_conocimientos.getConocimientos());
+				try {
+					UtilidadesBD.filtrarCandidatos(txField_nombreApe.getText(), txField_nick.getText(),
+							txField_experiencia.getText(), txField_residencia.getText(), chBox_carne.isSelected(),
+							chBox_coche.isSelected(), chBox_viajes.isSelected(), pa_conocimientos.getConocimientos());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		pa_filtros.add(btn_aplicar);

@@ -2,6 +2,7 @@ package ethazi.intefaz.paneles;
 
 import javax.swing.JPanel;
 
+import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Usuario;
@@ -52,8 +53,12 @@ public class PanelVerPerfil extends JPanel {
 	private JComboBox<Integer> mescomboBox;
 	private JComboBox<Integer> aniocomboBox;
 	private PanelListaDoble conocimientosEditar;
+	
+	private Usuario miUsuario = Aplicacion.getUsuario();
+	private boolean esPropio = true;
 
-	public PanelVerPerfil(Usuario user, boolean propio) {
+	public PanelVerPerfil() {
+		setName("Ver Perfil");
 		setPreferredSize(new Dimension(762, 488));
 		setLayout(null);
 		JLabel milblNick = new JLabel("Nick: ");
@@ -78,7 +83,7 @@ public class PanelVerPerfil extends JPanel {
 		add(nombretextField);
 		nombretextField.setColumns(10);
 
-		JLabel milblNumId = new JLabel("CIF:");
+		JLabel milblNumId = new JLabel(miUsuario instanceof Empresa?"CIF:":"DNI:");
 		milblNumId.setBounds(10, 90, 26, 14);
 		add(milblNumId);
 
@@ -122,7 +127,7 @@ public class PanelVerPerfil extends JPanel {
 		add(teltextField);
 		teltextField.setColumns(10);
 
-		if (user instanceof Candidato) {
+		if (miUsuario instanceof Candidato) {
 			JLabel milblApellidos = new JLabel("Apellidos: ");
 			milblApellidos.setBounds(456, 65, 78, 14);
 			add(milblApellidos);
@@ -164,7 +169,7 @@ public class PanelVerPerfil extends JPanel {
 			lblConocimientos.setBounds(10, 254, 102, 14);
 			add(lblConocimientos);
 	
-			conocimientosEditar = new PanelListaDoble(Usuario.getConocimientosTotales(), ((Candidato)user).getConocimientos());
+			conocimientosEditar = new PanelListaDoble(Usuario.getConocimientosTotales(), ((Candidato)miUsuario).getConocimientos());
 			conocimientosEditar.setBounds(60, 270, 214, 177);
 			add(conocimientosEditar);
 
@@ -205,12 +210,12 @@ public class PanelVerPerfil extends JPanel {
 			add(chckbxCarnet);
 
 			chckbxCoche = new JCheckBox("Coche Propio");
-			chckbxCoche.setEnabled(((Candidato) user).isCochePropio());
+			chckbxCoche.setEnabled(((Candidato) miUsuario).isCochePropio());
 			chckbxCoche.setBounds(186, 168, 118, 23);
 			add(chckbxCoche);
 
 			chckbxDisponibilidadParaViajar = new JCheckBox("Disponibilidad para Viajar");
-			chckbxDisponibilidadParaViajar.setEnabled(((Candidato) user).isDisViajar());
+			chckbxDisponibilidadParaViajar.setEnabled(((Candidato) miUsuario).isDisViajar());
 			chckbxDisponibilidadParaViajar.setBounds(303, 171, 174, 23);
 			add(chckbxDisponibilidadParaViajar);
 		} else {
@@ -220,7 +225,7 @@ public class PanelVerPerfil extends JPanel {
 
 			informacionContactotextArea = new JTextArea();
 
-			informacionContactotextArea.setText(((Empresa) user).getContacto());
+			informacionContactotextArea.setText(((Empresa) miUsuario).getContacto());
 			informacionContactotextArea.setBounds(46, 234, 239, 213);
 			add(informacionContactotextArea);
 
@@ -230,12 +235,12 @@ public class PanelVerPerfil extends JPanel {
 
 			descripciontextArea = new JTextArea();
 
-			descripciontextArea.setText(((Empresa) user).getDescripcion());
+			descripciontextArea.setText(((Empresa) miUsuario).getDescripcion());
 			descripciontextArea.setBounds(343, 234, 239, 213);
 			add(descripciontextArea);
 		}
 
-		inicializarDatos(user);
+		inicializarDatos(miUsuario);
 		Label label = new Label("Su Perfil:");
 		label.setAlignment(Label.CENTER);
 		label.setFont(new Font("Dialog", Font.BOLD, 30));
@@ -245,12 +250,12 @@ public class PanelVerPerfil extends JPanel {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 50, 742, 2);
 		add(separator);
-		if (propio) {
+		if (esPropio) {
 			JButton btnEditar = new JButton("Editar");
 			btnEditar.setToolTipText("Editar Perfil");
 			btnEditar.setBounds(693, 454, 67, 23);
 			add(btnEditar);
-			habilitarODes(false, user);
+			habilitarODes(false, miUsuario);
 			btnEditar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -262,7 +267,7 @@ public class PanelVerPerfil extends JPanel {
 					JButton btnCancelar = new JButton("Cancelar");
 					btnCancelar.setBounds(2, 454, 86, 23);
 					add(btnCancelar);
-					habilitarODes(true, user);
+					habilitarODes(true, miUsuario);
 					btnValidar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
@@ -272,18 +277,18 @@ public class PanelVerPerfil extends JPanel {
 					btnCancelar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							habilitarODes(false, user);
+							habilitarODes(false, miUsuario);
 							btnValidar.removeAll();
 							btnCancelar.removeAll();
 							btnEditar.setVisible(true);
-							inicializarDatos(user);
+							inicializarDatos(miUsuario);
 						}
 					});
 
 				}
 			});
 		} else {
-			if (user instanceof Candidato) {
+			if (miUsuario instanceof Candidato) {
 				JButton btnGuardarCV = new JButton("Guardar CV");
 				btnGuardarCV.setToolTipText("Guarda el Curr\u00EDculum Vitae");
 				btnGuardarCV.setBounds(693, 454, 67, 23);
@@ -292,32 +297,32 @@ public class PanelVerPerfil extends JPanel {
 				btnGuardarCV.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						File cv = new File(user.getNombre() + "-" + ((Candidato) user).getApellidos() + "-CV");
+						File cv = new File(miUsuario.getNombre() + "-" + ((Candidato) miUsuario).getApellidos() + "-CV");
 						if (cv.exists()) {
 							cv.delete();
 						}
 						PrintWriter pw;
 						try {
 							pw = new PrintWriter(new FileWriter(cv));
-							pw.println(user.getNombre() + " " + ((Candidato) user).getApellidos());
-							pw.println(user.getNumID());
-							pw.println(user.getDireccion());
-							pw.println(((Candidato) user).getFechaNac());
-							pw.println(user.getTelefono());
-							pw.println(user.getEmail());
-							pw.println("Carnet de Conducir: " + (((Candidato) user).isCarnet() ? "Sí" : "No"));
-							pw.println("Coche Propio: " + (((Candidato) user).isCarnet() ? "Sí" : "No"));
-							pw.println("Disponibilidad para Viajar: " + (((Candidato) user).isCarnet() ? "Sí" : "No"));
-							pw.println("Estudios: " + ((Candidato) user).getEstudios());
+							pw.println(miUsuario.getNombre() + " " + ((Candidato) miUsuario).getApellidos());
+							pw.println(miUsuario.getNumID());
+							pw.println(miUsuario.getDireccion());
+							pw.println(((Candidato) miUsuario).getFechaNac());
+							pw.println(miUsuario.getTelefono());
+							pw.println(miUsuario.getEmail());
+							pw.println("Carnet de Conducir: " + (((Candidato) miUsuario).isCarnet() ? "Sí" : "No"));
+							pw.println("Coche Propio: " + (((Candidato) miUsuario).isCarnet() ? "Sí" : "No"));
+							pw.println("Disponibilidad para Viajar: " + (((Candidato) miUsuario).isCarnet() ? "Sí" : "No"));
+							pw.println("Estudios: " + ((Candidato) miUsuario).getEstudios());
 							pw.println("Conocimientos: ");
-							for (int i = 0; i < ((Candidato) user).getConocimientos().size(); i++) {
-								pw.println(((Candidato) user).getConocimientos().get(i));
+							for (int i = 0; i < ((Candidato) miUsuario).getConocimientos().size(); i++) {
+								pw.println(((Candidato) miUsuario).getConocimientos().get(i));
 							}
 							pw.println("Otros Conocimientos:");
-							pw.println(((Candidato) user).getOtrosConocimientos());
-							pw.println("Vida Laboral: " + ((Candidato) user).getVidaLaboral());
+							pw.println(((Candidato) miUsuario).getOtrosConocimientos());
+							pw.println("Vida Laboral: " + ((Candidato) miUsuario).getVidaLaboral());
 							pw.print(
-									"Experiencia Profesional: " + ((Candidato) user).getExperienciaProfesional() + " años");
+									"Experiencia Profesional: " + ((Candidato) miUsuario).getExperienciaProfesional() + " años");
 							pw.close();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
@@ -435,5 +440,10 @@ public class PanelVerPerfil extends JPanel {
 			conocimientosEditar.getBtn_anadir().setVisible(hab);
 			conocimientosEditar.getBtn_eliminar().setVisible(hab);
 		}
+	}
+	
+	public void setUsuario(Usuario user, boolean esPropio) {
+		miUsuario = user;
+		this.esPropio = esPropio;
 	}
 }

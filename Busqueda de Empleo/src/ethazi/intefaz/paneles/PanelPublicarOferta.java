@@ -9,16 +9,20 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
 import ethazi.aplicacion.Usuario;
+import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.emergentes.EmergenteCambios;
 import ethazi.intefaz.emergentes.TieneEmergente;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 	/**
@@ -36,6 +40,7 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 	 * Create the panel.
 	 */
 	public PanelPublicarOferta() {
+		setName("Publicar Oferta");
 		setPreferredSize(new Dimension(762,488));
 		setLayout(null);
 		
@@ -121,10 +126,31 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 		txField_buscarCono.setColumns(10);
 		
 		JButton btn_buscar = new JButton("");
+		btn_buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				pa_conocimientos.filtrarElemento(txField_buscarCono.getText());
+			}
+		});
 		btn_buscar.setBounds(682, 138, 24, 23);
 		add(btn_buscar);
 		
 		JButton btn_crear = new JButton("");
+		btn_crear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					// Si el conocimiento ya existe
+					if (UtilidadesBD.buscarConocimiento(txField_buscarCono.getText())) {
+						// TODO sacar ventana emergente con "El conocimiento ya existe"
+					} else {
+						// TODO sacar ventana emergente con "Seguro que quieres añadir + ???? + ? "
+						// TODO añadir conocimiento
+						// TODO actualizar lista y conocimientos totales
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		btn_crear.setBounds(716, 138, 24, 23);
 		add(btn_crear);
 		
@@ -145,7 +171,7 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 		combo_contrato.addItem("Indefinido Tiempo Completo");
 		combo_contrato.addItem("Indefinido Tiempo Parcial");
 		combo_contrato.addItem("Temporal Tiempo Completo");
-		combo_contrato.addItem("Temporal Tiempo Parcial");
+		combo_contrato.addItem("Temporal Tiempo Parcial"); //TODO cambiar por enumeracion
 		combo_contrato.setBounds(506, 83, 159, 20);
 		add(combo_contrato);
 		

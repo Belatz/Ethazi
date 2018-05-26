@@ -17,7 +17,6 @@ import ethazi.intefaz.Elementos_Listados;
  * @author JonOr
  *
  */
-
 public class GenericoDePanelesConLista extends JPanel {
 	public Elementos_Listados panel_QueTieneLaLista = null;
 	public JPanel _panelBotonAtrasYAlante = null;
@@ -57,7 +56,7 @@ public class GenericoDePanelesConLista extends JPanel {
 			pa_listado.setBounds(10, 0, 500, 443);
 			_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
 			_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
-
+			System.out.println("LOG: PANEL ACTUAL -- Sus Solicitudes");
 			break;
 
 		case Elemento_A_Listar.C_CONSULTAR_OFERTAS:
@@ -83,7 +82,7 @@ public class GenericoDePanelesConLista extends JPanel {
 			JScrollPane pa_filtrosOferta = new PanelFiltrosOferta();
 			pa_filtrosOferta.setBounds(512, 0, 247, 482);
 			add(pa_filtrosOferta);
-
+			System.out.println("LOG: PANEL ACTUAL -- Consultar Ofertas");
 			break;
 
 		case Elemento_A_Listar.C_VER_OFERTAS_CON_SOLICITUD:
@@ -97,7 +96,7 @@ public class GenericoDePanelesConLista extends JPanel {
 
 			_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
 			_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
-
+			System.out.println("LOG: PANEL ACTUAL -- Ofertas con Solicitudes");
 			break;
 
 		case Elemento_A_Listar.C_CONSULTAR_SUS_OFERTAS:
@@ -110,7 +109,7 @@ public class GenericoDePanelesConLista extends JPanel {
 
 			_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
 			_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
-
+			System.out.println("LOG: PANEL ACTUAL -- Sus Ofertas");
 			break;
 
 		case Elemento_A_Listar.C_ANALIZAR_SOLICITUDES:
@@ -123,7 +122,7 @@ public class GenericoDePanelesConLista extends JPanel {
 
 			_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
 			_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
-
+			System.out.println("LOG: PANEL ACTUAL -- Analizar Solicitudes");
 			break;
 
 		case Elemento_A_Listar.C_BUSCAR_CANDIDATOS:
@@ -140,6 +139,7 @@ public class GenericoDePanelesConLista extends JPanel {
 			JScrollPane pa_filtrosCandidato = new PanelFiltrosCandidato();
 			pa_filtrosCandidato.setBounds(512, 0, 247, 482);
 			add(pa_filtrosCandidato);
+			System.out.println("LOG: PANEL ACTUAL -- Buscar Candidatos");
 			break;
 
 		}

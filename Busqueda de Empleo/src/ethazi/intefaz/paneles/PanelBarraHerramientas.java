@@ -31,7 +31,7 @@ public class PanelBarraHerramientas extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txField_buscar;
+	private static JTextField txField_buscar;
 
 	/*
 	 * public static ArrayList<Elemento_Listable> listaDeOfertas = new
@@ -93,15 +93,15 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_apagar.setBounds(702, 0, 50, 50);
 		add(btn_apagar);
 
-		txField_buscar = new JTextField();
-		txField_buscar.setHorizontalAlignment(SwingConstants.RIGHT);
-		txField_buscar.setToolTipText("");
-		txField_buscar.setText("Introduzca el nombre de la Oferta....\r\n");
-		txField_buscar.setHorizontalAlignment(SwingConstants.CENTER);
-		txField_buscar.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txField_buscar.setColumns(10);
-		txField_buscar.setBounds(51, 0, 277, 50);
-		add(txField_buscar);
+		setTxField_buscar(new JTextField());
+		getTxField_buscar().setHorizontalAlignment(SwingConstants.RIGHT);
+		getTxField_buscar().setToolTipText("");
+		getTxField_buscar().setText("Introduzca el nombre de la Oferta....\r\n");
+		getTxField_buscar().setHorizontalAlignment(SwingConstants.CENTER);
+		getTxField_buscar().setFont(new Font("Tahoma", Font.PLAIN, 11));
+		getTxField_buscar().setColumns(10);
+		getTxField_buscar().setBounds(51, 0, 277, 50);
+		add(getTxField_buscar());
 
 		btnMenu = new JButton("Otras cosas");
 		btnMenu.addActionListener(new ActionListener() {
@@ -152,6 +152,14 @@ public class PanelBarraHerramientas extends JPanel {
 			menu = true;
 			btnMenu.setVisible(true);
 		}
+	}
+
+	public static String getTxField_buscar() {
+		return txField_buscar.getText();
+	}
+
+	public void setTxField_buscar(JTextField txField_buscar) {
+		this.txField_buscar = txField_buscar;
 	}
 
 }
