@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,7 +13,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ethazi.aplicacion.Aplicacion;
-import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
@@ -41,9 +39,8 @@ public class PanelBarraHerramientas extends JPanel {
 	 * 
 	 * public PanelBarraHerramientas(GenericoDePanelesConLista pa_buscarOfertas) {
 	 */
-
 	private static boolean menu = true;
-	static JButton btnMenu;
+	private static JButton btnMenu;
 
 	public PanelBarraHerramientas() {
 		setLayout(null);
@@ -68,7 +65,8 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_perfil.setMinimumSize(new Dimension(33, 9));
 		btn_perfil.setMaximumSize(new Dimension(33, 9));
 		btn_perfil.setBounds(642, 0, 50, 50);
-		btn_perfil.addActionListener(new ActionListener() {
+		
+		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_VER_PERFIL);

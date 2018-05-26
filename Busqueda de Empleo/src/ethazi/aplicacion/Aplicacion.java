@@ -20,7 +20,6 @@ public class Aplicacion {
 	private static Conexion miConexion;
 
 	public static void main(String[] args) {
-		System.out.println("ola");
 		try {
 			miConexion = new Conexion();
 			UsuariosDummy.crear();
@@ -38,7 +37,6 @@ public class Aplicacion {
 	 * 
 	 * @return miUsuario
 	 */
-
 	public static Usuario getUsuario() {
 		return miUsuario;
 	}

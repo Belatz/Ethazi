@@ -1,6 +1,8 @@
 package ethazi.intefaz.frame;
 
 import java.awt.CardLayout;
+
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -9,9 +11,33 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+import ethazi.intefaz.paneles.PanelBarraHerramientas;
+import ethazi.intefaz.paneles.PanelConocimientosBuscados;
+
+import ethazi.intefaz.paneles.PanelEditarOferta;
+import ethazi.intefaz.paneles.PanelMenu;
+import ethazi.intefaz.paneles.PanelPublicarOferta;
+import ethazi.intefaz.paneles.PanelRealizarSolicitud;
+import ethazi.intefaz.Elemento_A_Listar;
+import ethazi.intefaz.Elemento_Listable;
+import ethazi.intefaz.paneles.GenericoDePanelesConLista;
+
+import javax.swing.JTextField;
+
+import javax.swing.JButton;
+
+import java.awt.Font;
+
+import java.awt.Dimension;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Oferta;
@@ -21,15 +47,7 @@ import ethazi.datos.Conexion;
 import ethazi.datos.Tablas;
 import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
-import ethazi.intefaz.Elemento_A_Listar;
-import ethazi.intefaz.Elemento_Listable;
-import ethazi.intefaz.paneles.GenericoDePanelesConLista;
 import ethazi.intefaz.paneles.PanelAnalizarCandidato;
-import ethazi.intefaz.paneles.PanelBarraHerramientas;
-import ethazi.intefaz.paneles.PanelConocimientosBuscados;
-import ethazi.intefaz.paneles.PanelMenu;
-import ethazi.intefaz.paneles.PanelPublicarOferta;
-import ethazi.intefaz.paneles.PanelRealizarSolicitud;
 import ethazi.intefaz.paneles.PanelVerPerfil;
 
 public class VentanaPrincipal extends JFrame {
@@ -43,8 +61,10 @@ public class VentanaPrincipal extends JFrame {
 
 	private static JPanel contentPane;
 	private static JPanel pa_contenedor = new JPanel();
+	public static ArrayList<Elemento_Listable> listaDeElementos = new ArrayList<Elemento_Listable>();
+	private static boolean genericousado = true;
 
-	private static JPanel pa_buscarOfertas = null;
+	private static GenericoDePanelesConLista pa_buscarOfertas = null;
 	private static JPanel pa_ofertasAdecuadas = null;
 	private static JPanel pa_susSolicitudes = null;
 	private static JPanel pa_conocimientosBuscados = null;
@@ -75,9 +95,6 @@ public class VentanaPrincipal extends JFrame {
 	public static final short C_ANALIZAR_SOLICITUDES = 13;
 	public static final short C_OFERTAS_CON_SOLICITUDES = 14;
 
-	// variable de prueba
-	// ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
-
 	/**
 	 * Launches the frame
 	 */
@@ -96,8 +113,10 @@ public class VentanaPrincipal extends JFrame {
 
 	/**
 	 * Create the frame and panels
+	 * 
+	 * @throws SQLException
 	 */
-	public VentanaPrincipal() {
+	public VentanaPrincipal() throws SQLException {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 768, 575);
@@ -119,6 +138,16 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(menu);
 		menu.setLayout(null);
 		menu.setVisible(false);
+		// Prueba jonor: si lo borrais moris
+		/*
+		 * Oferta oferta; Empresa empresa; empresa = new
+		 * Empresa("ASD","asd","asd","asd","asd","asd","asd","asd","asd");
+		 * ArrayList<String> con = new ArrayList<String>(); con.add("asd"); int cont =
+		 * 0; while (cont < 12) { oferta = new Oferta(2+cont, "titulo"+cont,"sd",
+		 * "sdf",4,4,3, "sdf","asdf",true,(byte)1,empresa,con);
+		 * listaDeOfertas.add(oferta); cont++; pa_buscarOfertas = new
+		 * GenericoDePanelesConLista(listaDeOfertas, (byte)1); }
+		 */
 		MouseListener ml = new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -165,7 +194,8 @@ public class VentanaPrincipal extends JFrame {
 			e.printStackTrace();
 		}
 		
-		// crearPaneles();
+		// Crear paneles
+		crearPaneles();
 	}
 
 	/**
@@ -210,9 +240,19 @@ public class VentanaPrincipal extends JFrame {
 	 * 
 	 * @deprecated
 	 * @author belatz
+	 * @throws SQLException
 	 */
 	public void crearPaneles() {
 		if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea sus posibles ventanas
+			// Buscar ofertas
+			try {
+				listaDeElementos = UtilidadesBD.buscarOfertas("Pro");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			pa_buscarOfertas = new GenericoDePanelesConLista(listaDeElementos, (byte) 1);
+			currentPanel = new JPanel();
+			pa_buscarOfertas.setVisible(true);
 			// Crear consultar ofertas adecuadas
 			// Crear consultar sus solicitudes
 			// Crear consultar conocimientos mas buscados
@@ -256,7 +296,7 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public static void cambiarPanel(short p_nuevoPanel) throws PanelNoDisponible {
 		currentPanel.setVisible(false);
-		JPanel nuevoPanel = null;
+		JPanel nuevoPanel = new JPanel();
 
 		switch (p_nuevoPanel) {
 		case C_ABRIR_OFERTA:
@@ -272,9 +312,13 @@ public class VentanaPrincipal extends JFrame {
 
 			break;
 		case C_BUSCAR_OFERTA:
+			try {
+				cargarListado(Elemento_A_Listar.C_CONSULTAR_OFERTAS);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			// __________________________________
 			pa_buscarOfertas.updateUI();
-			;
-			pa_buscarOfertas.setVisible(true);
 			break;
 		case C_CONOCIMIENTOS_BUSCADOS:
 			nuevoPanel = pa_conocimientosBuscados;
@@ -308,12 +352,14 @@ public class VentanaPrincipal extends JFrame {
 			throw new PanelNoDisponible("La opcion elegida no existe");
 		}
 
-		if (nuevoPanel == null) {
-			throw new PanelNoDisponible("El panel elegido no se ha generado");
-		}
+		// if (nuevoPanel == null) {
+		// // throw new PanelNoDisponible("El panel elegido no se ha generado");
+		// }
 
-		nuevoPanel.setVisible(true);
+		// nuevoPanel.setVisible(true);
 		currentPanel = nuevoPanel;
+		// currentPanel.setVisible(true);
+		pa_buscarOfertas.setVisible(true);
 	}
 
 	public static void actualizar(ArrayList<Elemento_Listable> listaDeOfertas) {
@@ -322,11 +368,30 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public static void visibilidadMenu() {
-		visMenu = 0;
+
 		menu.setVisible(true);
 		menu.requestFocus();
 	}
 
+	public static void cargarListado(byte tipo) throws SQLException {
+		switch (tipo) {
+		case Elemento_A_Listar.C_CONSULTAR_SUS_SOLICITUDES:
+
+			break;
+		case Elemento_A_Listar.C_CONSULTAR_OFERTAS:
+			listaDeElementos = UtilidadesBD.buscarOfertas(PanelBarraHerramientas.txField_buscar.getText());
+			pa_buscarOfertas.actualizar(listaDeElementos, tipo);
+			break;
+
+		default:
+			break;
+		}
+
+	}
+	public static void visMenu2() {
+	menu.setVisible(false);
+	}
+	
 	/**
 	 * Quita la visibilidad a la ventana
 	 */
@@ -340,5 +405,4 @@ public class VentanaPrincipal extends JFrame {
 	public static void abrir() {
 		frame.setVisible(true);
 	}
-
 }

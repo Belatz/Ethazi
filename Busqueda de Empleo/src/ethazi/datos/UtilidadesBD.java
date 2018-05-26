@@ -61,25 +61,15 @@ public abstract class UtilidadesBD {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Returns and object Usuario through a nick by parameter
-=======
 	 * Devuelve un objeto Usuario a partir de un nick o un numid pasado por
 	 * parametro
->>>>>>> branch 'master' of https://github.com/Belatz/Ethazi.git
 	 * 
-<<<<<<< HEAD
-	 * @param p_nick
-	 *            String with user's nick
-	 * @return Returns a Usuario with last nick's data
-=======
 	 * @param p_identificador
 	 *            String con el nick o el numid del usuario
 	 * @param p_esNick
 	 *            boolean que determina el tipo de texto que le pasamos, true si es
 	 *            un nick, false si es un numid
 	 * @return Devuelve un Usuario con los datos sacados del nick pasado
->>>>>>> branch 'master' of https://github.com/Belatz/Ethazi.git
 	 * @throws SQLException
 	 */
 	public static Usuario toUsuario(String p_identificador, boolean p_esNick) throws SQLException {
