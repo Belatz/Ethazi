@@ -379,7 +379,7 @@ public abstract class UtilidadesBD {
 			ArrayList<String> p_conocimientos) throws SQLException {
 
 		ArrayList<Oferta> _ofertas = new ArrayList<>();
-		String _sentencia = "SELECT DISTINCT" + Tablas.C_OFERTA_CODIGO + " FROM " + Tablas.C_OFERTA_TABLA + ", "
+		String _sentencia = "SELECT DISTINCT " + Tablas.C_OFERTA_CODIGO + " FROM " + Tablas.C_OFERTA_TABLA + ", "
 				+ Tablas.C_OFER_CONO_TABLA + " WHERE " + Tablas.C_OFERTA_CODIGO + "=" + Tablas.C_OFER_CONO_OFERTA;
 
 		if (null != p_titulo && !p_titulo.isEmpty()) {
@@ -457,7 +457,7 @@ public abstract class UtilidadesBD {
 			throws SQLException {
 
 		ArrayList<Candidato> _candidatos = new ArrayList<>();
-		String _sentencia = "SELECT DISTINCT" + Tablas.C_CANDIDATO_NUMID + " FROM " + Tablas.C_USUARIO_TABLA + ", "
+		String _sentencia = "SELECT DISTINCT " + Tablas.C_CANDIDATO_NUMID + " FROM " + Tablas.C_USUARIO_TABLA + ", "
 				+ Tablas.C_CANDIDATO_TABLA + ", " + Tablas.C_CANDI_CONO_TABLA + " WHERE " + Tablas.C_USUARIO_NUMID + "="
 				+ Tablas.C_CANDIDATO_NUMID + " AND " + Tablas.C_CANDIDATO_NUMID + "=" + Tablas.C_CANDI_CONO_CANDIDATO;
 
