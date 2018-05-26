@@ -12,6 +12,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 
+/**
+ * 
+ * @deprecated
+ *
+ */
 public class PanelAnalizarCandidato extends JPanel {
 	/**
 	 * 

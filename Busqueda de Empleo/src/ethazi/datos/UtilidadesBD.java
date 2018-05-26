@@ -315,6 +315,13 @@ public abstract class UtilidadesBD {
 		return _empresas;
 	}
 
+	public static boolean buscarConocimiento(String p_nombre) throws SQLException {
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_CONOCIMIENTOS_TABLA + " WHERE "
+				+ Tablas.C_CONOCIMIENTOS_NOMBRE + "=" + p_nombre + ";");
+
+		return _rs.next();
+	}
+
 	/**
 	 * This method downloads in an ArrayList the list of available conocimientos
 	 * 
@@ -372,7 +379,7 @@ public abstract class UtilidadesBD {
 			ArrayList<String> p_conocimientos) throws SQLException {
 
 		ArrayList<Oferta> _ofertas = new ArrayList<>();
-		String _sentencia = "SELECT " + Tablas.C_OFERTA_CODIGO + " FROM " + Tablas.C_OFERTA_TABLA + ", "
+		String _sentencia = "SELECT DISTINCT " + Tablas.C_OFERTA_CODIGO + " FROM " + Tablas.C_OFERTA_TABLA + ", "
 				+ Tablas.C_OFER_CONO_TABLA + " WHERE " + Tablas.C_OFERTA_CODIGO + "=" + Tablas.C_OFER_CONO_OFERTA;
 
 		if (null != p_titulo && !p_titulo.isEmpty()) {
@@ -445,9 +452,76 @@ public abstract class UtilidadesBD {
 		return _ofertas;
 	}
 
-	public static void filtrarCandidatos(String text, String text2, String text3, String text4, boolean selected,
-			boolean selected2, boolean selected3, ArrayList<String> conocimientos) {
-		// TODO Filtrar candidatos
+	public static ArrayList<Candidato> filtrarCandidatos(String p_nombreApellidos, String p_nick, String p_experiencia,
+			String p_direccion, boolean p_carne, boolean p_coche, boolean p_viajes, ArrayList<String> p_conocimientos)
+			throws SQLException {
+
+		ArrayList<Candidato> _candidatos = new ArrayList<>();
+		String _sentencia = "SELECT DISTINCT " + Tablas.C_CANDIDATO_NUMID + " FROM " + Tablas.C_USUARIO_TABLA + ", "
+				+ Tablas.C_CANDIDATO_TABLA + ", " + Tablas.C_CANDI_CONO_TABLA + " WHERE " + Tablas.C_USUARIO_NUMID + "="
+				+ Tablas.C_CANDIDATO_NUMID + " AND " + Tablas.C_CANDIDATO_NUMID + "=" + Tablas.C_CANDI_CONO_CANDIDATO;
+
+		if (null != p_nombreApellidos && !p_nombreApellidos.isEmpty()) {
+			String _nombre, _apellidos;
+			_nombre = p_nombreApellidos.split(" ")[0];
+			_apellidos = p_nombreApellidos.substring(p_nombreApellidos.indexOf(' ') + 1);
+			_sentencia += " AND ";
+			_sentencia += Tablas.C_USUARIO_NOMBRE + " LIKE '%" + _nombre + "%'";
+			if (!_apellidos.isEmpty()) {
+				_sentencia += " AND ";
+				_sentencia += Tablas.C_CANDIDATO_APELLIDOS + " LIKE '%" + _apellidos + "%'";
+			}
+		}
+		if (p_nick != null && !p_nick.isEmpty()) {
+			_sentencia += " AND ";
+			_sentencia += Tablas.C_USUARIO_NICK + " LIKE '%" + p_nick + "%'";
+		}
+		if (p_experiencia != null && !p_experiencia.isEmpty()) {
+			_sentencia += " AND ";
+			_sentencia += Tablas.C_CANDIDATO_EXPERIENCIA_LABORAL + " >= " + p_experiencia;
+		}
+		if (p_direccion != null && !p_direccion.isEmpty()) {
+			_sentencia += " AND ";
+			_sentencia += Tablas.C_USUARIO_DIRECCION + "LIKE '%" + p_direccion + "%'";
+		}
+		if (p_carne) {
+			_sentencia += " AND ";
+			_sentencia += Tablas.C_CANDIDATO_CARNET + "=1";
+		}
+		if (p_coche) {
+			_sentencia += " AND ";
+			_sentencia += Tablas.C_CANDIDATO_COCHE + "=1";
+		}
+		if (p_viajes) {
+			_sentencia += " AND ";
+			_sentencia += Tablas.C_CANDIDATO_VIAJES + "=1";
+		}
+		if (p_conocimientos != null && p_conocimientos.size() > 0) {
+			boolean _primerConocimiento = true;
+
+			_sentencia += " AND ";
+			_sentencia += Tablas.C_CANDI_CONO_CONOCIMIENTO + " IN (";
+			for (String conocimiento : p_conocimientos) {
+				if (!_primerConocimiento) { // Si el primer elemento en IN( ) no pongas coma
+					_sentencia += ", ";
+				} else {
+					_primerConocimiento = false;
+				}
+				_sentencia += "'" + conocimiento + "'";
+			}
+			_sentencia += ")";
+		}
+
+		_sentencia += ";";
+		// Busca todas los candiadtos que concuerden con los filtros, los combierte en
+		// Objetos y los mete en el array
+		ResultSet _rs = Conexion.consultar(_sentencia);
+		while (_rs.next()) {
+			_candidatos.add((Candidato) toUsuario((_rs.getString(Tablas.C_CANDIDATO_NUMID)), false));
+		}
+
+		return _candidatos;
+		// TODO tener en cuenta los nombres compuestos
 
 	}
 

@@ -43,6 +43,7 @@ public class PanelIdentificarse extends JPanel {
 	 * This panel is used by the user to identify as a Candidato or a Empresa.
 	 */
 	public PanelIdentificarse() {
+		setName("Identificarse");
 		this.setLayout(null);
 
 		lbl_contrasenaErronea = new JLabel("Credenciales Incorrectas");

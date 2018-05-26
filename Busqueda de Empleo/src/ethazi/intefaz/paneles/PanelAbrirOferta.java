@@ -63,6 +63,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 			e1.printStackTrace();
 		}
 		
+		setName("Abir Oferta");
 		setPreferredSize(new Dimension(762, 488));
 		setLayout(null);
 

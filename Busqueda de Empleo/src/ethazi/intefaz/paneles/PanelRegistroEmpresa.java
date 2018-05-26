@@ -45,6 +45,7 @@ import java.awt.event.MouseEvent;
 	public PanelRegistroEmpresa() {
 		padre = this;
 		setLayout(null);
+		setName("Registro Empresa");
 
 		JLabel lblNombreDeUsuario = new JLabel("Nick:");
 		lblNombreDeUsuario.setBounds(10, 70, 46, 14);
