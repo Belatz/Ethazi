@@ -63,24 +63,27 @@ public class GenericoDePanelesConLista extends JPanel {
 		case Elemento_A_Listar.C_CONSULTAR_OFERTAS:
 			if (listaDeElementosListables.size() == 0) {
 				sinResultados = new JLabel("No se encontraron ofertas con esa busqueda");
-				sinResultados.setBounds(100,100,500,30);
+				sinResultados.setBounds(100, 100, 500, 30);
 				add(sinResultados);
-				
-			}
-			else {
-			panel_QueTieneLaLista = new Elementos_Listados(listaDeElementosListables,
-					Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 
-			setPreferredSize(new Dimension(762, 488));
+			} else {
+				panel_QueTieneLaLista = new Elementos_Listados(listaDeElementosListables,
+						Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 
-			pa_listado.setBounds(10, 0, 500, 443);
+				setPreferredSize(new Dimension(762, 488));
 
-			_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
-			_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
+				pa_listado.setBounds(10, 0, 500, 443);
+
+				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
+				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
+				pa_listado.setViewportView(panel_QueTieneLaLista);
+				add(pa_listado);
+				add(_panelBotonAtrasYAlante);
 			}
 			JScrollPane pa_filtrosOferta = new PanelFiltrosOferta();
 			pa_filtrosOferta.setBounds(512, 0, 247, 482);
 			add(pa_filtrosOferta);
+
 			break;
 
 		case Elemento_A_Listar.C_VER_OFERTAS_CON_SOLICITUD:
@@ -140,9 +143,7 @@ public class GenericoDePanelesConLista extends JPanel {
 			break;
 
 		}
-		pa_listado.setViewportView(panel_QueTieneLaLista);
-		add(pa_listado);
-		add(_panelBotonAtrasYAlante);
+
 	}
 
 }
