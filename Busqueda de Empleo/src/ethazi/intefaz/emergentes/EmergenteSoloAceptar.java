@@ -14,12 +14,11 @@ import javax.swing.SwingConstants;
 
 import ethazi.intefaz.frame.VentanaPrincipal;
 
-public class EmergenteCambios extends JDialog{
+public class EmergenteSoloAceptar extends JDialog{
 	private JButton btnAceptar;
-	private JButton btnCancelar;
 	private static final long serialVersionUID = 1L;
 
-	public EmergenteCambios(String texto) {
+	public EmergenteSoloAceptar(String texto) {
 		//
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		JPanel contentPanel=new JPanel();
@@ -28,12 +27,9 @@ public class EmergenteCambios extends JDialog{
 		contentPanel.setLayout(null);
 		
 		btnAceptar=new JButton("Aceptar");
-		btnAceptar.setBounds(10, 217, 128, 23);
+		btnAceptar.setBounds(162, 216, 128, 23);
 		contentPanel.add(btnAceptar);
 		
-		btnCancelar=new JButton("Cancelar");
-		btnCancelar.setBounds(296, 217, 128, 23);
-		contentPanel.add(btnCancelar);
 		getContentPane().add(contentPanel);
 		
 		JLabel labelTexto = new JLabel(texto);
@@ -46,7 +42,7 @@ public class EmergenteCambios extends JDialog{
 	public static void createWindow(String texto, TieneEmergente p_padre)
 	{	
 		VentanaPrincipal.desHabVentana(false, ((JPanel)p_padre).getParent());
-		EmergenteCambios ventanaEmergente=new EmergenteCambios(texto);
+		EmergenteSoloAceptar ventanaEmergente=new EmergenteSoloAceptar(texto);
 		ventanaEmergente.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		ventanaEmergente.setVisible(true);
 		ventanaEmergente.getBtnAceptar().addMouseListener(new MouseAdapter() {
@@ -55,15 +51,6 @@ public class EmergenteCambios extends JDialog{
 				ventanaEmergente.setVisible(false);
 				ventanaEmergente.removeAll();
 				p_padre.funcionalidad(true);
-				VentanaPrincipal.desHabVentana(true, ((JPanel)p_padre).getParent());
-			}
-		});
-		ventanaEmergente.getBtnCancelar().addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ventanaEmergente.setVisible(false);
-				ventanaEmergente.removeAll();
-				p_padre.funcionalidad(false);
 				VentanaPrincipal.desHabVentana(true, ((JPanel)p_padre).getParent());
 			}
 		});
@@ -78,7 +65,4 @@ public class EmergenteCambios extends JDialog{
 		return btnAceptar;
 	}
 
-	public JButton getBtnCancelar() {
-		return btnCancelar;
-	}
 }

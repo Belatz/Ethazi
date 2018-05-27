@@ -7,6 +7,9 @@ import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Usuario;
 import ethazi.datos.UtilidadesBD;
+import ethazi.intefaz.emergentes.EmergenteCambios;
+import ethazi.intefaz.emergentes.EmergenteSoloAceptar;
+import ethazi.intefaz.emergentes.TieneEmergente;
 
 import java.awt.Dimension;
 
@@ -25,16 +28,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 
-public class PanelVerPerfil extends JPanel {
+public class PanelVerPerfil extends JPanel implements TieneEmergente {
 	/**
 	 * This panel is used to show the data of the correspondent user: Empresa or
 	 * Candidato
 	 * 
-	 * @author Nestor
+	 * @author Nestor, Belatz
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField nickTextField;
@@ -57,11 +61,14 @@ public class PanelVerPerfil extends JPanel {
 	private JComboBox<Integer> mescomboBox;
 	private JComboBox<Integer> aniocomboBox;
 	private PanelListaDoble conocimientosEditar;
+	private JPanel panel;
 
 	private Usuario miUsuario = Aplicacion.getUsuario();
 	private boolean esPropio = true;
+	// private boolean emergenteAceptado;
 
 	public PanelVerPerfil() {
+		panel = this;
 		setName("Ver Perfil");
 		setPreferredSize(new Dimension(762, 488));
 		setLayout(null);
@@ -91,8 +98,7 @@ public class PanelVerPerfil extends JPanel {
 		add(nombretextField);
 		nombretextField.setColumns(10);
 
-		JLabel milblNumId = new JLabel(miUsuario instanceof Empresa ? "CIF:" : "DNI:"); // TODO cambiarlo con
-																						// inicializacion
+		JLabel milblNumId = new JLabel(miUsuario instanceof Empresa ? "CIF:" : "DNI:");
 		milblNumId.setBounds(10, 90, 26, 14);
 		add(milblNumId);
 
@@ -281,16 +287,52 @@ public class PanelVerPerfil extends JPanel {
 					btnValidar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							if (validarDatos()) {
-								try {
-									// TODO actualizar miUsuario (Setters)
-									UtilidadesBD.actualizarUsuario(miUsuario);
-								} catch (SQLException e1) {
-									e1.printStackTrace();
+//							EmergenteCambios.createWindow("¿Esta seguro de que desea guardar los cambios?",
+//									(TieneEmergente) panel);
+//							if (emergenteAceptado) {
+								if (validarDatos()) {
+									try {
+										miUsuario.setNombre(nombretextField.getText());
+										miUsuario.setDireccion(dirtextField.getText());
+										miUsuario.setEmail(emailtextField.getText());
+										miUsuario.setTelefono(teltextField.getText());
+
+										if (miUsuario instanceof Candidato) {
+											((Candidato) miUsuario).setApellidos(apellidostextField.getText());
+											((Candidato) miUsuario)
+													.setDisViajar(chckbxDisponibilidadParaViajar.isSelected());
+											((Candidato) miUsuario).setCarnet(chckbxCarnet.isSelected());
+											((Candidato) miUsuario).setCochePropio(chckbxCoche.isSelected());
+											((Candidato) miUsuario).setExperienciaProfesional(
+													Float.parseFloat(experienciaProfesionaltextField.getText()));
+											((Candidato) miUsuario)
+													.setOtrosConocimientos(otrosConocimientostextArea.getText());
+											((Candidato) miUsuario).setVidaLaboral(vidaLaboraltextArea.getText());
+											((Candidato) miUsuario).setEstudios(estudiostextArea.getText());
+											// mes-anyo-dia -> aaaa/mm/dd
+											String fecha = String.join(
+													String.valueOf(mescomboBox.getSelectedItem() + "/"),
+													String.valueOf(aniocomboBox.getSelectedItem() + "/"),
+													String.valueOf(diacomboBox.getSelectedItem()));
+											((Candidato) miUsuario).setFechaNac(fecha);
+											((Candidato) miUsuario)
+													.setConocimientos(conocimientosEditar.getConocimientosAnadidos());
+										} else {
+											((Empresa) miUsuario).setDescripcion(descripciontextArea.getText());
+											((Empresa) miUsuario).setContacto(informacionContactotextArea.getText());
+										}
+
+										UtilidadesBD.actualizarUsuario(miUsuario);
+										EmergenteSoloAceptar.createWindow("Se han guardado los cambios",
+												(TieneEmergente) panel);
+									} catch (SQLException e1) {
+										e1.printStackTrace();
+									}
+								} else {
+									EmergenteSoloAceptar.createWindow("No se ha podido guardar los cambios",
+											(TieneEmergente) panel);
 								}
-							} else {
-								// TODO mostrar error
-							}
+//							}
 						}
 					});
 					btnCancelar.addMouseListener(new MouseAdapter() {
@@ -499,4 +541,8 @@ public class PanelVerPerfil extends JPanel {
 		;
 	}
 
+	@Override
+	public void funcionalidad(boolean aceptado) {
+		//emergenteAceptado = true;
+	}
 }
