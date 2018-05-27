@@ -220,12 +220,12 @@ public class PanelVerPerfil extends JPanel {
 			add(chckbxCarnet);
 
 			chckbxCoche = new JCheckBox("Coche Propio");
-			chckbxCoche.setEnabled(((Candidato) miUsuario).isCochePropio());
+			chckbxCoche.setEnabled(((Candidato) miUsuario).hasCochePropio());
 			chckbxCoche.setBounds(186, 168, 118, 23);
 			add(chckbxCoche);
 
 			chckbxDisponibilidadParaViajar = new JCheckBox("Disponibilidad para Viajar");
-			chckbxDisponibilidadParaViajar.setEnabled(((Candidato) miUsuario).isDisViajar());
+			chckbxDisponibilidadParaViajar.setEnabled(((Candidato) miUsuario).hasDisViajar());
 			chckbxDisponibilidadParaViajar.setBounds(303, 171, 174, 23);
 			add(chckbxDisponibilidadParaViajar);
 		} else {
@@ -330,10 +330,10 @@ public class PanelVerPerfil extends JPanel {
 							pw.println(((Candidato) miUsuario).getFechaNac());
 							pw.println(miUsuario.getTelefono());
 							pw.println(miUsuario.getEmail());
-							pw.println("Carnet de Conducir: " + (((Candidato) miUsuario).isCarnet() ? "Sí" : "No"));
-							pw.println("Coche Propio: " + (((Candidato) miUsuario).isCarnet() ? "Sí" : "No"));
+							pw.println("Carnet de Conducir: " + (((Candidato) miUsuario).hasCarnet() ? "Sí" : "No"));
+							pw.println("Coche Propio: " + (((Candidato) miUsuario).hasCarnet() ? "Sí" : "No"));
 							pw.println("Disponibilidad para Viajar: "
-									+ (((Candidato) miUsuario).isCarnet() ? "Sí" : "No"));
+									+ (((Candidato) miUsuario).hasCarnet() ? "Sí" : "No"));
 							pw.println("Estudios: " + ((Candidato) miUsuario).getEstudios());
 							pw.println("Conocimientos: ");
 							for (int i = 0; i < ((Candidato) miUsuario).getConocimientos().size(); i++) {
@@ -420,9 +420,9 @@ public class PanelVerPerfil extends JPanel {
 			otrosConocimientostextArea.setText(((Candidato) user).getOtrosConocimientos());
 			vidaLaboraltextArea.setText(((Candidato) user).getVidaLaboral());
 			experienciaProfesionaltextField.setText(String.valueOf(((Candidato) user).getExperienciaProfesional()));
-			chckbxCarnet.setSelected(((Candidato) user).isCarnet());
-			chckbxCoche.setSelected(((Candidato) user).isCochePropio());
-			chckbxDisponibilidadParaViajar.setSelected(((Candidato) user).isDisViajar());
+			chckbxCarnet.setSelected(((Candidato) user).hasCarnet());
+			chckbxCoche.setSelected(((Candidato) user).hasCochePropio());
+			chckbxDisponibilidadParaViajar.setSelected(((Candidato) user).hasDisViajar());
 			conocimientosEditar.actualizarListas(Usuario.getConocimientosTotales(),
 					((Candidato) user).getConocimientos());
 		} else {
