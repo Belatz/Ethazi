@@ -10,8 +10,8 @@ import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Solicitud;
 import ethazi.aplicacion.Usuario;
-import ethazi.excepciones.NoQuedanFilas;
 import ethazi.excepciones.ResultSetVacio;
+import ethazi.excepciones.NoQuedanFilas;
 import ethazi.intefaz.Elemento_Listable;
 
 /**
@@ -543,6 +543,18 @@ public abstract class UtilidadesBD {
 		}
 
 		return _solicitudes;
+	}
+
+	public static boolean existeEmail(String p_email) throws SQLException {
+		ResultSet _rs = Conexion.consultar(
+				"SELECT * FROM " + Tablas.C_USUARIO_TABLA + " WHERE " + Tablas.C_USUARIO_EMAIL + "='" + p_email + "';");
+		return _rs.next();
+	}
+
+	public static void actualizarUsuario(Usuario usr) throws SQLException {
+		// TODO actualizar usuario
+		Conexion.actualizar("UPDATE " + Tablas.C_USUARIO_TABLA + " SET " + Tablas.C_USUARIO_NOMBRE + "='"
+				+ usr.getNombre() + "' WHERE " + Tablas.C_USUARIO_NUMID + "='" + usr.getNumID() + "';");
 	}
 
 }

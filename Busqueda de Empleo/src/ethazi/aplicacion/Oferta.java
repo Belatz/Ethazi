@@ -62,10 +62,6 @@ public class Oferta implements Elemento_Listable {
 		return miCodigo;
 	}
 
-	public void setCodigo(int miCodigo) {
-		this.miCodigo = miCodigo;
-	}
-
 	@Override
 	public String getInfo() {
 		return miTitulo;
@@ -117,14 +113,6 @@ public class Oferta implements Elemento_Listable {
 	 */
 	public Empresa getEmpresa() {
 		return miEmpresa;
-	}
-
-	/**
-	 * 
-	 * @param empresa
-	 */
-	public void setEmpresa(Empresa empresa) {
-		this.miEmpresa = empresa;
 	}
 
 	/**
