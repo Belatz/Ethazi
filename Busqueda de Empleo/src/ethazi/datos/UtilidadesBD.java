@@ -552,9 +552,48 @@ public abstract class UtilidadesBD {
 	}
 
 	public static void actualizarUsuario(Usuario usr) throws SQLException {
-		// TODO actualizar usuario
 		Conexion.actualizar("UPDATE " + Tablas.C_USUARIO_TABLA + " SET " + Tablas.C_USUARIO_NOMBRE + "='"
-				+ usr.getNombre() + "' WHERE " + Tablas.C_USUARIO_NUMID + "='" + usr.getNumID() + "';");
+				+ usr.getNombre() + "', " + Tablas.C_USUARIO_DIRECCION + "='" + usr.getDireccion() + "', "
+				+ Tablas.C_USUARIO_EMAIL + "='" + usr.getEmail() + "', " + Tablas.C_USUARIO_TELEFONO + "='"
+				+ usr.getTelefono() + "'" + " WHERE " + Tablas.C_USUARIO_NUMID + "='" + usr.getNumID() + "';");
+
+		if (usr instanceof Candidato) {
+			Candidato can = (Candidato) usr;
+			Conexion.actualizar("UPDATE " + Tablas.C_CANDIDATO_TABLA + " SET " + Tablas.C_CANDIDATO_APELLIDOS + "='"
+					+ can.getApellidos() + "', " + Tablas.C_CANDIDATO_VIAJES + "=" + (can.hasDisViajar() ? 1 : 0) + ", "
+					+ Tablas.C_CANDIDATO_CARNET + "=" + (can.hasCarnet() ? 1 : 0) + ", " + Tablas.C_CANDIDATO_COCHE
+					+ "=" + (can.hasCochePropio() ? 1 : 0) + ", " + Tablas.C_CANDIDATO_EXPERIENCIA_LABORAL + "="
+					+ can.getExperienciaProfesional() + ", " + Tablas.C_CANDIDATO_OTROS_CONOCIMIENTOS + "='"
+					+ can.getOtrosConocimientos() + "', " + Tablas.C_CANDIDATO_VIDA_LABORAL + "='"
+					+ can.getVidaLaboral() + "', " + Tablas.C_CANDIDATO_ESTUDIOS + "='" + can.getEstudios() + "', "
+					+ Tablas.C_CANDIDATO_FECHA_NAC + "='" + can.getFechaNac() + "' WHERE " + Tablas.C_CANDIDATO_NUMID
+					+ "='" + can.getNumID() + "';");
+			Conexion.actualizar("DELETE " + Tablas.C_CANDI_CONO_TABLA + " WHERE " + Tablas.C_CANDI_CONO_CANDIDATO + "='"
+					+ can.getNumID() + "';");
+			for (String conocimiento : can.getConocimientos()) {
+				Conexion.actualizar("INSERT INTO " + Tablas.C_CANDI_CONO_TABLA + " VALUES ('" + can.getNumID() + "', '"
+						+ conocimiento + "');");
+			}
+		} else {
+			Empresa emp = (Empresa) usr;
+			Conexion.actualizar("UPDATE " + Tablas.C_EMPRESA_TABLA + " SET " + Tablas.C_EMPRESA_DESCRIPCION + "='"
+					+ emp.getDescripcion() + "', " + Tablas.C_EMPRESA_CONTACTO + "='" + emp.getContacto() + "' WHERE "
+					+ Tablas.C_EMPRESA_NUMID + "='" + emp.getNumID() + "';");
+		}
+	}
+
+	public static void eliminarElemento(Object obj) throws SQLException {
+		if (obj instanceof Oferta) {
+			Oferta ofer = (Oferta) obj;
+			Conexion.actualizar("DELETE " + Tablas.C_OFERTA_TABLA + " WHERE " + Tablas.C_OFERTA_CODIGO + "="
+					+ ofer.getCodigo() + ";");
+
+		} else if (obj instanceof Solicitud) {
+			Solicitud soli = (Solicitud) obj;
+			Conexion.actualizar("DELETE " + Tablas.C_SOLICITUD_TABLA + " WHERE " + Tablas.C_SOLICITUD_CANDIDATO + "='"
+					+ soli.getCand().getNumID() + "' AND " + Tablas.C_SOLICITUD_OFERTA + "="
+					+ soli.getOfer().getCodigo() + ";");
+		}
 	}
 
 }

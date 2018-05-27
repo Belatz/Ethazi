@@ -53,14 +53,11 @@ public class Elementos_Listados extends JPanel {
 		setAlignmentX(0);
 		setAlignmentY(0);
 		setPreferredSize(new Dimension(600, 1050));
-		// TODO temporal belatz
-		if (!listaDeElementosListables.isEmpty()) {
-			mostrar10();
+		mostrar10();
 
-			for (int i = 0, coordenada = 0; i < limite; i++, coordenada += 100) {
-				arrayElementos_A_Listar.get(i).setBounds(10, coordenada, 500, 91);
-				add(arrayElementos_A_Listar.get(i));
-			}
+		for (int i = 0, coordenada = 0; i < limite; i++, coordenada += 100) {
+			arrayElementos_A_Listar.get(i).setBounds(10, coordenada, 500, 91);
+			add(arrayElementos_A_Listar.get(i));
 		}
 	}
 
@@ -73,7 +70,7 @@ public class Elementos_Listados extends JPanel {
 
 			arrayElementos_A_Listar.get(i).setBounds(10, coordenada, 500, 91);
 			add(arrayElementos_A_Listar.get(i));
-			
+
 		}
 	}
 
@@ -101,7 +98,7 @@ public class Elementos_Listados extends JPanel {
 	 * Mostrar otras 10.
 	 */
 	public void mostrarOtras10() {
-		limite=10;
+		limite = 10;
 		int cont = 0;
 		arrayElementos_A_Listar.clear();
 		arrayElementos_A_Listar = new ArrayList<Elemento_A_Listar>();
