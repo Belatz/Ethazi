@@ -126,7 +126,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 				try {
 					UtilidadesBD.filtrarCandidatos(txField_nombreApe.getText(), txField_nick.getText(),
 							txField_experiencia.getText(), txField_residencia.getText(), chBox_carne.isSelected(),
-							chBox_coche.isSelected(), chBox_viajes.isSelected(), pa_conocimientos.getConocimientos());
+							chBox_coche.isSelected(), chBox_viajes.isSelected(), pa_conocimientos.getConocimientosAnadidos());
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

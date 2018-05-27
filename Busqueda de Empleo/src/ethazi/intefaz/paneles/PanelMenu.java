@@ -1,9 +1,5 @@
 package ethazi.intefaz.paneles;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import ethazi.aplicacion.Aplicacion;
@@ -11,16 +7,21 @@ import ethazi.aplicacion.Candidato;
 import ethazi.excepciones.PanelNoDisponible;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
-/**
- * This panel is used in the BarraHerramientas, which is opened with the mouse,
- * passing over the menu.
- * 
- * @autor JonOr
- */
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class PanelMenu extends JPanel {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * This panel is used in the BarraHerramientas, which is opened with the mouse, passing over the menu.
+	 * @autor JonOr
+	 */
 	public PanelMenu() {
 		setLayout(null);
 
@@ -42,7 +43,7 @@ public class PanelMenu extends JPanel {
 			btn_ofertasAdecuadas.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_OFERTAS_ADECUADAS);
+						VentanaPrincipal.cambiarPanel( (short) VentanaPrincipal.C_OFERTAS_ADECUADAS );
 					} catch (PanelNoDisponible e) {
 						e.printStackTrace();
 					}
@@ -67,7 +68,7 @@ public class PanelMenu extends JPanel {
 			JButton btn_solicitudes = new JButton("Ver ofertas con solicitudes");
 			btn_solicitudes.addActionListener(new ActionListener() {
 
-				public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent arg0) {
 					try {
 						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_OFERTAS_CON_SOLICITUDES);
 					} catch (PanelNoDisponible e) {
@@ -118,6 +119,6 @@ public class PanelMenu extends JPanel {
 			add(button);
 		}
 
-	}
+}
 
 }

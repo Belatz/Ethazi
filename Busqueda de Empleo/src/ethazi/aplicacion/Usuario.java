@@ -62,26 +62,10 @@ public abstract class Usuario {
 
 	/**
 	 * 
-	 * @param miNick
-	 */
-	public void setNick(String miNick) {
-		this.miNick = miNick;
-	}
-
-	/**
-	 * 
 	 * @return
 	 */
 	public String getPassword() {
 		return miPassword;
-	}
-
-	/**
-	 * 
-	 * @param miPassword
-	 */
-	public void setPassword(String miPassword) {
-		this.miPassword = miPassword;
 	}
 
 	/**
@@ -106,14 +90,6 @@ public abstract class Usuario {
 	 */
 	public String getNumID() {
 		return miNumID;
-	}
-
-	/**
-	 * 
-	 * @param p_numID
-	 */
-	public void setNumID(String p_numID) {
-		this.miNumID = p_numID;
 	}
 
 	/**

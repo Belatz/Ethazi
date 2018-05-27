@@ -66,7 +66,7 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_perfil.setMaximumSize(new Dimension(33, 9));
 		btn_perfil.setBounds(642, 0, 50, 50);
 		
-		btn_buscar.addActionListener(new ActionListener() {
+		btn_perfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_VER_PERFIL);

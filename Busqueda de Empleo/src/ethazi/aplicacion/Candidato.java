@@ -50,7 +50,7 @@ public class Candidato extends Usuario implements Elemento_Listable {
 		return fechaNac;
 	}
 
-	public boolean isCarnet() {
+	public boolean hasCarnet() {
 		return carnet;
 	}
 
@@ -58,7 +58,7 @@ public class Candidato extends Usuario implements Elemento_Listable {
 		this.carnet = carnet;
 	}
 
-	public boolean isCochePropio() {
+	public boolean hasCochePropio() {
 		return cochePropio;
 	}
 
@@ -66,7 +66,7 @@ public class Candidato extends Usuario implements Elemento_Listable {
 		this.cochePropio = cochePropio;
 	}
 
-	public boolean isDisViajar() {
+	public boolean hasDisViajar() {
 		return disViajar;
 	}
 
@@ -116,7 +116,6 @@ public class Candidato extends Usuario implements Elemento_Listable {
 
 	@Override
 	public String getInfo() {
-		// TODO Auto-generated method stub
 		return getNombre() + " " + apellidos;
 	}
 }

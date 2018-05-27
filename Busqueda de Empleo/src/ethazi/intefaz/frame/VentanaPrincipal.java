@@ -45,20 +45,19 @@ public class VentanaPrincipal extends JFrame {
 	private static boolean genericousado = true;
 
 	private static GenericoDePanelesConLista pa_buscarOfertas = null;
-	private static JPanel pa_ofertasAdecuadas = null;
-	private static JPanel pa_susSolicitudes = null;
-	private static JPanel pa_conocimientosBuscados = null;
-	private static JPanel pa_realizarSolicitud = null;
-	private static JPanel pa_abrirOferta = null;
-	private static JPanel pa_verPerfil = null;
-	private static JPanel pa_consultarCandidatos = null;
-	private static JPanel pa_susOfertas;
-	private static JPanel panelDeOfertas;
-	private static JPanel pa_publicarOferta = null;
-	private static JPanel pa_analizarCandidato = null;
-	private static JPanel pa_analizarSolicitudes = null;
-	private static JPanel pa_ofertasConSolici = null;
-	private static JPanel menu;
+	private static GenericoDePanelesConLista pa_ofertasAdecuadas = null;
+	private static GenericoDePanelesConLista pa_susSolicitudes = null;
+	private static PanelConocimientosBuscados pa_conocimientosBuscados = null;
+	private static PanelRealizarSolicitud pa_realizarSolicitud = null;
+	private static PanelAbrirOferta pa_abrirOferta = null;
+	private static PanelVerPerfil pa_verPerfil = null;
+	private static GenericoDePanelesConLista pa_consultarCandidatos = null;
+	private static GenericoDePanelesConLista pa_susOfertas;
+	private static GenericoDePanelesConLista panelDeOfertas;
+	private static PanelPublicarOferta pa_publicarOferta = null;
+	private static GenericoDePanelesConLista pa_analizarSolicitudes = null;
+	private static GenericoDePanelesConLista pa_ofertasConSolici = null;
+	private static PanelMenu menu;
 
 	public static final short C_BUSCAR_OFERTA = 0;
 	public static final short C_ANALIZAR_EMPRESA = 1;
@@ -296,6 +295,10 @@ public class VentanaPrincipal extends JFrame {
 		}
 	}
 
+	public static void cambiarPanel(short p_nuevoPanel) throws PanelNoDisponible {
+		cambiarPanel(p_nuevoPanel, null);
+	}
+
 	/**
 	 * Switches between panels
 	 * 
@@ -305,7 +308,7 @@ public class VentanaPrincipal extends JFrame {
 	 * @throws PanelNoDisponible
 	 *             If the choosen panel doesn't exist
 	 */
-	public static void cambiarPanel(short p_nuevoPanel) throws PanelNoDisponible {
+	public static void cambiarPanel(short p_nuevoPanel, Object p_obj) throws PanelNoDisponible {
 		currentPanel.setVisible(false);
 		JPanel nuevoPanel = new JPanel();
 
@@ -356,7 +359,8 @@ public class VentanaPrincipal extends JFrame {
 
 			break;
 		case C_VER_PERFIL:
-
+			pa_verPerfil.cambiarPerfil(Aplicacion.getUsuario(), true);
+			nuevoPanel = pa_verPerfil;
 			break;
 
 		default:
@@ -367,7 +371,7 @@ public class VentanaPrincipal extends JFrame {
 			throw new PanelNoDisponible("El panel elegido no se ha generado");
 		}
 
-		// nuevoPanel.setVisible(true);
+		nuevoPanel.setVisible(true);
 		currentPanel = nuevoPanel;
 		// pa_buscarOfertas.setVisible(true);
 		System.out.println("LOG: PANEL ACTUAL -- " + currentPanel.getName());

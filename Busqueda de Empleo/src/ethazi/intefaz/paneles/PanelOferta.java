@@ -23,6 +23,11 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * 
+ * @deprecated
+ *
+ */
 public class PanelOferta extends JPanel implements TieneEmergente{
 
 	private static final long serialVersionUID = 1L;

@@ -132,7 +132,7 @@ public class PanelFiltrosOferta extends JScrollPane {
 				try {
 					UtilidadesBD.filtrarOfertas(txField_titulo.getText(), (String) combo_lugar.getSelectedItem(),
 							txField_sueldoMax.getText(), txField_sueldoMin.getText(), txFiedl_experiencia.getText(),
-							(String) combo_contrato.getSelectedItem(), txField_empresa.getText(), pa_conocimientos.getConocimientos());
+							(String) combo_contrato.getSelectedItem(), txField_empresa.getText(), pa_conocimientos.getConocimientosAnadidos());
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
