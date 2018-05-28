@@ -85,7 +85,6 @@ public class Conexion {
 	 */
 	public static ResultSet consultar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
-
 		System.out.println("LOG: CONSULTA -- "+sql+" ...");
 		return _comando.executeQuery(sql);
 	}

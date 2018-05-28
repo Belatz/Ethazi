@@ -175,12 +175,7 @@ public class VentanaPrincipal extends JFrame {
 		crearPaneles();
 
 		// Crear panel inicial
-		try {
-			crearPaneles();
-			crearPrimerPanel();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		crearPrimerPanel();
 	}
 
 	/**
@@ -194,12 +189,12 @@ public class VentanaPrincipal extends JFrame {
 		} else {
 			ArrayList<Oferta> _ofertas = UtilidadesBD.buscarOfertasEmpresa(Aplicacion.getUsuario().getNumID());
 
-			if (listaDeElementos.isEmpty()) { // Si no tiene ofertas publicadas
+			if (_ofertas.isEmpty()) { // Si no tiene ofertas publicadas
 				currentPanel = pa_buscarOfertas;
 				System.out.println("LOG: PANEL ACTUAL -- Publicar Oferta");
 			} else {
 				// Buscar ofertas con solicitudes
-				currentPanel = pa_buscarOfertas;
+				currentPanel = pa_ofertasConSolici;
 			}
 		}
 		currentPanel.setVisible(true);
@@ -305,7 +300,7 @@ public class VentanaPrincipal extends JFrame {
 	 *            The new panel to show
 	 * @throws PanelNoDisponible
 	 *             If the choosen panel doesn't exist
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public static void cambiarPanel(short p_nuevoPanel, Object p_obj) throws PanelNoDisponible, SQLException {
 		currentPanel.setVisible(false);

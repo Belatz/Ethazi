@@ -46,7 +46,7 @@ public abstract class UtilidadesBD {
 		Usuario _usr = null;
 		String _nick = p_rs.getString(Tablas.C_USUARIO_NICK);
 
-		if (Usuario.esCandidato(_nick)) {
+		if (Usuario.esCandidato(_nick, true)) {
 			_usr = new Candidato(_nick, p_rs.getString(Tablas.C_USUARIO_PASSWORD),
 					p_rs.getString(Tablas.C_USUARIO_NOMBRE), p_rs.getString(Tablas.C_USUARIO_NUMID),
 					p_rs.getString(Tablas.C_USUARIO_DIRECCION), p_rs.getString(Tablas.C_USUARIO_EMAIL),
@@ -86,7 +86,7 @@ public abstract class UtilidadesBD {
 		ResultSet _rs;
 
 		if (p_esNick) {
-			if (Usuario.esCandidato(p_identificador)) {
+			if (Usuario.esCandidato(p_identificador, p_esNick)) {
 				_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_CANDIDATO_TABLA
 						+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND "
 						+ Tablas.C_USUARIO_NICK + "='" + p_identificador + "';");
@@ -96,7 +96,7 @@ public abstract class UtilidadesBD {
 						+ Tablas.C_USUARIO_NICK + "='" + p_identificador + "';");
 			}
 		} else {
-			if (Usuario.esCandidato(p_identificador)) {
+			if (Usuario.esCandidato(p_identificador, p_esNick)) {
 				_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_CANDIDATO_TABLA
 						+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND "
 						+ Tablas.C_USUARIO_NUMID + "='" + p_identificador + "';");
@@ -554,6 +554,22 @@ public abstract class UtilidadesBD {
 		return _rs.next();
 	}
 
+	public static void actualizarOferta(Oferta ofer) throws SQLException {
+		Conexion.actualizar("UPDATE " + Tablas.C_OFERTA_TABLA + " SET " + Tablas.C_OFERTA_DESCRIPCION + "='" + ofer.getDescripcion() + "', "
+				+ Tablas.C_OFERTA_LUGAR + "='" + ofer.getLugar() + "', " + Tablas.C_OFERTA_EXPERIENCIA + "="
+				+ ofer.getExperiencia() + ", " + Tablas.C_OFERTA_TIPO_CONTRATO + "=" + ofer.getContrato() + ", "
+				+ Tablas.C_OFERTA_SUELDO_MAX + "=" + ofer.getSalarioMax() + ", " + Tablas.C_OFERTA_SUELDO_MIN + "="
+				+ ofer.getSalarioMin() + ", " + Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES + "='"
+				+ ofer.getAspectosImprescindibles() + "', " + Tablas.C_OFERTA_ASPECTOS_VALORAR + "='"
+				+ ofer.getAspectosAValorar() + "' WHERE " + Tablas.C_OFERTA_CODIGO + "=" + ofer.getCodigo() + ";");
+		Conexion.actualizar("DELETE " + Tablas.C_OFER_CONO_TABLA + " WHERE " + Tablas.C_OFER_CONO_OFERTA + "="
+				+ ofer.getCodigo() + ";");
+		for (String conocimiento : ofer.getConocimientos()) {
+			Conexion.actualizar("INSERT INTO " + Tablas.C_OFER_CONO_TABLA + " VALUES (" + ofer.getCodigo() + ", '"
+					+ conocimiento + "');");
+		}
+	}
+
 	public static void actualizarUsuario(Usuario usr) throws SQLException {
 		Conexion.actualizar("UPDATE " + Tablas.C_USUARIO_TABLA + " SET " + Tablas.C_USUARIO_NOMBRE + "='"
 				+ usr.getNombre() + "', " + Tablas.C_USUARIO_DIRECCION + "='" + usr.getDireccion() + "', "
@@ -602,12 +618,12 @@ public abstract class UtilidadesBD {
 	public static ArrayList<String> buscarConocimientosRequeridos() throws SQLException {
 		ArrayList<String> _conocimientos = new ArrayList<>();
 		ResultSet _rs = Conexion.consultar("SELECT " + Tablas.C_OFER_CONO_CONOCIMIENTO + ", COUNT(*) FROM "
-				+ Tablas.C_OFER_CONO_TABLA + " GROUP BY "+Tablas.C_OFER_CONO_CONOCIMIENTO+" ORDER BY 2;");
+				+ Tablas.C_OFER_CONO_TABLA + " GROUP BY " + Tablas.C_OFER_CONO_CONOCIMIENTO + " ORDER BY 2;");
 
-		while(_rs.next()) {
+		while (_rs.next()) {
 			_conocimientos.add(_rs.getString(1));
 		}
-		
+
 		return _conocimientos;
 	}
 

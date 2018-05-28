@@ -21,7 +21,7 @@ import ethazi.datos.Tablas;
  */
 public abstract class Usuario {
 	/**
-	 * Class gets and set user personal data 
+	 * Class gets and set user personal data
 	 */
 	public static ArrayList<String> misConocimientosTotales;
 
@@ -169,9 +169,17 @@ public abstract class Usuario {
 	 * @throws SQLException
 	 * @author belatz
 	 */
-	public static boolean esCandidato(String p_nick) throws SQLException {
+	public static boolean esCandidato(String p_identificador, boolean esNick) throws SQLException {
 		ResultSet _rs;
-		_rs = Conexion.consultar("SELECT * FROM "+Tablas.C_CANDIDATO_TABLA+", "+Tablas.C_USUARIO_TABLA+" WHERE "+Tablas.C_USUARIO_NUMID+"="+Tablas.C_CANDIDATO_NUMID+" AND "+Tablas.C_USUARIO_NICK+"='" + p_nick + "';");
+		if (esNick) {
+			_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_CANDIDATO_TABLA + ", " + Tablas.C_USUARIO_TABLA
+					+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND "
+					+ Tablas.C_USUARIO_NICK + "='" + p_identificador + "';");
+		}else {
+			_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_CANDIDATO_TABLA + ", " + Tablas.C_USUARIO_TABLA
+					+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND "
+					+ Tablas.C_USUARIO_NUMID + "='" + p_identificador + "';");
+		}
 		return _rs.next();
 	}
 

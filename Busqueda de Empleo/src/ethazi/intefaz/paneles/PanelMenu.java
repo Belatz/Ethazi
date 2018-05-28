@@ -10,6 +10,7 @@ import ethazi.intefaz.frame.VentanaPrincipal;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class PanelMenu extends JPanel {
@@ -37,6 +38,8 @@ public class PanelMenu extends JPanel {
 					PanelBarraHerramientas.botonMenuInv();
 				} catch (PanelNoDisponible e) {
 					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 			}
 		});
@@ -54,6 +57,8 @@ public class PanelMenu extends JPanel {
 						PanelBarraHerramientas.botonMenuInv();
 					} catch (PanelNoDisponible e) {
 						e.printStackTrace();
+					} catch (SQLException e) {
+						e.printStackTrace();
 					}
 				}
 			});
@@ -69,6 +74,8 @@ public class PanelMenu extends JPanel {
 						PanelBarraHerramientas.botonMenuInv();
 					} catch (PanelNoDisponible e) {
 						e.printStackTrace();
+					} catch (SQLException e) {
+						e.printStackTrace();
 					}
 				}
 			});
@@ -83,6 +90,8 @@ public class PanelMenu extends JPanel {
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
 					} catch (PanelNoDisponible e) {
+						e.printStackTrace();
+					} catch (SQLException e) {
 						e.printStackTrace();
 					}
 				}
@@ -100,6 +109,8 @@ public class PanelMenu extends JPanel {
 						PanelBarraHerramientas.botonMenuInv();
 					} catch (PanelNoDisponible e) {
 						e.printStackTrace();
+					} catch (SQLException e) {
+						e.printStackTrace();
 					}
 				}
 			});
@@ -116,6 +127,8 @@ public class PanelMenu extends JPanel {
 						System.out.println("algo");
 					} catch (PanelNoDisponible e) {
 						e.printStackTrace();
+					} catch (SQLException e) {
+						e.printStackTrace();
 					}
 				}
 			});
@@ -131,6 +144,8 @@ public class PanelMenu extends JPanel {
 						PanelBarraHerramientas.botonMenuInv();
 					} catch (PanelNoDisponible e) {
 						e.printStackTrace();
+					} catch (SQLException e) {
+						e.printStackTrace();
 					}
 				}
 			});
@@ -145,6 +160,8 @@ public class PanelMenu extends JPanel {
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
 					} catch (PanelNoDisponible e1) {
+						e1.printStackTrace();
+					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
 				}

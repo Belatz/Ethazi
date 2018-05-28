@@ -99,14 +99,10 @@ public class Oferta implements Elemento_Listable {
 		this.misConocimientos = misConocimientos;
 	}
 
-	/**
-	 * 
-	 * @param titulo
-	 */
-	public void setTitulo(String titulo) {
-		this.miTitulo = titulo;
+	public String getTitulo() {
+		return miTitulo;
 	}
-
+	
 	/**
 	 * 
 	 * @return

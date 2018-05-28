@@ -140,7 +140,7 @@ public class PanelIdentificarse extends JPanel {
 				+ "='" + _nick + "' AND " + Tablas.C_USUARIO_PASSWORD + "='" + _pass + "';");
 
 		if (_rs.next()) {
-			if (Usuario.esCandidato(_nick)) {
+			if (Usuario.esCandidato(_nick, true)) {
 				_usuario = Conexion.consultar("SELECT * FROM " + Tablas.C_CANDIDATO_TABLA + ", "
 						+ Tablas.C_USUARIO_TABLA + " WHERE " + Tablas.C_CANDIDATO_NUMID + "=" + Tablas.C_USUARIO_NUMID
 						+ " AND " + Tablas.C_USUARIO_NICK + "='" + _nick + "';");
