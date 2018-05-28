@@ -140,6 +140,8 @@ public abstract class UtilidadesBD {
 		emp=(Empresa)toUsuario(_rs);
 		}catch(ResultSetVacio e) {
 			emp=null;
+		} catch (NoQuedanFilas e) {
+			e.printStackTrace();
 		}
 		return emp;
 	}
@@ -152,6 +154,8 @@ public abstract class UtilidadesBD {
 		emp=(Empresa)toUsuario(_rs);
 		}catch(ResultSetVacio e) {
 			emp=null;
+		} catch (NoQuedanFilas e) {
+			e.printStackTrace();
 		}
 		return emp;
 	}
@@ -163,7 +167,8 @@ public abstract class UtilidadesBD {
 		try {
 			cand=(Candidato)toUsuario(_rs);
 		} catch (ResultSetVacio e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoQuedanFilas e) {
 			e.printStackTrace();
 		}
 		return cand;
@@ -177,6 +182,8 @@ public abstract class UtilidadesBD {
 		user=toUsuario(_rs);
 		}catch(ResultSetVacio e) {
 			user=null;
+		} catch (NoQuedanFilas e) {
+			e.printStackTrace();
 		}
 		return user;
 	}
