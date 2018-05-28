@@ -34,10 +34,10 @@ import ethazi.intefaz.paneles.PanelVerPerfil;
 
 public class VentanaPrincipal extends JFrame {
 	/**
-	 * 
+	 * Is the main window from where we load the JPanels
 	 */
 	private static final long serialVersionUID = 1L;
-	private static byte visMenu = 0;
+	private static byte visMenu = 0;                 
 	private static VentanaPrincipal frame;
 	private static JPanel currentPanel;
 
@@ -164,7 +164,7 @@ public class VentanaPrincipal extends JFrame {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		// crearPaneles();
 	}
 
@@ -176,7 +176,7 @@ public class VentanaPrincipal extends JFrame {
 			ArrayList<Elemento_Listable> _ofertas = Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(null,
 					null, null, null, String.valueOf(_usr.getExperienciaProfesional()), null, null,
 					UtilidadesBD.descargarConocimientosCandidato(_usr.getNumID())));
-			
+
 			pa_ofertasAdecuadas = new GenericoDePanelesConLista(_ofertas, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 			pa_contenedor.add(pa_ofertasAdecuadas);
 		} else {
@@ -188,12 +188,14 @@ public class VentanaPrincipal extends JFrame {
 			} else {
 				// Buscar ofertas con solicitudes
 				ArrayList<Elemento_Listable> _ofertasConSolicitud = new ArrayList<>();
-				ResultSet _rs = Conexion.consultar("SELECT "+Tablas.C_OFERTA_CODIGO+" FROM "+Tablas.C_OFERTA_TABLA+", "+Tablas.C_SOLICITUD_TABLA+" WHERE "+Tablas.C_OFERTA_CODIGO+"="+Tablas.C_SOLICITUD_OFERTA+";");
-				
-				while(_rs.next()) {
+				ResultSet _rs = Conexion.consultar("SELECT " + Tablas.C_OFERTA_CODIGO + " FROM " + Tablas.C_OFERTA_TABLA
+						+ ", " + Tablas.C_SOLICITUD_TABLA + " WHERE " + Tablas.C_OFERTA_CODIGO + "="
+						+ Tablas.C_SOLICITUD_OFERTA + ";");
+
+				while (_rs.next()) {
 					_ofertas.add(UtilidadesBD.toOferta(_rs.getString(Tablas.C_OFERTA_CODIGO)));
 				}
-				
+
 				pa_ofertasConSolici = new GenericoDePanelesConLista(_ofertasConSolicitud,
 						Elemento_A_Listar.C_VER_OFERTAS_CON_SOLICITUD);
 				pa_contenedor.add(pa_ofertasConSolici);

@@ -18,7 +18,7 @@ import java.awt.Color;
 
 public class PanelConocimientosBuscados extends JPanel {
 	/**
-	 * 
+	 * Shows the most wanted knowledge of the platform
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTable table;
@@ -46,7 +46,7 @@ public class PanelConocimientosBuscados extends JPanel {
 		table.setEnabled(false);
 		table.setBounds(10, 88, 762, 488);
 		add(scrollPane);
-		
+
 		lblqueEsLo = new JLabel("\u00BFQue es lo que quieren las empresas de ti?");
 		lblqueEsLo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblqueEsLo.setBounds(158, 28, 352, 14);
@@ -85,10 +85,9 @@ public class PanelConocimientosBuscados extends JPanel {
 				conocimientosTotales.remove(pos);
 				contadores.remove(pos);
 			}
-		}
-		else
+		} else
 			conocimientosMasBuscados.addAll(Usuario.getConocimientosTotales());
-		Vector<String> aux=new Vector<String>();
+		Vector<String> aux = new Vector<String>();
 		aux.addAll(conocimientosMasBuscados);
 		return aux;
 	}

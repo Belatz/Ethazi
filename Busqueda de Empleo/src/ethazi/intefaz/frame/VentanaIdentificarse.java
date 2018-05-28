@@ -14,8 +14,15 @@ import javax.swing.border.EmptyBorder;
 import ethazi.intefaz.paneles.PanelIdentificarse;
 import ethazi.intefaz.paneles.PanelRegistroEmpresa;
 
+/**
+ * 
+ * @author Eduardo
+ *
+ */
 public class VentanaIdentificarse extends JFrame {
-
+	/**
+	 * This window is used by the user to identify as Candidato or Empresa.
+	 */
 	private JPanel contentPane;
 
 	private static VentanaIdentificarse frame;

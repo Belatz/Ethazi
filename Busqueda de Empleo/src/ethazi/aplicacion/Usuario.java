@@ -13,7 +13,11 @@ import java.util.ArrayList;
 
 import ethazi.datos.Tablas;
 
-
+/**
+ * 
+ * @author Jonor
+ *
+ */
 public abstract class Usuario {
 	/**
 	 * Class gets and set user personal data 
@@ -155,7 +159,7 @@ public abstract class Usuario {
 
 	/**
 	 * 
-	 * @return
+	 * @return miDireccion
 	 */
 	public String getDireccion() {
 		return miDireccion;
@@ -171,7 +175,7 @@ public abstract class Usuario {
 
 	/**
 	 * 
-	 * @return
+	 * @return miEmail
 	 */
 	public String getMiEmail() {
 		return miEmail;
@@ -187,7 +191,7 @@ public abstract class Usuario {
 
 	/**
 	 * 
-	 * @return
+	 * @return miTelefono
 	 */
 	public String getMiTelefono() {
 		return miTelefono;
@@ -203,7 +207,7 @@ public abstract class Usuario {
 
 	/**
 	 * 
-	 * @return
+	 * @return misConocimientosTotales
 	 */
 	public static ArrayList<String> getConocimientosTotales() {
 		return misConocimientosTotales;
