@@ -43,7 +43,7 @@ public class PanelConocimientosBuscados extends JPanel {
 		table.setFont(new Font("Tahoma", Font.BOLD, 11));
 		table.setBackground(new Color(255, 239, 213));
 		DefaultTableModel model = new DefaultTableModel();
-		model.addColumn("", conocimientosMasBuscados(100));
+		model.addColumn("", conocimientosMasBuscados(10));
 		table.setModel(model);
 		scrollPane.setViewportView(table);
 		table.setEnabled(false);

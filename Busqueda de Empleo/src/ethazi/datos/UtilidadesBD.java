@@ -140,6 +140,8 @@ public abstract class UtilidadesBD {
 		emp=(Empresa)toUsuario(_rs);
 		}catch(ResultSetVacio e) {
 			emp=null;
+		} catch (NoQuedanFilas e) {
+			e.printStackTrace();
 		}
 		return emp;
 	}
@@ -152,6 +154,8 @@ public abstract class UtilidadesBD {
 		emp=(Empresa)toUsuario(_rs);
 		}catch(ResultSetVacio e) {
 			emp=null;
+		} catch (NoQuedanFilas e) {
+			e.printStackTrace();
 		}
 		return emp;
 	}
@@ -163,7 +167,8 @@ public abstract class UtilidadesBD {
 		try {
 			cand=(Candidato)toUsuario(_rs);
 		} catch (ResultSetVacio e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoQuedanFilas e) {
 			e.printStackTrace();
 		}
 		return cand;
@@ -177,6 +182,8 @@ public abstract class UtilidadesBD {
 		user=toUsuario(_rs);
 		}catch(ResultSetVacio e) {
 			user=null;
+		} catch (NoQuedanFilas e) {
+			e.printStackTrace();
 		}
 		return user;
 	}
@@ -282,10 +289,11 @@ public abstract class UtilidadesBD {
 		// Descargar oferta
 		ResultSet _rsOferta = Conexion.consultar(
 				"SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE " + Tablas.C_OFERTA_CODIGO + "='" + p_cod + "';");
+		_rsOferta.next();
 		// Descargar conocimientos
 		_conocimientos = descargarConocimientosOferta(_rsOferta.getString(Tablas.C_OFERTA_CODIGO));
 		// Descargar empresa de la oferta
-		ResultSet _rsEmpresa = Conexion.consultar("SELECT * FROM " + Tablas.C_EMPRESA_TABLA + ", "
+		ResultSet _rsEmpresa = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", "
 				+ Tablas.C_EMPRESA_TABLA + " WHERE " + Tablas.C_USUARIO_NUMID + " = " + Tablas.C_EMPRESA_NUMID + " AND "
 				+ Tablas.C_EMPRESA_NUMID + "='" + _rsOferta.getString(Tablas.C_OFERTA_EMPRESA) + "';");
 
@@ -680,7 +688,7 @@ public abstract class UtilidadesBD {
 	public static ArrayList<String> buscarConocimientosRequeridos() throws SQLException {
 		ArrayList<String> _conocimientos = new ArrayList<>();
 		ResultSet _rs = Conexion.consultar("SELECT " + Tablas.C_OFER_CONO_CONOCIMIENTO + ", COUNT(*) FROM "
-				+ Tablas.C_OFER_CONO_TABLA + " GROUP BY " + Tablas.C_OFER_CONO_CONOCIMIENTO + " ORDER BY 2;");
+				+ Tablas.C_OFER_CONO_TABLA + " GROUP BY " + Tablas.C_OFER_CONO_CONOCIMIENTO + " ORDER BY 2 DESC;");
 
 		while (_rs.next()) {
 			_conocimientos.add(_rs.getString(1));

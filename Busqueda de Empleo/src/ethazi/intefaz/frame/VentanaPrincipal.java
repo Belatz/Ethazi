@@ -185,12 +185,12 @@ public class VentanaPrincipal extends JFrame {
 	public static void crearPrimerPanel() throws SQLException {
 		if (Aplicacion.getUsuario() instanceof Candidato) {
 			// Buscar ofertas adecuadas
-			currentPanel = pa_buscarOfertas;
+			currentPanel = pa_ofertasAdecuadas;
 		} else {
 			ArrayList<Oferta> _ofertas = UtilidadesBD.buscarOfertasEmpresa(Aplicacion.getUsuario().getNumID());
 
 			if (_ofertas.isEmpty()) { // Si no tiene ofertas publicadas
-				currentPanel = pa_buscarOfertas;
+				currentPanel = pa_publicarOferta;
 				System.out.println("LOG: PANEL ACTUAL -- Publicar Oferta");
 			} else {
 				// Buscar ofertas con solicitudes
@@ -330,6 +330,7 @@ public class VentanaPrincipal extends JFrame {
 			//cargarListado(Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 			actualizarGenerico(listaDeElementos, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 			pa_buscarOfertas.updateUI();
+			nuevoPanel = pa_buscarOfertas;
 			break;
 		case C_CONOCIMIENTOS_BUSCADOS:
 			nuevoPanel = pa_conocimientosBuscados;

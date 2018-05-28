@@ -28,14 +28,14 @@ public class Conexion {
 	private static Connection miConexion;
 
 	private static final String C_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String C_USUARIO = "kk";
-	private static final String C_CONTRASENA = "1234";
-	private static final String C_URL = "jdbc:mysql://192.168.14.10:3306/ethazi";
+	private static final String C_USUARIO = "root";
+	private static final String C_CONTRASENA = "";
+	private static final String C_URL = "jdbc:mysql://localhost:3306/ethazi";
 
 	public Conexion() {
 		miConexion = null;
 		try {
-			Class.forName(C_DRIVER); //No es necesario
+			Class.forName(C_DRIVER); // No es necesario
 			miConexion = DriverManager.getConnection(C_URL, C_USUARIO, C_CONTRASENA);
 
 			if (miConexion != null) {
@@ -56,7 +56,7 @@ public class Conexion {
 			miConexion = null;
 			System.out.println("Conexion con la base de datos terminada..");
 		} catch (SQLException e) {
-		} 
+		}
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class Conexion {
 	 */
 	public static int actualizar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
-		System.out.println("LOG: ACTUALIZACION -- "+sql+" ...");
+		System.out.println("LOG: ACTUALIZACION -- " + sql + " ...");
 		return _comando.executeUpdate(sql);
 	}
 
@@ -85,7 +85,7 @@ public class Conexion {
 	 */
 	public static ResultSet consultar(String sql) throws SQLException {
 		Statement _comando = miConexion.createStatement();
-		System.out.println("LOG: CONSULTA -- "+sql+" ...");
+		System.out.println("LOG: CONSULTA -- " + sql + " ...");
 		return _comando.executeQuery(sql);
 	}
 }
