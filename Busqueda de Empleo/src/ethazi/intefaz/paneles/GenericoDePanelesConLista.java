@@ -61,6 +61,9 @@ public class GenericoDePanelesConLista extends JPanel {
 				pa_listado.setBounds(10, 0, 500, 443);
 				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
+				pa_listado.setViewportView(panel_QueTieneLaLista);
+				add(_panelBotonAtrasYAlante);
+				add(pa_listado);
 			}
 			System.out.println("LOG: PANEL ACTUAL -- Sus Solicitudes");
 			break;
