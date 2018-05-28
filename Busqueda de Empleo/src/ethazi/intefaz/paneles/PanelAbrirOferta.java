@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Usuario;
 import ethazi.aplicacion.Candidato;
+import ethazi.aplicacion.Contrato;
 import ethazi.aplicacion.Empresa;
 import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.emergentes.EmergenteCambios;
@@ -40,7 +41,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 	private JTextArea txArea_aspectosImpres;
 	private JTextArea txArea_descripcion;
 	private PanelListaDoble pa_conocimientos;
-	private JComboBox<String> combo_contrato;
+	private JComboBox<Contrato> combo_contrato;
 	private JLabel lbl_Oferta;
 	private JTextField textFieldTitulo;
 	private final JPanel padre = this;
@@ -182,11 +183,11 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		lbl_contrato.setBounds(411, 86, 93, 14);
 		add(lbl_contrato);
 
-		combo_contrato = new JComboBox<String>(); // TODO usar enumeracion
-		combo_contrato.addItem("Indefinido Tiempo Completo");
-		combo_contrato.addItem("Indefinido Tiempo Parcial");
-		combo_contrato.addItem("Temporal Tiempo Completo");
-		combo_contrato.addItem("Temporal Tiempo Parcial");
+		combo_contrato = new JComboBox<Contrato>(); 
+		combo_contrato.addItem(Contrato.INDEFINIDO_TIEMPO_COMPLETO);
+		combo_contrato.addItem(Contrato.INDEFINIDO_TIEMPO_PARCIAL);
+		combo_contrato.addItem(Contrato.TEMPORAL_TIEMPO_COMPLETO);
+		combo_contrato.addItem(Contrato.TEMPORTAL_TIEMPO_PARCIAL);
 		combo_contrato.setBounds(506, 83, 159, 20);
 		add(combo_contrato);
 
@@ -300,8 +301,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 				miOferta.setDescripcion(txArea_descripcion.getText());
 				miOferta.setLugar(txField_lugar.getText());
 				miOferta.setExperiencia(Integer.parseInt(txField_experiencia.getText()));
-				// TODO CONTEMPLAR CLASE CONTRATO, PROB CAMBIAR POR CONSTANTES
-				// miOferta.setContrato((String) combo_contrato.getSelectedItem());
+				miOferta.setContrato((byte) ((Contrato) combo_contrato.getSelectedItem()).getTipo());
 				miOferta.setSalarioMax(Integer.parseInt(txField_sueldoMax.getText()));
 				miOferta.setSalarioMin(Integer.parseInt(txField_sueldoMin.getText()));
 				miOferta.setAspectosImprescindibles(txArea_aspectosImpres.getText());

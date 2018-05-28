@@ -223,7 +223,7 @@ public class VentanaPrincipal extends JFrame {
 			pa_buscarOfertas.setVisible(false);
 			// Crear consultar ofertas adecuadas
 			_elementos = Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(null, null, null, null,
-					String.valueOf(_usr.getExperienciaProfesional()), null, null,
+					String.valueOf(_usr.getExperienciaProfesional()), -1, null,
 					UtilidadesBD.descargarConocimientosCandidato(_usr.getNumID())));
 			pa_ofertasAdecuadas = new GenericoDePanelesConLista(_elementos, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 			pa_contenedor.add(pa_ofertasAdecuadas);
@@ -327,7 +327,8 @@ public class VentanaPrincipal extends JFrame {
 			nuevoPanel = pa_analizarSolicitudes;
 			break;
 		case C_BUSCAR_OFERTA:
-			cargarListado(Elemento_A_Listar.C_CONSULTAR_OFERTAS);
+			//cargarListado(Elemento_A_Listar.C_CONSULTAR_OFERTAS);
+			actualizarGenerico(listaDeElementos, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 			pa_buscarOfertas.updateUI();
 			break;
 		case C_CONOCIMIENTOS_BUSCADOS:
@@ -387,8 +388,7 @@ public class VentanaPrincipal extends JFrame {
 	 * @param listaDeOfertas
 	 * @param tipoPanel
 	 */
-	public static void actualizar(ArrayList<Elemento_Listable> listaDeOfertas, byte tipoPanel) {
-		pa_buscarOfertas.updateUI();
+	public static void actualizarGenerico(ArrayList<Elemento_Listable> listaDeOfertas, byte tipoPanel) {
 		pa_buscarOfertas = new GenericoDePanelesConLista(listaDeOfertas, tipoPanel);
 	}
 

@@ -3,9 +3,6 @@ package ethazi.datos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
@@ -110,7 +107,7 @@ public abstract class UtilidadesBD {
 		try {
 			usr = toUsuario(_rs);
 		} catch (ResultSetVacio e) {
-			System.out.println("No se han encontrado usuarios con esos datos"); // TODO manejar error por interfaz
+			System.out.println("No se han encontrado usuarios con esos datos");
 		} catch (NoQuedanFilas e) {
 		}
 
@@ -378,7 +375,7 @@ public abstract class UtilidadesBD {
 	}
 
 	public static ArrayList<Oferta> filtrarOfertas(String p_titulo, String p_lugar, String p_salarioMax,
-			String p_salarioMin, String p_experiencia, String p_contrato, String p_empresa,
+			String p_salarioMin, String p_experiencia, int p_contrato, String p_empresa,
 			ArrayList<String> p_conocimientos) throws SQLException {
 
 		ArrayList<Oferta> _ofertas = new ArrayList<>();
@@ -401,14 +398,13 @@ public abstract class UtilidadesBD {
 			_sentencia += " AND ";
 			_sentencia += Tablas.C_OFERTA_SUELDO_MIN + " >= " + p_salarioMin;
 		}
-		if (p_experiencia != null && p_experiencia.isEmpty()) {
+		if (p_experiencia != null && !p_experiencia.isEmpty()) {
 			_sentencia += " AND ";
 			_sentencia += Tablas.C_OFERTA_EXPERIENCIA + " >= " + p_experiencia;
 		}
-		if (p_contrato != null && !p_contrato.isEmpty()) {
+		if (p_contrato >= 0) {
 			_sentencia += " AND ";
-			_sentencia += Tablas.C_OFERTA_TIPO_CONTRATO + " = '" + p_contrato + "'"; // TODO Controlarlo con la
-																						// enumeracion
+			_sentencia += Tablas.C_OFERTA_TIPO_CONTRATO + " = " + p_contrato; 
 		}
 		if (p_empresa != null && !p_empresa.isEmpty()) {
 			ArrayList<Empresa> _empresas = buscarEmpresas(p_empresa);
