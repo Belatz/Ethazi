@@ -81,6 +81,8 @@ public class PanelBarraHerramientas extends JPanel {
 					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_VER_PERFIL);
 				} catch (PanelNoDisponible e) {
 					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 			}
 		});
