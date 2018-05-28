@@ -15,6 +15,9 @@ import ethazi.intefaz.paneles.SeleccionRegistro;
 import java.awt.Cursor;
 import java.awt.Dimension;
 
+	/**
+	 * This window is used by the user to identify as Candidato or Empresa.
+	 */
 public class VentanaIdentificarse extends JFrame {
 
 	/**

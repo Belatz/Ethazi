@@ -33,7 +33,7 @@ import ethazi.intefaz.paneles.PanelVerPerfil;
 
 public class VentanaPrincipal extends JFrame {
 	/**
-	 * 
+	 * Is the main window from where we load the JPanels
 	 */
 	private static final long serialVersionUID = 1L;
 	private static JPanel contentPane;

@@ -30,18 +30,21 @@ import java.awt.event.ActionEvent;
 import java.awt.Cursor;
 import java.awt.Dimension;
 
+/**
+ * 
+ * @author Eduardo
+ *
+ */
 public class PanelIdentificarse extends JPanel {
 	/**
-	 * 
+	 * This panel is used by the user to identify as Candidato or Empresa.
 	 */
+
 	private static final long serialVersionUID = 1L;
 	private static JPasswordField pssField_contrasena;
 	private static JTextField txField_usuario;
 	private JLabel lbl_contrasenaErronea;
 
-	/**
-	 * This panel is used by the user to identify as a Candidato or a Empresa.
-	 */
 	public PanelIdentificarse() {
 		setName("Identificarse");
 		this.setLayout(null);
