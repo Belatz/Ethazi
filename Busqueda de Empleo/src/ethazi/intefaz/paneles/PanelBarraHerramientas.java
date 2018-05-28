@@ -110,7 +110,7 @@ public class PanelBarraHerramientas extends JPanel {
 				botonMenuInv();
 			}
 		});
-		btnMenu.setBounds(368, 9, 229, 31);
+		btnMenu.setBounds(369, 11, 229, 23);
 		add(btnMenu);
 
 		MouseListener ml = new MouseListener() {
