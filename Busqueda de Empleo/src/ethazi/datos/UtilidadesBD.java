@@ -51,14 +51,14 @@ public abstract class UtilidadesBD {
 		Conexion.actualizar("INSERT INTO "+Tablas.C_CANDIDATO_TABLA+
 				" VALUES ('"+cand.getApellidos()+"','"
 				+cand.getFechaNac()+"','"
-				+cand.hasCarnet()+"','"
-				+cand.hasCochePropio()+"','"
-				+cand.hasDisViajar()+"','"
+				+(cand.hasCarnet()?"1":"0")+"','"
+				+(cand.hasCochePropio()?"1":"0")+"','"
+				+(cand.hasDisViajar()?"1":"0")+"','"
 				+cand.getEstudios()+"','"
 				+cand.getOtrosConocimientos()+"','"
 				+cand.getVidaLaboral()+"','"
 				+cand.getExperienciaProfesional()+"','"
-				+cand.getNumID()+");");
+				+cand.getNumID()+"');");
 	}
 	/**
 	 * Returns and object Usuario through a ResultSet by parameter

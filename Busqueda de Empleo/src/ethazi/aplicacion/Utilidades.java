@@ -2,6 +2,8 @@ package ethazi.aplicacion;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.Elemento_Listable;
@@ -137,10 +139,9 @@ public abstract class Utilidades {
 	}
 	public static boolean correoValido(String email)
 	{
-		boolean correcto=false;
-		if(email.contains("@") && email.contains("."))
-			correcto=true;
-		return correcto;
+		Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		Matcher match=pattern.matcher(email);
+		return match.find();
 	}
 	public static boolean telefonoValido(String tel)
 	{

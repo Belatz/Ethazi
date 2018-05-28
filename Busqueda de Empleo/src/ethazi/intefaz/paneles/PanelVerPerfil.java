@@ -442,7 +442,9 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 			aniocomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(0,3)));
 			for (int i = 1; i <= 12; i++)
 				mescomboBox.addItem(Integer.valueOf(i));
-			mescomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(5, 6)));
+			int pos1=((Candidato)user).getFechaNac().indexOf('-');
+			int pos2=((Candidato)user).getFechaNac().lastIndexOf('-');
+			mescomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(pos1, pos2)));
 			mescomboBox.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -456,7 +458,8 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 				}
 			});
 			actualizarDia();
-			diacomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(8, 9)));
+			System.out.println(((Candidato)user).getFechaNac().substring(pos2));
+			diacomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(pos2)));
 
 			otrosConocimientostextArea.setText(((Candidato) user).getOtrosConocimientos());
 			vidaLaboraltextArea.setText(((Candidato) user).getVidaLaboral());
@@ -541,6 +544,14 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 
 	@Override
 	public void funcionalidad(boolean aceptado) {
-		//emergenteAceptado = true;
+		if(aceptado)
+		{
+			try {
+				UtilidadesBD.actualizarUsuario(miUsuario);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }
