@@ -537,7 +537,6 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 
 		this.removeAll();
 		crearPanel();
-		;
 	}
 
 	@Override
