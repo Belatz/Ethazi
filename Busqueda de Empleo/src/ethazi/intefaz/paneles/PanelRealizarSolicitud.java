@@ -14,12 +14,17 @@ import javax.swing.JButton;
  */
 
 public class PanelRealizarSolicitud extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 
 	/**
 	 * Adds a request to the data base.
 	 */
 	public PanelRealizarSolicitud() {
+		setName("Realizar Solicitud");
 		setLayout(null);
 
 		JLabel lblPresentacionCandidato = new JLabel("Presentacion candidato");

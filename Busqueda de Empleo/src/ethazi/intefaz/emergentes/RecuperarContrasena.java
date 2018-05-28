@@ -16,13 +16,10 @@ import java.awt.Color;
 import java.awt.Container;
 
 import javax.swing.JTextField;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.awt.event.ActionEvent;
 
 /**
  * @author Eduardo
@@ -30,6 +27,10 @@ import java.awt.event.ActionEvent;
 
 public class RecuperarContrasena extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * This is recover password window, it send a code to a email account that we
 	 * write.

@@ -3,7 +3,6 @@ package ethazi.pruebas;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ethazi.aplicacion.Aplicacion;
 import ethazi.datos.Conexion;
 import ethazi.datos.Tablas;
 

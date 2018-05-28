@@ -16,15 +16,11 @@ import ethazi.intefaz.emergentes.TieneEmergente;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
-import javax.swing.JComboBox;
 import javax.swing.JTextArea;
-import javax.swing.JSeparator;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 /**
@@ -34,8 +30,7 @@ import java.awt.Color;
  * @author Xabi
  *
  */
-
-public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
+	public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
 	/**
 	 * 
 	 */
@@ -55,6 +50,7 @@ public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
 	public PanelRegistroEmpresa() {
 		padre = this;
 		setLayout(null);
+		setName("Registro Empresa");
 
 		JLabel lblNombreDeUsuario = new JLabel("Nick:");
 		lblNombreDeUsuario.setBounds(10, 70, 46, 14);
@@ -147,7 +143,7 @@ public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
 		btnRegistarEmpresa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				EmergenteCambios.createWindow("¿Desea registrar estos datos de la Empresa?", (TieneEmergente) padre);
+				EmergenteCambios.createWindow("Â¿Desea registrar estos datos de la Empresa?", (TieneEmergente) padre);
 			}
 		});
 		btnRegistarEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -197,7 +193,7 @@ public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
 		if (aceptado) {
 			Empresa aux = null;
 			lbl_Invalido.setVisible(false);
-			lbl_Invalido.setText("Campos inválidos/vacíos:");
+			lbl_Invalido.setText("Campos invÃ¡lidos/vacÃ­os:");
 			try {
 				boolean valido = true;
 				if (textFieldNick.getText().compareTo("") == 0 || textFieldNick.getText().charAt(0) == ' '
@@ -244,7 +240,7 @@ public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
 				if (textFieldPass.getText().compareTo("") == 0) {
 					valido = false;
 					textFieldPass.setText("");
-					lbl_Invalido.setText(lbl_Invalido.getText() + " Contraseña");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " ContraseÃ±a");
 				}
 				if (textFieldContact.getText().compareTo("") == 0) {
 					valido = false;

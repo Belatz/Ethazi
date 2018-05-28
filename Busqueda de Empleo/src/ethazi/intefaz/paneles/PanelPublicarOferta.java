@@ -9,16 +9,20 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
 import ethazi.aplicacion.Usuario;
+import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.emergentes.EmergenteCambios;
 import ethazi.intefaz.emergentes.TieneEmergente;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 	/**
@@ -36,6 +40,7 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 	 * Create the panel.
 	 */
 	public PanelPublicarOferta() {
+		setName("Publicar Oferta");
 		setPreferredSize(new Dimension(762,488));
 		setLayout(null);
 		
@@ -54,48 +59,48 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 		add(lbl_PublicarOferta);
 		
 		JLabel lbl_sueldoMin = new JLabel("Sueldo Minimo:");
-		lbl_sueldoMin.setBounds(10, 83, 85, 14);
+		lbl_sueldoMin.setBounds(10, 83, 107, 14);
 		add(lbl_sueldoMin);
 		
 		txField_sueldoMin = new JTextField();
 		txField_sueldoMin.setColumns(10);
-		txField_sueldoMin.setBounds(93, 80, 93, 20);
+		txField_sueldoMin.setBounds(104, 80, 93, 20);
 		add(txField_sueldoMin);
 		
 		JLabel lbl_sueldoMax = new JLabel("Sueldo Maximo:");
-		lbl_sueldoMax.setBounds(10, 115, 85, 14);
+		lbl_sueldoMax.setBounds(10, 115, 107, 14);
 		add(lbl_sueldoMax);
 		
 		txField_sueldoMax = new JTextField();
 		txField_sueldoMax.setColumns(10);
-		txField_sueldoMax.setBounds(93, 112, 93, 20);
+		txField_sueldoMax.setBounds(104, 112, 93, 20);
 		add(txField_sueldoMax);
 		
 		JLabel lbl_experiencia = new JLabel("Anos de experiencia minimos:");
-		lbl_experiencia.setBounds(10, 143, 152, 14);
+		lbl_experiencia.setBounds(10, 143, 187, 14);
 		add(lbl_experiencia);
 		
 		txField_experiencia = new JTextField();
 		txField_experiencia.setColumns(10);
-		txField_experiencia.setBounds(162, 140, 93, 20);
+		txField_experiencia.setBounds(184, 140, 93, 20);
 		add(txField_experiencia);
 		
 		JLabel lbl_aspectosValorar = new JLabel("Aspectos a valorar:");
-		lbl_aspectosValorar.setBounds(10, 178, 107, 14);
+		lbl_aspectosValorar.setBounds(10, 178, 133, 14);
 		add(lbl_aspectosValorar);
 		
 		JTextArea txArea_aspectosValorar = new JTextArea();
 		txArea_aspectosValorar.setBorder(UIManager.getBorder("TextField.border"));
-		txArea_aspectosValorar.setBounds(137, 173, 253, 41);
+		txArea_aspectosValorar.setBounds(120, 195, 253, 41);
 		add(txArea_aspectosValorar);
 		
 		JLabel lbl_aspectosImpres = new JLabel("Aspectos imprescindibles:");
-		lbl_aspectosImpres.setBounds(10, 238, 133, 14);
+		lbl_aspectosImpres.setBounds(10, 238, 187, 14);
 		add(lbl_aspectosImpres);
 		
 		JTextArea txArea_aspectosImpres = new JTextArea();
 		txArea_aspectosImpres.setBorder(UIManager.getBorder("TextField.border"));
-		txArea_aspectosImpres.setBounds(137, 233, 253, 41);
+		txArea_aspectosImpres.setBounds(120, 252, 253, 41);
 		add(txArea_aspectosImpres);
 		
 		JLabel lbl_descripcion = new JLabel("Descripcion:");
@@ -108,7 +113,7 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 		add(txArea_descripcion);
 		
 		JLabel lbl_conocimientos = new JLabel("Conocimientos requeridos:");
-		lbl_conocimientos.setBounds(537, 125, 169, 14);
+		lbl_conocimientos.setBounds(537, 123, 169, 14);
 		add(lbl_conocimientos);
 		
 		PanelListaDoble pa_conocimientos = new PanelListaDoble(Usuario.misConocimientosTotales,null);
@@ -121,32 +126,53 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 		txField_buscarCono.setColumns(10);
 		
 		JButton btn_buscar = new JButton("");
+		btn_buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				pa_conocimientos.filtrarElemento(txField_buscarCono.getText());
+			}
+		});
 		btn_buscar.setBounds(682, 138, 24, 23);
 		add(btn_buscar);
 		
 		JButton btn_crear = new JButton("");
+		btn_crear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					// Si el conocimiento ya existe
+					if (UtilidadesBD.buscarConocimiento(txField_buscarCono.getText())) {
+						// TODO sacar ventana emergente con "El conocimiento ya existe"
+					} else {
+						// TODO sacar ventana emergente con "Seguro que quieres añadir + ???? + ? "
+						// TODO añadir conocimiento
+						// TODO actualizar lista y conocimientos totales
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		btn_crear.setBounds(716, 138, 24, 23);
 		add(btn_crear);
 		
 		txField_lugar = new JTextField();
 		txField_lugar.setColumns(10);
-		txField_lugar.setBounds(506, 49, 234, 20);
+		txField_lugar.setBounds(518, 49, 234, 20);
 		add(txField_lugar);
 		
 		JLabel lbl_lugar = new JLabel("Lugar de trabajo:");
-		lbl_lugar.setBounds(411, 52, 93, 14);
+		lbl_lugar.setBounds(411, 52, 133, 14);
 		add(lbl_lugar);
 		
 		JLabel lbl_contrato = new JLabel("Tipo de contrato:");
-		lbl_contrato.setBounds(411, 86, 93, 14);
+		lbl_contrato.setBounds(411, 86, 107, 14);
 		add(lbl_contrato);
 		
 		JComboBox<String> combo_contrato = new JComboBox<String>();
 		combo_contrato.addItem("Indefinido Tiempo Completo");
 		combo_contrato.addItem("Indefinido Tiempo Parcial");
 		combo_contrato.addItem("Temporal Tiempo Completo");
-		combo_contrato.addItem("Temporal Tiempo Parcial");
-		combo_contrato.setBounds(506, 83, 159, 20);
+		combo_contrato.addItem("Temporal Tiempo Parcial"); //TODO cambiar por enumeracion
+		combo_contrato.setBounds(528, 82, 159, 20);
 		add(combo_contrato);
 		
 		JButton btn_publicar = new JButton("Publicar oferta");

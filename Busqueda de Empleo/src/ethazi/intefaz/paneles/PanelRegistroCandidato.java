@@ -2,17 +2,11 @@ package ethazi.intefaz.paneles;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.TextArea;
 
 import javax.swing.JTextField;
 
-import ethazi.aplicacion.Aplicacion;
-import ethazi.aplicacion.Candidato;
-import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Usuario;
 import ethazi.aplicacion.Utilidades;
 import ethazi.datos.UtilidadesBD;
@@ -22,19 +16,14 @@ import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.JSeparator;
-import javax.swing.JCheckBox;
 import javax.swing.JButton;
-import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
+import javax.swing.JTextArea;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 /**
@@ -44,7 +33,6 @@ import java.awt.Color;
  * @author Urtzi
  *
  */
-
 public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 	private static final long serialVersionUID = 1L;
 	private JTextField nickTextField;
@@ -71,7 +59,8 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 	private JPanel padre;
 
 	public PanelRegistroCandidato() {
-		padre=this;
+    setName("Registro candidato");
+    padre=this;
 		setLayout(null);
 		JLabel milblNick = new JLabel("Nick: ");
 		milblNick.setBounds(10, 21, 46, 14);
@@ -229,7 +218,7 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 				estudiostextArea.setText("");
 				otrosConocimientostextArea.setText("");
 				vidaLaboraltextArea.setText("");
-				conocimientosEditar.actualizarListas(Aplicacion.getUsuario().getConocimientosTotales(), null);
+				conocimientosEditar.actualizarListas(Usuario.getConocimientosTotales(), null);
 				VentanaIdentificarse.getPa_registrarCandidato().setVisible(false);
 				VentanaIdentificarse.getPa_identificarse().setVisible(true);
 				VentanaIdentificarse.cambiarTam(new Dimension(300, 300));
@@ -245,7 +234,7 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 		btnRegistrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				EmergenteCambios.createWindow("¿Desea registrar estos datos de la Empresa?", (TieneEmergente) padre);
+				EmergenteCambios.createWindow("ï¿½Desea registrar estos datos de la Empresa?", (TieneEmergente) padre);
 			}
 		});
 		
@@ -322,7 +311,7 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 		if (aceptado) {
 			Empresa aux = null;
 			lbl_Invalido.setVisible(false);
-			lbl_Invalido.setText("Campos inválidos/vacíos:");
+			lbl_Invalido.setText("Campos invï¿½lidos/vacï¿½os:");
 			try {
 				boolean valido = true;
 				if (nickTextField.getText().compareTo("") == 0 || nickTextField.getText().charAt(0) == ' '
@@ -369,7 +358,7 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 				if (textFieldPass.getText().compareTo("") == 0) {
 					valido = false;
 					textFieldPass.setText("");
-					lbl_Invalido.setText(lbl_Invalido.getText() + " Contraseña");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Contraseï¿½a");
 				}
 				if (textFieldContact.getText().compareTo("") == 0) {
 					valido = false;

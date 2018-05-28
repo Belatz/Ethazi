@@ -7,13 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 
 import ethazi.datos.UtilidadesBD;
 
@@ -125,9 +123,13 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		btn_aplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO hacer algo con la lista de candidatos
-				UtilidadesBD.filtrarCandidatos(txField_nombreApe.getText(), txField_nick.getText(),
-						txField_experiencia.getText(), txField_residencia.getText(), chBox_carne.isSelected(),
-						chBox_coche.isSelected(), chBox_viajes.isSelected(), pa_conocimientos.getConocimientos());
+				try {
+					UtilidadesBD.filtrarCandidatos(txField_nombreApe.getText(), txField_nick.getText(),
+							txField_experiencia.getText(), txField_residencia.getText(), chBox_carne.isSelected(),
+							chBox_coche.isSelected(), chBox_viajes.isSelected(), pa_conocimientos.getConocimientosAnadidos());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		pa_filtros.add(btn_aplicar);

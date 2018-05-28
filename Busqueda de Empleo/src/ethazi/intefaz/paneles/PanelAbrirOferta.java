@@ -9,14 +9,17 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import javax.swing.JTextArea;
 
 import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Usuario;
+import ethazi.aplicacion.Candidato;
+import ethazi.aplicacion.Empresa;
+import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.emergentes.EmergenteCambios;
 import ethazi.intefaz.emergentes.TieneEmergente;
-import ethazi.intefaz.frame.VentanaPrincipal;
 
 import javax.swing.UIManager;
 import javax.swing.JButton;
@@ -48,13 +51,34 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 	private JButton btnEliminar;
 	private JButton btn_crear;
 
+	private Oferta miOferta;
+
 	/**
-	 * Create the panel.
+	 * Creates the panel
 	 */
-	public PanelAbrirOferta(Oferta ofer) {
+	public PanelAbrirOferta() {
+		try {
+			miOferta = new Oferta(0, "Dummy", "Oferta de muestra", "", 1, 1, 0, "", "", false, (byte) 1,
+					(Empresa) UtilidadesBD.toUsuario("Dummy2", true), Usuario.getConocimientosTotales());
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		setName("Abir Oferta");
 		setPreferredSize(new Dimension(762, 488));
 		setLayout(null);
 
+		crearPanel();
+	}
+
+	public void cambiarOferta(Oferta ofer) {
+		miOferta = ofer;
+
+		this.removeAll();
+		crearPanel();
+	}
+
+	private void crearPanel() {
 		JLabel lbl_Empresa = new JLabel("Empresa:");
 		lbl_Empresa.setBounds(10, 52, 46, 14);
 		add(lbl_Empresa);
@@ -127,7 +151,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		lbl_conocimientos.setBounds(537, 125, 169, 14);
 		add(lbl_conocimientos);
 
-		pa_conocimientos = new PanelListaDoble(Usuario.getConocimientosTotales(), ofer.getConocimientos());
+		pa_conocimientos = new PanelListaDoble(Usuario.getConocimientosTotales(), miOferta.getConocimientos());
 		pa_conocimientos.setBounds(537, 174, 215, 180);
 		add(pa_conocimientos);
 
@@ -158,7 +182,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		lbl_contrato.setBounds(411, 86, 93, 14);
 		add(lbl_contrato);
 
-		combo_contrato = new JComboBox<String>();
+		combo_contrato = new JComboBox<String>(); // TODO usar enumeracion
 		combo_contrato.addItem("Indefinido Tiempo Completo");
 		combo_contrato.addItem("Indefinido Tiempo Parcial");
 		combo_contrato.addItem("Temporal Tiempo Completo");
@@ -166,7 +190,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		combo_contrato.setBounds(506, 83, 159, 20);
 		add(combo_contrato);
 
-		inicializar(ofer);
+		inicializar(miOferta);
 
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setToolTipText("Eliminar");
@@ -213,7 +237,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 						button_Editar.setVisible(true);
 						btnRetirar.setVisible(true);
 						btn_crear.setVisible(true);
-						inicializar(ofer);
+						inicializar(miOferta);
 						desHabCampos(false);
 					}
 				});
@@ -257,7 +281,6 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		txArea_aspectosImpres.setEditable(hab);
 		txArea_aspectosValorar.setEditable(hab);
 		pa_conocimientos.setEnabled(hab);
-		txField_lugar.setEditable(hab);
 	}
 
 	@Override
@@ -271,7 +294,38 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 			button_Editar.setVisible(true);
 			btnRetirar.setVisible(true);
 			btn_crear.setVisible(true);
-			// TODO actualizar la base de datos
+
+			if (validarDatos()) {
+				// Actualizar miOferta
+				miOferta.setDescripcion(txArea_descripcion.getText());
+				miOferta.setLugar(txField_lugar.getText());
+				miOferta.setExperiencia(Integer.parseInt(txField_experiencia.getText()));
+				// TODO CONTEMPLAR CLASE CONTRATO, PROB CAMBIAR POR CONSTANTES
+				// miOferta.setContrato((String) combo_contrato.getSelectedItem());
+				miOferta.setSalarioMax(Integer.parseInt(txField_sueldoMax.getText()));
+				miOferta.setSalarioMin(Integer.parseInt(txField_sueldoMin.getText()));
+				miOferta.setAspectosImprescindibles(txArea_aspectosImpres.getText());
+				miOferta.setAspectosAValorar(txArea_aspectosValorar.getText());
+				miOferta.setConocimientos(pa_conocimientos.getConocimientosAnadidos());
+			}
+
+			try {
+				UtilidadesBD.actualizarOferta(miOferta);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+	}
+
+	private boolean validarDatos() {
+		boolean _esValido = true;
+
+		if (txField_lugar.getText() == null || txField_lugar.getText().isEmpty())
+			_esValido = false;
+		return _esValido;
+	}
+
+	public void setOferta(Oferta oferta) {
+		miOferta = oferta;
 	}
 }
