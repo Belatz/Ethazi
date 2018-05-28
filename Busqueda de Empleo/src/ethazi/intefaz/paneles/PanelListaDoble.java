@@ -111,7 +111,6 @@ public class PanelListaDoble extends JPanel {
 	public JButton getBtn_eliminar() {
 		return btn_eliminar;
 	}
-
 	public void actualizarListas(ArrayList<String> listaIzquierda, ArrayList<String> listaDerecha) {
 		modelo_totales.removeAllElements();
 		modelo_anadidos.removeAllElements();

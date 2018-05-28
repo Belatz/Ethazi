@@ -67,7 +67,7 @@ public abstract class Utilidades {
 			else
 			{
 				int i=0;
-				while(i<dNI.length()-1 && (dNI.charAt(i)<'0' || dNI.charAt(i)>'9'))
+				while(i<dNI.length()-1 && (dNI.charAt(i)>='0' || dNI.charAt(i)<='9'))
 					i++;
 				if(i==dNI.length()-1 && "TRWAGMYFPDXBNJZSQVHLCKE".charAt(Integer.valueOf(dNI.substring(0, 8))%23)!=dNI.charAt(dNI.toUpperCase().length()-1))
 					correcto=false;
