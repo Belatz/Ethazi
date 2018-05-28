@@ -14,7 +14,12 @@ import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Usuario;
+import ethazi.aplicacion.Utilidades;
+import ethazi.datos.UtilidadesBD;
+import ethazi.intefaz.emergentes.EmergenteCambios;
+import ethazi.intefaz.emergentes.TieneEmergente;
 import ethazi.intefaz.frame.VentanaIdentificarse;
+import ethazi.intefaz.frame.VentanaPrincipal;
 
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -26,9 +31,11 @@ import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 /**
  * The panel RegistroCandidato will show the facts that the user will have to
@@ -38,7 +45,7 @@ import java.awt.event.ActionEvent;
  *
  */
 
-public class PanelRegistroCandidato extends JPanel {
+public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 	private static final long serialVersionUID = 1L;
 	private JTextField nickTextField;
 	private JTextField dirtextField;
@@ -59,8 +66,12 @@ public class PanelRegistroCandidato extends JPanel {
 	private JComboBox<Integer> aniocomboBox;
 	private PanelListaDoble conocimientosEditar;
 	private JButton btnRegistrar;
+	private JTextField textFieldPass;
+	private JLabel lbl_Invalido;
+	private JPanel padre;
 
 	public PanelRegistroCandidato() {
+		padre=this;
 		setLayout(null);
 		JLabel milblNick = new JLabel("Nick: ");
 		milblNick.setBounds(10, 21, 46, 14);
@@ -72,11 +83,11 @@ public class PanelRegistroCandidato extends JPanel {
 		nickTextField.setColumns(10);
 
 		JLabel milblNombre = new JLabel("Nombre:");
-		milblNombre.setBounds(217, 21, 78, 14);
+		milblNombre.setBounds(513, 46, 78, 14);
 		add(milblNombre);
 
 		nombretextField = new JTextField();
-		nombretextField.setBounds(274, 18, 159, 20);
+		nombretextField.setBounds(570, 46, 159, 20);
 		add(nombretextField);
 		nombretextField.setColumns(10);
 
@@ -117,11 +128,11 @@ public class PanelRegistroCandidato extends JPanel {
 		teltextField.setColumns(10);
 
 		JLabel milblApellidos = new JLabel("Apellidos: ");
-		milblApellidos.setBounds(456, 21, 78, 14);
+		milblApellidos.setBounds(476, 77, 78, 14);
 		add(milblApellidos);
 
 		apellidostextField = new JTextField();
-		apellidostextField.setBounds(527, 18, 225, 20);
+		apellidostextField.setBounds(536, 77, 225, 20);
 		add(apellidostextField);
 		apellidostextField.setColumns(10);
 
@@ -230,6 +241,29 @@ public class PanelRegistroCandidato extends JPanel {
 		btnRegistrar = new JButton("Registrar");
 		btnRegistrar.setBounds(663, 454, 89, 23);
 		add(btnRegistrar);
+		
+		btnRegistrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EmergenteCambios.createWindow("¿Desea registrar estos datos de la Empresa?", (TieneEmergente) padre);
+			}
+		});
+		
+		textFieldPass = new JTextField();
+		textFieldPass.setText("");
+		textFieldPass.setColumns(10);
+		textFieldPass.setBounds(270, 18, 265, 20);
+		add(textFieldPass);
+		
+		JLabel labelPass = new JLabel("Contrase\u00F1a:");
+		labelPass.setBounds(186, 20, 74, 14);
+		add(labelPass);
+		
+		lbl_Invalido = new JLabel("Campos inv\u00E1lidos/vac\u00EDos ");
+		lbl_Invalido.setForeground(Color.RED);
+		lbl_Invalido.setBounds(304, 413, 549, 14);
+		lbl_Invalido.setVisible(false);
+		add(lbl_Invalido);
 
 		for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= (Calendar.getInstance().get(Calendar.YEAR)
 				- 90); i--)
@@ -283,4 +317,90 @@ public class PanelRegistroCandidato extends JPanel {
 			diacomboBox.addItem(Integer.valueOf(i));
 	}
 
+	@Override
+	public void funcionalidad(boolean aceptado) {
+		if (aceptado) {
+			Empresa aux = null;
+			lbl_Invalido.setVisible(false);
+			lbl_Invalido.setText("Campos inválidos/vacíos:");
+			try {
+				boolean valido = true;
+				if (nickTextField.getText().compareTo("") == 0 || nickTextField.getText().charAt(0) == ' '
+						|| Utilidades.esUsuario(nickTextField.getText())) {
+					valido = false;
+					nickTextField.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Nick ");
+				}
+				if (nombretextField.getText().compareTo("") == 0 || nombretextField.getText().charAt(0) == ' '
+						|| UtilidadesBD.toEmpresa(nombretextField.getText()) != null) {
+					valido = false;
+					nombretextField.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Nombre ");
+				}
+				if (numIdtextField.getText().compareTo("") == 0 || numIdtextField.getText().charAt(0) == ' '
+						|| !Utilidades.dniCorrecto(numIdtextField.getText())) {
+					valido = false;
+					numIdtextField.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " CIF ");
+				} else {
+					if (Utilidades.candidatoExisteDNI(numIdtextField.getText())) {
+						valido = false;
+						numIdtextField.setText("");
+						lbl_Invalido.setText(lbl_Invalido.getText() + " CIF ");
+					}
+				}
+				if (emailtextField.getText().compareTo("") == 0 || emailtextField.getText().charAt(0) == ' '
+						|| !Utilidades.correoValido(emailtextField.getText())|| Utilidades.existeCorreo(emailtextField.getText())){
+					valido = false;
+					emailtextField.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Email ");
+				}
+				if (teltextField.getText().compareTo("") == 0 || teltextField.getText().charAt(0) == ' '
+						|| !Utilidades.telefonoValido(teltextField.getText())) {
+					valido = false;
+					teltextField.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Tel ");
+				}
+				if (textFieldDir.getText().compareTo("") == 0) {
+					valido = false;
+					textFieldDir.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Dir");
+				}
+				if (textFieldPass.getText().compareTo("") == 0) {
+					valido = false;
+					textFieldPass.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Contraseña");
+				}
+				if (textFieldContact.getText().compareTo("") == 0) {
+					valido = false;
+					textFieldContact.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Contacto");
+				}
+				lbl_Invalido.setVisible(!valido);
+				if (valido) {
+					aux = new Empresa(textFieldNick.getText(), textFieldPass.getText(), textFieldNombre.getText(),
+							textFieldCif.getText(), textFieldDir.getText(), textFieldEmail.getText(),
+							textFieldTel.getText(), textFieldContact.getText(), textAreaDesc.getText());
+					UtilidadesBD.insertarEmpresa(aux);
+					VentanaIdentificarse.cerrar();
+					VentanaPrincipal.ejecutar();
+					Aplicacion.setUsuario(aux);
+					textFieldCif.setText("");
+					textFieldContact.setText("");
+					textFieldDir.setText("");
+					textFieldEmail.setText("");
+					textFieldNick.setText("");
+					textFieldNombre.setText("");
+					textFieldPass.setText("");
+					textFieldTel.setText("");
+					textAreaDesc.setText("");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// TODO mandar correo
+		}
+		
+	}
 }

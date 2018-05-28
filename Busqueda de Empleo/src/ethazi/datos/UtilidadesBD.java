@@ -22,6 +22,25 @@ import ethazi.intefaz.Elemento_Listable;
  */
 public abstract class UtilidadesBD {
 
+	public static void insertarUsuario(Usuario user) throws SQLException
+	{
+		Conexion.actualizar("INSERT INTO "+Tablas.C_USUARIO_TABLA+
+				" VALUES ('"+user.getNumID()+"','"
+				+user.getNick()+"','"
+				+user.getPassword()+"','"
+				+user.getNombre()+"','"
+				+user.getDireccion()+"','"
+				+user.getEmail()+"','"
+				+user.getTelefono()+"');");
+	}
+	public static void insertarEmpresa(Empresa emp) throws SQLException
+	{
+		insertarUsuario(emp);
+		Conexion.actualizar("INSERT INTO "+Tablas.C_EMPRESA_TABLA+
+				" VALUES ('"+emp.getContacto()+"','"
+				+emp.getDescripcion()+"','"
+				+emp.getNumID()+"');");
+	}
 	/**
 	 * Returns and object Usuario through a ResultSet by parameter
 	 * 
@@ -80,7 +99,6 @@ public abstract class UtilidadesBD {
 	 *            un nick, false si es un numid
 	 * @return Devuelve un Usuario con los datos sacados del nick pasado
 >>>>>>> branch 'master' of https://github.com/Belatz/Ethazi.git
-	 * @throws SQLException
 	 */
 	public static Usuario toUsuario(String p_identificador, boolean p_esNick) throws SQLException {
 		Usuario usr = null;
@@ -116,7 +134,55 @@ public abstract class UtilidadesBD {
 
 		return usr;
 	}
-
+	public static Empresa toEmpresa(String nombre) throws SQLException{
+		ResultSet _rs=Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_EMPRESA_TABLA
+				+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_EMPRESA_NUMID + " AND "
+				+ Tablas.C_USUARIO_NICK + "='" + nombre + "';");
+		Empresa emp=null;
+		try {
+		emp=(Empresa)toUsuario(_rs);
+		}catch(ResultSetVacio e) {
+			emp=null;
+		}
+		return emp;
+	}
+	public static Empresa toEmpresaCif(String cIF) throws SQLException{
+		ResultSet _rs=Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_EMPRESA_TABLA
+				+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_EMPRESA_NUMID + " AND "
+				+ Tablas.C_EMPRESA_NUMID + "='" + cIF + "';");
+		Empresa emp=null;
+		try {
+		emp=(Empresa)toUsuario(_rs);
+		}catch(ResultSetVacio e) {
+			emp=null;
+		}
+		return emp;
+	}
+	public static Candidato toCandidatoDNI(String dNI) throws SQLException {
+		ResultSet _rs=Conexion.consultar("SELECT * FROM "+Tablas.C_USUARIO_TABLA+", "+Tablas.C_CANDIDATO_TABLA
+				+ " WHERE "+Tablas.C_USUARIO_NUMID+"="+Tablas.C_EMPRESA_NUMID+" AND "
+				+Tablas.C_EMPRESA_NUMID+"='"+dNI+"';");
+		Candidato cand=null;
+		try {
+			cand=(Candidato)toUsuario(_rs);
+		} catch (ResultSetVacio e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cand;
+	}
+	public static Usuario toUsuario(String email) throws SQLException
+	{
+		ResultSet _rs=Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + " WHERE "
+				+ Tablas.C_USUARIO_EMAIL + "='" + email + "';");
+		Usuario user=null;
+		try {
+		user=toUsuario(_rs);
+		}catch(ResultSetVacio e) {
+			user=null;
+		}
+		return user;
+	}
 	/**
 	 * Returns and object Solicitud through a ResultSet by parameter
 	 * 
@@ -138,7 +204,6 @@ public abstract class UtilidadesBD {
 
 		return _soli;
 	}
-
 	public static Oferta toOferta(ResultSet p_rs) throws SQLException, ResultSetVacio {
 		if (!p_rs.next()) {
 			throw new ResultSetVacio();
