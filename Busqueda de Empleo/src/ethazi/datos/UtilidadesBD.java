@@ -46,7 +46,7 @@ public abstract class UtilidadesBD {
 		Usuario _usr = null;
 		String _nick = p_rs.getString(Tablas.C_USUARIO_NICK);
 
-		if (Usuario.esCandidato(_nick)) {
+		if (Usuario.esCandidato(_nick, true)) {
 			_usr = new Candidato(_nick, p_rs.getString(Tablas.C_USUARIO_PASSWORD),
 					p_rs.getString(Tablas.C_USUARIO_NOMBRE), p_rs.getString(Tablas.C_USUARIO_NUMID),
 					p_rs.getString(Tablas.C_USUARIO_DIRECCION), p_rs.getString(Tablas.C_USUARIO_EMAIL),
@@ -86,7 +86,7 @@ public abstract class UtilidadesBD {
 		ResultSet _rs;
 
 		if (p_esNick) {
-			if (Usuario.esCandidato(p_identificador)) {
+			if (Usuario.esCandidato(p_identificador, p_esNick)) {
 				_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_CANDIDATO_TABLA
 						+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND "
 						+ Tablas.C_USUARIO_NICK + "='" + p_identificador + "';");
@@ -96,7 +96,7 @@ public abstract class UtilidadesBD {
 						+ Tablas.C_USUARIO_NICK + "='" + p_identificador + "';");
 			}
 		} else {
-			if (Usuario.esCandidato(p_identificador)) {
+			if (Usuario.esCandidato(p_identificador, p_esNick)) {
 				_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_CANDIDATO_TABLA
 						+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND "
 						+ Tablas.C_USUARIO_NUMID + "='" + p_identificador + "';");

@@ -52,7 +52,6 @@ public abstract class Utilidades {
 		for (Candidato candidato : p_candidatos) {
 			_elementos.add(candidato);
 		}
-		
 		return _elementos;
 	}
 
