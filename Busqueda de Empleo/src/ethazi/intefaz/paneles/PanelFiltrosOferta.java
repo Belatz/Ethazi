@@ -15,6 +15,7 @@ import javax.swing.ScrollPaneConstants;
 import ethazi.datos.UtilidadesBD;
 
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 /**
@@ -25,6 +26,10 @@ import java.awt.event.ActionEvent;
  */
 public class PanelFiltrosOferta extends JScrollPane {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txField_sueldoMin;
 	private JTextField txField_sueldoMax;
 	private JTextField txFiedl_experiencia;
@@ -58,13 +63,14 @@ public class PanelFiltrosOferta extends JScrollPane {
 		lbl_conocimientos.setBounds(15, 121, 211, 14);
 		pa_filtros.add(lbl_conocimientos);
 
-		// Ejemplo
-		ArrayList<String> conocimientos = new ArrayList<String>();
-		for (int i = 0; i < 10; i++)
-			conocimientos.add("Ejemplo " + i);
-		// JPanel pa_conocimientos = new PanelListaDoble();
-		JPanel pa_conocimientos = new PanelListaDoble(conocimientos, null);
-		pa_conocimientos.setLocation(7, 66);
+		ArrayList<String> conocimientos = new ArrayList<>();
+		try {
+			conocimientos = UtilidadesBD.descargarConocimientos();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		PanelListaDoble pa_conocimientos = new PanelListaDoble(conocimientos, null);
+		pa_conocimientos.setLocation(9, 140);
 		pa_filtros.add(pa_conocimientos);
 
 		JLabel lbl_lugar = new JLabel("Lugar de trabajo:");
@@ -123,10 +129,13 @@ public class PanelFiltrosOferta extends JScrollPane {
 		btn_aplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO hacer algo con la lista de ofertas
-				// TODO tratar la lista de conocimientos en un arraylist
-				UtilidadesBD.filtrarOfertas(txField_titulo.getText(), combo_lugar.getSelectedItem(),
-						txField_sueldoMax.getText(), txField_sueldoMin.getText(), txFiedl_experiencia.getText(),
-						combo_contrato.getSelectedItem(), txField_empresa.getText(), p_conocimientos);
+				try {
+					UtilidadesBD.filtrarOfertas(txField_titulo.getText(), (String) combo_lugar.getSelectedItem(),
+							txField_sueldoMax.getText(), txField_sueldoMin.getText(), txFiedl_experiencia.getText(),
+							(String) combo_contrato.getSelectedItem(), txField_empresa.getText(), pa_conocimientos.getConocimientosAnadidos());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		btn_aplicar.setBounds(66, 11, 89, 23);

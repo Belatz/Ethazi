@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,7 +13,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ethazi.aplicacion.Aplicacion;
-import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
@@ -33,7 +31,7 @@ public class PanelBarraHerramientas extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txField_buscar;
+	private static JTextField txField_buscar;
 
 	/*
 	 * public static ArrayList<Elemento_Listable> listaDeOfertas = new
@@ -41,9 +39,8 @@ public class PanelBarraHerramientas extends JPanel {
 	 * 
 	 * public PanelBarraHerramientas(GenericoDePanelesConLista pa_buscarOfertas) {
 	 */
-
 	private static boolean menu = true;
-	static JButton btnMenu;
+	private static JButton btnMenu;
 
 	public PanelBarraHerramientas() {
 		setLayout(null);
@@ -68,6 +65,7 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_perfil.setMinimumSize(new Dimension(33, 9));
 		btn_perfil.setMaximumSize(new Dimension(33, 9));
 		btn_perfil.setBounds(642, 0, 50, 50);
+		
 		btn_perfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -112,7 +110,7 @@ public class PanelBarraHerramientas extends JPanel {
 				botonMenuInv();
 			}
 		});
-		btnMenu.setBounds(368, 9, 229, 31);
+		btnMenu.setBounds(369, 11, 229, 23);
 		add(btnMenu);
 
 		MouseListener ml = new MouseListener() {
@@ -154,6 +152,10 @@ public class PanelBarraHerramientas extends JPanel {
 			menu = true;
 			btnMenu.setVisible(true);
 		}
+	}
+
+	public static String getTxField_buscar() {
+		return txField_buscar.getText();
 	}
 
 }

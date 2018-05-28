@@ -9,11 +9,6 @@ import ethazi.intefaz.Elemento_Listable;
  */
 public class Oferta implements Elemento_Listable {
 
-	/**
-	 * Shows all the contents of the offer
-	 */
-	/* jon:esta clase solo es de pruebas */
-
 	private int miCodigo;
 	private String miTitulo;
 	private String miDescripcion;
@@ -28,6 +23,7 @@ public class Oferta implements Elemento_Listable {
 	private Empresa miEmpresa;
 	private ArrayList<String> misConocimientos;
 
+	
 	/**
 	 * 
 	 * @param miTitulo
@@ -64,10 +60,6 @@ public class Oferta implements Elemento_Listable {
 
 	public int getCodigo() {
 		return miCodigo;
-	}
-
-	public void setCodigo(int miCodigo) {
-		this.miCodigo = miCodigo;
 	}
 
 	@Override
@@ -121,14 +113,6 @@ public class Oferta implements Elemento_Listable {
 	 */
 	public Empresa getEmpresa() {
 		return miEmpresa;
-	}
-
-	/**
-	 * 
-	 * @param empresa
-	 */
-	public void setEmpresa(Empresa empresa) {
-		this.miEmpresa = empresa;
 	}
 
 	/**

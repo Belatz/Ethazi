@@ -1,6 +1,7 @@
 package ethazi.intefaz.paneles;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -18,6 +19,7 @@ import ethazi.aplicacion.Usuario;
 import ethazi.datos.Conexion;
 import ethazi.datos.Tablas;
 import ethazi.datos.UtilidadesBD;
+import ethazi.excepciones.NoQuedanFilas;
 import ethazi.excepciones.ResultSetVacio;
 import ethazi.intefaz.emergentes.RecuperarContrasena;
 import ethazi.intefaz.frame.VentanaIdentificarse;
@@ -25,6 +27,8 @@ import ethazi.intefaz.frame.VentanaPrincipal;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Cursor;
+import java.awt.Dimension;
 
 /**
  * 
@@ -39,9 +43,18 @@ public class PanelIdentificarse extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private static JPasswordField pssField_contrasena;
 	private static JTextField txField_usuario;
+	private JLabel lbl_contrasenaErronea;
 
 	public PanelIdentificarse() {
+		setName("Identificarse");
 		this.setLayout(null);
+
+		lbl_contrasenaErronea = new JLabel("Credenciales Incorrectas");
+		lbl_contrasenaErronea.setForeground(new Color(128, 0, 0));
+		lbl_contrasenaErronea.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lbl_contrasenaErronea.setBounds(219, 129, 141, 14);
+		lbl_contrasenaErronea.setVisible(false);
+		add(lbl_contrasenaErronea);
 
 		JLabel lbl_usuario = new JLabel("Usuario:");
 		lbl_usuario.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -54,6 +67,15 @@ public class PanelIdentificarse extends JPanel {
 		this.add(lbl_contrasena);
 
 		JButton btn_registrarse = new JButton("Registrarse");
+		btn_registrarse.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				limpiarTextos();
+				VentanaIdentificarse.getPa_identificarse().setVisible(false);
+				VentanaIdentificarse.getSelect().setVisible(true);
+				VentanaIdentificarse.cambiarTam(new Dimension(600, 600));
+			}
+		});
 		btn_registrarse.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btn_registrarse.setBounds(85, 204, 126, 23);
 		this.add(btn_registrarse);
@@ -66,10 +88,12 @@ public class PanelIdentificarse extends JPanel {
 						VentanaIdentificarse.cerrar();
 						VentanaPrincipal.ejecutar();
 					} else {
-						// TODO Mostrar error
+						lbl_contrasenaErronea.setVisible(true);
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+				} finally {
+					limpiarTextos();
 				}
 			}
 		});
@@ -82,39 +106,29 @@ public class PanelIdentificarse extends JPanel {
 		pssField_contrasena.setFont(new Font("Tahoma", Font.BOLD, 11));
 		pssField_contrasena.setBackground(new Color(255, 239, 213));
 		pssField_contrasena.setBounds(84, 125, 126, 20);
+		pssField_contrasena.setText("");
 		this.add(pssField_contrasena);
 
 		txField_usuario = new JTextField();
-		txField_usuario.setText("Introduce el nombre de usuario");
+		txField_usuario.setText("");
 		txField_usuario.setFont(new Font("Tahoma", Font.BOLD, 11));
 		txField_usuario.setColumns(10);
 		txField_usuario.setBackground(new Color(255, 239, 213));
-		txField_usuario.setBounds(85, 74, 189, 20);
+		txField_usuario.setBounds(85, 74, 126, 20);
 		this.add(txField_usuario);
 
 		JLabel lbl_recuperarContrasena = new JLabel("Recuperar contraseña");
+		lbl_recuperarContrasena.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_recuperarContrasena.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				RecuperarContrasena.crearVentana(this);
+				RecuperarContrasena.crearVentana(VentanaIdentificarse.getPa_identificarse().getParent());
 			}
 		});
 		lbl_recuperarContrasena.setForeground(Color.BLUE);
 		lbl_recuperarContrasena.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lbl_recuperarContrasena.setBounds(84, 144, 189, 14);
 		this.add(lbl_recuperarContrasena);
-
-		JLabel lbl_contrasenaErronea = new JLabel("(Contraseña incorrecta)");
-		lbl_contrasenaErronea.setForeground(new Color(128, 0, 0));
-		lbl_contrasenaErronea.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lbl_contrasenaErronea.setBounds(219, 129, 141, 14);
-		this.add(lbl_contrasenaErronea);
-
-		JLabel lbl_usuarioErroneo = new JLabel("(Usuario incorrecto)");
-		lbl_usuarioErroneo.setForeground(new Color(128, 0, 0));
-		lbl_usuarioErroneo.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lbl_usuarioErroneo.setBounds(283, 79, 141, 14);
-		this.add(lbl_usuarioErroneo);
 	}
 
 	private static boolean validarUsuario() throws SQLException {
@@ -139,12 +153,18 @@ public class PanelIdentificarse extends JPanel {
 				Aplicacion.setUsuario(UtilidadesBD.toUsuario(_usuario));
 			} catch (ResultSetVacio e) {
 				System.out.println("No existe ese usuario");
+			} catch (NoQuedanFilas e) {
 			}
 			_esValido = true;
 		} else {
 			_esValido = false;
 		}
 		return _esValido;
+	}
+
+	private static void limpiarTextos() {
+		txField_usuario.setText("");
+		pssField_contrasena.setText("");
 	}
 
 }

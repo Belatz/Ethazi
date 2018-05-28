@@ -9,15 +9,19 @@ import javax.swing.JSeparator;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JScrollBar;
-import java.awt.Color;
 import javax.swing.JCheckBox;
-import javax.swing.JList;
-import javax.swing.ListSelectionModel;
-import javax.swing.AbstractListModel;
 import javax.swing.JScrollPane;
 
+/**
+ * 
+ * @deprecated
+ *
+ */
 public class PanelAnalizarCandidato extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
