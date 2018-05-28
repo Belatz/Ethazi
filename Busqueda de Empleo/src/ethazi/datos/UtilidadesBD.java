@@ -3,6 +3,9 @@ package ethazi.datos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
@@ -594,6 +597,18 @@ public abstract class UtilidadesBD {
 					+ soli.getCand().getNumID() + "' AND " + Tablas.C_SOLICITUD_OFERTA + "="
 					+ soli.getOfer().getCodigo() + ";");
 		}
+	}
+
+	public static ArrayList<String> buscarConocimientosRequeridos() throws SQLException {
+		ArrayList<String> _conocimientos = new ArrayList<>();
+		ResultSet _rs = Conexion.consultar("SELECT " + Tablas.C_OFER_CONO_CONOCIMIENTO + ", COUNT(*) FROM "
+				+ Tablas.C_OFER_CONO_TABLA + " GROUP BY "+Tablas.C_OFER_CONO_CONOCIMIENTO+" ORDER BY 2;");
+
+		while(_rs.next()) {
+			_conocimientos.add(_rs.getString(1));
+		}
+		
+		return _conocimientos;
 	}
 
 }

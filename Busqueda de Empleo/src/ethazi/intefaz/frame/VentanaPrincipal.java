@@ -107,12 +107,13 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
-		
+
 		// Menu desplegable
-		//EL menu comienza ahora mas abajo para que no quede encima de el boton que lo abre al usar un boton
-		//de el menu
+		// EL menu comienza ahora mas abajo para que no quede encima de el boton que lo
+		// abre al usar un boton
+		// de el menu
 		menu = new PanelMenu();
-	
+
 		if (Aplicacion.getUsuario() instanceof Candidato) {
 			menu.setBounds(365, 11, 258, 143);
 		} else {
@@ -139,7 +140,7 @@ public class VentanaPrincipal extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-			
+
 			}
 
 			@Override
@@ -181,6 +182,7 @@ public class VentanaPrincipal extends JFrame {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * @author belatz
 	 * @throws SQLException
@@ -291,7 +293,7 @@ public class VentanaPrincipal extends JFrame {
 		}
 	}
 
-	public static void cambiarPanel(short p_nuevoPanel) throws PanelNoDisponible {
+	public static void cambiarPanel(short p_nuevoPanel) throws PanelNoDisponible, SQLException {
 		cambiarPanel(p_nuevoPanel, null);
 	}
 
@@ -303,13 +305,19 @@ public class VentanaPrincipal extends JFrame {
 	 *            The new panel to show
 	 * @throws PanelNoDisponible
 	 *             If the choosen panel doesn't exist
+	 * @throws SQLException 
 	 */
-	public static void cambiarPanel(short p_nuevoPanel, Object p_obj) throws PanelNoDisponible {
+	public static void cambiarPanel(short p_nuevoPanel, Object p_obj) throws PanelNoDisponible, SQLException {
 		currentPanel.setVisible(false);
 		JPanel nuevoPanel = new JPanel();
 
+		if (p_obj instanceof ArrayList<?>) {
+			listaDeElementos = (ArrayList<Elemento_Listable>) p_obj;
+		}
+
 		switch (p_nuevoPanel) {
 		case C_ABRIR_OFERTA:
+			pa_abrirOferta.cambiarOferta((Oferta) p_obj);
 			nuevoPanel = pa_abrirOferta;
 			break;
 		case C_ANALIZAR_CANDIDATO:
@@ -324,12 +332,7 @@ public class VentanaPrincipal extends JFrame {
 			nuevoPanel = pa_analizarSolicitudes;
 			break;
 		case C_BUSCAR_OFERTA:
-			try {
-				cargarListado(Elemento_A_Listar.C_CONSULTAR_OFERTAS);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			// __________________________________
+			cargarListado(Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 			pa_buscarOfertas.updateUI();
 			break;
 		case C_CONOCIMIENTOS_BUSCADOS:

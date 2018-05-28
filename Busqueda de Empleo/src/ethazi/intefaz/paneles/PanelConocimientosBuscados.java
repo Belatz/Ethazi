@@ -3,13 +3,16 @@ package ethazi.intefaz.paneles;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Vector;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import ethazi.aplicacion.Usuario;
+import ethazi.datos.UtilidadesBD;
 
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
@@ -53,73 +56,22 @@ public class PanelConocimientosBuscados extends JPanel {
 		add(lblqueEsLo);
 	}
 
-	public static Vector<String> conocimientosMasBuscados(int cantidad) {
-		// TODO consulta a la base de datos con un arrayBidi de conocimientos y el
-		// número
-		ArrayList<String> conocimientosMasBuscados = new ArrayList<String>();
-		// Ejemplo
-		ArrayList<ArrayList<String>> bidi = new ArrayList<ArrayList<String>>();
-		for (int i = 0; i < 10; i++) {
-			ArrayList<String> aux = new ArrayList<String>();
-			for (int j = 0; j < 10; j++)
-				aux.add(String.valueOf(j));
-			bidi.add(aux);
-		}
-		if (cantidad < Usuario.getConocimientosTotales().size()) {
-			ArrayList<Integer> contadores = new ArrayList<Integer>(Usuario.misConocimientosTotales.size());
-			for (int i = 0; i < bidi.size(); i++) {
-				for (int j = 0; j < bidi.get(i).size(); j++) {
-					int pos = posString(Usuario.getConocimientosTotales(), bidi.get(i).get(j));
-					if (pos != -1)
-						contadores.set(pos, contadores.get(pos) + 1);
-				}
+	/**
+	 * @author Belatz
+	 * @param cantidad
+	 * @return
+	 */
+	public static Vector<String> conocimientosMasBuscados(int p_cantidad) {
+		Vector<String> _resultado = new Vector<>();
+		try {
+			ArrayList<String> _conocimientosBuscados = UtilidadesBD.buscarConocimientosRequeridos();
+			if (_conocimientosBuscados.size() < p_cantidad) {
+				p_cantidad = _conocimientosBuscados.size();
 			}
-			ArrayList<String> conocimientosTotales = new ArrayList<String>();
-			conocimientosTotales.addAll(Usuario.getConocimientosTotales());
-
-			int i = 0, mayor;
-			while (i < cantidad) {
-				mayor = buscarMayr(contadores);
-				int pos = posInt(contadores, mayor);
-				conocimientosMasBuscados.add(conocimientosTotales.get(pos));
-				conocimientosTotales.remove(pos);
-				contadores.remove(pos);
-			}
-		} else
-			conocimientosMasBuscados.addAll(Usuario.getConocimientosTotales());
-		Vector<String> aux = new Vector<String>();
-		aux.addAll(conocimientosMasBuscados);
-		return aux;
-	}
-
-	// TODO pasar a la clase de utilidades
-	public static int posString(ArrayList<String> array, String texto) {
-		int i = 0;
-		while (i < array.size() && array.get(i).toLowerCase().compareTo(texto.toLowerCase()) != 0)
-			i++;
-		if (i >= array.size())
-			i = -1;
-		return i;
-	}
-
-	public static int posInt(ArrayList<Integer> array, int num) {
-		int i = 0;
-		while (i < array.size() && array.get(i) != num)
-			i++;
-		if (i >= array.size())
-			i = -1;
-		return i;
-	}
-
-	public static int buscarMayr(ArrayList<Integer> array) {
-		int mayor = 0;
-		for (int i = 0; i < array.size(); i++) {
-			int j = 0;
-			while (j < array.size() && mayor > array.get(j))
-				j++;
-			if (j < array.size())
-				mayor = array.get(j);
+			_resultado.addAll(_conocimientosBuscados.subList(0, p_cantidad));
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return mayor;
+		return _resultado;
 	}
 }

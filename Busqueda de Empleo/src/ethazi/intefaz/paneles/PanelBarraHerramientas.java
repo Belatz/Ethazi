@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,7 +15,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ethazi.aplicacion.Aplicacion;
+import ethazi.aplicacion.Oferta;
+import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
+import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
@@ -48,8 +53,12 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA);
-					// TODO en el panel de consultar ofertas coger el texto de la barra de busqueda
+					try {
+						ArrayList<Elemento_Listable> ofertas = UtilidadesBD.buscarOfertas(PanelBarraHerramientas.getTxField_buscar());
+						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA, ofertas);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
 				} catch (PanelNoDisponible e2) {
 					e2.printStackTrace();
 				}

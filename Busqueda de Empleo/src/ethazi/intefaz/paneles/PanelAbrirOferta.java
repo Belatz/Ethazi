@@ -67,6 +67,17 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		setPreferredSize(new Dimension(762, 488));
 		setLayout(null);
 
+		crearPanel();
+	}
+	
+	public void cambiarOferta(Oferta ofer) {
+		miOferta = ofer;
+		
+		this.removeAll();
+		crearPanel();
+	}
+	
+	private void crearPanel() {
 		JLabel lbl_Empresa = new JLabel("Empresa:");
 		lbl_Empresa.setBounds(10, 52, 46, 14);
 		add(lbl_Empresa);
