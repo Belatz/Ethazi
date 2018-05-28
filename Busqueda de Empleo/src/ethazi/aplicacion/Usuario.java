@@ -13,6 +13,7 @@ import ethazi.datos.Conexion;
  */
 
 import ethazi.datos.Tablas;
+import ethazi.datos.UtilidadesBD;
 
 /**
  * 

@@ -7,6 +7,8 @@ import java.awt.Dimension;
 
 import javax.swing.JTextField;
 
+import ethazi.aplicacion.Aplicacion;
+import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Usuario;
 import ethazi.aplicacion.Utilidades;
 import ethazi.datos.UtilidadesBD;
@@ -22,8 +24,10 @@ import javax.swing.JTextArea;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.awt.Color;
 
 /**
@@ -194,7 +198,7 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 		chckbxDisponibilidadParaViajar = new JCheckBox("Disponibilidad para Viajar");
 		chckbxDisponibilidadParaViajar.setBounds(274, 135, 174, 23);
 		add(chckbxDisponibilidadParaViajar);
-
+		
 		JButton buttonRetroceder = new JButton("<--");
 		
 		buttonRetroceder.setToolTipText("Volver a la Ventana de Identificaci\u00F3n");
@@ -272,6 +276,25 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 			}
 		});
 		actualizarDia();
+		apellidostextField.setText("");
+		nickTextField.setText("");
+		nombretextField.setText("");
+		numIdtextField.setText("");
+		dirtextField.setText("");
+		teltextField.setText("");
+		emailtextField.setText("");
+		diacomboBox.setSelectedIndex(0);
+		mescomboBox.setSelectedIndex(0);
+		aniocomboBox.setSelectedIndex(0);
+		chckbxCarnet.setSelected(false);
+		chckbxCoche.setSelected(false);
+		chckbxDisponibilidadParaViajar.setSelected(false);
+		experienciaProfesionaltextField.setText("");
+		estudiostextArea.setText("");
+		otrosConocimientostextArea.setText("");
+		vidaLaboraltextArea.setText("");
+		conocimientosEditar.actualizarListas(Usuario.getConocimientosTotales(), null);
+	
 	}
 
 	private void actualizarDia() {
@@ -305,11 +328,15 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 		for (int i = 1; i <= total; i++)
 			diacomboBox.addItem(Integer.valueOf(i));
 	}
-
+	private String comboAFecha() {
+		return aniocomboBox.getSelectedItem()+"-"+
+				mescomboBox.getSelectedItem()+"-"+
+				diacomboBox.getSelectedItem();
+	}
 	@Override
 	public void funcionalidad(boolean aceptado) {
 		if (aceptado) {
-			Empresa aux = null;
+			Candidato aux = null;
 			lbl_Invalido.setVisible(false);
 			lbl_Invalido.setText("Campos inv�lidos/vac�os:");
 			try {
@@ -350,9 +377,9 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 					teltextField.setText("");
 					lbl_Invalido.setText(lbl_Invalido.getText() + " Tel ");
 				}
-				if (textFieldDir.getText().compareTo("") == 0) {
+				if (dirtextField.getText().compareTo("") == 0) {
 					valido = false;
-					textFieldDir.setText("");
+					dirtextField.setText("");
 					lbl_Invalido.setText(lbl_Invalido.getText() + " Dir");
 				}
 				if (textFieldPass.getText().compareTo("") == 0) {
@@ -360,29 +387,56 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 					textFieldPass.setText("");
 					lbl_Invalido.setText(lbl_Invalido.getText() + " Contrase�a");
 				}
-				if (textFieldContact.getText().compareTo("") == 0) {
-					valido = false;
-					textFieldContact.setText("");
-					lbl_Invalido.setText(lbl_Invalido.getText() + " Contacto");
+				String fecha=comboAFecha();
+				if((Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(fecha.substring(0, 4)))<18)
+				{
+					valido=false;
+					diacomboBox.setSelectedIndex(0);
+					mescomboBox.setSelectedIndex(0);
+					aniocomboBox.setSelectedIndex(0);
+					lbl_Invalido.setText(lbl_Invalido.getText()+" Fecha");
+				}
+				if(apellidostextField.getText().compareTo("")==0 || apellidostextField.getText().charAt(0)==' ')
+				{
+					valido=false;
+					apellidostextField.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText()+" Apellidos");
+				}
+				int i=0;
+				while(i<experienciaProfesionaltextField.getText().length() && experienciaProfesionaltextField.getText().charAt(i)>='0' && experienciaProfesionaltextField.getText().charAt(i)<='9')
+					i++;
+				if(experienciaProfesionaltextField.getText().compareTo("")==0 || i<experienciaProfesionaltextField.getText().length() || Integer.valueOf(experienciaProfesionaltextField.getText())<0)
+				{
+					valido=false;
+					experienciaProfesionaltextField.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText()+" Experiencia Profecional");
 				}
 				lbl_Invalido.setVisible(!valido);
 				if (valido) {
-					aux = new Empresa(textFieldNick.getText(), textFieldPass.getText(), textFieldNombre.getText(),
-							textFieldCif.getText(), textFieldDir.getText(), textFieldEmail.getText(),
-							textFieldTel.getText(), textFieldContact.getText(), textAreaDesc.getText());
-					UtilidadesBD.insertarEmpresa(aux);
+					aux=new Candidato(nickTextField.getText(), textFieldPass.getText(), nombretextField.getText(), numIdtextField.getText(), dirtextField.getText(), emailtextField.getText(), teltextField.getText(), apellidostextField.getText(), fecha, chckbxCarnet.getSelectedObjects()==null?false:true,chckbxCoche.getSelectedObjects()==null?false:true, chckbxDisponibilidadParaViajar.getSelectedObjects()==null?false:true, estudiostextArea.getText(), conocimientosEditar.getConocimientosAnadidos(), otrosConocimientostextArea.getText(), vidaLaboraltextArea.getText(), Integer.valueOf(experienciaProfesionaltextField.getText()));
+					UtilidadesBD.insertarCandidato(aux);
 					VentanaIdentificarse.cerrar();
 					VentanaPrincipal.ejecutar();
 					Aplicacion.setUsuario(aux);
-					textFieldCif.setText("");
-					textFieldContact.setText("");
-					textFieldDir.setText("");
-					textFieldEmail.setText("");
-					textFieldNick.setText("");
-					textFieldNombre.setText("");
+					numIdtextField.setText("");
+					otrosConocimientostextArea.setText("");
+					dirtextField.setText("");
+					emailtextField.setText("");
+					nickTextField.setText("");
+					nombretextField.setText("");
 					textFieldPass.setText("");
-					textFieldTel.setText("");
-					textAreaDesc.setText("");
+					teltextField.setText("");
+					estudiostextArea.setText("");
+					otrosConocimientostextArea.setText("");
+					vidaLaboraltextArea.setText("");
+					chckbxCarnet.setSelected(false);
+					chckbxCoche.setSelected(false);
+					chckbxDisponibilidadParaViajar.setSelected(false);
+					diacomboBox.setSelectedIndex(0);
+					mescomboBox.setSelectedIndex(0);
+					aniocomboBox.setSelectedIndex(0);
+					apellidostextField.setText("");
+					conocimientosEditar.actualizarListas(Usuario.getConocimientosTotales(), null);
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

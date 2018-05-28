@@ -25,6 +25,7 @@ public abstract class UtilidadesBD {
 
 	public static void insertarUsuario(Usuario user) throws SQLException
 	{
+		
 		Conexion.actualizar("INSERT INTO "+Tablas.C_USUARIO_TABLA+
 				" VALUES ('"+user.getNumID()+"','"
 				+user.getNick()+"','"
@@ -41,6 +42,20 @@ public abstract class UtilidadesBD {
 				" VALUES ('"+emp.getContacto()+"','"
 				+emp.getDescripcion()+"','"
 				+emp.getNumID()+"');");
+	}
+	public static void insertarCandidato(Candidato cand) throws SQLException {
+		insertarUsuario(cand);
+		Conexion.actualizar("INSERT INTO "+Tablas.C_CANDIDATO_TABLA+
+				" VALUES ('"+cand.getApellidos()+"','"
+				+cand.getFechaNac()+"','"
+				+(cand.hasCarnet()?"1":"0")+"','"
+				+(cand.hasCochePropio()?"1":"0")+"','"
+				+(cand.hasDisViajar()?"1":"0")+"','"
+				+cand.getEstudios()+"','"
+				+cand.getOtrosConocimientos()+"','"
+				+cand.getVidaLaboral()+"','"
+				+cand.getExperienciaProfesional()+"','"
+				+cand.getNumID()+"');");
 	}
 	/**
 	 * Returns and object Usuario through a ResultSet by parameter
@@ -161,15 +176,15 @@ public abstract class UtilidadesBD {
 	}
 	public static Candidato toCandidatoDNI(String dNI) throws SQLException {
 		ResultSet _rs=Conexion.consultar("SELECT * FROM "+Tablas.C_USUARIO_TABLA+", "+Tablas.C_CANDIDATO_TABLA
-				+ " WHERE "+Tablas.C_USUARIO_NUMID+"="+Tablas.C_EMPRESA_NUMID+" AND "
-				+Tablas.C_EMPRESA_NUMID+"='"+dNI+"';");
+				+ " WHERE "+Tablas.C_USUARIO_NUMID+"="+Tablas.C_CANDIDATO_NUMID+" AND "
+				+Tablas.C_CANDIDATO_NUMID+"='"+dNI+"';");
 		Candidato cand=null;
 		try {
 			cand=(Candidato)toUsuario(_rs);
 		} catch (ResultSetVacio e) {
-			e.printStackTrace();
-		} catch (NoQuedanFilas e) {
-			e.printStackTrace();
+        cand=null;
+		} catch (NoQuedanFilas e) { 
+      e.printStackTrace();
 		}
 		return cand;
 	}
