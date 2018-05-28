@@ -185,12 +185,12 @@ public class VentanaPrincipal extends JFrame {
 	public static void crearPrimerPanel() throws SQLException {
 		if (Aplicacion.getUsuario() instanceof Candidato) {
 			// Buscar ofertas adecuadas
-			currentPanel = pa_buscarOfertas;
+			currentPanel = pa_ofertasAdecuadas;
 		} else {
 			ArrayList<Oferta> _ofertas = UtilidadesBD.buscarOfertasEmpresa(Aplicacion.getUsuario().getNumID());
 
 			if (_ofertas.isEmpty()) { // Si no tiene ofertas publicadas
-				currentPanel = pa_buscarOfertas;
+				currentPanel = pa_publicarOferta;
 				System.out.println("LOG: PANEL ACTUAL -- Publicar Oferta");
 			} else {
 				// Buscar ofertas con solicitudes
@@ -223,7 +223,7 @@ public class VentanaPrincipal extends JFrame {
 			pa_buscarOfertas.setVisible(false);
 			// Crear consultar ofertas adecuadas
 			_elementos = Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(null, null, null, null,
-					String.valueOf(_usr.getExperienciaProfesional()), null, null,
+					String.valueOf(_usr.getExperienciaProfesional()), -1, null,
 					UtilidadesBD.descargarConocimientosCandidato(_usr.getNumID())));
 			pa_ofertasAdecuadas = new GenericoDePanelesConLista(_elementos, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 			pa_contenedor.add(pa_ofertasAdecuadas);
@@ -327,8 +327,10 @@ public class VentanaPrincipal extends JFrame {
 			nuevoPanel = pa_analizarSolicitudes;
 			break;
 		case C_BUSCAR_OFERTA:
-			cargarListado(Elemento_A_Listar.C_CONSULTAR_OFERTAS);
+			//cargarListado(Elemento_A_Listar.C_CONSULTAR_OFERTAS);
+			actualizarGenerico(listaDeElementos, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 			pa_buscarOfertas.updateUI();
+			nuevoPanel = pa_buscarOfertas;
 			break;
 		case C_CONOCIMIENTOS_BUSCADOS:
 			nuevoPanel = pa_conocimientosBuscados;
@@ -387,8 +389,7 @@ public class VentanaPrincipal extends JFrame {
 	 * @param listaDeOfertas
 	 * @param tipoPanel
 	 */
-	public static void actualizar(ArrayList<Elemento_Listable> listaDeOfertas, byte tipoPanel) {
-		pa_buscarOfertas.updateUI();
+	public static void actualizarGenerico(ArrayList<Elemento_Listable> listaDeOfertas, byte tipoPanel) {
 		pa_buscarOfertas = new GenericoDePanelesConLista(listaDeOfertas, tipoPanel);
 	}
 

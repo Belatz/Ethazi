@@ -3,9 +3,6 @@ package ethazi.datos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
@@ -143,7 +140,7 @@ public abstract class UtilidadesBD {
 		try {
 			usr = toUsuario(_rs);
 		} catch (ResultSetVacio e) {
-			System.out.println("No se han encontrado usuarios con esos datos"); // TODO manejar error por interfaz
+			System.out.println("No se han encontrado usuarios con esos datos");
 		} catch (NoQuedanFilas e) {
 		}
 
@@ -159,7 +156,6 @@ public abstract class UtilidadesBD {
 		}catch(ResultSetVacio e) {
 			emp=null;
 		} catch (NoQuedanFilas e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return emp;
@@ -174,7 +170,6 @@ public abstract class UtilidadesBD {
 		}catch(ResultSetVacio e) {
 			emp=null;
 		} catch (NoQuedanFilas e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return emp;
@@ -187,10 +182,9 @@ public abstract class UtilidadesBD {
 		try {
 			cand=(Candidato)toUsuario(_rs);
 		} catch (ResultSetVacio e) {
-			cand=null;
-		} catch (NoQuedanFilas e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+        cand=null;
+		} catch (NoQuedanFilas e) { 
+      e.printStackTrace();
 		}
 		return cand;
 	}
@@ -204,7 +198,6 @@ public abstract class UtilidadesBD {
 		}catch(ResultSetVacio e) {
 			user=null;
 		} catch (NoQuedanFilas e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return user;
@@ -311,10 +304,11 @@ public abstract class UtilidadesBD {
 		// Descargar oferta
 		ResultSet _rsOferta = Conexion.consultar(
 				"SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE " + Tablas.C_OFERTA_CODIGO + "='" + p_cod + "';");
+		_rsOferta.next();
 		// Descargar conocimientos
 		_conocimientos = descargarConocimientosOferta(_rsOferta.getString(Tablas.C_OFERTA_CODIGO));
 		// Descargar empresa de la oferta
-		ResultSet _rsEmpresa = Conexion.consultar("SELECT * FROM " + Tablas.C_EMPRESA_TABLA + ", "
+		ResultSet _rsEmpresa = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", "
 				+ Tablas.C_EMPRESA_TABLA + " WHERE " + Tablas.C_USUARIO_NUMID + " = " + Tablas.C_EMPRESA_NUMID + " AND "
 				+ Tablas.C_EMPRESA_NUMID + "='" + _rsOferta.getString(Tablas.C_OFERTA_EMPRESA) + "';");
 
@@ -470,7 +464,7 @@ public abstract class UtilidadesBD {
 	}
 
 	public static ArrayList<Oferta> filtrarOfertas(String p_titulo, String p_lugar, String p_salarioMax,
-			String p_salarioMin, String p_experiencia, String p_contrato, String p_empresa,
+			String p_salarioMin, String p_experiencia, int p_contrato, String p_empresa,
 			ArrayList<String> p_conocimientos) throws SQLException {
 
 		ArrayList<Oferta> _ofertas = new ArrayList<>();
@@ -493,14 +487,13 @@ public abstract class UtilidadesBD {
 			_sentencia += " AND ";
 			_sentencia += Tablas.C_OFERTA_SUELDO_MIN + " >= " + p_salarioMin;
 		}
-		if (p_experiencia != null && p_experiencia.isEmpty()) {
+		if (p_experiencia != null && !p_experiencia.isEmpty()) {
 			_sentencia += " AND ";
 			_sentencia += Tablas.C_OFERTA_EXPERIENCIA + " >= " + p_experiencia;
 		}
-		if (p_contrato != null && !p_contrato.isEmpty()) {
+		if (p_contrato >= 0) {
 			_sentencia += " AND ";
-			_sentencia += Tablas.C_OFERTA_TIPO_CONTRATO + " = '" + p_contrato + "'"; // TODO Controlarlo con la
-																						// enumeracion
+			_sentencia += Tablas.C_OFERTA_TIPO_CONTRATO + " = " + p_contrato; 
 		}
 		if (p_empresa != null && !p_empresa.isEmpty()) {
 			ArrayList<Empresa> _empresas = buscarEmpresas(p_empresa);
@@ -710,7 +703,7 @@ public abstract class UtilidadesBD {
 	public static ArrayList<String> buscarConocimientosRequeridos() throws SQLException {
 		ArrayList<String> _conocimientos = new ArrayList<>();
 		ResultSet _rs = Conexion.consultar("SELECT " + Tablas.C_OFER_CONO_CONOCIMIENTO + ", COUNT(*) FROM "
-				+ Tablas.C_OFER_CONO_TABLA + " GROUP BY " + Tablas.C_OFER_CONO_CONOCIMIENTO + " ORDER BY 2;");
+				+ Tablas.C_OFER_CONO_TABLA + " GROUP BY " + Tablas.C_OFER_CONO_CONOCIMIENTO + " ORDER BY 2 DESC;");
 
 		while (_rs.next()) {
 			_conocimientos.add(_rs.getString(1));
