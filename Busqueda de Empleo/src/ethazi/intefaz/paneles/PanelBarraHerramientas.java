@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,6 +14,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ethazi.aplicacion.Aplicacion;
+import ethazi.aplicacion.Candidato;
+import ethazi.aplicacion.Utilidades;
+import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
@@ -47,10 +51,13 @@ public class PanelBarraHerramientas extends JPanel {
 		JButton btn_buscar = new JButton("");
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			//este trycatch solo carga el array de elementos listables
 				try {
-					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA);
-					// TODO en el panel de consultar ofertas coger el texto de la barra de busqueda
-				} catch (PanelNoDisponible e2) {
+					VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas("Pro", null, null, null, null, null, null, null))) ; 
+					
+					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA, VentanaPrincipal.listaDeElementos);
+					// TODO en el panel de consultar ofertas coger el texto de la barra((Candidato)Aplicacion.getUsuario()) de busqueda
+				} catch (PanelNoDisponible | SQLException e2) {
 					e2.printStackTrace();
 				}
 			}
@@ -96,8 +103,8 @@ public class PanelBarraHerramientas extends JPanel {
 		txField_buscar = new JTextField();
 		txField_buscar.setHorizontalAlignment(SwingConstants.RIGHT);
 		txField_buscar.setToolTipText("");
-		txField_buscar.setText("Introduzca el nombre de la Oferta....\r\n");
-		txField_buscar.setHorizontalAlignment(SwingConstants.CENTER);
+		txField_buscar.setText("    Introduzca el nombre de la Oferta....\r\n");
+		txField_buscar.setHorizontalAlignment(SwingConstants.LEFT);
 		txField_buscar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txField_buscar.setColumns(10);
 		txField_buscar.setBounds(51, 0, 277, 50);

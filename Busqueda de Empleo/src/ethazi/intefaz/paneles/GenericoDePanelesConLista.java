@@ -61,6 +61,9 @@ public class GenericoDePanelesConLista extends JPanel {
 				pa_listado.setBounds(10, 0, 500, 443);
 				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
+				pa_listado.setViewportView(panel_QueTieneLaLista);
+				add(pa_listado);
+				add(_panelBotonAtrasYAlante);
 			}
 			System.out.println("LOG: PANEL ACTUAL -- Sus Solicitudes");
 			break;
@@ -106,6 +109,9 @@ public class GenericoDePanelesConLista extends JPanel {
 
 				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
+				pa_listado.setViewportView(panel_QueTieneLaLista);
+				add(pa_listado);
+				add(_panelBotonAtrasYAlante);
 			}
 			System.out.println("LOG: PANEL ACTUAL -- Ofertas con Solicitudes");
 			break;
@@ -125,6 +131,9 @@ public class GenericoDePanelesConLista extends JPanel {
 
 				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
+				pa_listado.setViewportView(panel_QueTieneLaLista);
+				add(pa_listado);
+				add(_panelBotonAtrasYAlante);
 			}
 			System.out.println("LOG: PANEL ACTUAL -- Sus Ofertas");
 			break;
@@ -144,6 +153,9 @@ public class GenericoDePanelesConLista extends JPanel {
 
 				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
+				pa_listado.setViewportView(panel_QueTieneLaLista);
+				add(pa_listado);
+				add(_panelBotonAtrasYAlante);
 			}
 			System.out.println("LOG: PANEL ACTUAL -- Analizar Solicitudes");
 			break;
@@ -162,6 +174,9 @@ public class GenericoDePanelesConLista extends JPanel {
 
 				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
+
+				pa_listado.setViewportView(panel_QueTieneLaLista);
+				add(pa_listado);
 				add(_panelBotonAtrasYAlante);
 			}
 			JScrollPane pa_filtrosCandidato = new PanelFiltrosCandidato();

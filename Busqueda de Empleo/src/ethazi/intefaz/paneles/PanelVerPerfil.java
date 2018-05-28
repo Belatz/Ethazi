@@ -439,10 +439,10 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 			for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= (Calendar.getInstance().get(Calendar.YEAR)
 					- 90); i--)
 				aniocomboBox.addItem(Integer.valueOf(i));
-			aniocomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(6)));
+			aniocomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(0, 3)));
 			for (int i = 1; i <= 12; i++)
 				mescomboBox.addItem(Integer.valueOf(i));
-			mescomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(3, 5)));
+			mescomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(4, 6)));
 			mescomboBox.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
