@@ -91,7 +91,7 @@ public class PruebasBD {
 			Conexion.actualizar("INSERT INTO conocimientos VALUES ('Especialista en electronica')");
 			Conexion.actualizar("INSERT INTO conocimientos VALUES ('Especialista en mecanica general')");
 			Conexion.actualizar("INSERT INTO conocimientos VALUES ('Marketing')");
-			Conexion.actualizar("INSERT INTO conocimientos VALUES ('Contabilidad Avanzada')");
+			Conexion.actualizar("INSERT INTO conocimientos VALUES ('Contabilidad avanzada')");
 
 			// Datos ofertas
 			Conexion.actualizar(
@@ -160,25 +160,43 @@ public class PruebasBD {
 			// Datos candidato_conocimientos
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('11111111D','Mecanico')");
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('11111111D','Electricista')");
+			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('11111111D','Marketing')");
+			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('22222222L','Marketing')");
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('22222222L','Dependiente')");
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('33333333K','Contabilidad')");
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('44444444A','Programador')");
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('44444444A','Marketing')");
-			Conexion.actualizar(
-					"INSERT INTO candidato_conocimientos VALUES ('55555555P','Especialista en electronica')");
-
+			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('55555555P','Especialista en electronica')");
+			
 			// Datos oferta_conocimientos
 			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + codigo + ",'Mecanico')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + codigo + ",'Electricista')");
 			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 1) + ",'Dependiente')");
-			Conexion.actualizar(
-					"INSERT INTO oferta_conocimientos VALUES (" + (codigo + 2) + ",'Contabilidad avanzada')");
-			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 3)
-					+ ",'Especialista en mecanica general')");
-			Conexion.actualizar(
-					"INSERT INTO oferta_conocimientos VALUES (" + (codigo + 4) + ",'Programacion en Python')");
-			Conexion.actualizar(
-					"INSERT INTO oferta_conocimientos VALUES (" + (codigo + 5) + ",'Especialista en electronica')");
-
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 2) + ",'Contabilidad avanzada')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 3) + ",'Especialista en mecanica general')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 3) + ",'Especialista en electronica')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 4) + ",'Programacion en Python')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 5) + ",'Especialista en electronica')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 6) + ",'Marketing')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 7) + ",'Programacion en Java')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 7) + ",'Programacion en C')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 8) + ",'Programacion en C')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 9) + ",'Programacion en C++')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 9) + ",'Programacion en C')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 10) + ",'Programacion en Python')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 11) + ",'Contabilidad avanzada')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 12) + ",'Dependiente')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 13) + ",'Dependiente')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 14) + ",'Programador')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 15) + ",'Especialista en electronica')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 16) + ",'Marketing')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 17) + ",'Mecanico')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 17) + ",'Dependiente')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 18) + ",'Contabilidad avanzada')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 19) + ",'Programacion en Java')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 20) + ",'Contabilidad')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 21) + ",'Marketing')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 21) + ",'Dependiente')");
 		}
 	}
 }
