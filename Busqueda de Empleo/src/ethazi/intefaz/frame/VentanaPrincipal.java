@@ -106,13 +106,16 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);
-
+		
 		// Menu desplegable
+		//EL menu comienza ahora mas abajo para que no quede encima de el boton que lo abre al usar un boton
+		//de el menu
 		menu = new PanelMenu();
+	
 		if (Aplicacion.getUsuario() instanceof Candidato) {
-			menu.setBounds(350, 0, 251, 115);
+			menu.setBounds(365, 11, 258, 143);
 		} else {
-			menu.setBounds(350, 0, 251, 147);
+			menu.setBounds(365, 11, 258, 173);
 		}
 		contentPane.add(menu);
 		menu.setLayout(null);
@@ -135,7 +138,7 @@ public class VentanaPrincipal extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				System.out.println("ola");
+			
 			}
 
 			@Override
@@ -172,12 +175,12 @@ public class VentanaPrincipal extends JFrame {
 			crearPrimerPanel();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		
 
 		// Crear paneles
 		crearPaneles();
+		}
 	}
-
 	/**
 	 * @author belatz
 	 * @throws SQLException
@@ -185,16 +188,16 @@ public class VentanaPrincipal extends JFrame {
 	public static void crearPrimerPanel() throws SQLException {
 		if (Aplicacion.getUsuario() instanceof Candidato) {
 			// Buscar ofertas adecuadas
-			currentPanel = pa_ofertasAdecuadas;
+			currentPanel = pa_buscarOfertas;
 		} else {
 			ArrayList<Oferta> _ofertas = UtilidadesBD.buscarOfertasEmpresa(Aplicacion.getUsuario().getNumID());
 
-			if (_ofertas.isEmpty()) { // Si no tiene ofertas publicadas
-				currentPanel = pa_publicarOferta;
+			if (listaDeElementos.isEmpty()) { // Si no tiene ofertas publicadas
+				currentPanel = pa_buscarOfertas;
 				System.out.println("LOG: PANEL ACTUAL -- Publicar Oferta");
 			} else {
 				// Buscar ofertas con solicitudes
-				currentPanel = pa_ofertasConSolici;
+				currentPanel = pa_buscarOfertas;
 			}
 		}
 		currentPanel.setVisible(true);
