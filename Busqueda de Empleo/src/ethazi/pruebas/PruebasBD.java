@@ -167,6 +167,7 @@ public class PruebasBD {
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('33333333K','Contabilidad avanzada')");
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('44444444A','Programador')");
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('44444444A','Marketing')");
+			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('44444444A','Especialista en ')");
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('55555555P','Especialista en electronica')");
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('55555555P','Programacion en Python')");
 			
