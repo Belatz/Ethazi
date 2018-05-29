@@ -2,12 +2,10 @@
 · Registrarse
 · Consultar Ofertas
 · Abrir Oferta
-· Editar Oferta
 · Analizar Empresa
 · Analizar Candidato
 · Consultar Sus Solicitudes
 · Consultar Ofertas Adecuadas
-· Consultar Conocimientos Mas Demandados
 · Retirar Solicitud
 · Realizar Solicitud
 · Ver Ofertas Con Solicitudes
@@ -23,11 +21,13 @@
 ~ Guardar Curriculum
 
 == Trabajando ==
+· Editar Oferta
 
 == Por Probar ==
-· Ver Perfil
 · Editar Perfil
 
 == Terminado ==
+· Ver Perfil
+· Consultar Conocimientos Mas Demandados
 · Identificarse
 ~ Cerrar Sesion

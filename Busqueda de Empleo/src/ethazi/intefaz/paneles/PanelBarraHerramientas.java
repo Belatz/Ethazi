@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -16,8 +17,10 @@ import javax.swing.SwingConstants;
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Utilidades;
+import ethazi.aplicacion.Oferta;
 import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
+import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
@@ -55,10 +58,7 @@ public class PanelBarraHerramientas extends JPanel {
 		JButton btn_buscar = new JButton("");
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-				
 					try {
-				
 						if (Aplicacion.getUsuario() instanceof Candidato) {
 							VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
 									.filtrarOfertas(txField_buscar.getText(), null, null, null, null, null, null, null)));
@@ -72,9 +72,6 @@ public class PanelBarraHerramientas extends JPanel {
 					} catch (SQLException | PanelNoDisponible e2) {
 						e2.printStackTrace();
 					}
-				
-		
-
 			}
 		});
 		btn_buscar.setBounds(0, 0, 50, 50);
@@ -93,6 +90,8 @@ public class PanelBarraHerramientas extends JPanel {
 				try {
 					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_VER_PERFIL);
 				} catch (PanelNoDisponible e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}

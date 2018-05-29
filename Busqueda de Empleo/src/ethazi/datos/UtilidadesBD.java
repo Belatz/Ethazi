@@ -23,6 +23,40 @@ import ethazi.intefaz.Elemento_Listable;
  */
 public abstract class UtilidadesBD {
 
+	public static void insertarUsuario(Usuario user) throws SQLException
+	{
+		
+		Conexion.actualizar("INSERT INTO "+Tablas.C_USUARIO_TABLA+
+				" VALUES ('"+user.getNumID()+"','"
+				+user.getNick()+"','"
+				+user.getPassword()+"','"
+				+user.getNombre()+"','"
+				+user.getDireccion()+"','"
+				+user.getEmail()+"','"
+				+user.getTelefono()+"');");
+	}
+	public static void insertarEmpresa(Empresa emp) throws SQLException
+	{
+		insertarUsuario(emp);
+		Conexion.actualizar("INSERT INTO "+Tablas.C_EMPRESA_TABLA+
+				" VALUES ('"+emp.getContacto()+"','"
+				+emp.getDescripcion()+"','"
+				+emp.getNumID()+"');");
+	}
+	public static void insertarCandidato(Candidato cand) throws SQLException {
+		insertarUsuario(cand);
+		Conexion.actualizar("INSERT INTO "+Tablas.C_CANDIDATO_TABLA+
+				" VALUES ('"+cand.getApellidos()+"','"
+				+cand.getFechaNac()+"','"
+				+(cand.hasCarnet()?"1":"0")+"','"
+				+(cand.hasCochePropio()?"1":"0")+"','"
+				+(cand.hasDisViajar()?"1":"0")+"','"
+				+cand.getEstudios()+"','"
+				+cand.getOtrosConocimientos()+"','"
+				+cand.getVidaLaboral()+"','"
+				+cand.getExperienciaProfesional()+"','"
+				+cand.getNumID()+"');");
+	}
 	/**
 	 * Returns and object Usuario through a ResultSet by parameter
 	 * 
@@ -43,7 +77,7 @@ public abstract class UtilidadesBD {
 		Usuario _usr = null;
 		String _nick = p_rs.getString(Tablas.C_USUARIO_NICK);
 
-		if (Usuario.esCandidato(_nick)) {
+		if (Usuario.esCandidato(_nick, true)) {
 			_usr = new Candidato(_nick, p_rs.getString(Tablas.C_USUARIO_PASSWORD),
 					p_rs.getString(Tablas.C_USUARIO_NOMBRE), p_rs.getString(Tablas.C_USUARIO_NUMID),
 					p_rs.getString(Tablas.C_USUARIO_DIRECCION), p_rs.getString(Tablas.C_USUARIO_EMAIL),
@@ -74,8 +108,7 @@ public abstract class UtilidadesBD {
 	 *            String con el nick o el numid del usuario
 	 * @param p_esNick
 	 *            boolean que determina el tipo de texto que le pasamos, true si es
-	 *            un nick, false si es un numid
-	 * @return Returns a Usuario with the data obtained from the identificator
+	 *            un nick, false si es un numid * @return Returns a Usuario with the data obtained from the identificator
 	 * @throws SQLException
 	 */
 	public static Usuario toUsuario(String p_identificador, boolean p_esNick) throws SQLException {
@@ -83,7 +116,7 @@ public abstract class UtilidadesBD {
 		ResultSet _rs;
 
 		if (p_esNick) {
-			if (Usuario.esCandidato(p_identificador)) {
+			if (Usuario.esCandidato(p_identificador, p_esNick)) {
 				_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_CANDIDATO_TABLA
 						+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND "
 						+ Tablas.C_USUARIO_NICK + "='" + p_identificador + "';");
@@ -93,7 +126,7 @@ public abstract class UtilidadesBD {
 						+ Tablas.C_USUARIO_NICK + "='" + p_identificador + "';");
 			}
 		} else {
-			if (Usuario.esCandidato(p_identificador)) {
+			if (Usuario.esCandidato(p_identificador, p_esNick)) {
 				_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_CANDIDATO_TABLA
 						+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND "
 						+ Tablas.C_USUARIO_NUMID + "='" + p_identificador + "';");
@@ -107,13 +140,68 @@ public abstract class UtilidadesBD {
 		try {
 			usr = toUsuario(_rs);
 		} catch (ResultSetVacio e) {
-			System.out.println("No se han encontrado usuarios con esos datos"); // TODO manejar error por interfaz
+			System.out.println("No se han encontrado usuarios con esos datos");
 		} catch (NoQuedanFilas e) {
 		}
 
 		return usr;
 	}
-
+	public static Empresa toEmpresa(String nombre) throws SQLException{
+		ResultSet _rs=Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_EMPRESA_TABLA
+				+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_EMPRESA_NUMID + " AND "
+				+ Tablas.C_USUARIO_NICK + "='" + nombre + "';");
+		Empresa emp=null;
+		try {
+		emp=(Empresa)toUsuario(_rs);
+		}catch(ResultSetVacio e) {
+			emp=null;
+		} catch (NoQuedanFilas e) {
+			e.printStackTrace();
+		}
+		return emp;
+	}
+	public static Empresa toEmpresaCif(String cIF) throws SQLException{
+		ResultSet _rs=Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_EMPRESA_TABLA
+				+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_EMPRESA_NUMID + " AND "
+				+ Tablas.C_EMPRESA_NUMID + "='" + cIF + "';");
+		Empresa emp=null;
+		try {
+		emp=(Empresa)toUsuario(_rs);
+		}catch(ResultSetVacio e) {
+			emp=null;
+		} catch (NoQuedanFilas e) {
+			e.printStackTrace();
+		}
+		return emp;
+	}
+	public static Candidato toCandidatoDNI(String dNI) throws SQLException {
+		ResultSet _rs=Conexion.consultar("SELECT * FROM "+Tablas.C_USUARIO_TABLA+", "+Tablas.C_CANDIDATO_TABLA
+				+ " WHERE "+Tablas.C_USUARIO_NUMID+"="+Tablas.C_CANDIDATO_NUMID+" AND "
+				+Tablas.C_CANDIDATO_NUMID+"='"+dNI+"';");
+		Candidato cand=null;
+		try {
+			cand=(Candidato)toUsuario(_rs);
+		} catch (ResultSetVacio e) {
+        cand=null;
+		} catch (NoQuedanFilas e) { 
+      e.printStackTrace();
+		}
+		return cand;
+	}
+	public static Usuario toUsuario(String email) throws SQLException
+	{
+		ResultSet _rs=Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + " WHERE "
+				+ Tablas.C_USUARIO_EMAIL + "='" + email + "';");
+		Usuario user=null;
+		try {
+		user=toUsuario(_rs);
+		}catch(ResultSetVacio e) {
+			user=null;
+		} catch (NoQuedanFilas e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
 	/**
 	 * Returns and object Solicitud through a ResultSet by parameter
 	 * 
@@ -216,10 +304,11 @@ public abstract class UtilidadesBD {
 		// Descargar oferta
 		ResultSet _rsOferta = Conexion.consultar(
 				"SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE " + Tablas.C_OFERTA_CODIGO + "='" + p_cod + "';");
+		_rsOferta.next();
 		// Descargar conocimientos
 		_conocimientos = descargarConocimientosOferta(_rsOferta.getString(Tablas.C_OFERTA_CODIGO));
 		// Descargar empresa de la oferta
-		ResultSet _rsEmpresa = Conexion.consultar("SELECT * FROM " + Tablas.C_EMPRESA_TABLA + ", "
+		ResultSet _rsEmpresa = Conexion.consultar("SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", "
 				+ Tablas.C_EMPRESA_TABLA + " WHERE " + Tablas.C_USUARIO_NUMID + " = " + Tablas.C_EMPRESA_NUMID + " AND "
 				+ Tablas.C_EMPRESA_NUMID + "='" + _rsOferta.getString(Tablas.C_OFERTA_EMPRESA) + "';");
 
@@ -375,7 +464,7 @@ public abstract class UtilidadesBD {
 	}
 
 	public static ArrayList<Oferta> filtrarOfertas(String p_titulo, String p_lugar, String p_salarioMax,
-			String p_salarioMin, String p_experiencia, String p_contrato, String p_empresa,
+			String p_salarioMin, String p_experiencia, int p_contrato, String p_empresa,
 			ArrayList<String> p_conocimientos) throws SQLException {
 
 		ArrayList<Oferta> _ofertas = new ArrayList<>();
@@ -398,14 +487,13 @@ public abstract class UtilidadesBD {
 			_sentencia += " AND ";
 			_sentencia += Tablas.C_OFERTA_SUELDO_MIN + " >= " + p_salarioMin;
 		}
-		if (p_experiencia != null && p_experiencia.isEmpty()) {
+		if (p_experiencia != null && !p_experiencia.isEmpty()) {
 			_sentencia += " AND ";
 			_sentencia += Tablas.C_OFERTA_EXPERIENCIA + " >= " + p_experiencia;
 		}
-		if (p_contrato != null && !p_contrato.isEmpty()) {
+		if (p_contrato >= 0) {
 			_sentencia += " AND ";
-			_sentencia += Tablas.C_OFERTA_TIPO_CONTRATO + " = '" + p_contrato + "'"; // TODO Controlarlo con la
-																						// enumeracion
+			_sentencia += Tablas.C_OFERTA_TIPO_CONTRATO + " = " + p_contrato; 
 		}
 		if (p_empresa != null && !p_empresa.isEmpty()) {
 			ArrayList<Empresa> _empresas = buscarEmpresas(p_empresa);
@@ -551,6 +639,22 @@ public abstract class UtilidadesBD {
 		return _rs.next();
 	}
 
+	public static void actualizarOferta(Oferta ofer) throws SQLException {
+		Conexion.actualizar("UPDATE " + Tablas.C_OFERTA_TABLA + " SET " + Tablas.C_OFERTA_DESCRIPCION + "='" + ofer.getDescripcion() + "', "
+				+ Tablas.C_OFERTA_LUGAR + "='" + ofer.getLugar() + "', " + Tablas.C_OFERTA_EXPERIENCIA + "="
+				+ ofer.getExperiencia() + ", " + Tablas.C_OFERTA_TIPO_CONTRATO + "=" + ofer.getContrato() + ", "
+				+ Tablas.C_OFERTA_SUELDO_MAX + "=" + ofer.getSalarioMax() + ", " + Tablas.C_OFERTA_SUELDO_MIN + "="
+				+ ofer.getSalarioMin() + ", " + Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES + "='"
+				+ ofer.getAspectosImprescindibles() + "', " + Tablas.C_OFERTA_ASPECTOS_VALORAR + "='"
+				+ ofer.getAspectosAValorar() + "' WHERE " + Tablas.C_OFERTA_CODIGO + "=" + ofer.getCodigo() + ";");
+		Conexion.actualizar("DELETE " + Tablas.C_OFER_CONO_TABLA + " WHERE " + Tablas.C_OFER_CONO_OFERTA + "="
+				+ ofer.getCodigo() + ";");
+		for (String conocimiento : ofer.getConocimientos()) {
+			Conexion.actualizar("INSERT INTO " + Tablas.C_OFER_CONO_TABLA + " VALUES (" + ofer.getCodigo() + ", '"
+					+ conocimiento + "');");
+		}
+	}
+
 	public static void actualizarUsuario(Usuario usr) throws SQLException {
 		Conexion.actualizar("UPDATE " + Tablas.C_USUARIO_TABLA + " SET " + Tablas.C_USUARIO_NOMBRE + "='"
 				+ usr.getNombre() + "', " + Tablas.C_USUARIO_DIRECCION + "='" + usr.getDireccion() + "', "
@@ -594,6 +698,18 @@ public abstract class UtilidadesBD {
 					+ soli.getCand().getNumID() + "' AND " + Tablas.C_SOLICITUD_OFERTA + "="
 					+ soli.getOfer().getCodigo() + ";");
 		}
+	}
+
+	public static ArrayList<String> buscarConocimientosRequeridos() throws SQLException {
+		ArrayList<String> _conocimientos = new ArrayList<>();
+		ResultSet _rs = Conexion.consultar("SELECT " + Tablas.C_OFER_CONO_CONOCIMIENTO + ", COUNT(*) FROM "
+				+ Tablas.C_OFER_CONO_TABLA + " GROUP BY " + Tablas.C_OFER_CONO_CONOCIMIENTO + " ORDER BY 2 DESC;");
+
+		while (_rs.next()) {
+			_conocimientos.add(_rs.getString(1));
+		}
+
+		return _conocimientos;
 	}
 
 }

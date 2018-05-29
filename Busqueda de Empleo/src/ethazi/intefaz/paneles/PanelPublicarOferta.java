@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
+import ethazi.aplicacion.Contrato;
 import ethazi.aplicacion.Usuario;
 import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.emergentes.EmergenteCambios;
@@ -167,11 +168,11 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 		lbl_contrato.setBounds(411, 86, 107, 14);
 		add(lbl_contrato);
 		
-		JComboBox<String> combo_contrato = new JComboBox<String>();
-		combo_contrato.addItem("Indefinido Tiempo Completo");
-		combo_contrato.addItem("Indefinido Tiempo Parcial");
-		combo_contrato.addItem("Temporal Tiempo Completo");
-		combo_contrato.addItem("Temporal Tiempo Parcial"); //TODO cambiar por enumeracion
+		JComboBox<Contrato> combo_contrato = new JComboBox<Contrato>();
+		combo_contrato.addItem(Contrato.INDEFINIDO_TIEMPO_COMPLETO);
+		combo_contrato.addItem(Contrato.INDEFINIDO_TIEMPO_PARCIAL);
+		combo_contrato.addItem(Contrato.TEMPORAL_TIEMPO_COMPLETO);
+		combo_contrato.addItem(Contrato.TEMPORTAL_TIEMPO_PARCIAL);
 		combo_contrato.setBounds(528, 82, 159, 20);
 		add(combo_contrato);
 		

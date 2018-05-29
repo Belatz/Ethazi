@@ -286,7 +286,7 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 					btnValidar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-//							EmergenteCambios.createWindow("¿Esta seguro de que desea guardar los cambios?",
+//							EmergenteCambios.createWindow("Â¿Esta seguro de que desea guardar los cambios?",
 //									(TieneEmergente) panel);
 //							if (emergenteAceptado) {
 								if (validarDatos()) {
@@ -371,10 +371,10 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 							pw.println(((Candidato) miUsuario).getFechaNac());
 							pw.println(miUsuario.getTelefono());
 							pw.println(miUsuario.getEmail());
-							pw.println("Carnet de Conducir: " + (((Candidato) miUsuario).hasCarnet() ? "Sí" : "No"));
-							pw.println("Coche Propio: " + (((Candidato) miUsuario).hasCarnet() ? "Sí" : "No"));
+							pw.println("Carnet de Conducir: " + (((Candidato) miUsuario).hasCarnet() ? "SÃ­" : "No"));
+							pw.println("Coche Propio: " + (((Candidato) miUsuario).hasCarnet() ? "SÃ­" : "No"));
 							pw.println("Disponibilidad para Viajar: "
-									+ (((Candidato) miUsuario).hasCarnet() ? "Sí" : "No"));
+									+ (((Candidato) miUsuario).hasCarnet() ? "SÃ­" : "No"));
 							pw.println("Estudios: " + ((Candidato) miUsuario).getEstudios());
 							pw.println("Conocimientos: ");
 							for (int i = 0; i < ((Candidato) miUsuario).getConocimientos().size(); i++) {
@@ -384,7 +384,7 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 							pw.println(((Candidato) miUsuario).getOtrosConocimientos());
 							pw.println("Vida Laboral: " + ((Candidato) miUsuario).getVidaLaboral());
 							pw.print("Experiencia Profesional: " + ((Candidato) miUsuario).getExperienciaProfesional()
-									+ " años");
+									+ " aÃ±os");
 							pw.close();
 						} catch (IOException e1) {
 							e1.printStackTrace();
@@ -456,7 +456,8 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 				}
 			});
 			actualizarDia();
-			diacomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(0, 2)));
+			System.out.println(((Candidato)user).getFechaNac().substring(pos2));
+			diacomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(pos2)));
 
 			otrosConocimientostextArea.setText(((Candidato) user).getOtrosConocimientos());
 			vidaLaboraltextArea.setText(((Candidato) user).getVidaLaboral());
@@ -537,11 +538,18 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 
 		this.removeAll();
 		crearPanel();
-		;
 	}
 
 	@Override
 	public void funcionalidad(boolean aceptado) {
-		//emergenteAceptado = true;
+		if(aceptado)
+		{
+			try {
+				UtilidadesBD.actualizarUsuario(miUsuario);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

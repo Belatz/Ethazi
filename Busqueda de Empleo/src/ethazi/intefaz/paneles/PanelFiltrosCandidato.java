@@ -13,7 +13,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+import ethazi.aplicacion.Utilidades;
 import ethazi.datos.UtilidadesBD;
+import ethazi.excepciones.PanelNoDisponible;
+import ethazi.intefaz.Elemento_Listable;
+import ethazi.intefaz.frame.VentanaPrincipal;
 
 import javax.swing.JCheckBox;
 
@@ -33,7 +37,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 	private JTextField txField_experiencia;
 	private JTextField txField_nick;
 	private JTextField txField_nombreApe;
-	
+
 	public PanelFiltrosCandidato() {
 		JPanel pa_filtros = crearPanelFiltros();
 		setBounds(10, 60, 247, 550);
@@ -43,6 +47,7 @@ public class PanelFiltrosCandidato extends JScrollPane {
 
 	/**
 	 * Generates a filter panel.
+	 * 
 	 * @return pa_filtros
 	 */
 	public JPanel crearPanelFiltros() {
@@ -122,12 +127,14 @@ public class PanelFiltrosCandidato extends JScrollPane {
 		btn_aplicar.setBounds(66, 11, 89, 23);
 		btn_aplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO hacer algo con la lista de candidatos
 				try {
-					UtilidadesBD.filtrarCandidatos(txField_nombreApe.getText(), txField_nick.getText(),
-							txField_experiencia.getText(), txField_residencia.getText(), chBox_carne.isSelected(),
-							chBox_coche.isSelected(), chBox_viajes.isSelected(), pa_conocimientos.getConocimientosAnadidos());
-				} catch (SQLException e) {
+					ArrayList<Elemento_Listable> _candidatos = Utilidades
+							.cambiarCandidatoAElemento(UtilidadesBD.filtrarCandidatos(txField_nombreApe.getText(),
+									txField_nick.getText(), txField_experiencia.getText(), txField_residencia.getText(),
+									chBox_carne.isSelected(), chBox_coche.isSelected(), chBox_viajes.isSelected(),
+									pa_conocimientos.getConocimientosAnadidos()));
+					VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONSULTAR_CANDIDATOS, _candidatos);
+				} catch (SQLException | PanelNoDisponible e) {
 					e.printStackTrace();
 				}
 			}

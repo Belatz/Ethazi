@@ -45,7 +45,7 @@ public class Elemento_A_Listar extends JPanel {
 
 		switch (p_constante_opcion) {
 		case C_CONSULTAR_SUS_SOLICITUDES: {
-			miBtnEliminar = new JButton("Retirar Oferta");
+			miBtnEliminar = new JButton("Retirar Solicitud");
 			miBtnEliminar.setBounds(364, 44, 107, 30);
 			add(miBtnEliminar);
 			miLblAnalizar = new JLabel(((Solicitud) p_elemento).getOfer().getEmpresa().getNombre());
