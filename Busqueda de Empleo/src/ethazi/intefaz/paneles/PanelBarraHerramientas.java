@@ -23,6 +23,7 @@ import ethazi.excepciones.PanelNoDisponible;
 import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -56,6 +57,7 @@ public class PanelBarraHerramientas extends JPanel {
 	public PanelBarraHerramientas() {
 		setLayout(null);
 		JButton btn_buscar = new JButton("");
+		btn_buscar.setIcon(new ImageIcon(PanelBarraHerramientas.class.getResource("/ethazi/intefaz/iconos/search.ico.png")));
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			try {
@@ -72,6 +74,7 @@ public class PanelBarraHerramientas extends JPanel {
 		setBounds(0, 0, 762, 50);
 
 		JButton btn_perfil = new JButton("");
+		btn_perfil.setIcon(new ImageIcon(PanelBarraHerramientas.class.getResource("/ethazi/intefaz/iconos/perfil.ico")));
 		btn_perfil.setToolTipText("Ver Perfil");
 		btn_perfil.setPreferredSize(new Dimension(33, 9));
 		btn_perfil.setMinimumSize(new Dimension(33, 9));
@@ -92,6 +95,7 @@ public class PanelBarraHerramientas extends JPanel {
 		add(btn_perfil);
 
 		JButton btn_apagar = new JButton("");
+		btn_apagar.setIcon(new ImageIcon(PanelBarraHerramientas.class.getResource("/ethazi/intefaz/iconos/apagar.png")));
 		btn_apagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Borrar el usuario
