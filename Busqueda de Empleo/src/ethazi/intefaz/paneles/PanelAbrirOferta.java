@@ -59,8 +59,8 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 	 */
 	public PanelAbrirOferta() {
 		try {
-			miOferta = new Oferta(0, "Dummy", "Oferta de muestra", "", 1, 1, 0, "", "", false, (byte) 1,
-					(Empresa) UtilidadesBD.toUsuario("iberdrola", true), Usuario.getConocimientosTotales());
+			miOferta = new Oferta(0, "Dummy", "Oferta de muestra", "", 1, 1, 0, "", "", false, Contrato.value(1),
+					(Empresa) UtilidadesBD.toUsuario("Dummy2", true), Usuario.getConocimientosTotales());
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -264,7 +264,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		txArea_descripcion.setText(ofer.getDescripcion());
 		txField_lugar.setText(ofer.getLugar());
 		txField_experiencia.setText(String.valueOf(ofer.getExperiencia()));
-		combo_contrato.setSelectedIndex(ofer.getContrato());
+		combo_contrato.setSelectedItem(ofer.getContrato());
 		txField_sueldoMax.setText(String.valueOf(ofer.getSalarioMax()));
 		txField_sueldoMin.setText(String.valueOf(ofer.getSalarioMin()));
 		txArea_aspectosValorar.setText(ofer.getAspectosAValorar());
@@ -301,7 +301,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 				miOferta.setDescripcion(txArea_descripcion.getText());
 				miOferta.setLugar(txField_lugar.getText());
 				miOferta.setExperiencia(Integer.parseInt(txField_experiencia.getText()));
-				miOferta.setContrato((byte) ((Contrato) combo_contrato.getSelectedItem()).getTipo());
+				miOferta.setContrato(((Contrato) combo_contrato.getSelectedItem()));
 				miOferta.setSalarioMax(Integer.parseInt(txField_sueldoMax.getText()));
 				miOferta.setSalarioMin(Integer.parseInt(txField_sueldoMin.getText()));
 				miOferta.setAspectosImprescindibles(txArea_aspectosImpres.getText());

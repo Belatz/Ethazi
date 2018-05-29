@@ -74,6 +74,37 @@ public class EmergenteCambios extends JDialog{
 			}
 		});
 	}
+	public static void createWindow(String texto, TieneEmergente p_padre, boolean accion)
+	{	
+		VentanaPrincipal.desHabVentana(false, ((JPanel)p_padre).getParent());
+		EmergenteCambios ventanaEmergente=new EmergenteCambios(texto);
+		ventanaEmergente.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		ventanaEmergente.setVisible(true);
+		ventanaEmergente.getBtnAceptar().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ventanaEmergente.setVisible(false);
+				ventanaEmergente.removeAll();
+				p_padre.funcionalidad(accion);
+				VentanaPrincipal.desHabVentana(true, ((JPanel)p_padre).getParent());
+			}
+		});
+		ventanaEmergente.getBtnCancelar().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ventanaEmergente.setVisible(false);
+				ventanaEmergente.removeAll();
+				p_padre.funcionalidad(false);
+				VentanaPrincipal.desHabVentana(true, ((JPanel)p_padre).getParent());
+			}
+		});
+		ventanaEmergente.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				VentanaPrincipal.desHabVentana(true, ((JPanel)p_padre).getParent());
+			}
+		});
+	}
 	public JButton getBtnAceptar() {
 		return btnAceptar;
 	}
