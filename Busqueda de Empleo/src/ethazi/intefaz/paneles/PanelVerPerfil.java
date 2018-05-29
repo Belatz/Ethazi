@@ -286,7 +286,7 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 					btnValidar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-//							EmergenteCambios.createWindow("¿Esta seguro de que desea guardar los cambios?",
+//							EmergenteCambios.createWindow("Â¿Esta seguro de que desea guardar los cambios?",
 //									(TieneEmergente) panel);
 //							if (emergenteAceptado) {
 								if (validarDatos()) {
@@ -371,10 +371,10 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 							pw.println(((Candidato) miUsuario).getFechaNac());
 							pw.println(miUsuario.getTelefono());
 							pw.println(miUsuario.getEmail());
-							pw.println("Carnet de Conducir: " + (((Candidato) miUsuario).hasCarnet() ? "Sí" : "No"));
-							pw.println("Coche Propio: " + (((Candidato) miUsuario).hasCarnet() ? "Sí" : "No"));
+							pw.println("Carnet de Conducir: " + (((Candidato) miUsuario).hasCarnet() ? "SÃ­" : "No"));
+							pw.println("Coche Propio: " + (((Candidato) miUsuario).hasCarnet() ? "SÃ­" : "No"));
 							pw.println("Disponibilidad para Viajar: "
-									+ (((Candidato) miUsuario).hasCarnet() ? "Sí" : "No"));
+									+ (((Candidato) miUsuario).hasCarnet() ? "SÃ­" : "No"));
 							pw.println("Estudios: " + ((Candidato) miUsuario).getEstudios());
 							pw.println("Conocimientos: ");
 							for (int i = 0; i < ((Candidato) miUsuario).getConocimientos().size(); i++) {
@@ -384,7 +384,7 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 							pw.println(((Candidato) miUsuario).getOtrosConocimientos());
 							pw.println("Vida Laboral: " + ((Candidato) miUsuario).getVidaLaboral());
 							pw.print("Experiencia Profesional: " + ((Candidato) miUsuario).getExperienciaProfesional()
-									+ " años");
+									+ " aÃ±os");
 							pw.close();
 						} catch (IOException e1) {
 							e1.printStackTrace();
@@ -439,12 +439,10 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 			for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= (Calendar.getInstance().get(Calendar.YEAR)
 					- 90); i--)
 				aniocomboBox.addItem(Integer.valueOf(i));
-			aniocomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(0,3)));
+			aniocomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(0, 3)));
 			for (int i = 1; i <= 12; i++)
 				mescomboBox.addItem(Integer.valueOf(i));
-			int pos1=((Candidato)user).getFechaNac().indexOf('-');
-			int pos2=((Candidato)user).getFechaNac().lastIndexOf('-');
-			mescomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(pos1, pos2)));
+			mescomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(4, 6)));
 			mescomboBox.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {

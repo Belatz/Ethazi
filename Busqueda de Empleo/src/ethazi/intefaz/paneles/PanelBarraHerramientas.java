@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ethazi.aplicacion.Aplicacion;
+import ethazi.aplicacion.Candidato;
+import ethazi.aplicacion.Utilidades;
 import ethazi.aplicacion.Oferta;
 import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
@@ -47,21 +49,29 @@ public class PanelBarraHerramientas extends JPanel {
 	private static boolean menu = true;
 	private static JButton btnMenu;
 
+	
+	/*PARA LOS DE EL JAVADOCK
+	 * ESTE BOTON AL PULSARLO si es candidato busca ofertas, si es empresa busca candidatos
+	 * */
 	public PanelBarraHerramientas() {
 		setLayout(null);
 		JButton btn_buscar = new JButton("");
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
 					try {
-						ArrayList<Elemento_Listable> ofertas = UtilidadesBD.buscarOfertas(PanelBarraHerramientas.getTxField_buscar());
-						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA, ofertas);
-					} catch (SQLException e1) {
-						e1.printStackTrace();
+						if (Aplicacion.getUsuario() instanceof Candidato) {
+							VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
+									.filtrarOfertas(txField_buscar.getText(), null, null, null, null, null, null, null)));
+						}
+						else {
+							VentanaPrincipal.setListaDeElementos(Utilidades.cambiarCandidatoAElemento(
+									UtilidadesBD.filtrarCandidatos(txField_buscar.getText(), null, null, null, false, false, false, null)));	
 					}
-				} catch (PanelNoDisponible e2) {
-					e2.printStackTrace();
-				}
+						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_CONSULTAR_CANDIDATOS,
+								VentanaPrincipal.listaDeElementos);
+					} catch (SQLException | PanelNoDisponible e2) {
+						e2.printStackTrace();
+					}
 			}
 		});
 		btn_buscar.setBounds(0, 0, 50, 50);
@@ -74,7 +84,7 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_perfil.setMinimumSize(new Dimension(33, 9));
 		btn_perfil.setMaximumSize(new Dimension(33, 9));
 		btn_perfil.setBounds(642, 0, 50, 50);
-		
+
 		btn_perfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
