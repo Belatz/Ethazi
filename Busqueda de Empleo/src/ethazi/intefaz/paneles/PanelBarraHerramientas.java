@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
@@ -54,7 +55,8 @@ public class PanelBarraHerramientas extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					try {
-						ArrayList<Elemento_Listable> ofertas = UtilidadesBD.buscarOfertas(PanelBarraHerramientas.getTxField_buscar());
+						ArrayList<Elemento_Listable> ofertas = UtilidadesBD
+								.buscarOfertas(PanelBarraHerramientas.getTxField_buscar());
 						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA, ofertas);
 					} catch (SQLException e1) {
 						e1.printStackTrace();
@@ -74,7 +76,7 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_perfil.setMinimumSize(new Dimension(33, 9));
 		btn_perfil.setMaximumSize(new Dimension(33, 9));
 		btn_perfil.setBounds(642, 0, 50, 50);
-		
+
 		btn_perfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -124,35 +126,12 @@ public class PanelBarraHerramientas extends JPanel {
 		btnMenu.setBounds(369, 11, 229, 23);
 		add(btnMenu);
 
-		MouseListener ml = new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				System.out.println("ola");
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-
-			}
-
-			@Override
+		btnMenu.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent arg0) {
 				botonMenuInv();
 				VentanaPrincipal.visibilidadMenu();
 			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-
-			}
-		};
-		btnMenu.addMouseListener(ml);
+		});
 	}
 
 	public static void botonMenuInv() {
