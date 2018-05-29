@@ -12,13 +12,13 @@ import ethazi.intefaz.frame.VentanaPrincipal;
 import ethazi.intefaz.paneles.GenericoDePanelesConLista;
 import ethazi.intefaz.paneles.PanelBarraHerramientas;
 
-	/**
-	 * The utility class has different static methods accessible from any part of
-	 * the program that performs various functions
-	 *
-   */
+/**
+ * The utility class has different static methods accessible from any part of
+ * the program that performs various functions
+ *
+ */
 public abstract class Utilidades {
-	
+
 	/**
 	 * @author Belatz
 	 * @param p_ofertas
@@ -34,7 +34,6 @@ public abstract class Utilidades {
 		return _elementos;
 	}
 
-	
 	/**
 	 * @author Belatz
 	 * @param p_solicitudes
@@ -42,24 +41,14 @@ public abstract class Utilidades {
 	 */
 	public static ArrayList<Elemento_Listable> cambiarSolicitudAElemento(ArrayList<Solicitud> p_solicitudes) {
 		ArrayList<Elemento_Listable> _elementos = new ArrayList<>();
-		
+
 		for (Solicitud solitud : p_solicitudes) {
 			_elementos.add(solitud);
 		}
-		
+
 		return _elementos;
 	}
-	
-	public static void  buscarOfertasAdecuadas(ArrayList<Elemento_Listable> listaDeElementos, GenericoDePanelesConLista panelListadoGenerico) {
-		try {
-			listaDeElementos = UtilidadesBD.buscarOfertas(PanelBarraHerramientas.getTxField_buscar());
-      		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
-      
 	/**
 	 * @author Belatz
 	 * @param p_candidatos
@@ -67,125 +56,123 @@ public abstract class Utilidades {
 	 */
 	public static ArrayList<Elemento_Listable> cambiarCandidatoAElemento(ArrayList<Candidato> p_candidatos) {
 		ArrayList<Elemento_Listable> _elementos = new ArrayList<>();
-		
+
 		for (Candidato candidato : p_candidatos) {
 			_elementos.add(candidato);
 		}
 		return _elementos;
 	}
-	public static boolean dniCorrecto(String dNI)
-	{
-		boolean correcto=true;
-		if(dNI.length()!=9)
-			correcto=false;
-		else
-			if(dNI.toLowerCase().charAt(dNI.length()-1)<'a' || dNI.toLowerCase().charAt(dNI.length()-1)>'z' )
-				correcto=false;
-			else
-			{
-				int i=0;
-				while(i<dNI.length()-1 && (dNI.charAt(i)>='0' || dNI.charAt(i)<='9'))
-					i++;
-				if(i==dNI.length()-1 && "TRWAGMYFPDXBNJZSQVHLCKE".charAt(Integer.valueOf(dNI.substring(0, 8))%23)!=dNI.charAt(dNI.toUpperCase().length()-1))
-					correcto=false;
-			}
+
+	public static boolean dniCorrecto(String dNI) {
+		boolean correcto = true;
+		if (dNI.length() != 9)
+			correcto = false;
+		else if (dNI.toLowerCase().charAt(dNI.length() - 1) < 'a' || dNI.toLowerCase().charAt(dNI.length() - 1) > 'z')
+			correcto = false;
+		else {
+			int i = 0;
+			while (i < dNI.length() - 1 && (dNI.charAt(i) >= '0' || dNI.charAt(i) <= '9'))
+				i++;
+			if (i == dNI.length() - 1 && "TRWAGMYFPDXBNJZSQVHLCKE"
+					.charAt(Integer.valueOf(dNI.substring(0, 8)) % 23) != dNI.charAt(dNI.toUpperCase().length() - 1))
+				correcto = false;
+		}
 		return correcto;
 	}
-	public static boolean cifCorrecto(String cIF)
-	{
-		boolean correcto=true;
-		if(cIF.length()!=9)
-			correcto=false;
-		else
-			if(cIF.toLowerCase().charAt(0)<'a' || cIF.toLowerCase().charAt(0)>'z')
-				correcto=false;
-			else
-			{
-				int i=1;
-				while(i<cIF.length()-1 && (cIF.charAt(i)>='0' && cIF.charAt(i)<='9'))
-					i++;
-				if(i<cIF.length()-1)
-					correcto=false;
-				else
-				{
-					int comp=0;
-					for(int j=1;j<cIF.length()-1;j++)
-					{
-						if(j%2==0)
-							comp+=Integer.valueOf(cIF.charAt(j)-'0');
-						else
-							comp+=sumaCifras(Integer.valueOf(cIF.charAt(j)-'0')*2);
-					}
-					comp=10-comp%10;
-					switch(cIF.toLowerCase().charAt(0))
-					{
-					case 'k':case 'p': case'q': case 's':
-					{
-						if(cIF.charAt(cIF.length()-1)!=64+comp)
-							correcto=false;
-					}break;
-					case 'x':
-					{
-						if("TRWAGMYFPDXBNJZSQVHLCKE".charAt(Integer.valueOf(cIF.substring(1, 8))%23)!=cIF.charAt(cIF.toUpperCase().length()-1))
-							correcto=false;
-					}break;
-					default:
-						if(Integer.valueOf(cIF.charAt(cIF.length()-1)-'0')!=comp)
-							correcto=false;
-						break;
-					}
+
+	public static boolean cifCorrecto(String cIF) {
+		boolean correcto = true;
+		if (cIF.length() != 9)
+			correcto = false;
+		else if (cIF.toLowerCase().charAt(0) < 'a' || cIF.toLowerCase().charAt(0) > 'z')
+			correcto = false;
+		else {
+			int i = 1;
+			while (i < cIF.length() - 1 && (cIF.charAt(i) >= '0' && cIF.charAt(i) <= '9'))
+				i++;
+			if (i < cIF.length() - 1)
+				correcto = false;
+			else {
+				int comp = 0;
+				for (int j = 1; j < cIF.length() - 1; j++) {
+					if (j % 2 == 0)
+						comp += Integer.valueOf(cIF.charAt(j) - '0');
+					else
+						comp += sumaCifras(Integer.valueOf(cIF.charAt(j) - '0') * 2);
+				}
+				comp = 10 - comp % 10;
+				switch (cIF.toLowerCase().charAt(0)) {
+				case 'k':
+				case 'p':
+				case 'q':
+				case 's': {
+					if (cIF.charAt(cIF.length() - 1) != 64 + comp)
+						correcto = false;
+				}
+					break;
+				case 'x': {
+					if ("TRWAGMYFPDXBNJZSQVHLCKE".charAt(Integer.valueOf(cIF.substring(1, 8)) % 23) != cIF
+							.charAt(cIF.toUpperCase().length() - 1))
+						correcto = false;
+				}
+					break;
+				default:
+					if (Integer.valueOf(cIF.charAt(cIF.length() - 1) - '0') != comp)
+						correcto = false;
+					break;
 				}
 			}
+		}
 		return correcto;
 	}
-	private static int sumaCifras(int num)
-	{
-		int suma=0;
-		int i=0, aux=num;
-		while(num>=10)
-		{
-			num/=10;
+
+	private static int sumaCifras(int num) {
+		int suma = 0;
+		int i = 0, aux = num;
+		while (num >= 10) {
+			num /= 10;
 			i++;
 		}
-		for(;i>0;i--)
-			suma+=aux/Math.pow(10, i);
-		suma+=aux%10;
+		for (; i > 0; i--)
+			suma += aux / Math.pow(10, i);
+		suma += aux % 10;
 		return suma;
 	}
-	public static boolean correoValido(String email)
-	{
-		Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-		Matcher match=pattern.matcher(email);
+
+	public static boolean correoValido(String email) {
+		Pattern pattern = Pattern
+				.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		Matcher match = pattern.matcher(email);
 		return match.find();
 	}
-	public static boolean telefonoValido(String tel)
-	{
-		boolean correcto=false;
-		if(tel.length()==9 && (tel.charAt(0)=='6' || tel.charAt(0)=='7' || tel.charAt(0)=='8' || tel.charAt(0)=='9'))
-		{
-			int i=1;
-			while(i<tel.length() && (tel.charAt(i)>='0' && tel.charAt(i)<='9'))
+
+	public static boolean telefonoValido(String tel) {
+		boolean correcto = false;
+		if (tel.length() == 9
+				&& (tel.charAt(0) == '6' || tel.charAt(0) == '7' || tel.charAt(0) == '8' || tel.charAt(0) == '9')) {
+			int i = 1;
+			while (i < tel.length() && (tel.charAt(i) >= '0' && tel.charAt(i) <= '9'))
 				i++;
-			if(i==tel.length())
-				correcto=true;
+			if (i == tel.length())
+				correcto = true;
 		}
 		return correcto;
 	}
-	public static boolean esUsuario(String nick)
-	{
-		boolean existe=false;
+
+	public static boolean esUsuario(String nick) {
+		boolean existe = false;
 		try {
-			if(UtilidadesBD.toUsuario(nick, true)!=null)
-				existe=true;
-			else
-				if(UtilidadesBD.toUsuario(nick, false)!=null)
-					existe=true;
+			if (UtilidadesBD.toUsuario(nick, true) != null)
+				existe = true;
+			else if (UtilidadesBD.toUsuario(nick, false) != null)
+				existe = true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return existe;
 	}
+
 	
 	public static void filtrarOfertas(ArrayList<Elemento_Listable> listaDeElementos,
 			GenericoDePanelesConLista panelListadoGenerico,	String titulo, String lugar,
@@ -201,13 +188,12 @@ public abstract class Utilidades {
 			}
 
 	}	
-	//TODO arreglar
-	public static boolean empresaExiste(String nombre)
-	{
-		boolean existe=true;
+	
+	public static boolean empresaExiste(String nombre) {
+
 		try {
-			if(UtilidadesBD.toEmpresa(nombre)==null)
-				existe=false;
+			if (UtilidadesBD.toEmpresa(nombre) == null)
+				existe = false;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -215,47 +201,48 @@ public abstract class Utilidades {
 		return existe;
 	}
 
-    /*Esto es para los filtros
-	 * try {
-		VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(null, null, null, null,
-				String.valueOf(((Candidato)Aplicacion.getUsuario()).getExperienciaProfesional()), null, null,
-				UtilidadesBD.descargarConocimientosCandidato(((Candidato)Aplicacion.getUsuario()).getNumID())))); 
-		VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA);
-		// TODO en el panel de consultar ofertas coger el texto de la barra((Candidato)Aplicacion.getUsuario()) de busqueda
-	} catch (PanelNoDisponible | SQLException e2) {
-		e2.printStackTrace();
-	}*/
+	/*
+	 * Esto es para los filtros try {
+	 * VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(
+	 * UtilidadesBD.filtrarOfertas(null, null, null, null,
+	 * String.valueOf(((Candidato)Aplicacion.getUsuario()).getExperienciaProfesional
+	 * ()), null, null,
+	 * UtilidadesBD.descargarConocimientosCandidato(((Candidato)Aplicacion.
+	 * getUsuario()).getNumID())))); VentanaPrincipal.cambiarPanel((short)
+	 * VentanaPrincipal.C_BUSCAR_OFERTA); // TODO en el panel de consultar ofertas
+	 * coger el texto de la barra((Candidato)Aplicacion.getUsuario()) de busqueda }
+	 * catch (PanelNoDisponible | SQLException e2) { e2.printStackTrace(); }
+	 */
 
-    public static boolean candidatoExisteDNI(String dNI)
-	{
-		boolean existe=true;
+	public static boolean candidatoExisteDNI(String dNI) {
+		boolean existe = true;
 		try {
-			if(UtilidadesBD.toCandidatoDNI(dNI)==null)
-				existe=false;
+			if (UtilidadesBD.toCandidatoDNI(dNI) == null)
+				existe = false;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return existe;
 	}
-	public static boolean empresaExisteCif(String cIF)
-	{
-		boolean existe=true;
+
+	public static boolean empresaExisteCif(String cIF) {
+		boolean existe = true;
 		try {
-			if(UtilidadesBD.toEmpresaCif(cIF)==null)
-				existe=false;
+			if (UtilidadesBD.toEmpresaCif(cIF) == null)
+				existe = false;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return existe;
 	}
-	public static boolean existeCorreo(String email)
-	{
-		boolean existe=true;
+
+	public static boolean existeCorreo(String email) {
+		boolean existe = true;
 		try {
-			if(UtilidadesBD.toUsuario(email)==null)
-				existe=false;
+			if (UtilidadesBD.toUsuario(email) == null)
+				existe = false;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

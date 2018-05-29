@@ -125,11 +125,13 @@ public class PanelMenu extends JPanel {
 			btn_candidatos.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
+
 						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarCandidatoAElemento(UtilidadesBD.buscarCandidatos()));
-						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONSULTAR_CANDIDATOS);
+				VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONSULTAR_CANDIDATOS,VentanaPrincipal.getListaDeElementos());
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
 				
+
 					} catch (PanelNoDisponible e) {
 						e.printStackTrace();
 					} catch (SQLException e) {

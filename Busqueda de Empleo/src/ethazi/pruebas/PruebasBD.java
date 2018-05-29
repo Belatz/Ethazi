@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import ethazi.datos.Conexion;
 import ethazi.datos.Tablas;
 
-public class PruebasBD {
-
+public class PruebasBD 
+{
 	public static void insertar() throws SQLException {
 		// Usuarios Dummy
 		ResultSet rs = Conexion.consultar(
