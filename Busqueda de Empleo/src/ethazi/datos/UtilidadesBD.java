@@ -532,6 +532,21 @@ public abstract class UtilidadesBD {
 
 		return _ofertas;
 	}
+	public static ArrayList<Candidato> buscarCandidatos() throws SQLException{
+		ArrayList<Candidato> _candidatos = new ArrayList<>();
+		String _sentencia = "SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", "
+				+ Tablas.C_CANDIDATO_TABLA + " WHERE " + Tablas.C_USUARIO_NUMID + "="
+				+ Tablas.C_CANDIDATO_NUMID;
+		_sentencia += ";";
+		ResultSet _rs = Conexion.consultar(_sentencia);
+		
+		while (_rs.next()) {
+			_candidatos.add((Candidato) toUsuario((_rs.getString(Tablas.C_CANDIDATO_NUMID)), false));
+		}
+
+		return _candidatos;
+		
+	}
 
 	public static ArrayList<Candidato> filtrarCandidatos(String p_nombreApellidos, String p_nick, String p_experiencia,
 			String p_direccion, boolean p_carne, boolean p_coche, boolean p_viajes, ArrayList<String> p_conocimientos)

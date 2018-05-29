@@ -58,19 +58,12 @@ public class PanelBarraHerramientas extends JPanel {
 		JButton btn_buscar = new JButton("");
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					if (Aplicacion.getUsuario() instanceof Candidato) {
-						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
-								.filtrarOfertas(txField_buscar.getText(), null, null, null, null, -1, null, null)));
-					} else {
-						VentanaPrincipal.setListaDeElementos(
-								Utilidades.cambiarCandidatoAElemento(UtilidadesBD.filtrarCandidatos(
-										txField_buscar.getText(), null, null, null, false, false, false, null)));
-					}
-					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA,
-							Utilidades.cambiarOfertaAElemento(UtilidadesBD.buscarOfertas(txField_buscar.getText())));
-				} catch (SQLException | PanelNoDisponible e2) {
-					e2.printStackTrace();
+			try {
+					VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
+							.filtrarOfertas(txField_buscar.getText(), null, null, null, null, 0, null, null)));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});

@@ -106,7 +106,9 @@ public class PanelMenu extends JPanel {
 
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_OFERTAS_CON_SOLICITUDES);
+						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
+								.filtrarOfertas("Dum", null, null, null, null, 0, null, null)));
+						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_OFERTAS_CON_SOLICITUDES, VentanaPrincipal.getListaDeElementos());
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
 					} catch (PanelNoDisponible e) {
@@ -123,11 +125,13 @@ public class PanelMenu extends JPanel {
 			btn_candidatos.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONSULTAR_CANDIDATOS,
-								Utilidades.cambiarCandidatoAElemento(UtilidadesBD.filtrarCandidatos(null, null, null,
-										null, false, false, false, null)));
+
+						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarCandidatoAElemento(UtilidadesBD.buscarCandidatos()));
+				VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONSULTAR_CANDIDATOS,VentanaPrincipal.getListaDeElementos());
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
+				
+
 					} catch (PanelNoDisponible e) {
 						e.printStackTrace();
 					} catch (SQLException e) {
