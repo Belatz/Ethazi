@@ -347,7 +347,7 @@ public class VentanaPrincipal extends JFrame {
 			// nuevoPanel = pa_buscarOfertas;
 			break;
 		case C_CONOCIMIENTOS_BUSCADOS:
-			pa_conocimientosBuscados.actualizar();
+			//pa_conocimientosBuscados.actualizar();
 			nuevoPanel = pa_conocimientosBuscados;
 			break;
 		case C_CONSULTAR_CANDIDATOS:

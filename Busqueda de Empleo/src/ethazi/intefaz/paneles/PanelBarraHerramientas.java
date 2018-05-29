@@ -67,8 +67,8 @@ public class PanelBarraHerramientas extends JPanel {
 								Utilidades.cambiarCandidatoAElemento(UtilidadesBD.filtrarCandidatos(
 										txField_buscar.getText(), null, null, null, false, false, false, null)));
 					}
-					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_CONSULTAR_CANDIDATOS,
-							VentanaPrincipal.listaDeElementos);
+					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA,
+							Utilidades.cambiarOfertaAElemento(UtilidadesBD.buscarOfertas(txField_buscar.getText())));
 				} catch (SQLException | PanelNoDisponible e2) {
 					e2.printStackTrace();
 				}

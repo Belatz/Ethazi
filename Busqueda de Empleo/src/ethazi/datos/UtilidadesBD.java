@@ -321,9 +321,9 @@ public abstract class UtilidadesBD {
 		return _oferta;
 	}
 
-	public static ArrayList<Elemento_Listable> buscarOfertas(String titulo) throws SQLException {
+	public static ArrayList<Oferta> buscarOfertas(String titulo) throws SQLException {
 		boolean fin = false;
-		ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
+		ArrayList<Oferta> ofertas = new ArrayList<>();
 
 		// Decargar ofertas
 		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE "

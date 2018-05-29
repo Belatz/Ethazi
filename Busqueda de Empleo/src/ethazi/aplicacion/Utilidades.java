@@ -49,19 +49,6 @@ public abstract class Utilidades {
 		return _elementos;
 	}
 
-	/*
-	 * Esto no hace lo que tiene que hacer, si son adecuadas deberia recoger los datos del usuario
-	 * Mejor usar UtilidadesBD.buscarOfertasAdecuadas(Candidato)
-	 */
-	public static void buscarOfertasAdecuadas(ArrayList<Elemento_Listable> listaDeElementos,
-			GenericoDePanelesConLista panelListadoGenerico) {
-		try {
-			listaDeElementos = UtilidadesBD.buscarOfertas(PanelBarraHerramientas.getTxField_buscar());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 	/**
 	 * @author Belatz
 	 * @param p_candidatos
