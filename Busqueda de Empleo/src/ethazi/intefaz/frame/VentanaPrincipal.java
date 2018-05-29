@@ -3,6 +3,7 @@ package ethazi.intefaz.frame;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
@@ -119,34 +120,13 @@ public class VentanaPrincipal extends JFrame {
 		 * listaDeOfertas.add(oferta); cont++; pa_buscarOfertas = new
 		 * GenericoDePanelesConLista(listaDeOfertas, (byte)1); }
 		 */
-		MouseListener ml = new MouseListener() {
+		menu.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseReleased(MouseEvent arg0) {
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
+			public void mouseExited(MouseEvent e) {
 				menu.setVisible(false);
 				PanelBarraHerramientas.botonMenuInv();
 			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-
-			}
-		};
-		menu.addMouseListener(ml);
+		});
 
 		// Crear contenedor
 		pa_contenedor.setBounds(0, 55, 762, 488);
@@ -430,8 +410,10 @@ public class VentanaPrincipal extends JFrame {
 	/**
 	 * Quita la visibilidad a la ventana
 	 */
+	//TODO arreglar
 	public static void cerrar() {
 		frame.setVisible(false);
+		currentPanel.setVisible(false);
 	}
 
 	/**

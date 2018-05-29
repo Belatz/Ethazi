@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
+import ethazi.aplicacion.Contrato;
 import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Solicitud;
@@ -22,7 +23,36 @@ import ethazi.intefaz.Elemento_Listable;
  * @author belatz
  */
 public abstract class UtilidadesBD {
-
+	public static void insertarOferta(Oferta ofer) throws SQLException
+	{
+		Conexion.actualizar("INSERT INTO " + Tablas.C_OFERTA_TABLA 
+				+ " ("+Tablas.C_OFERTA_TITULO+", "+Tablas.C_OFERTA_DESCRIPCION
+				+", "+Tablas.C_OFERTA_LUGAR+", "+Tablas.C_OFERTA_SUELDO_MAX
+				+", "+Tablas.C_OFERTA_SUELDO_MIN+", "+Tablas.C_OFERTA_EXPERIENCIA
+				+", "+Tablas.C_OFERTA_ASPECTOS_VALORAR+", "+Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES
+				+", "+Tablas.C_OFERTA_VISIBLE+", "+Tablas.C_OFERTA_EMPRESA+", "+Tablas.C_OFERTA_TIPO_CONTRATO+")"
+				+ " VALUES ('"
+				+ofer.getTitulo()+"', '"
+				+ofer.getDescripcion()+"', '"
+				+ofer.getLugar()+"', "
+				+ofer.getSalarioMax()+", "
+				+ofer.getSalarioMin()+", "
+				+ofer.getExperiencia()+", '"
+				+ofer.getAspectosAValorar()+"', '"
+				+ofer.getAspectosImprescindibles()+"', "
+				+(ofer.isVisibilidad()?1:0)+", '"
+				+ofer.getEmpresa().getNumID()+"', "
+				+(byte)Contrato.value(ofer.getContrato())+");");
+		Oferta aux=UtilidadesBD.toOfertaTitulo(ofer.getTitulo());
+		for (String conocimiento : ofer.getConocimientos()) {
+			Conexion.actualizar("INSERT INTO " + Tablas.C_OFER_CONO_TABLA + " VALUES (" + aux.getCodigo() + ", '"
+					+ conocimiento + "');");
+		}
+	}
+	public static void insertarConocimiento(String conocimiento) throws SQLException
+	{
+		Conexion.actualizar("INSERT INTO "+Tablas.C_CONOCIMIENTOS_TABLA+" VALUES ('"+conocimiento+"');");
+	}
 	public static void insertarUsuario(Usuario user) throws SQLException {
 
 		Conexion.actualizar("INSERT INTO " + Tablas.C_USUARIO_TABLA + " VALUES ('" + user.getNumID() + "','"
@@ -232,13 +262,12 @@ public abstract class UtilidadesBD {
 		}
 
 		Oferta _ofer;
-
 		_ofer = new Oferta(p_rs.getInt(Tablas.C_OFERTA_CODIGO), p_rs.getString(Tablas.C_OFERTA_TITULO),
 				p_rs.getString(Tablas.C_OFERTA_DESCRIPCION), p_rs.getString(Tablas.C_OFERTA_LUGAR),
 				p_rs.getInt(Tablas.C_OFERTA_SUELDO_MAX), p_rs.getInt(Tablas.C_OFERTA_SUELDO_MIN),
 				p_rs.getInt(Tablas.C_OFERTA_EXPERIENCIA), p_rs.getString(Tablas.C_OFERTA_ASPECTOS_VALORAR),
 				p_rs.getString(Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES), p_rs.getBoolean(Tablas.C_OFERTA_VISIBLE),
-				p_rs.getByte(Tablas.C_OFERTA_TIPO_CONTRATO),
+				Contrato.value(p_rs.getByte(Tablas.C_OFERTA_TIPO_CONTRATO)),
 				(Empresa) (toUsuario(p_rs.getString(Tablas.C_OFERTA_EMPRESA), false)),
 				descargarConocimientosOferta(Tablas.C_OFERTA_CODIGO));
 
@@ -249,6 +278,19 @@ public abstract class UtilidadesBD {
 		Oferta ofer = null;
 		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE " + Tablas.C_OFERTA_CODIGO
 				+ "=" + p_codOFerta + ";");
+		try {
+			ofer = toOferta(_rs);
+		} catch (ResultSetVacio e) {
+			System.out.println("No se han encontrado ofertas con ese codigo"); 
+			ofer=null;
+		} catch (NoQuedanFilas e) {
+		}
+		return ofer;
+	}
+	public static Oferta toOfertaTitulo(String titulo) throws SQLException {
+		Oferta ofer = null;
+		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE " + Tablas.C_OFERTA_TITULO
+				+ "= '" + titulo + "';");
 		try {
 			ofer = toOferta(_rs);
 		} catch (ResultSetVacio e) {
@@ -312,7 +354,7 @@ public abstract class UtilidadesBD {
 					_rsOferta.getInt(Tablas.C_OFERTA_EXPERIENCIA),
 					_rsOferta.getString(Tablas.C_OFERTA_ASPECTOS_VALORAR),
 					_rsOferta.getString(Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES),
-					_rsOferta.getBoolean(Tablas.C_OFERTA_VISIBLE), _rsOferta.getByte(Tablas.C_OFERTA_TIPO_CONTRATO),
+					_rsOferta.getBoolean(Tablas.C_OFERTA_VISIBLE), Contrato.value(_rsOferta.getByte(Tablas.C_OFERTA_TIPO_CONTRATO)),
 					(Empresa) toUsuario(_rsEmpresa), _conocimientos);
 		} catch (ResultSetVacio e) {
 			System.out.println("No se han encontrado usuarios con esos datos");
@@ -609,7 +651,7 @@ public abstract class UtilidadesBD {
 		}
 
 		_sentencia += ";";
-		// Busca todas los candiadtos que concuerden con los filtros, los combierte en
+		// Busca todas los candiadtos que concuerden con los filtros, los convierte en
 		// Objetos y los mete en el array
 		ResultSet _rs = Conexion.consultar(_sentencia);
 		while (_rs.next()) {
@@ -651,8 +693,8 @@ public abstract class UtilidadesBD {
 		Conexion.actualizar("UPDATE " + Tablas.C_OFERTA_TABLA + " SET " + Tablas.C_OFERTA_DESCRIPCION + "='"
 				+ ofer.getDescripcion() + "', " + Tablas.C_OFERTA_LUGAR + "='" + ofer.getLugar() + "', "
 				+ Tablas.C_OFERTA_EXPERIENCIA + "=" + ofer.getExperiencia() + ", " + Tablas.C_OFERTA_TIPO_CONTRATO + "="
-				+ ofer.getContrato() + ", " + Tablas.C_OFERTA_SUELDO_MAX + "=" + ofer.getSalarioMax() + ", "
-				+ Tablas.C_OFERTA_SUELDO_MIN + "=" + ofer.getSalarioMin() + ", "
+        + Contrato.value(ofer.getContrato()) + ", " + Tablas.C_OFERTA_SUELDO_MAX + "=" + ofer.getSalarioMax() + ", "
+        + Tablas.C_OFERTA_SUELDO_MIN + "=" + ofer.getSalarioMin() + ", "
 				+ Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES + "='" + ofer.getAspectosImprescindibles() + "', "
 				+ Tablas.C_OFERTA_ASPECTOS_VALORAR + "='" + ofer.getAspectosAValorar() + "' WHERE "
 				+ Tablas.C_OFERTA_CODIGO + "=" + ofer.getCodigo() + ";");
@@ -681,11 +723,13 @@ public abstract class UtilidadesBD {
 					+ can.getVidaLaboral() + "', " + Tablas.C_CANDIDATO_ESTUDIOS + "='" + can.getEstudios() + "', "
 					+ Tablas.C_CANDIDATO_FECHA_NAC + "='" + can.getFechaNac() + "' WHERE " + Tablas.C_CANDIDATO_NUMID
 					+ "='" + can.getNumID() + "';");
-			Conexion.actualizar("DELETE " + Tablas.C_CANDI_CONO_TABLA + " WHERE " + Tablas.C_CANDI_CONO_CANDIDATO + "='"
-					+ can.getNumID() + "';");
-			for (String conocimiento : can.getConocimientos()) {
-				Conexion.actualizar("INSERT INTO " + Tablas.C_CANDI_CONO_TABLA + " VALUES ('" + can.getNumID() + "', '"
-						+ conocimiento + "');");
+			if (!((Candidato) usr).getConocimientos().isEmpty()) {
+				Conexion.actualizar("DELETE " + Tablas.C_CANDI_CONO_TABLA + " WHERE " + Tablas.C_CANDI_CONO_CANDIDATO
+						+ "='" + can.getNumID() + "';");
+				for (String conocimiento : can.getConocimientos()) {
+					Conexion.actualizar("INSERT INTO " + Tablas.C_CANDI_CONO_TABLA + " VALUES ('" + can.getNumID()
+							+ "', '" + conocimiento + "');");
+				}
 			}
 		} else {
 			Empresa emp = (Empresa) usr;

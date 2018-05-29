@@ -22,6 +22,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.awt.Color;
+import javax.swing.JPasswordField;
 
 /**
  * The panel RegistroEmpresa will show the data that the user will have to fill,
@@ -36,7 +37,6 @@ import java.awt.Color;
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField textFieldNick;
-	private JTextField textFieldPass;
 	private JTextField textFieldNombre;
 	private JTextField textFieldCif;
 	private JTextField textFieldDir;
@@ -46,6 +46,7 @@ import java.awt.Color;
 	private JPanel padre;
 	private JTextArea textAreaDesc;
 	private JLabel lbl_Invalido;
+	private JPasswordField passwordField;
 
 	public PanelRegistroEmpresa() {
 		padre = this;
@@ -86,11 +87,6 @@ import java.awt.Color;
 		add(textFieldNick);
 		textFieldNick.setColumns(10);
 
-		textFieldPass = new JTextField();
-		textFieldPass.setColumns(10);
-		textFieldPass.setBounds(294, 68, 265, 17);
-		add(textFieldPass);
-
 		textFieldNombre = new JTextField();
 		textFieldNombre.setColumns(10);
 		textFieldNombre.setBounds(156, 95, 199, 17);
@@ -126,7 +122,6 @@ import java.awt.Color;
 		textFieldContact.setColumns(10);
 
 		textFieldNick.setText("");
-		textFieldPass.setText("");
 		textFieldNombre.setText("");
 		textFieldCif.setText("");
 		textFieldDir.setText("");
@@ -165,7 +160,7 @@ import java.awt.Color;
 				textFieldEmail.setText("");
 				textFieldNick.setText("");
 				textFieldNombre.setText("");
-				textFieldPass.setText("");
+				passwordField.setText("");
 				textFieldTel.setText("");
 				textAreaDesc.setText("");
 				VentanaIdentificarse.getPa_registrarEmpresa().setVisible(false);
@@ -185,6 +180,10 @@ import java.awt.Color;
 		lbl_Invalido.setBounds(10, 40, 549, 14);
 		lbl_Invalido.setVisible(false);
 		add(lbl_Invalido);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(294, 67, 265, 17);
+		add(passwordField);
 
 	}
 
@@ -237,9 +236,9 @@ import java.awt.Color;
 					textFieldDir.setText("");
 					lbl_Invalido.setText(lbl_Invalido.getText() + " Dir");
 				}
-				if (textFieldPass.getText().compareTo("") == 0) {
+				if (String.valueOf(passwordField.getPassword()).compareTo("") == 0) {
 					valido = false;
-					textFieldPass.setText("");
+					passwordField.setText("");
 					lbl_Invalido.setText(lbl_Invalido.getText() + " Contraseña");
 				}
 				if (textFieldContact.getText().compareTo("") == 0) {
@@ -249,7 +248,7 @@ import java.awt.Color;
 				}
 				lbl_Invalido.setVisible(!valido);
 				if (valido) {
-					aux = new Empresa(textFieldNick.getText(), textFieldPass.getText(), textFieldNombre.getText(),
+					aux = new Empresa(textFieldNick.getText(), String.valueOf(passwordField.getPassword()), textFieldNombre.getText(),
 							textFieldCif.getText(), textFieldDir.getText(), textFieldEmail.getText(),
 							textFieldTel.getText(), textFieldContact.getText(), textAreaDesc.getText());
 					UtilidadesBD.insertarEmpresa(aux);
@@ -262,7 +261,7 @@ import java.awt.Color;
 					textFieldEmail.setText("");
 					textFieldNick.setText("");
 					textFieldNombre.setText("");
-					textFieldPass.setText("");
+					passwordField.setText("");
 					textFieldTel.setText("");
 					textAreaDesc.setText("");
 				}

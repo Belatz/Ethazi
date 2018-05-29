@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
@@ -60,13 +61,13 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_buscar.setIcon(new ImageIcon(PanelBarraHerramientas.class.getResource("/ethazi/intefaz/iconos/search.ico.png")));
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			try {
+        try {
 					VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
 							.filtrarOfertas(txField_buscar.getText(), null, null, null, null, 0, null, null)));
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
+      }
 			}
 		});
 		btn_buscar.setBounds(0, 0, 50, 50);
@@ -131,35 +132,12 @@ public class PanelBarraHerramientas extends JPanel {
 		btnMenu.setBounds(369, 11, 229, 23);
 		add(btnMenu);
 
-		MouseListener ml = new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				System.out.println("ola");
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-
-			}
-
-			@Override
+		btnMenu.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent arg0) {
 				botonMenuInv();
 				VentanaPrincipal.visibilidadMenu();
 			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-
-			}
-		};
-		btnMenu.addMouseListener(ml);
+		});
 	}
 
 	public static void botonMenuInv() {

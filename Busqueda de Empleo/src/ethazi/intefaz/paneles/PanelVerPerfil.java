@@ -6,15 +6,20 @@ import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Usuario;
+import ethazi.aplicacion.Utilidades;
 import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.emergentes.EmergenteCambios;
 import ethazi.intefaz.emergentes.EmergenteSoloAceptar;
 import ethazi.intefaz.emergentes.TieneEmergente;
+import ethazi.intefaz.frame.VentanaPrincipal;
 
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import org.omg.PortableInterceptor.USER_EXCEPTION;
+
 import java.awt.TextArea;
 import javax.swing.JCheckBox;
 import javax.swing.JSeparator;
@@ -31,8 +36,9 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
+import javax.swing.JPasswordField;
 
-public class PanelVerPerfil extends JPanel implements TieneEmergente {
+public class PanelVerPerfil extends JPanel implements TieneEmergente{
 	/**
 	 * This panel is used to show the data of the correspondent user: Empresa or
 	 * Candidato
@@ -61,9 +67,14 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 	private JComboBox<Integer> aniocomboBox;
 	private PanelListaDoble conocimientosEditar;
 	private JPanel panel;
-
+	private JButton btnEditar;
+	private JButton btnValidar;
+	private JButton btnCancelar;
+	private JLabel lblContrasea;
+	
 	private Usuario miUsuario = Aplicacion.getUsuario();
 	private boolean esPropio = true;
+	private JPasswordField passwordField;
 	// private boolean emergenteAceptado;
 
 	public PanelVerPerfil() {
@@ -265,8 +276,18 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 50, 742, 2);
 		add(separator);
+		
+		lblContrasea= new JLabel("Contrase\u00F1a:");
+		lblContrasea.setBounds(476, 124, 82, 14);
+		lblContrasea.setVisible(false);
+		add(lblContrasea);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(568, 121, 184, 17);
+		passwordField.setVisible(false);
+		add(passwordField);
 		if (esPropio) {
-			JButton btnEditar = new JButton("Editar");
+			btnEditar= new JButton("Editar");
 			btnEditar.setToolTipText("Editar Perfil");
 			btnEditar.setBounds(693, 454, 67, 23);
 			add(btnEditar);
@@ -275,69 +296,74 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					btnEditar.setVisible(false);
-					JButton btnValidar = new JButton("Guardar");
+					btnValidar= new JButton("Guardar");
 					btnValidar.setToolTipText("Guardar Cambios");
 					btnValidar.setBounds(677, 454, 83, 23);
 					add(btnValidar);
-					JButton btnCancelar = new JButton("Cancelar");
+					btnCancelar= new JButton("Cancelar");
 					btnCancelar.setBounds(2, 454, 86, 23);
 					add(btnCancelar);
 					habilitarODes(true, miUsuario);
+					lblContrasea.setVisible(true);
+					passwordField.setVisible(true);
 					btnValidar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							// EmergenteCambios.createWindow("¿Esta seguro de que desea guardar los
-							// cambios?",
-							// (TieneEmergente) panel);
-							// if (emergenteAceptado) {
-							if (validarDatos()) {
-								try {
-									miUsuario.setNombre(nombretextField.getText());
-									miUsuario.setDireccion(dirtextField.getText());
-									miUsuario.setEmail(emailtextField.getText());
-									miUsuario.setTelefono(teltextField.getText());
+//							EmergenteCambios.createWindow("�Esta seguro de que desea guardar los cambios?",
+//									(TieneEmergente) panel);
+//							if (emergenteAceptado) {
+								if (validarDatos(miUsuario)) {
+									try {
+										if(passwordField.getPassword()!=null && (String.valueOf(passwordField.getPassword()).compareTo("")==0 || String.valueOf(passwordField.getPassword()).isEmpty()))
+											miUsuario.setPassword(String.valueOf(passwordField.getPassword()));
+										miUsuario.setNombre(nombretextField.getText());
+										miUsuario.setDireccion(dirtextField.getText());
+										miUsuario.setEmail(emailtextField.getText());
+										miUsuario.setTelefono(teltextField.getText());
 
-									if (miUsuario instanceof Candidato) {
-										((Candidato) miUsuario).setApellidos(apellidostextField.getText());
-										((Candidato) miUsuario)
-												.setDisViajar(chckbxDisponibilidadParaViajar.isSelected());
-										((Candidato) miUsuario).setCarnet(chckbxCarnet.isSelected());
-										((Candidato) miUsuario).setCochePropio(chckbxCoche.isSelected());
-										((Candidato) miUsuario).setExperienciaProfesional(
-												Float.parseFloat(experienciaProfesionaltextField.getText()));
-										((Candidato) miUsuario)
-												.setOtrosConocimientos(otrosConocimientostextArea.getText());
-										((Candidato) miUsuario).setVidaLaboral(vidaLaboraltextArea.getText());
-										((Candidato) miUsuario).setEstudios(estudiostextArea.getText());
-										// mes-anyo-dia -> aaaa/mm/dd
-										String fecha = String.join(String.valueOf(mescomboBox.getSelectedItem() + "/"),
-												String.valueOf(aniocomboBox.getSelectedItem() + "/"),
-												String.valueOf(diacomboBox.getSelectedItem()));
-										((Candidato) miUsuario).setFechaNac(fecha);
-										((Candidato) miUsuario)
-												.setConocimientos(conocimientosEditar.getConocimientosAnadidos());
-									} else {
-										((Empresa) miUsuario).setDescripcion(descripciontextArea.getText());
-										((Empresa) miUsuario).setContacto(informacionContactotextArea.getText());
+										if (miUsuario instanceof Candidato) {
+											((Candidato) miUsuario).setApellidos(apellidostextField.getText());
+											((Candidato) miUsuario)
+													.setDisViajar(chckbxDisponibilidadParaViajar.isSelected());
+											((Candidato) miUsuario).setCarnet(chckbxCarnet.isSelected());
+											((Candidato) miUsuario).setCochePropio(chckbxCoche.isSelected());
+											((Candidato) miUsuario).setExperienciaProfesional(
+													Float.parseFloat(experienciaProfesionaltextField.getText()));
+											((Candidato) miUsuario)
+													.setOtrosConocimientos(otrosConocimientostextArea.getText());
+											((Candidato) miUsuario).setVidaLaboral(vidaLaboraltextArea.getText());
+											((Candidato) miUsuario).setEstudios(estudiostextArea.getText());
+											// mes-anyo-dia -> aaaa/mm/dd
+											String fecha = String.join(
+													String.valueOf(mescomboBox.getSelectedItem() + "-"),
+													String.valueOf(aniocomboBox.getSelectedItem() + "-"),
+													String.valueOf(diacomboBox.getSelectedItem()));
+											((Candidato) miUsuario).setFechaNac(fecha);
+											((Candidato) miUsuario)
+													.setConocimientos(conocimientosEditar.getConocimientosAnadidos());
+										} else {
+											((Empresa) miUsuario).setDescripcion(descripciontextArea.getText());
+											((Empresa) miUsuario).setContacto(informacionContactotextArea.getText());
+										}
+
+										UtilidadesBD.actualizarUsuario(miUsuario);
+										EmergenteSoloAceptar.createWindow("Se han guardado los cambios",
+												(TieneEmergente) panel, true);
+									} catch (SQLException e1) {
+										e1.printStackTrace();
 									}
-
-									UtilidadesBD.actualizarUsuario(miUsuario);
-									EmergenteSoloAceptar.createWindow("Se han guardado los cambios",
-											(TieneEmergente) panel);
-								} catch (SQLException e1) {
-									e1.printStackTrace();
+								} else {
+									EmergenteSoloAceptar.createWindow("No se ha podido guardar los cambios",
+											(TieneEmergente) panel,false);
 								}
-							} else {
-								EmergenteSoloAceptar.createWindow("No se ha podido guardar los cambios",
-										(TieneEmergente) panel);
-							}
-							// }
 						}
 					});
 					btnCancelar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
 							habilitarODes(false, miUsuario);
+							lblContrasea.setVisible(false);
+							passwordField.setVisible(false);
 							btnEditar.setVisible(true);
 							inicializarDatos(miUsuario);
 							remove(btnValidar);
@@ -396,26 +422,64 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 		}
 	}
 
-	private boolean validarDatos() {
+	private boolean validarDatos(Usuario user) {
 		boolean _esValido = true;
 
 		if (nombretextField.getText() == null || nombretextField.getText().isEmpty())
 			_esValido = false;
+		else
+			if(user instanceof Empresa && user.getNombre().compareToIgnoreCase(nombretextField.getText())!=0 && Utilidades.empresaExiste(nombretextField.getText()))
+				_esValido=false;
 		if (dirtextField.getText() == null || dirtextField.getText().isEmpty())
 			_esValido = false;
-		if (teltextField.getText() == null || teltextField.getText().isEmpty())
+		if (teltextField.getText() == null || teltextField.getText().isEmpty() || !Utilidades.telefonoValido(teltextField.getText()))
 			_esValido = false;
 		try {
 			if (emailtextField.getText() == null || emailtextField.getText().isEmpty()
-					|| UtilidadesBD.existeEmail(emailtextField.getText()))
+					|| !Utilidades.correoValido(emailtextField.getText()) ||emailtextField.getText().compareToIgnoreCase(user.getEmail())!=0 && UtilidadesBD.existeEmail(emailtextField.getText()))
 				_esValido = false;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		if (miUsuario instanceof Candidato) {
+			try {
+				if (nombretextField.getText()== null || nombretextField.getText().isEmpty()
+						|| UtilidadesBD.toEmpresa(nombretextField.getText()) != null) {
+					_esValido = false;
+					nombretextField.setText("");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String fecha=comboAFecha();
+			if((Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(fecha.substring(0, 4)))<18)
+			{
+				_esValido=false;
+				diacomboBox.setSelectedIndex(0);
+				mescomboBox.setSelectedIndex(0);
+				aniocomboBox.setSelectedIndex(0);
+			}
 			if (apellidostextField.getText() == null || apellidostextField.getText().isEmpty())
 				_esValido = false;
+			if (teltextField.getText()!=null|| teltextField.getText().isEmpty()
+					|| !Utilidades.telefonoValido(teltextField.getText())) {
+				_esValido = false;
+				teltextField.setText("");
+			}
+			if (dirtextField!=null || dirtextField.getText().isEmpty()) {
+				_esValido = false;
+				dirtextField.setText("");
+			}
+			int i=0;
+			while(i<experienciaProfesionaltextField.getText().length() && ((experienciaProfesionaltextField.getText().charAt(i)>='0' && experienciaProfesionaltextField.getText().charAt(i)<='9')|| experienciaProfesionaltextField.getText().charAt(i)=='.'))
+				i++;
+			if(i<experienciaProfesionaltextField.getText().length() || experienciaProfesionaltextField.getText().compareTo("")==0 || i<experienciaProfesionaltextField.getText().length() || Float.parseFloat(experienciaProfesionaltextField.getText())<0)
+			{
+				_esValido=false;
+				experienciaProfesionaltextField.setText("");
+			}
 		} else {
 			if (informacionContactotextArea.getText() == null || informacionContactotextArea.getText().isEmpty())
 				_esValido = false;
@@ -439,10 +503,13 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 			for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= (Calendar.getInstance().get(Calendar.YEAR)
 					- 90); i--)
 				aniocomboBox.addItem(Integer.valueOf(i));
-			aniocomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(0, 3)));
+			aniocomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(0,((Candidato) user).getFechaNac().indexOf('-'))));
 			for (int i = 1; i <= 12; i++)
 				mescomboBox.addItem(Integer.valueOf(i));
-			mescomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(4, 6)));
+			int pos1=((Candidato)user).getFechaNac().indexOf('-')+1;
+			int pos2=((Candidato)user).getFechaNac().lastIndexOf('-');
+			mescomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(pos1, pos2)));
+
 			mescomboBox.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -456,8 +523,7 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 				}
 			});
 			actualizarDia();
-			// System.out.println(((Candidato)user).getFechaNac().substring(pos2));
-			diacomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(8, 9)));
+			diacomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(pos2+1)));
 
 			otrosConocimientostextArea.setText(((Candidato) user).getOtrosConocimientos());
 			vidaLaboraltextArea.setText(((Candidato) user).getVidaLaboral());
@@ -542,13 +608,20 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 
 	@Override
 	public void funcionalidad(boolean aceptado) {
-		if (aceptado) {
-			try {
-				UtilidadesBD.actualizarUsuario(miUsuario);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+	if(aceptado)
+		{
+			btnEditar.setVisible(true);
+			btnValidar.setVisible(false);
+			btnCancelar.setVisible(false);
+			habilitarODes(false, miUsuario);
+			lblContrasea.setVisible(false);
+			passwordField.setVisible(false);
+	}
+		
+	}
+	private String comboAFecha() {
+		return aniocomboBox.getSelectedItem()+"-"+
+				mescomboBox.getSelectedItem()+"-"+
+				diacomboBox.getSelectedItem();
 	}
 }
