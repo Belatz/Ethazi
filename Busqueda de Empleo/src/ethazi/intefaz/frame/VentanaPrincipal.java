@@ -199,7 +199,6 @@ public class VentanaPrincipal extends JFrame {
 		if (Aplicacion.getUsuario() instanceof Candidato) { // Si es candidato crea sus posibles ventanas
 			Candidato _usr = (Candidato) Aplicacion.getUsuario();
 
-			// Buscar ofertas
 			try {
 				listaDeElementos = Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(null, null, null, null,
 						String.valueOf(_usr.getExperienciaProfesional()), null, null,
