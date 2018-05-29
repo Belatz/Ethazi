@@ -173,29 +173,26 @@ public abstract class Utilidades {
 		return existe;
 	}
 
-	
 	public static void filtrarOfertas(ArrayList<Elemento_Listable> listaDeElementos,
-			GenericoDePanelesConLista panelListadoGenerico,	String titulo, String lugar,
-			String salarioMax, String salarioMin, String experiencia, int contrato,
-			String empresa, ArrayList<String> conocimientos) {
+			GenericoDePanelesConLista panelListadoGenerico, String titulo, String lugar, String salarioMax,
+			String salarioMin, String experiencia, int contrato, String empresa, ArrayList<String> conocimientos) {
 
-			try {
-				listaDeElementos = Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(titulo,
-						lugar, salarioMax, salarioMin, experiencia, contrato, empresa, conocimientos));
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			listaDeElementos = Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(titulo, lugar, salarioMax,
+					salarioMin, experiencia, contrato, empresa, conocimientos));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-	}	
-	
+	}
+
 	public static boolean empresaExiste(String nombre) {
-
+		boolean existe = true;
 		try {
 			if (UtilidadesBD.toEmpresa(nombre) == null)
 				existe = false;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return existe;
