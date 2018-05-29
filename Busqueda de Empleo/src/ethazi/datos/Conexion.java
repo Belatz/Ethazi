@@ -13,7 +13,6 @@ import java.sql.Statement;
  * @category DataBase
  */
 public class Conexion {
-	// TODO constantes y toUpper
 	/*
 	 * =====================
 	 * 
@@ -28,9 +27,9 @@ public class Conexion {
 	private static Connection miConexion;
 
 	private static final String C_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String C_USUARIO = "kk";
-	private static final String C_CONTRASENA = "1234";
-	private static final String C_URL = "jdbc:mysql://192.168.14.10:3306/ethazi";
+	private static final String C_USUARIO = "root";
+	private static final String C_CONTRASENA = "";
+	private static final String C_URL = "jdbc:mysql://localhost:3306/ethazi";
 	public Conexion() {
 		miConexion = null;
 		try {

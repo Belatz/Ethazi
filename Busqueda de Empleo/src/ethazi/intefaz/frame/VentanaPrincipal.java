@@ -23,6 +23,7 @@ import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.paneles.GenericoDePanelesConLista;
 import ethazi.intefaz.paneles.PanelAbrirOferta;
 import ethazi.intefaz.paneles.PanelBarraHerramientas;
+import ethazi.intefaz.paneles.PanelConocimientosBuscados;
 import ethazi.intefaz.paneles.PanelMenu;
 import ethazi.intefaz.paneles.PanelPublicarOferta;
 import ethazi.intefaz.paneles.PanelRealizarSolicitud;
@@ -44,6 +45,7 @@ public class VentanaPrincipal extends JFrame {
 	private static PanelPublicarOferta pa_publicarOferta = null;
 	private static PanelMenu menu;
 	private static PanelRealizarSolicitud pa_realizarSolicitud;
+	private static PanelConocimientosBuscados pa_conocimientosBuscados = null;
 
 	public static final short C_BUSCAR_OFERTA = 0;
 	public static final short C_ANALIZAR_EMPRESA = 1;
@@ -171,15 +173,16 @@ public class VentanaPrincipal extends JFrame {
 		if (Aplicacion.getUsuario() instanceof Candidato) {
 			// Buscar ofertas adecuadas
 			currentPanel = panelListadoGenerico;
-			//currentPanel = pa_ofertasAdecuadas;
+			// currentPanel = pa_ofertasAdecuadas;
 		} else {
-			listaDeElementos = Utilidades.cambiarOfertaAElemento(UtilidadesBD.buscarOfertasEmpresa(Aplicacion.getUsuario().getNumID()));
-			if (_ofertas.isEmpty()) { // Si no tiene ofertas publicadas
+			listaDeElementos = Utilidades
+					.cambiarOfertaAElemento(UtilidadesBD.buscarOfertasEmpresa(Aplicacion.getUsuario().getNumID()));
+			if (listaDeElementos.isEmpty()) { // Si no tiene ofertas publicadas
 				currentPanel = pa_publicarOferta;
 				System.out.println("LOG: PANEL ACTUAL -- Publicar Oferta");
 			} else {
 				// Buscar ofertas con solicitudes
-				//currentPanel = pa_ofertasConSolici;
+				// currentPanel = pa_ofertasConSolici;
 				currentPanel = panelListadoGenerico;
 			}
 		}
@@ -199,39 +202,42 @@ public class VentanaPrincipal extends JFrame {
 
 			try {
 				listaDeElementos = Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(null, null, null, null,
-						String.valueOf(_usr.getExperienciaProfesional()), null, null,
+						String.valueOf(_usr.getExperienciaProfesional()), -1, null,
 						UtilidadesBD.descargarConocimientosCandidato(_usr.getNumID())));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 
-      panelListadoGenerico = new GenericoDePanelesConLista(listaDeElementos,
+			panelListadoGenerico = new GenericoDePanelesConLista(listaDeElementos,
 					Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 			pa_contenedor.add(panelListadoGenerico);
 			panelListadoGenerico.setVisible(false);
-  /*
-			pa_buscarOfertas = new GenericoDePanelesConLista(listaDeElementos, (byte) 1);
-			currentPanel = new JPanel();
-			pa_buscarOfertas.setVisible(false);
-			// Crear consultar ofertas adecuadas
-			_elementos = Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(null, null, null, null,
-					String.valueOf(_usr.getExperienciaProfesional()), -1, null,
-					UtilidadesBD.descargarConocimientosCandidato(_usr.getNumID())));
-			pa_ofertasAdecuadas = new GenericoDePanelesConLista(_elementos, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
-			pa_contenedor.add(pa_ofertasAdecuadas);
-			pa_ofertasAdecuadas.setVisible(false);
-      */
+			/*
+			 * pa_buscarOfertas = new GenericoDePanelesConLista(listaDeElementos, (byte) 1);
+			 * currentPanel = new JPanel(); pa_buscarOfertas.setVisible(false); // Crear
+			 * consultar ofertas adecuadas _elementos =
+			 * Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(null, null,
+			 * null, null, String.valueOf(_usr.getExperienciaProfesional()), -1, null,
+			 * UtilidadesBD.descargarConocimientosCandidato(_usr.getNumID())));
+			 * pa_ofertasAdecuadas = new GenericoDePanelesConLista(_elementos,
+			 * Elemento_A_Listar.C_CONSULTAR_OFERTAS);
+			 * pa_contenedor.add(pa_ofertasAdecuadas);
+			 * pa_ofertasAdecuadas.setVisible(false);
+			 */
 			// Crear consultar sus solicitudes
 			/*
 			 * _elementos =
 			 * Utilidades.cambiarSolicitudAElemento(UtilidadesBD.descargarSolicitudes(_usr))
 			 * ; pa_susSolicitudes = new GenericoDePanelesConLista(_elementos,
 			 * Elemento_A_Listar.C_CONSULTAR_SUS_SOLICITUDES);
-			 * pa_contenedor.add(pa_susSolicitudes); pa_susSolicitudes.setVisible(false); //
-			 * Crear consultar conocimientos mas buscados pa_conocimientosBuscados = new
-			 * PanelConocimientosBuscados(); pa_contenedor.add(pa_conocimientosBuscados);
-			 * pa_conocimientosBuscados.setVisible(false);
+			 * pa_contenedor.add(pa_susSolicitudes); pa_susSolicitudes.setVisible(false);
 			 */
+
+			// Crear consultar conocimientos mas buscados
+			pa_conocimientosBuscados = new PanelConocimientosBuscados();
+			pa_contenedor.add(pa_conocimientosBuscados);
+			pa_conocimientosBuscados.setVisible(false);
+
 			// Crear realizar solicitud
 			PanelRealizarSolicitud pa_realizarSolicitud = new PanelRealizarSolicitud();
 			pa_contenedor.add(pa_realizarSolicitud);
@@ -249,11 +255,15 @@ public class VentanaPrincipal extends JFrame {
 			Empresa _usr = (Empresa) Aplicacion.getUsuario();
 
 			// Crear consultar candidatos
-			_elementos = Utilidades.cambiarCandidatoAElemento(
-					UtilidadesBD.filtrarCandidatos(null, null, null, null, false, false, false, null));
-			pa_consultarCandidatos = new GenericoDePanelesConLista(_elementos, Elemento_A_Listar.C_BUSCAR_CANDIDATOS);
-			pa_contenedor.add(pa_consultarCandidatos);
-			pa_consultarCandidatos.setVisible(false);
+			/*
+			 * listaDeElementos = Utilidades.cambiarCandidatoAElemento(
+			 * UtilidadesBD.filtrarCandidatos(null, null, null, null, false, false, false,
+			 * null)); pa_consultarCandidatos = new
+			 * GenericoDePanelesConLista(listaDeElementos,
+			 * Elemento_A_Listar.C_BUSCAR_CANDIDATOS);
+			 * pa_contenedor.add(pa_consultarCandidatos);
+			 * pa_consultarCandidatos.setVisible(false);
+			 */
 			// Crear consultar sus ofertas
 
 			/*
@@ -270,8 +280,8 @@ public class VentanaPrincipal extends JFrame {
 			pa_contenedor.add(pa_publicarOferta);
 			pa_publicarOferta.setVisible(false);
 			// Crear analizar solicitudes
-			pa_analizarSolicitudes = new GenericoDePanelesConLista(new ArrayList<Elemento_Listable>(),
-					Elemento_A_Listar.C_ANALIZAR_SOLICITUDES);
+			// pa_analizarSolicitudes = new GenericoDePanelesConLista(new
+			// ArrayList<Elemento_Listable>(),Elemento_A_Listar.C_ANALIZAR_SOLICITUDES);
 			// Crear consultar ofertas con solicitudes
 			listaDeElementos = Utilidades
 					.cambiarOfertaAElemento(UtilidadesBD.buscarOfertasConSolicitud(_usr.getNumID()));
@@ -328,30 +338,33 @@ public class VentanaPrincipal extends JFrame {
 		case C_ANALIZAR_SOLICITUDES:
 			panelListadoGenerico.actualizar(listaDeElementos, Elemento_A_Listar.C_ANALIZAR_SOLICITUDES);
 			nuevoPanel = panelListadoGenerico;
-//			nuevoPanel = pa_analizarSolicitudes;
+			// nuevoPanel = pa_analizarSolicitudes;
 			break;
 		case C_BUSCAR_OFERTA:
 			panelListadoGenerico.actualizar(listaDeElementos, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 			nuevoPanel = panelListadoGenerico;
-			//cargarListado(Elemento_A_Listar.C_CONSULTAR_OFERTAS);
-			//actualizarGenerico(listaDeElementos, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
-			//pa_buscarOfertas.updateUI();
-			//nuevoPanel = pa_buscarOfertas;
+			// cargarListado(Elemento_A_Listar.C_CONSULTAR_OFERTAS);
+			// nuevoPanel = pa_buscarOfertas;
 			break;
 		case C_CONOCIMIENTOS_BUSCADOS:
-			nuevoPanel = panelListadoGenerico;
+			//pa_conocimientosBuscados.actualizar();
+			nuevoPanel = pa_conocimientosBuscados;
 			break;
 		case C_CONSULTAR_CANDIDATOS:
 			panelListadoGenerico.actualizar(listaDeElementos, Elemento_A_Listar.C_BUSCAR_CANDIDATOS);
 			nuevoPanel = panelListadoGenerico;
-      //nuevoPanel = pa_consultarCandidatos;
+			// nuevoPanel = pa_consultarCandidatos;
 			break;
 		case C_OFERTAS_ADECUADAS:
+			listaDeElementos = Utilidades
+					.cambiarOfertaAElemento(UtilidadesBD.buscarOfertasAdecuadas((Candidato) Aplicacion.getUsuario()));
 			panelListadoGenerico.actualizar(listaDeElementos, Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 			nuevoPanel = panelListadoGenerico;
-      //nuevoPanel = pa_ofertasAdecuadas;
+			// nuevoPanel = pa_ofertasAdecuadas;
 			break;
 		case C_OFERTAS_CON_SOLICITUDES:
+			listaDeElementos = Utilidades
+					.cambiarOfertaAElemento(UtilidadesBD.buscarOfertasConSolicitud(Aplicacion.getUsuario().getNumID()));
 			panelListadoGenerico.actualizar(listaDeElementos, Elemento_A_Listar.C_VER_OFERTAS_CON_SOLICITUD);
 			nuevoPanel = panelListadoGenerico;
 			break;
@@ -362,14 +375,18 @@ public class VentanaPrincipal extends JFrame {
 			nuevoPanel = pa_realizarSolicitud;
 			break;
 		case C_SUS_OFERTAS:
+			listaDeElementos = Utilidades
+					.cambiarOfertaAElemento(UtilidadesBD.buscarOfertasEmpresa(Aplicacion.getUsuario().getNumID()));
 			panelListadoGenerico.actualizar(listaDeElementos, Elemento_A_Listar.C_CONSULTAR_SUS_OFERTAS);
 			nuevoPanel = panelListadoGenerico;
-      //nuevoPanel = pa_susOfertas;
+			// nuevoPanel = pa_susOfertas;
 			break;
 		case C_SUS_SOLICITUDES:
+			listaDeElementos = Utilidades
+					.cambiarSolicitudAElemento(UtilidadesBD.descargarSolicitudes((Candidato) Aplicacion.getUsuario()));
 			panelListadoGenerico.actualizar(listaDeElementos, Elemento_A_Listar.C_CONSULTAR_SUS_SOLICITUDES);
 			nuevoPanel = panelListadoGenerico;
-			//nuevoPanel = pa_susSolicitudes;
+			// nuevoPanel = pa_susSolicitudes;
 			break;
 		case C_VER_PERFIL:
 			pa_verPerfil.cambiarPerfil(Aplicacion.getUsuario(), true);
@@ -388,24 +405,6 @@ public class VentanaPrincipal extends JFrame {
 		currentPanel = nuevoPanel;
 		// pa_buscarOfertas.setVisible(true);
 		System.out.println("LOG: PANEL ACTUAL -- " + currentPanel.getName());
-	}
-
-	/**
-	 * @author Jon
-	 * @param listaDeOfertas
-	 */
-	public static void actualizar(ArrayList<Elemento_Listable> listaDeOfertas) {
-		pa_buscarOfertas.updateUI();
-		pa_buscarOfertas = new GenericoDePanelesConLista(listaDeOfertas, (byte) 1);
-	}
-
-	/**
-	 * @author Belatz
-	 * @param listaDeOfertas
-	 * @param tipoPanel
-	 */
-	public static void actualizarGenerico(ArrayList<Elemento_Listable> listaDeOfertas, byte tipoPanel) {
-		pa_buscarOfertas = new GenericoDePanelesConLista(listaDeOfertas, tipoPanel);
 	}
 
 	public static void visibilidadMenu() {
@@ -440,6 +439,7 @@ public class VentanaPrincipal extends JFrame {
 	public static void abrir() {
 		frame.setVisible(true);
 	}
+
 	public static ArrayList<Elemento_Listable> getListaDeElementos() {
 		return listaDeElementos;
 	}
