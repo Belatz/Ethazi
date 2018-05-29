@@ -25,6 +25,8 @@ public class PanelConocimientosBuscados extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private JLabel lblqueEsLo;
+	public static final int C_CANTIDAD_MAX = 10;
+	private DefaultTableModel model;
 
 	/**
 	 * Create the panel.
@@ -42,8 +44,8 @@ public class PanelConocimientosBuscados extends JPanel {
 		table = new JTable();
 		table.setFont(new Font("Tahoma", Font.BOLD, 11));
 		table.setBackground(new Color(255, 239, 213));
-		DefaultTableModel model = new DefaultTableModel();
-		model.addColumn("", conocimientosMasBuscados(10));
+		model = new DefaultTableModel();
+		model.addColumn("", conocimientosMasBuscados(C_CANTIDAD_MAX));
 		table.setModel(model);
 		scrollPane.setViewportView(table);
 		table.setEnabled(false);
@@ -55,13 +57,22 @@ public class PanelConocimientosBuscados extends JPanel {
 		lblqueEsLo.setBounds(158, 28, 352, 14);
 		add(lblqueEsLo);
 	}
+	
+	public void actualizar() {
+		int aux = model.getRowCount();
+		for (int i = 0; i < aux; i++) {
+			model.removeRow(i);
+		}
+		
+		model.addColumn("", conocimientosMasBuscados(C_CANTIDAD_MAX));
+	}
 
 	/**
 	 * @author Belatz
 	 * @param cantidad
 	 * @return
 	 */
-	public static Vector<String> conocimientosMasBuscados(int p_cantidad) {
+	private static Vector<String> conocimientosMasBuscados(int p_cantidad) {
 		Vector<String> _resultado = new Vector<>();
 		try {
 			ArrayList<String> _conocimientosBuscados = UtilidadesBD.buscarConocimientosRequeridos();

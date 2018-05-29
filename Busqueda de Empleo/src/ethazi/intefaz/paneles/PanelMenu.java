@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Empresa;
+import ethazi.aplicacion.Utilidades;
+import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
@@ -104,7 +106,9 @@ public class PanelMenu extends JPanel {
 
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_OFERTAS_CON_SOLICITUDES);
+						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
+								.filtrarOfertas("Dum", null, null, null, null, 0, null, null)));
+						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_OFERTAS_CON_SOLICITUDES, VentanaPrincipal.getListaDeElementos());
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
 					} catch (PanelNoDisponible e) {
@@ -121,10 +125,13 @@ public class PanelMenu extends JPanel {
 			btn_candidatos.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONSULTAR_CANDIDATOS);
+
+						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarCandidatoAElemento(UtilidadesBD.buscarCandidatos()));
+				VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONSULTAR_CANDIDATOS,VentanaPrincipal.getListaDeElementos());
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
-						System.out.println("algo");
+				
+
 					} catch (PanelNoDisponible e) {
 						e.printStackTrace();
 					} catch (SQLException e) {

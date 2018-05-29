@@ -13,7 +13,6 @@ import java.sql.Statement;
  * @category DataBase
  */
 public class Conexion {
-	// TODO constantes y toUpper
 	/*
 	 * =====================
 	 * 

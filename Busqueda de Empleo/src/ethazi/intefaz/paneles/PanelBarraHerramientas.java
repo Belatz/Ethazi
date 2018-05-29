@@ -16,12 +16,15 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ethazi.aplicacion.Aplicacion;
+import ethazi.aplicacion.Candidato;
+import ethazi.aplicacion.Utilidades;
 import ethazi.aplicacion.Oferta;
 import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
 import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -48,22 +51,23 @@ public class PanelBarraHerramientas extends JPanel {
 	private static boolean menu = true;
 	private static JButton btnMenu;
 
+	/*
+	 * PARA LOS DE EL JAVADOCK ESTE BOTON AL PULSARLO si es candidato busca ofertas,
+	 * si es empresa busca candidatos
+	 */
 	public PanelBarraHerramientas() {
 		setLayout(null);
 		JButton btn_buscar = new JButton("");
+		btn_buscar.setIcon(new ImageIcon(PanelBarraHerramientas.class.getResource("/ethazi/intefaz/iconos/search.ico.png")));
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					try {
-						ArrayList<Elemento_Listable> ofertas = UtilidadesBD
-								.buscarOfertas(PanelBarraHerramientas.getTxField_buscar());
-						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA, ofertas);
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-				} catch (PanelNoDisponible e2) {
-					e2.printStackTrace();
-				}
+        try {
+					VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
+							.filtrarOfertas(txField_buscar.getText(), null, null, null, null, 0, null, null)));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+      }
 			}
 		});
 		btn_buscar.setBounds(0, 0, 50, 50);
@@ -71,6 +75,7 @@ public class PanelBarraHerramientas extends JPanel {
 		setBounds(0, 0, 762, 50);
 
 		JButton btn_perfil = new JButton("");
+		btn_perfil.setIcon(new ImageIcon(PanelBarraHerramientas.class.getResource("/ethazi/intefaz/iconos/perfil.ico")));
 		btn_perfil.setToolTipText("Ver Perfil");
 		btn_perfil.setPreferredSize(new Dimension(33, 9));
 		btn_perfil.setMinimumSize(new Dimension(33, 9));
@@ -91,6 +96,7 @@ public class PanelBarraHerramientas extends JPanel {
 		add(btn_perfil);
 
 		JButton btn_apagar = new JButton("");
+		btn_apagar.setIcon(new ImageIcon(PanelBarraHerramientas.class.getResource("/ethazi/intefaz/iconos/apagar.png")));
 		btn_apagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Borrar el usuario

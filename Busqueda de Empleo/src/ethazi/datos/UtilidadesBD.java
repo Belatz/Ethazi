@@ -363,9 +363,9 @@ public abstract class UtilidadesBD {
 		return _oferta;
 	}
 
-	public static ArrayList<Elemento_Listable> buscarOfertas(String titulo) throws SQLException {
+	public static ArrayList<Oferta> buscarOfertas(String titulo) throws SQLException {
 		boolean fin = false;
-		ArrayList<Elemento_Listable> ofertas = new ArrayList<Elemento_Listable>();
+		ArrayList<Oferta> ofertas = new ArrayList<>();
 
 		// Decargar ofertas
 		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE "
@@ -574,6 +574,21 @@ public abstract class UtilidadesBD {
 
 		return _ofertas;
 	}
+	public static ArrayList<Candidato> buscarCandidatos() throws SQLException{
+		ArrayList<Candidato> _candidatos = new ArrayList<>();
+		String _sentencia = "SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", "
+				+ Tablas.C_CANDIDATO_TABLA + " WHERE " + Tablas.C_USUARIO_NUMID + "="
+				+ Tablas.C_CANDIDATO_NUMID;
+		_sentencia += ";";
+		ResultSet _rs = Conexion.consultar(_sentencia);
+		
+		while (_rs.next()) {
+			_candidatos.add((Candidato) toUsuario((_rs.getString(Tablas.C_CANDIDATO_NUMID)), false));
+		}
+
+		return _candidatos;
+		
+	}
 
 	public static ArrayList<Candidato> filtrarCandidatos(String p_nombreApellidos, String p_nick, String p_experiencia,
 			String p_direccion, boolean p_carne, boolean p_coche, boolean p_viajes, ArrayList<String> p_conocimientos)
@@ -678,8 +693,8 @@ public abstract class UtilidadesBD {
 		Conexion.actualizar("UPDATE " + Tablas.C_OFERTA_TABLA + " SET " + Tablas.C_OFERTA_DESCRIPCION + "='"
 				+ ofer.getDescripcion() + "', " + Tablas.C_OFERTA_LUGAR + "='" + ofer.getLugar() + "', "
 				+ Tablas.C_OFERTA_EXPERIENCIA + "=" + ofer.getExperiencia() + ", " + Tablas.C_OFERTA_TIPO_CONTRATO + "="
-				+ Contrato.value(ofer.getContrato()) + ", " + Tablas.C_OFERTA_SUELDO_MAX + "=" + ofer.getSalarioMax() + ", "
-				+ Tablas.C_OFERTA_SUELDO_MIN + "=" + ofer.getSalarioMin() + ", "
+        + Contrato.value(ofer.getContrato()) + ", " + Tablas.C_OFERTA_SUELDO_MAX + "=" + ofer.getSalarioMax() + ", "
+        + Tablas.C_OFERTA_SUELDO_MIN + "=" + ofer.getSalarioMin() + ", "
 				+ Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES + "='" + ofer.getAspectosImprescindibles() + "', "
 				+ Tablas.C_OFERTA_ASPECTOS_VALORAR + "='" + ofer.getAspectosAValorar() + "' WHERE "
 				+ Tablas.C_OFERTA_CODIGO + "=" + ofer.getCodigo() + ";");
@@ -748,6 +763,12 @@ public abstract class UtilidadesBD {
 		}
 
 		return _conocimientos;
+	}
+
+	public static ArrayList<Oferta> buscarOfertasAdecuadas(Candidato usr) throws SQLException {
+		ArrayList<Oferta> _ofertas = filtrarOfertas(null, null, null, null,
+				String.valueOf(usr.getExperienciaProfesional()), -1, null, usr.getConocimientos());
+		return _ofertas;
 	}
 
 }
