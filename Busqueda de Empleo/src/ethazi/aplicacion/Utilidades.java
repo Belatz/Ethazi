@@ -26,6 +26,20 @@ public abstract class Utilidades {
 		
 		return _elementos;
 	}
+	/**
+	 * @author Jon
+	 * @param p_candidatos
+	 * @return
+	 */
+	public static ArrayList<Elemento_Listable> cambiarCandidatoAElemento(ArrayList<Candidato> p_candidatos) {
+		ArrayList<Elemento_Listable> _elementos = new ArrayList<>();
+		
+		for (Candidato candidato : p_candidatos) {
+			_elementos.add(candidato);
+		}
+		
+		return _elementos;
+	}
 	
 	/**
 	 * @author Belatz

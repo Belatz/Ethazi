@@ -175,7 +175,7 @@ public class VentanaPrincipal extends JFrame {
 			// Buscar ofertas adecuadas
 			currentPanel = panelListadoGenerico;
 		} else {
-			listaDeElementos = UtilidadesBD.buscarOfertasEmpresa(Aplicacion.getUsuario().getNumID());
+			listaDeElementos = Utilidades.cambiarOfertaAElemento(UtilidadesBD.buscarOfertasEmpresa(Aplicacion.getUsuario().getNumID()));
 
 			if (listaDeElementos.isEmpty()) { // Si no tiene ofertas publicadas
 				currentPanel = panelListadoGenerico;
