@@ -195,7 +195,7 @@ public class Elemento_A_Listar extends JPanel {
 		}
 			break;
 		case C_BUSCAR_CANDIDATOS: {
-			miLblAnalizar = new JLabel(((Candidato) p_elemento).getInfo());
+			miLblAnalizar = new JLabel (p_elemento.getInfo());
 			miLblAnalizar.setBounds(0, 0, 450, 50);
 			add(miLblAnalizar);
 			// Codificar

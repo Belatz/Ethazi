@@ -22,6 +22,8 @@ public class GenericoDePanelesConLista extends JPanel {
 	public JPanel _panelBotonAtrasYAlante = null;
 	public JScrollPane pa_listado;
 	public JLabel sinResultados;
+	public JScrollPane pa_filtrosOferta;
+	public JScrollPane pa_filtrosCandidato;
 	private static final long serialVersionUID = 1L;
 
 	public GenericoDePanelesConLista() {
@@ -87,7 +89,7 @@ public class GenericoDePanelesConLista extends JPanel {
 				add(pa_listado);
 				add(_panelBotonAtrasYAlante);
 			}
-			JScrollPane pa_filtrosOferta = new PanelFiltrosOferta();
+			pa_filtrosOferta = new PanelFiltrosOferta();
 			pa_filtrosOferta.setBounds(512, 0, 247, 482);
 			add(pa_filtrosOferta);
 			System.out.println("LOG: PANEL ACTUAL -- Consultar Ofertas");
@@ -179,7 +181,7 @@ public class GenericoDePanelesConLista extends JPanel {
 				add(pa_listado);
 				add(_panelBotonAtrasYAlante);
 			}
-			JScrollPane pa_filtrosCandidato = new PanelFiltrosCandidato();
+			pa_filtrosCandidato = new PanelFiltrosCandidato();
 			pa_filtrosCandidato.setBounds(512, 0, 247, 482);
 			add(pa_filtrosCandidato);
 			System.out.println("LOG: PANEL ACTUAL -- Buscar Candidatos");

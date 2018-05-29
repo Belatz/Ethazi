@@ -33,20 +33,7 @@ public abstract class Utilidades {
 
 		return _elementos;
 	}
-	/**
-	 * @author Jon
-	 * @param p_candidatos
-	 * @return
-	 */
-	public static ArrayList<Elemento_Listable> cambiarCandidatoAElemento(ArrayList<Candidato> p_candidatos) {
-		ArrayList<Elemento_Listable> _elementos = new ArrayList<>();
-		
-		for (Candidato candidato : p_candidatos) {
-			_elementos.add(candidato);
-		}
-		
-		return _elementos;
-	}
+
 	
 	/**
 	 * @author Belatz
@@ -197,17 +184,23 @@ public abstract class Utilidades {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return existe;
 	}
 	
 	public static void filtrarOfertas(ArrayList<Elemento_Listable> listaDeElementos,
 			GenericoDePanelesConLista panelListadoGenerico,	String titulo, String lugar,
-			String salarioMax, String salarioMin, String experiencia, String contrato,
+			String salarioMax, String salarioMin, String experiencia, int contrato,
 			String empresa, ArrayList<String> conocimientos) {
-		try {
-			listaDeElementos = Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(titulo,
-					lugar, salarioMax, salarioMin, experiencia, contrato, empresa, conocimientos));
-		return existe;
-	}
+
+			try {
+				listaDeElementos = Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(titulo,
+						lugar, salarioMax, salarioMin, experiencia, contrato, empresa, conocimientos));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+	}	
 	//TODO arreglar
 	public static boolean empresaExiste(String nombre)
 	{
@@ -219,6 +212,7 @@ public abstract class Utilidades {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return existe;
 	}
 
     /*Esto es para los filtros
