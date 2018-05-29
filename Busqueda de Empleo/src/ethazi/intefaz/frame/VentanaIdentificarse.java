@@ -1,15 +1,10 @@
 package ethazi.intefaz.frame;
 
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.awt.EventQueue;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import ethazi.intefaz.paneles.PanelIdentificarse;
@@ -20,7 +15,15 @@ import ethazi.intefaz.paneles.SeleccionRegistro;
 import java.awt.Cursor;
 import java.awt.Dimension;
 
+	/**
+	 * This window is used by the user to identify as Candidato or Empresa.
+	 */
 public class VentanaIdentificarse extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static JPanel contentPane;
 	private static JPanel pa_identificarse;

@@ -111,7 +111,6 @@ public class PanelListaDoble extends JPanel {
 	public JButton getBtn_eliminar() {
 		return btn_eliminar;
 	}
-
 	public void actualizarListas(ArrayList<String> listaIzquierda, ArrayList<String> listaDerecha) {
 		modelo_totales.removeAllElements();
 		modelo_anadidos.removeAllElements();
@@ -129,7 +128,7 @@ public class PanelListaDoble extends JPanel {
 				modelo_anadidos.addElement(listaDerecha.get(i));
 	}
 
-	public ArrayList<String> getConocimientos() {
+	public ArrayList<String> getConocimientosAnadidos() {
 		ArrayList<String> _conocimientos = new ArrayList<>();
 
 		for (int i = 0; i < modelo_anadidos.size(); i++) {

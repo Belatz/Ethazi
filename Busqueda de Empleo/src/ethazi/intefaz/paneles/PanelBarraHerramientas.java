@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,8 +15,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ethazi.aplicacion.Aplicacion;
+import ethazi.aplicacion.Oferta;
 import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
+import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
@@ -33,7 +36,7 @@ public class PanelBarraHerramientas extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txField_buscar;
+	private static JTextField txField_buscar;
 
 	/*
 	 * public static ArrayList<Elemento_Listable> listaDeOfertas = new
@@ -41,9 +44,8 @@ public class PanelBarraHerramientas extends JPanel {
 	 * 
 	 * public PanelBarraHerramientas(GenericoDePanelesConLista pa_buscarOfertas) {
 	 */
-
 	private static boolean menu = true;
-	static JButton btnMenu;
+	private static JButton btnMenu;
 
 	public PanelBarraHerramientas() {
 		setLayout(null);
@@ -51,8 +53,12 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA);
-					// TODO en el panel de consultar ofertas coger el texto de la barra de busqueda
+					try {
+						ArrayList<Elemento_Listable> ofertas = UtilidadesBD.buscarOfertas(PanelBarraHerramientas.getTxField_buscar());
+						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA, ofertas);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
 				} catch (PanelNoDisponible e2) {
 					e2.printStackTrace();
 				}
@@ -68,11 +74,14 @@ public class PanelBarraHerramientas extends JPanel {
 		btn_perfil.setMinimumSize(new Dimension(33, 9));
 		btn_perfil.setMaximumSize(new Dimension(33, 9));
 		btn_perfil.setBounds(642, 0, 50, 50);
+		
 		btn_perfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_VER_PERFIL);
 				} catch (PanelNoDisponible e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
@@ -112,7 +121,7 @@ public class PanelBarraHerramientas extends JPanel {
 				botonMenuInv();
 			}
 		});
-		btnMenu.setBounds(368, 9, 229, 31);
+		btnMenu.setBounds(369, 11, 229, 23);
 		add(btnMenu);
 
 		MouseListener ml = new MouseListener() {
@@ -154,6 +163,10 @@ public class PanelBarraHerramientas extends JPanel {
 			menu = true;
 			btnMenu.setVisible(true);
 		}
+	}
+
+	public static String getTxField_buscar() {
+		return txField_buscar.getText();
 	}
 
 }

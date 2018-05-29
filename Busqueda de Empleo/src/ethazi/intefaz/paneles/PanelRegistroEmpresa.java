@@ -9,19 +9,19 @@ import javax.swing.JTextField;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Empresa;
+import ethazi.aplicacion.Utilidades;
+import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.emergentes.EmergenteCambios;
 import ethazi.intefaz.emergentes.TieneEmergente;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
-import javax.swing.JComboBox;
 import javax.swing.JTextArea;
-import javax.swing.JSeparator;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.awt.Color;
 
 /**
  * The panel RegistroEmpresa will show the data that the user will have to fill,
@@ -30,8 +30,7 @@ import java.awt.event.ActionEvent;
  * @author Xabi
  *
  */
-
-public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
+	public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
 	/**
 	 * 
 	 */
@@ -46,10 +45,12 @@ public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
 	private JTextField textFieldContact;
 	private JPanel padre;
 	private JTextArea textAreaDesc;
+	private JLabel lbl_Invalido;
 
 	public PanelRegistroEmpresa() {
 		padre = this;
 		setLayout(null);
+		setName("Registro Empresa");
 
 		JLabel lblNombreDeUsuario = new JLabel("Nick:");
 		lblNombreDeUsuario.setBounds(10, 70, 46, 14);
@@ -124,6 +125,15 @@ public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
 		add(textFieldContact);
 		textFieldContact.setColumns(10);
 
+		textFieldNick.setText("");
+		textFieldPass.setText("");
+		textFieldNombre.setText("");
+		textFieldCif.setText("");
+		textFieldDir.setText("");
+		textFieldEmail.setText("");
+		textFieldTel.setText("");
+		textFieldContact.setText("");
+
 		JLabel lblDescripcion = new JLabel("Descripcion de la empresa:");
 		lblDescripcion.setBounds(10, 193, 190, 14);
 		add(lblDescripcion);
@@ -133,7 +143,7 @@ public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
 		btnRegistarEmpresa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				EmergenteCambios.createWindow("�Desea registrar estos datos de la Empresa?", (TieneEmergente) padre);
+				EmergenteCambios.createWindow("¿Desea registrar estos datos de la Empresa?", (TieneEmergente) padre);
 			}
 		});
 		btnRegistarEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -170,19 +180,98 @@ public class PanelRegistroEmpresa extends JPanel implements TieneEmergente {
 		textAreaDesc.setBounds(10, 218, 530, 120);
 		add(textAreaDesc);
 
+		lbl_Invalido = new JLabel("Campos inv\u00E1lidos/vac\u00EDos:");
+		lbl_Invalido.setForeground(Color.RED);
+		lbl_Invalido.setBounds(10, 40, 549, 14);
+		lbl_Invalido.setVisible(false);
+		add(lbl_Invalido);
+
 	}
 
 	@Override
 	public void funcionalidad(boolean aceptado) {
 		if (aceptado) {
-			Empresa aux = new Empresa(textFieldNick.getText(), textFieldPass.getText(), textFieldNombre.getText(),
-					textFieldCif.getText(), textFieldDir.getText(), textFieldEmail.getText(), textFieldDir.getText(),
-					textFieldContact.getText(), textAreaDesc.getText());
-			// TODO guardar en la base de datos la empresa
-			//TODO mandar correo y validar
-			VentanaIdentificarse.cerrar();
-			VentanaPrincipal.ejecutar();
-			Aplicacion.setUsuario(aux);
+			Empresa aux = null;
+			lbl_Invalido.setVisible(false);
+			lbl_Invalido.setText("Campos inválidos/vacíos:");
+			try {
+				boolean valido = true;
+				if (textFieldNick.getText().compareTo("") == 0 || textFieldNick.getText().charAt(0) == ' '
+						|| Utilidades.esUsuario(textFieldNick.getText())) {
+					valido = false;
+					textFieldNick.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Nick ");
+				}
+				if (textFieldNombre.getText().compareTo("") == 0 || textFieldNombre.getText().charAt(0) == ' '
+						|| UtilidadesBD.toEmpresa(textFieldNombre.getText()) != null) {
+					valido = false;
+					textFieldNombre.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Nombre ");
+				}
+				if (textFieldCif.getText().compareTo("") == 0 || textFieldCif.getText().charAt(0) == ' '
+						|| !Utilidades.cifCorrecto(textFieldCif.getText())) {
+					valido = false;
+					textFieldCif.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " CIF ");
+				} else {
+					if (Utilidades.empresaExisteCif(textFieldCif.getText())) {
+						valido = false;
+						textFieldCif.setText("");
+						lbl_Invalido.setText(lbl_Invalido.getText() + " CIF ");
+					}
+				}
+				if (textFieldEmail.getText().compareTo("") == 0 || textFieldEmail.getText().charAt(0) == ' '
+						|| !Utilidades.correoValido(textFieldEmail.getText())|| Utilidades.existeCorreo(textFieldEmail.getText())){
+					valido = false;
+					textFieldEmail.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Email ");
+				}
+				if (textFieldTel.getText().compareTo("") == 0 || textFieldTel.getText().charAt(0) == ' '
+						|| !Utilidades.telefonoValido(textFieldTel.getText())) {
+					valido = false;
+					textFieldTel.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Tel ");
+				}
+				if (textFieldDir.getText().compareTo("") == 0) {
+					valido = false;
+					textFieldDir.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Dir");
+				}
+				if (textFieldPass.getText().compareTo("") == 0) {
+					valido = false;
+					textFieldPass.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Contraseña");
+				}
+				if (textFieldContact.getText().compareTo("") == 0) {
+					valido = false;
+					textFieldContact.setText("");
+					lbl_Invalido.setText(lbl_Invalido.getText() + " Contacto");
+				}
+				lbl_Invalido.setVisible(!valido);
+				if (valido) {
+					aux = new Empresa(textFieldNick.getText(), textFieldPass.getText(), textFieldNombre.getText(),
+							textFieldCif.getText(), textFieldDir.getText(), textFieldEmail.getText(),
+							textFieldTel.getText(), textFieldContact.getText(), textAreaDesc.getText());
+					UtilidadesBD.insertarEmpresa(aux);
+					VentanaIdentificarse.cerrar();
+					VentanaPrincipal.ejecutar();
+					Aplicacion.setUsuario(aux);
+					textFieldCif.setText("");
+					textFieldContact.setText("");
+					textFieldDir.setText("");
+					textFieldEmail.setText("");
+					textFieldNick.setText("");
+					textFieldNombre.setText("");
+					textFieldPass.setText("");
+					textFieldTel.setText("");
+					textAreaDesc.setText("");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// TODO mandar correo
+
 		}
 
 	}

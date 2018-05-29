@@ -1,5 +1,6 @@
 package ethazi.aplicacion;
 
+
 public enum Contrato {
 	TEMPORAL_TIEMPO_COMPLETO(0),
 	TEMPORTAL_TIEMPO_PARCIAL(1),

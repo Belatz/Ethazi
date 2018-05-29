@@ -12,7 +12,12 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
+import ethazi.aplicacion.Contrato;
+import ethazi.aplicacion.Utilidades;
 import ethazi.datos.UtilidadesBD;
+import ethazi.excepciones.PanelNoDisponible;
+import ethazi.intefaz.Elemento_Listable;
+import ethazi.intefaz.frame.VentanaPrincipal;
 
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -30,11 +35,12 @@ public class PanelFiltrosOferta extends JScrollPane {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txField_sueldoMin;
-	private JTextField txField_sueldoMax;
-	private JTextField txFiedl_experiencia;
-	private JTextField txField_empresa;
-	private JTextField txField_titulo;
+	private static JTextField txField_sueldoMin;
+	private static JTextField txField_sueldoMax;
+	private static JTextField txFiedl_experiencia;
+	private static JTextField txField_empresa;
+	private static JTextField txField_titulo;
+	private static JTextField txField_lugar;
 
 	public PanelFiltrosOferta() {
 		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -47,6 +53,7 @@ public class PanelFiltrosOferta extends JScrollPane {
 
 	/**
 	 * Generates a filter panel.
+	 * 
 	 * @return
 	 */
 	public JPanel crearPanelFiltros() {
@@ -77,16 +84,20 @@ public class PanelFiltrosOferta extends JScrollPane {
 		lbl_lugar.setBounds(12, 321, 118, 14);
 		pa_filtros.add(lbl_lugar);
 
-		JComboBox<String> combo_lugar = new JComboBox<>();
-		combo_lugar.setBounds(12, 335, 118, 23);
-		pa_filtros.add(combo_lugar);
+		txField_lugar = new JTextField();
+		txField_lugar.setBounds(12, 335, 205, 23);
+		pa_filtros.add(txField_lugar);
 
 		JLabel lbl_contrato = new JLabel("Tipo de contrato:");
 		lbl_contrato.setBounds(12, 366, 118, 14);
 		pa_filtros.add(lbl_contrato);
 
-		JComboBox<String> combo_contrato = new JComboBox<>();
+		JComboBox<Contrato> combo_contrato = new JComboBox<>();
 		combo_contrato.setBounds(12, 380, 118, 23);
+		combo_contrato.addItem(Contrato.INDEFINIDO_TIEMPO_COMPLETO);
+		combo_contrato.addItem(Contrato.INDEFINIDO_TIEMPO_PARCIAL);
+		combo_contrato.addItem(Contrato.TEMPORAL_TIEMPO_COMPLETO);
+		combo_contrato.addItem(Contrato.TEMPORTAL_TIEMPO_PARCIAL);
 		pa_filtros.add(combo_contrato);
 
 		JLabel lbl_sueldoMin = new JLabel("Sueldo minimo:");
@@ -128,23 +139,25 @@ public class PanelFiltrosOferta extends JScrollPane {
 		JButton btn_aplicar = new JButton("Aplicar");
 		btn_aplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO hacer algo con la lista de ofertas
 				try {
-					UtilidadesBD.filtrarOfertas(txField_titulo.getText(), (String) combo_lugar.getSelectedItem(),
-							txField_sueldoMax.getText(), txField_sueldoMin.getText(), txFiedl_experiencia.getText(),
-							(String) combo_contrato.getSelectedItem(), txField_empresa.getText(), pa_conocimientos.getConocimientos());
-				} catch (SQLException e) {
+					ArrayList<Elemento_Listable> _ofertas = Utilidades.cambiarOfertaAElemento(UtilidadesBD
+							.filtrarOfertas(txField_titulo.getText(), txField_lugar.getText(),
+									txField_sueldoMax.getText(), txField_sueldoMin.getText(),
+									txFiedl_experiencia.getText(), ((Contrato) combo_contrato.getSelectedItem()).getTipo() ,
+									txField_empresa.getText(), pa_conocimientos.getConocimientosAnadidos()));
+					VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_BUSCAR_OFERTA, _ofertas);
+				} catch (SQLException | PanelNoDisponible e) {
 					e.printStackTrace();
 				}
 			}
 		});
 		btn_aplicar.setBounds(66, 11, 89, 23);
 		pa_filtros.add(btn_aplicar);
-		
+
 		JLabel lbl_titulo = new JLabel("Titulo:");
 		lbl_titulo.setBounds(12, 55, 70, 15);
 		pa_filtros.add(lbl_titulo);
-		
+
 		txField_titulo = new JTextField();
 		txField_titulo.setBounds(16, 82, 201, 19);
 		pa_filtros.add(txField_titulo);

@@ -17,12 +17,11 @@ public class Candidato extends Usuario implements Elemento_Listable {
 	private String vidaLaboral;
 	private float experienciaProfesional;
 
-	
 	public Candidato(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
 			String miEmail, String miTelefono, String apellidos, String fechaNac, boolean carnet, boolean cochePropio,
 			boolean disViajar, String estudios, ArrayList<String> conocimientos, String otrosConocimientos,
 			String vidaLaboral, float experienciaProfesional) {
-		super(miNick, miPassword, miNombre, miNumID, miDireccion, miEmail, miTelefono);
+		super(miNumID, miNick, miPassword, miNombre, miDireccion, miEmail, miTelefono);
 		this.apellidos = apellidos;
 		this.fechaNac = fechaNac;
 		this.carnet = carnet;
@@ -51,7 +50,7 @@ public class Candidato extends Usuario implements Elemento_Listable {
 		return fechaNac;
 	}
 
-	public boolean isCarnet() {
+	public boolean hasCarnet() {
 		return carnet;
 	}
 
@@ -59,7 +58,7 @@ public class Candidato extends Usuario implements Elemento_Listable {
 		this.carnet = carnet;
 	}
 
-	public boolean isCochePropio() {
+	public boolean hasCochePropio() {
 		return cochePropio;
 	}
 
@@ -67,7 +66,7 @@ public class Candidato extends Usuario implements Elemento_Listable {
 		this.cochePropio = cochePropio;
 	}
 
-	public boolean isDisViajar() {
+	public boolean hasDisViajar() {
 		return disViajar;
 	}
 
@@ -117,7 +116,6 @@ public class Candidato extends Usuario implements Elemento_Listable {
 
 	@Override
 	public String getInfo() {
-		// TODO Auto-generated method stub
-		return getNombre()+" "+apellidos;
+		return getNombre() + " " + apellidos;
 	}
 }
