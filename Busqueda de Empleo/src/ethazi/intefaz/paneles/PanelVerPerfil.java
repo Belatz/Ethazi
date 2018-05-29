@@ -286,52 +286,52 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 					btnValidar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-//							EmergenteCambios.createWindow("¿Esta seguro de que desea guardar los cambios?",
-//									(TieneEmergente) panel);
-//							if (emergenteAceptado) {
-								if (validarDatos()) {
-									try {
-										miUsuario.setNombre(nombretextField.getText());
-										miUsuario.setDireccion(dirtextField.getText());
-										miUsuario.setEmail(emailtextField.getText());
-										miUsuario.setTelefono(teltextField.getText());
+							// EmergenteCambios.createWindow("¿Esta seguro de que desea guardar los
+							// cambios?",
+							// (TieneEmergente) panel);
+							// if (emergenteAceptado) {
+							if (validarDatos()) {
+								try {
+									miUsuario.setNombre(nombretextField.getText());
+									miUsuario.setDireccion(dirtextField.getText());
+									miUsuario.setEmail(emailtextField.getText());
+									miUsuario.setTelefono(teltextField.getText());
 
-										if (miUsuario instanceof Candidato) {
-											((Candidato) miUsuario).setApellidos(apellidostextField.getText());
-											((Candidato) miUsuario)
-													.setDisViajar(chckbxDisponibilidadParaViajar.isSelected());
-											((Candidato) miUsuario).setCarnet(chckbxCarnet.isSelected());
-											((Candidato) miUsuario).setCochePropio(chckbxCoche.isSelected());
-											((Candidato) miUsuario).setExperienciaProfesional(
-													Float.parseFloat(experienciaProfesionaltextField.getText()));
-											((Candidato) miUsuario)
-													.setOtrosConocimientos(otrosConocimientostextArea.getText());
-											((Candidato) miUsuario).setVidaLaboral(vidaLaboraltextArea.getText());
-											((Candidato) miUsuario).setEstudios(estudiostextArea.getText());
-											// mes-anyo-dia -> aaaa/mm/dd
-											String fecha = String.join(
-													String.valueOf(mescomboBox.getSelectedItem() + "/"),
-													String.valueOf(aniocomboBox.getSelectedItem() + "/"),
-													String.valueOf(diacomboBox.getSelectedItem()));
-											((Candidato) miUsuario).setFechaNac(fecha);
-											((Candidato) miUsuario)
-													.setConocimientos(conocimientosEditar.getConocimientosAnadidos());
-										} else {
-											((Empresa) miUsuario).setDescripcion(descripciontextArea.getText());
-											((Empresa) miUsuario).setContacto(informacionContactotextArea.getText());
-										}
-
-										UtilidadesBD.actualizarUsuario(miUsuario);
-										EmergenteSoloAceptar.createWindow("Se han guardado los cambios",
-												(TieneEmergente) panel);
-									} catch (SQLException e1) {
-										e1.printStackTrace();
+									if (miUsuario instanceof Candidato) {
+										((Candidato) miUsuario).setApellidos(apellidostextField.getText());
+										((Candidato) miUsuario)
+												.setDisViajar(chckbxDisponibilidadParaViajar.isSelected());
+										((Candidato) miUsuario).setCarnet(chckbxCarnet.isSelected());
+										((Candidato) miUsuario).setCochePropio(chckbxCoche.isSelected());
+										((Candidato) miUsuario).setExperienciaProfesional(
+												Float.parseFloat(experienciaProfesionaltextField.getText()));
+										((Candidato) miUsuario)
+												.setOtrosConocimientos(otrosConocimientostextArea.getText());
+										((Candidato) miUsuario).setVidaLaboral(vidaLaboraltextArea.getText());
+										((Candidato) miUsuario).setEstudios(estudiostextArea.getText());
+										// mes-anyo-dia -> aaaa/mm/dd
+										String fecha = String.join(String.valueOf(mescomboBox.getSelectedItem() + "/"),
+												String.valueOf(aniocomboBox.getSelectedItem() + "/"),
+												String.valueOf(diacomboBox.getSelectedItem()));
+										((Candidato) miUsuario).setFechaNac(fecha);
+										((Candidato) miUsuario)
+												.setConocimientos(conocimientosEditar.getConocimientosAnadidos());
+									} else {
+										((Empresa) miUsuario).setDescripcion(descripciontextArea.getText());
+										((Empresa) miUsuario).setContacto(informacionContactotextArea.getText());
 									}
-								} else {
-									EmergenteSoloAceptar.createWindow("No se ha podido guardar los cambios",
+
+									UtilidadesBD.actualizarUsuario(miUsuario);
+									EmergenteSoloAceptar.createWindow("Se han guardado los cambios",
 											(TieneEmergente) panel);
+								} catch (SQLException e1) {
+									e1.printStackTrace();
 								}
-//							}
+							} else {
+								EmergenteSoloAceptar.createWindow("No se ha podido guardar los cambios",
+										(TieneEmergente) panel);
+							}
+							// }
 						}
 					});
 					btnCancelar.addMouseListener(new MouseAdapter() {
@@ -456,8 +456,8 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 				}
 			});
 			actualizarDia();
-			System.out.println(((Candidato)user).getFechaNac().substring(pos2));
-			diacomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(pos2)));
+			// System.out.println(((Candidato)user).getFechaNac().substring(pos2));
+			diacomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(8, 9)));
 
 			otrosConocimientostextArea.setText(((Candidato) user).getOtrosConocimientos());
 			vidaLaboraltextArea.setText(((Candidato) user).getVidaLaboral());
@@ -542,8 +542,7 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 
 	@Override
 	public void funcionalidad(boolean aceptado) {
-		if(aceptado)
-		{
+		if (aceptado) {
 			try {
 				UtilidadesBD.actualizarUsuario(miUsuario);
 			} catch (SQLException e) {

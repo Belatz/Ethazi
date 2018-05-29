@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Empresa;
+import ethazi.aplicacion.Utilidades;
+import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
@@ -121,10 +123,11 @@ public class PanelMenu extends JPanel {
 			btn_candidatos.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONSULTAR_CANDIDATOS);
+						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONSULTAR_CANDIDATOS,
+								Utilidades.cambiarCandidatoAElemento(UtilidadesBD.filtrarCandidatos(null, null, null,
+										null, false, false, false, null)));
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
-						System.out.println("algo");
 					} catch (PanelNoDisponible e) {
 						e.printStackTrace();
 					} catch (SQLException e) {
