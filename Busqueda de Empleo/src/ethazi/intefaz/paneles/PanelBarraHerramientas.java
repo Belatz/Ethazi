@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -83,6 +85,7 @@ public class PanelBarraHerramientas extends JPanel {
 			}
 		});
 		btn_buscar.setBounds(0, 0, 50, 50);
+		
 		add(btn_buscar);
 		setBounds(0, 0, 762, 50);
 
@@ -148,6 +151,22 @@ public class PanelBarraHerramientas extends JPanel {
 			public void mouseEntered(MouseEvent arg0) {
 				botonMenuInv();
 				VentanaPrincipal.visibilidadMenu();
+			}
+		});
+		txField_buscar.addKeyListener(new KeyListener() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btn_buscar.doClick();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					System.out.println("ds");
+				}
+			}
+
+			public void keyReleased(KeyEvent e) {
+			}
+ 
+			public void keyTyped(KeyEvent e) {
 			}
 		});
 	}

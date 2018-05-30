@@ -2,12 +2,17 @@ package ethazi.intefaz;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import ethazi.aplicacion.*;
+import ethazi.excepciones.PanelNoDisponible;
+import ethazi.intefaz.frame.VentanaPrincipal;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.sun.prism.paint.Color;
 
 /**
  * 
@@ -25,6 +30,7 @@ public class Elemento_A_Listar extends JPanel {
 	private JLabel miLblAbrir_Elemento;
 	private JLabel miLblAnalizar;
 	private JButton miBtnEditar;
+	private JLabel descripcion;
 
 	public final static byte C_CONSULTAR_SUS_SOLICITUDES = 0;
 	public final static byte C_CONSULTAR_OFERTAS = 1;
@@ -45,6 +51,7 @@ public class Elemento_A_Listar extends JPanel {
 
 		switch (p_constante_opcion) {
 		case C_CONSULTAR_SUS_SOLICITUDES: {
+
 			miBtnEliminar = new JButton("Retirar Solicitud");
 			miBtnEliminar.setBounds(364, 44, 107, 30);
 			add(miBtnEliminar);
@@ -82,8 +89,13 @@ public class Elemento_A_Listar extends JPanel {
 			break;
 		case C_CONSULTAR_OFERTAS: {
 			miLblAnalizar = new JLabel(((Oferta) p_elemento).getEmpresa().getNombre());
-			miLblAnalizar.setBounds(364, 1, 117, 40);
+		
+			miLblAnalizar.setBounds(350, 1, 117, 40);
 			add(miLblAnalizar);
+			descripcion = new JLabel();
+			descripcion.setText("Descripción: "+((Oferta) p_elemento).getDescripcion());
+			descripcion.setBounds(5, 30, 360, 20);
+			add(descripcion);
 			miLblAbrir_Elemento = new JLabel(((Oferta) p_elemento).getInfo());
 			miLblAbrir_Elemento.setBounds(0, 1, 354, 40);
 			add(miLblAbrir_Elemento);
@@ -91,7 +103,12 @@ public class Elemento_A_Listar extends JPanel {
 			miLblAnalizar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
+					try {
+						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_ANALIZAR_EMPRESA,((Oferta) p_elemento).getEmpresa());
+					} catch (PanelNoDisponible | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					super.mouseClicked(e);
 				}
 			});
@@ -99,7 +116,12 @@ public class Elemento_A_Listar extends JPanel {
 			miLblAbrir_Elemento.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
+					try {
+						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_ABRIR_OFERTA, p_elemento);
+					} catch (PanelNoDisponible | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					super.mouseClicked(e);
 				}
 			});
@@ -217,6 +239,8 @@ public class Elemento_A_Listar extends JPanel {
 	 * public void setMiPaElemento_A_Listar(JPanel miPaElemento_A_Listar) {
 	 * this.miPaElemento_A_Listar = miPaElemento_A_Listar; }
 	 */
+
+
 
 	public JButton getMiBtnEliminar() {
 		return miBtnEliminar;
