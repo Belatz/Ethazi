@@ -154,11 +154,20 @@ public class Elemento_A_Listar extends JPanel {
 			miBtnCambiar_Estado = new JButton();
 			miBtnCambiar_Estado.setBounds(350, 0, 50, 50);
 			add(miBtnCambiar_Estado);
+			descripcion = new JLabel();
+			descripcion.setText("Descripción: "+((Oferta) p_elemento).getDescripcion());
+			descripcion.setBounds(5, 30, 360, 20);
+			add(descripcion);
 			// Codificar
 			miLblAbrir_Elemento.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
+					try {
+						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_ABRIR_OFERTA, p_elemento);
+					} catch (PanelNoDisponible | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					super.mouseClicked(e);
 				}
 			});
