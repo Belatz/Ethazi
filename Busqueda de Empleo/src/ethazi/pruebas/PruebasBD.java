@@ -138,6 +138,7 @@ public class PruebasBD
 					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion21','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'88888888X',0)");
 
 			// Datos solicitudes
+			
 			Conexion.actualizar("INSERT INTO solicitudes VALUES (" + codigo
 					+ ",'11111111D','Buenos dias: Estaria encantado de colaborar con vosotros')");
 			Conexion.actualizar("INSERT INTO solicitudes VALUES (" + (codigo + 1)
@@ -156,7 +157,8 @@ public class PruebasBD
 					+ ",'55555555P','Buenos tardes: Mi situacion economica no es muy buena y necesito trabajar')");
 			Conexion.actualizar("INSERT INTO solicitudes VALUES (" + (codigo + 8)
 					+ ",'55555555P','Buenos tardes: Mi situacion economica no es muy buena y necesito trabajar')");
-
+			Conexion.actualizar("INSERT INTO solicitudes VALUES (" + (codigo + 9)
+					+ ",'00000000A','Buenos tardes: Mi situacion economica no es muy buena y necesito trabajar')");
 			// Datos candidato_conocimientos
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('11111111D','Mecanico')");
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('11111111D','Electricista')");
