@@ -63,7 +63,8 @@ public class GenericoDePanelesConLista extends JPanel {
 				panel_QueTieneLaLista.setPreferredSize(new Dimension(762, 1050));
 				setPreferredSize(new Dimension(762, 488));
 				pa_listado.setBounds(10, 0, 500, 443);
-				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
+				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista,
+						Elemento_A_Listar.C_CONSULTAR_SUS_SOLICITUDES);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
 				pa_listado.setViewportView(panel_QueTieneLaLista);
 				add(pa_listado);
@@ -71,7 +72,7 @@ public class GenericoDePanelesConLista extends JPanel {
 			}
 			System.out.println("LOG: PANEL ACTUAL -- Sus Solicitudes");
 			break;
- 
+
 		case Elemento_A_Listar.C_CONSULTAR_OFERTAS:
 			if (listaDeElementosListables.size() == 0) {
 				sinResultados = new JLabel("No se encontraron ofertas con esa busqueda");
@@ -85,7 +86,8 @@ public class GenericoDePanelesConLista extends JPanel {
 
 				pa_listado.setBounds(10, 0, 500, 443);
 
-				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
+				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista,
+						Elemento_A_Listar.C_CONSULTAR_OFERTAS);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
 				pa_listado.setViewportView(panel_QueTieneLaLista);
 
@@ -112,7 +114,8 @@ public class GenericoDePanelesConLista extends JPanel {
 
 				pa_listado.setBounds(10, 0, 762, 443);
 
-				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
+				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista,
+						Elemento_A_Listar.C_VER_OFERTAS_CON_SOLICITUD);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
 				pa_listado.setViewportView(panel_QueTieneLaLista);
 				add(pa_listado);
@@ -134,7 +137,8 @@ public class GenericoDePanelesConLista extends JPanel {
 
 				pa_listado.setBounds(10, 0, 500, 443);
 
-				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
+				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista,
+						Elemento_A_Listar.C_CONSULTAR_SUS_OFERTAS);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
 				pa_listado.setViewportView(panel_QueTieneLaLista);
 				add(pa_listado);
@@ -156,7 +160,8 @@ public class GenericoDePanelesConLista extends JPanel {
 
 				pa_listado.setBounds(10, 0, 500, 443);
 
-				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
+				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista,
+						Elemento_A_Listar.C_ANALIZAR_SOLICITUDES);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
 				pa_listado.setViewportView(panel_QueTieneLaLista);
 				add(pa_listado);
@@ -177,7 +182,8 @@ public class GenericoDePanelesConLista extends JPanel {
 
 				pa_listado.setBounds(10, 0, 500, 443);
 
-				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
+				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista,
+						Elemento_A_Listar.C_BUSCAR_CANDIDATOS);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
 
 				pa_listado.setViewportView(panel_QueTieneLaLista);
@@ -188,7 +194,7 @@ public class GenericoDePanelesConLista extends JPanel {
 			}
 			pa_filtrosCandidato = new PanelFiltrosCandidato();
 			pa_filtrosCandidato.setBounds(512, 0, 247, 482);
-			
+
 			add(pa_filtrosCandidato);
 			System.out.println("LOG: PANEL ACTUAL -- Buscar Candidatos");
 			break;
@@ -196,11 +202,8 @@ public class GenericoDePanelesConLista extends JPanel {
 		}
 
 	}
+
 	public void cambiarTituloOferta(String titulo) {
 		pa_filtrosOferta.setTxField_titulo(titulo);
 	}
 }
-	
-			
-		
-
