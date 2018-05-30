@@ -25,36 +25,28 @@ import ethazi.excepciones.NoQuedanFilas;
  * @author belatz
  */
 public abstract class UtilidadesBD {
-	public static void insertarOferta(Oferta ofer) throws SQLException
-	{
-		Conexion.actualizar("INSERT INTO " + Tablas.C_OFERTA_TABLA 
-				+ " ("+Tablas.C_OFERTA_TITULO+", "+Tablas.C_OFERTA_DESCRIPCION
-				+", "+Tablas.C_OFERTA_LUGAR+", "+Tablas.C_OFERTA_SUELDO_MAX
-				+", "+Tablas.C_OFERTA_SUELDO_MIN+", "+Tablas.C_OFERTA_EXPERIENCIA
-				+", "+Tablas.C_OFERTA_ASPECTOS_VALORAR+", "+Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES
-				+", "+Tablas.C_OFERTA_VISIBLE+", "+Tablas.C_OFERTA_EMPRESA+", "+Tablas.C_OFERTA_TIPO_CONTRATO+")"
-				+ " VALUES ('"
-				+ofer.getTitulo()+"', '"
-				+ofer.getDescripcion()+"', '"
-				+ofer.getLugar()+"', "
-				+ofer.getSalarioMax()+", "
-				+ofer.getSalarioMin()+", "
-				+ofer.getExperiencia()+", '"
-				+ofer.getAspectosAValorar()+"', '"
-				+ofer.getAspectosImprescindibles()+"', "
-				+(ofer.isVisibilidad()?1:0)+", '"
-				+ofer.getEmpresa().getNumID()+"', "
-				+(byte)Contrato.value(ofer.getContrato())+");");
-		Oferta aux=UtilidadesBD.toOfertaTitulo(ofer.getTitulo());
+	public static void insertarOferta(Oferta ofer) throws SQLException {
+		Conexion.actualizar("INSERT INTO " + Tablas.C_OFERTA_TABLA + " (" + Tablas.C_OFERTA_TITULO + ", "
+				+ Tablas.C_OFERTA_DESCRIPCION + ", " + Tablas.C_OFERTA_LUGAR + ", " + Tablas.C_OFERTA_SUELDO_MAX + ", "
+				+ Tablas.C_OFERTA_SUELDO_MIN + ", " + Tablas.C_OFERTA_EXPERIENCIA + ", "
+				+ Tablas.C_OFERTA_ASPECTOS_VALORAR + ", " + Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES + ", "
+				+ Tablas.C_OFERTA_VISIBLE + ", " + Tablas.C_OFERTA_EMPRESA + ", " + Tablas.C_OFERTA_TIPO_CONTRATO + ")"
+				+ " VALUES ('" + ofer.getTitulo() + "', '" + ofer.getDescripcion() + "', '" + ofer.getLugar() + "', "
+				+ ofer.getSalarioMax() + ", " + ofer.getSalarioMin() + ", " + ofer.getExperiencia() + ", '"
+				+ ofer.getAspectosAValorar() + "', '" + ofer.getAspectosImprescindibles() + "', "
+				+ (ofer.isVisibilidad() ? 1 : 0) + ", '" + ofer.getEmpresa().getNumID() + "', "
+				+ (byte) Contrato.value(ofer.getContrato()) + ");");
+		Oferta aux = UtilidadesBD.toOfertaTitulo(ofer.getTitulo());
 		for (String conocimiento : ofer.getConocimientos()) {
 			Conexion.actualizar("INSERT INTO " + Tablas.C_OFER_CONO_TABLA + " VALUES (" + aux.getCodigo() + ", '"
 					+ conocimiento + "');");
 		}
 	}
-	public static void insertarConocimiento(String conocimiento) throws SQLException
-	{
-		Conexion.actualizar("INSERT INTO "+Tablas.C_CONOCIMIENTOS_TABLA+" VALUES ('"+conocimiento+"');");
+
+	public static void insertarConocimiento(String conocimiento) throws SQLException {
+		Conexion.actualizar("INSERT INTO " + Tablas.C_CONOCIMIENTOS_TABLA + " VALUES ('" + conocimiento + "');");
 	}
+
 	public static void insertarUsuario(Usuario user) throws SQLException {
 
 		Conexion.actualizar("INSERT INTO " + Tablas.C_USUARIO_TABLA + " VALUES ('" + user.getNumID() + "','"
@@ -105,7 +97,7 @@ public abstract class UtilidadesBD {
 					p_rs.getDate(Tablas.C_CANDIDATO_FECHA_NAC).toString(), p_rs.getBoolean(Tablas.C_CANDIDATO_CARNET),
 					p_rs.getBoolean(Tablas.C_CANDIDATO_COCHE), p_rs.getBoolean(Tablas.C_CANDIDATO_VIAJES),
 					p_rs.getString(Tablas.C_CANDIDATO_ESTUDIOS),
-					descargarConocimientosCandidato(Tablas.C_CANDIDATO_NUMID),
+					descargarConocimientosCandidato(p_rs.getNString(Tablas.C_CANDIDATO_NUMID)),
 					p_rs.getString(Tablas.C_CANDIDATO_OTROS_CONOCIMIENTOS),
 					p_rs.getString(Tablas.C_CANDIDATO_VIDA_LABORAL),
 					p_rs.getInt(Tablas.C_CANDIDATO_EXPERIENCIA_LABORAL));
@@ -121,8 +113,7 @@ public abstract class UtilidadesBD {
 	}
 
 	/**
-	 * Devuelve un objeto Usuario a partir de un nick o un numid pasado por
-	 * parametro
+	 * Returns an object Usuario by a nick or a numid get by parameter
 	 * 
 	 * @param p_identificador
 	 *            String con el nick o el numid del usuario
@@ -271,7 +262,7 @@ public abstract class UtilidadesBD {
 				p_rs.getString(Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES), p_rs.getBoolean(Tablas.C_OFERTA_VISIBLE),
 				Contrato.value(p_rs.getByte(Tablas.C_OFERTA_TIPO_CONTRATO)),
 				(Empresa) (toUsuario(p_rs.getString(Tablas.C_OFERTA_EMPRESA), false)),
-				descargarConocimientosOferta(Tablas.C_OFERTA_CODIGO));
+				descargarConocimientosOferta(p_rs.getString(Tablas.C_OFERTA_CODIGO)));
 
 		return _ofer;
 	}
@@ -283,16 +274,17 @@ public abstract class UtilidadesBD {
 		try {
 			ofer = toOferta(_rs);
 		} catch (ResultSetVacio e) {
-			System.out.println("No se han encontrado ofertas con ese codigo"); 
-			ofer=null;
+			System.out.println("No se han encontrado ofertas con ese codigo");
+			ofer = null;
 		} catch (NoQuedanFilas e) {
 		}
 		return ofer;
 	}
+
 	public static Oferta toOfertaTitulo(String titulo) throws SQLException {
 		Oferta ofer = null;
-		ResultSet _rs = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE " + Tablas.C_OFERTA_TITULO
-				+ "= '" + titulo + "';");
+		ResultSet _rs = Conexion.consultar(
+				"SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE " + Tablas.C_OFERTA_TITULO + "= '" + titulo + "';");
 		try {
 			ofer = toOferta(_rs);
 		} catch (ResultSetVacio e) {
@@ -356,8 +348,9 @@ public abstract class UtilidadesBD {
 					_rsOferta.getInt(Tablas.C_OFERTA_EXPERIENCIA),
 					_rsOferta.getString(Tablas.C_OFERTA_ASPECTOS_VALORAR),
 					_rsOferta.getString(Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES),
-					_rsOferta.getBoolean(Tablas.C_OFERTA_VISIBLE), Contrato.value(_rsOferta.getByte(Tablas.C_OFERTA_TIPO_CONTRATO)),
-					(Empresa) toUsuario(_rsEmpresa), _conocimientos);
+					_rsOferta.getBoolean(Tablas.C_OFERTA_VISIBLE),
+					Contrato.value(_rsOferta.getByte(Tablas.C_OFERTA_TIPO_CONTRATO)), (Empresa) toUsuario(_rsEmpresa),
+					_conocimientos);
 		} catch (ResultSetVacio e) {
 			System.out.println("No se han encontrado usuarios con esos datos");
 		} catch (NoQuedanFilas e) {
@@ -466,9 +459,6 @@ public abstract class UtilidadesBD {
 		return _conocimientos;
 	}
 
-
-
-   
 	/**
 	 * This method downloads in an ArrayList the list of a Candidato's conocimientos
 	 * 
@@ -697,12 +687,14 @@ public abstract class UtilidadesBD {
 		Conexion.actualizar("UPDATE " + Tablas.C_OFERTA_TABLA + " SET " + Tablas.C_OFERTA_DESCRIPCION + "='"
 				+ ofer.getDescripcion() + "', " + Tablas.C_OFERTA_LUGAR + "='" + ofer.getLugar() + "', "
 				+ Tablas.C_OFERTA_EXPERIENCIA + "=" + ofer.getExperiencia() + ", " + Tablas.C_OFERTA_TIPO_CONTRATO + "="
-        + Contrato.value(ofer.getContrato()) + ", " + Tablas.C_OFERTA_SUELDO_MAX + "=" + ofer.getSalarioMax() + ", "
-        + Tablas.C_OFERTA_SUELDO_MIN + "=" + ofer.getSalarioMin() + ", "
+				+ Contrato.value(ofer.getContrato()) + ", " + Tablas.C_OFERTA_SUELDO_MAX + "=" + ofer.getSalarioMax()
+				+ ", " + Tablas.C_OFERTA_SUELDO_MIN + "=" + ofer.getSalarioMin() + ", "
 				+ Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES + "='" + ofer.getAspectosImprescindibles() + "', "
 				+ Tablas.C_OFERTA_ASPECTOS_VALORAR + "='" + ofer.getAspectosAValorar() + "' WHERE "
 				+ Tablas.C_OFERTA_CODIGO + "=" + ofer.getCodigo() + ";");
-		Conexion.actualizar("DELETE " + Tablas.C_OFER_CONO_TABLA + " WHERE " + Tablas.C_OFER_CONO_OFERTA + "="
+		if(Conexion.consultar("SELECT * FROM "+Tablas.C_OFER_CONO_TABLA+" WHERE "+Tablas.C_OFER_CONO_OFERTA+"="
+				+ofer.getCodigo()+";").next())
+			Conexion.actualizar("DELETE " + Tablas.C_OFER_CONO_TABLA + " WHERE " + Tablas.C_OFER_CONO_OFERTA + "="
 				+ ofer.getCodigo() + ";");
 		for (String conocimiento : ofer.getConocimientos()) {
 			Conexion.actualizar("INSERT INTO " + Tablas.C_OFER_CONO_TABLA + " VALUES (" + ofer.getCodigo() + ", '"
@@ -728,7 +720,7 @@ public abstract class UtilidadesBD {
 					+ Tablas.C_CANDIDATO_FECHA_NAC + "='" + can.getFechaNac() + "' WHERE " + Tablas.C_CANDIDATO_NUMID
 					+ "='" + can.getNumID() + "';");
 			if (!((Candidato) usr).getConocimientos().isEmpty()) {
-				Conexion.actualizar("DELETE " + Tablas.C_CANDI_CONO_TABLA + " WHERE " + Tablas.C_CANDI_CONO_CANDIDATO
+				Conexion.actualizar("DELETE FROM " + Tablas.C_CANDI_CONO_TABLA + " WHERE " + Tablas.C_CANDI_CONO_CANDIDATO
 						+ "='" + can.getNumID() + "';");
 				for (String conocimiento : can.getConocimientos()) {
 					Conexion.actualizar("INSERT INTO " + Tablas.C_CANDI_CONO_TABLA + " VALUES ('" + can.getNumID()
@@ -768,6 +760,5 @@ public abstract class UtilidadesBD {
 
 		return _conocimientos;
 	}
-	
 
 }

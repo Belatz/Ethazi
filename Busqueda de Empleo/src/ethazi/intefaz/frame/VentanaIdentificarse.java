@@ -14,15 +14,16 @@ import ethazi.intefaz.paneles.SeleccionRegistro;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
-
+/**
+ * 
+ * @author JonOr
+ *
+ */
+public class VentanaIdentificarse extends JFrame {
 	/**
 	 * This window is used by the user to identify as Candidato or Empresa.
 	 */
-public class VentanaIdentificarse extends JFrame {
 
-	/** 
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private static JPanel contentPane;
@@ -42,20 +43,20 @@ public class VentanaIdentificarse extends JFrame {
 				try {
 					frame = new VentanaIdentificarse();
 					frame.setLocationRelativeTo(null);
-					cambiarTam(new Dimension(300,300));
+					cambiarTam(new Dimension(300, 300));
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 
-	
 		});
 	}
-	
+
 	public static void cerrar() {
 		frame.setVisible(false);
 	}
+
 	public static void abrir() {
 		frame.setVisible(true);
 	}
@@ -73,21 +74,21 @@ public class VentanaIdentificarse extends JFrame {
 		contentPane.setLayout(new CardLayout(0, 0));
 		setResizable(false);
 
-		pa_identificarse= new PanelIdentificarse();
+		pa_identificarse = new PanelIdentificarse();
 		pa_identificarse.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		contentPane.add(pa_identificarse);
-		
-		select= new SeleccionRegistro();
+
+		select = new SeleccionRegistro();
 		contentPane.add(select);
 
-		pa_registrarEmpresa= new PanelRegistroEmpresa();
+		pa_registrarEmpresa = new PanelRegistroEmpresa();
 		contentPane.add(pa_registrarEmpresa);
-		
-		pa_registrarCandidato=new PanelRegistroCandidato();
+
+		pa_registrarCandidato = new PanelRegistroCandidato();
 		contentPane.add(pa_registrarCandidato);
 	}
 
-	public static void cambiarTam(Dimension d){
+	public static void cambiarTam(Dimension d) {
 		frame.setMaximumSize(d);
 		frame.setMinimumSize(d);
 		frame.setSize(d);
@@ -108,5 +109,5 @@ public class VentanaIdentificarse extends JFrame {
 	public static JPanel getPa_registrarCandidato() {
 		return pa_registrarCandidato;
 	}
-	
+
 }

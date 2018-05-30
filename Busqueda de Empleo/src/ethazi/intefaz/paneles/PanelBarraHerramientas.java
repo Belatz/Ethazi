@@ -171,6 +171,9 @@ public class PanelBarraHerramientas extends JPanel {
 		});
 	}
 
+	/**
+	 * Makes visible and invisible the menu button.
+	 */
 	public static void botonMenuInv() {
 		if (menu) {
 			menu = false;

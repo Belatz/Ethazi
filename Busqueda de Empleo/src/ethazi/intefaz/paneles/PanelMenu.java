@@ -18,15 +18,13 @@ import java.awt.event.ActionEvent;
 public class PanelMenu extends JPanel {
 
 	/**
-	 * 
+	 * @autor JonOr
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * This panel is used in the BarraHerramientas, which is opened with the mouse,
 	 * passing over the menu.
-	 * 
-	 * @autor JonOr
 	 */
 	public PanelMenu() {
 		setLayout(null);
@@ -98,9 +96,9 @@ public class PanelMenu extends JPanel {
 			btn_conocimientosDeman.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						//TODO no tenemos conocimientos mas buscados
-						//VentanaPrincipal.setListaDeElementos(
-						//		Utilidades.cambiar(UtilidadesBD.buscarConocimientosRequeridos()));
+						// TODO no tenemos conocimientos mas buscados
+						// VentanaPrincipal.setListaDeElementos(
+						// Utilidades.cambiar(UtilidadesBD.buscarConocimientosRequeridos()));
 						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONOCIMIENTOS_BUSCADOS);
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();

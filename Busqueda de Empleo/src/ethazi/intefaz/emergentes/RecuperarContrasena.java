@@ -22,19 +22,15 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
+ * This is recover password window, it send a code to a email account that we
+ * write
+ * 
  * @author Eduardo
  */
 
 public class RecuperarContrasena extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	/**
-	 * This is recover password window, it send a code to a email account that we
-	 * write.
-	 */
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txField_correo;
@@ -64,70 +60,67 @@ public class RecuperarContrasena extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
-			JLabel lbl_correoErroneo = new JLabel("Correo incorrecto");
-			lbl_correoErroneo.setVisible(false);
-			lbl_correoErroneo.setBounds(290, 60, 109, 14);
-			contentPanel.add(lbl_correoErroneo);
-			lbl_correoErroneo.setForeground(new Color(139, 0, 0));
-			lbl_correoErroneo.setFont(new Font("Tahoma", Font.BOLD, 11));
-		
-		
-			JLabel lbl_email = new JLabel("Email:");
-			lbl_email.setBounds(46, 60, 33, 14);
-			contentPanel.add(lbl_email);
-			lbl_email.setFont(new Font("Tahoma", Font.BOLD, 11));
-		
-		
-			txField_correo = new JTextField();
-			txField_correo.setBounds(89, 56, 195, 22);
-			contentPanel.add(txField_correo);
-			txField_correo.setText("");
-			txField_correo.setFont(new Font("Tahoma", Font.BOLD, 11));
-			txField_correo.setColumns(10);
-			txField_correo.setBackground(new Color(255, 239, 213));
-		
-		
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton btn_enviar = new JButton("Enviar");
-				btn_enviar.setActionCommand("OK");
-				buttonPane.add(btn_enviar);
-				getRootPane().setDefaultButton(btn_enviar);
-				btn_enviar.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						//TODO comprobar q el email sea válido y si lo es....
+
+		JLabel lbl_correoErroneo = new JLabel("Correo incorrecto");
+		lbl_correoErroneo.setVisible(false);
+		lbl_correoErroneo.setBounds(290, 60, 109, 14);
+		contentPanel.add(lbl_correoErroneo);
+		lbl_correoErroneo.setForeground(new Color(139, 0, 0));
+		lbl_correoErroneo.setFont(new Font("Tahoma", Font.BOLD, 11));
+
+		JLabel lbl_email = new JLabel("Email:");
+		lbl_email.setBounds(46, 60, 33, 14);
+		contentPanel.add(lbl_email);
+		lbl_email.setFont(new Font("Tahoma", Font.BOLD, 11));
+
+		txField_correo = new JTextField();
+		txField_correo.setBounds(89, 56, 195, 22);
+		contentPanel.add(txField_correo);
+		txField_correo.setText("");
+		txField_correo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		txField_correo.setColumns(10);
+		txField_correo.setBackground(new Color(255, 239, 213));
+
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+		{
+			JButton btn_enviar = new JButton("Enviar");
+			btn_enviar.setActionCommand("OK");
+			buttonPane.add(btn_enviar);
+			getRootPane().setDefaultButton(btn_enviar);
+			btn_enviar.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO comprobar q el email sea válido y si lo es....
 					VentanaPrincipal.desHabVentana(true, p_padre);
 					dialog.removeAll();
 					dialog.setVisible(false);
-					//TODO si el email no es válido....
+					// TODO si el email no es válido....
 					lbl_correoErroneo.setVisible(true);
-					}
-				});
-			}
-			
-				JButton btn_cancelar = new JButton("Cancelar");
-				btn_cancelar.setActionCommand("Cancel");
-				buttonPane.add(btn_cancelar);
-				btn_cancelar.addMouseListener(new MouseAdapter() {
-
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						VentanaPrincipal.desHabVentana(true, p_padre);
-						dialog.removeAll();
-						dialog.setVisible(false);
-					}
-				});
-					addWindowListener(new WindowAdapter() {
-					@Override
-					public void windowClosing(WindowEvent e) {
-						VentanaPrincipal.desHabVentana(true, p_padre);
-					}
-				});
-			
+				}
+			});
 		}
+
+		JButton btn_cancelar = new JButton("Cancelar");
+		btn_cancelar.setActionCommand("Cancel");
+		buttonPane.add(btn_cancelar);
+		btn_cancelar.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaPrincipal.desHabVentana(true, p_padre);
+				dialog.removeAll();
+				dialog.setVisible(false);
+			}
+		});
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				VentanaPrincipal.desHabVentana(true, p_padre);
+			}
+		});
+
+	}
 
 }

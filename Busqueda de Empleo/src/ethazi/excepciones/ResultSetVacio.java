@@ -1,10 +1,14 @@
 package ethazi.excepciones;
 
+/**
+ * Is an exception that it's thrown when an empty result set try to access to
+ * database
+ * 
+ * @author Belatz
+ *
+ */
 public class ResultSetVacio extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public ResultSetVacio() {

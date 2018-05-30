@@ -16,14 +16,13 @@ import ethazi.datos.Tablas;
 
 
 /**
+ * Class gets and set user personal data
  * 
  * @author Jonor
  *
  */
 public abstract class Usuario {
-	/**
-	 * Class gets and set user personal data
-	 */
+
 	public static ArrayList<String> misConocimientosTotales;
 
 	private String miNumID;
@@ -72,9 +71,11 @@ public abstract class Usuario {
 	public String getPassword() {
 		return miPassword;
 	}
+
 	public void setPassword(String pass) {
-		this.miPassword=pass;
+		this.miPassword = pass;
 	}
+
 	/**
 	 * 
 	 * @return
@@ -178,7 +179,7 @@ public abstract class Usuario {
 			_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_CANDIDATO_TABLA + ", " + Tablas.C_USUARIO_TABLA
 					+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND "
 					+ Tablas.C_USUARIO_NICK + "='" + p_identificador + "';");
-		}else {
+		} else {
 			_rs = Conexion.consultar("SELECT * FROM " + Tablas.C_CANDIDATO_TABLA + ", " + Tablas.C_USUARIO_TABLA
 					+ " WHERE " + Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID + " AND "
 					+ Tablas.C_USUARIO_NUMID + "='" + p_identificador + "';");

@@ -18,6 +18,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Color;
 
+/**
+ * 
+ * @author Belatz
+ *
+ */
 public class PanelConocimientosBuscados extends JPanel {
 	/**
 	 * Shows the most wanted knowledge of the platform
@@ -30,7 +35,7 @@ public class PanelConocimientosBuscados extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelConocimientosBuscados() {
-		// Tamaño del JPanel
+		// TamaÃ±o del JPanel
 		setName("Conocimientos mas buscados");
 		setLayout(null);
 		setPreferredSize(new Dimension(762, 488));
@@ -57,9 +62,11 @@ public class PanelConocimientosBuscados extends JPanel {
 	}
 
 	/**
+	 * This method searches the most found knowledges
+	 * 
 	 * @author Belatz
 	 * @param cantidad
-	 * @return
+	 * @return _resultado
 	 */
 	public static Vector<String> conocimientosMasBuscados(int p_cantidad) {
 		Vector<String> _resultado = new Vector<>();
