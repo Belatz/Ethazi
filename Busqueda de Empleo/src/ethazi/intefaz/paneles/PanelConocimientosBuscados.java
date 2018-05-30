@@ -57,8 +57,9 @@ public class PanelConocimientosBuscados extends JPanel {
 	}
 
 	/**
-	 * @author Belatz
+	 * This method searches the most found knowledges
 	 * 
+	 * @author Belatz
 	 * @param cantidad
 	 * @return _resultado
 	 */
