@@ -30,7 +30,7 @@ public class PruebasBD {
 			Conexion.actualizar("INSERT INTO " + Tablas.C_CANDI_CONO_TABLA + " VALUES ('00000000A', 'Dummy');");
 			// Oferta
 			Conexion.actualizar(
-					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Dummy','dummy dummy','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'00000000B',12)");
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Dummy','dummy dummy','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'00000000B', 1)");
 			// Oferta - Conocimiento
 			ResultSet primeraOferta = Conexion
 					.consultar("SELECT MIN(" + Tablas.C_OFERTA_CODIGO + ") FROM " + Tablas.C_OFERTA_TABLA + ";");
