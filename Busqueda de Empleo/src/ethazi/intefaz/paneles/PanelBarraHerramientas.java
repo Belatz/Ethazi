@@ -81,7 +81,7 @@ public class PanelBarraHerramientas extends JPanel {
 					VentanaPrincipal.getPanelListadoGenerico().cambiarTituloOferta(txField_buscar.getText());
 					;
 				} 
-
+//5
 			}
 		});
 		btn_buscar.setBounds(0, 0, 50, 50);

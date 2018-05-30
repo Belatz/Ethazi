@@ -86,6 +86,7 @@ public class Elemento_A_Listar extends JPanel {
 			miLblAbrir_Elemento.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					//gg
 					// TODO Auto-generated method stub
 					super.mouseClicked(e);
 				}
