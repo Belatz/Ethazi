@@ -120,7 +120,7 @@ public class PanelMenu extends JPanel {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
 						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(
-								UtilidadesBD.filtrarOfertas("Dum", null, null, null, null, 0, null, null)));
+								UtilidadesBD.filtrarOfertas(null, null, null, null, null, 0, Aplicacion.getUsuario().getNombre(), null)));
 						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_OFERTAS_CON_SOLICITUDES,
 								VentanaPrincipal.getListaDeElementos());
 						VentanaPrincipal.visMenu2();
