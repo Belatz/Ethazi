@@ -5,13 +5,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.Vector;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import ethazi.aplicacion.Usuario;
+
 import ethazi.datos.UtilidadesBD;
 
 import javax.swing.JScrollPane;

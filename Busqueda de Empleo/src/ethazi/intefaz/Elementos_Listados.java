@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import com.sun.prism.paint.Color;
+
 
 /**
  * This class receives elements from the class Elementos_A_Listar
@@ -33,7 +33,7 @@ public class Elementos_Listados extends JPanel {
 	private int nPagina = 1;
 
 	/** The tipo. */
-	private byte tipo;
+	
 
 	/** The lista de elementos listables. */
 	ArrayList<Elemento_Listable> listaDeElementosListables;
@@ -47,7 +47,7 @@ public class Elementos_Listados extends JPanel {
 	 *            the tipo
 	 */
 	public Elementos_Listados(ArrayList<Elemento_Listable> listaDeElementosListables, byte tipo) {
-		this.tipo = tipo;
+	
 		this.listaDeElementosListables = listaDeElementosListables;
 		maxPags = ((listaDeElementosListables.size() / limite)
 				+ (int) Math.pow(listaDeElementosListables.size() % limite, 0));

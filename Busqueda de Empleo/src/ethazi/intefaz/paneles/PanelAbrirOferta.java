@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 
 import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Usuario;
-import ethazi.aplicacion.Candidato;
+
 import ethazi.aplicacion.Contrato;
 import ethazi.aplicacion.Empresa;
 import ethazi.datos.UtilidadesBD;

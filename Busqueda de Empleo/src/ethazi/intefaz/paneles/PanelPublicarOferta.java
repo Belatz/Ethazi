@@ -1,6 +1,6 @@
 package ethazi.intefaz.paneles;
 
-import java.awt.Checkbox;
+
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
@@ -11,7 +11,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
