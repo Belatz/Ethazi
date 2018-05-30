@@ -26,6 +26,7 @@ import ethazi.intefaz.emergentes.EmergenteCambios;
 import ethazi.intefaz.emergentes.EmergenteSoloAceptar;
 import ethazi.intefaz.emergentes.TieneEmergente;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
