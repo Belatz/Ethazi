@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import com.sun.prism.paint.Color;
+
 /**
  * This class receives elements from the class Elementos_A_Listar
  * 

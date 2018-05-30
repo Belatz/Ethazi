@@ -201,7 +201,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		combo_contrato.addItem(Contrato.TEMPORTAL_TIEMPO_PARCIAL);
 		combo_contrato.setBounds(506, 83, 159, 20);
 		add(combo_contrato);
-
+//d
 		inicializar(miOferta);
 
 		btnEliminar = new JButton("Eliminar");
