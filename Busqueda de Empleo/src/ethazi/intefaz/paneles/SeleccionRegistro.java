@@ -12,6 +12,12 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+/**
+ * The panel shows two options to register: Empresa or Candidato
+ * @author mañana
+ *
+ */
 public class SeleccionRegistro extends JPanel{
 	/**
 	 * 
