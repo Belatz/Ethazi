@@ -118,9 +118,9 @@ public class PanelListaDoble extends JPanel {
 		for (int i = 0; i < listaIzquierda.size(); i++) {
 			int j = 0;
 			while (listaDerecha != null && j < listaDerecha.size()
-					&& listaDerecha.get(j).toLowerCase().compareTo(listaIzquierda.get(i).toLowerCase()) == 0)
+					&& listaDerecha.get(j).toLowerCase().compareTo(listaIzquierda.get(i).toLowerCase()) != 0)
 				j++;
-			if (listaDerecha == null || j < listaDerecha.size())
+			if (listaDerecha == null || j == listaDerecha.size())
 				modelo_totales.addElement(listaIzquierda.get(i));
 		}
 		if (listaDerecha != null)
