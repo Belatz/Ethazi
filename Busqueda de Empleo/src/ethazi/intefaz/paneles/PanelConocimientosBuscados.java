@@ -58,8 +58,9 @@ public class PanelConocimientosBuscados extends JPanel {
 
 	/**
 	 * @author Belatz
+	 * 
 	 * @param cantidad
-	 * @return
+	 * @return _resultado
 	 */
 	public static Vector<String> conocimientosMasBuscados(int p_cantidad) {
 		Vector<String> _resultado = new Vector<>();

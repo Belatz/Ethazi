@@ -76,6 +76,10 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		crearPanel();
 	}
 
+	/**
+	 * To change the offer, first removes all information, and then creates a new panel.
+	 * @param ofer
+	 */
 	public void cambiarOferta(Oferta ofer) {
 		miOferta = ofer;
 
@@ -83,6 +87,9 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		crearPanel();
 	}
 
+	/**
+	 * Creates the panel of the offer
+	 */
 	private void crearPanel() {
 		JLabel lbl_Empresa = new JLabel("Empresa:");
 		lbl_Empresa.setBounds(10, 52, 46, 14);
@@ -187,7 +194,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		lbl_contrato.setBounds(411, 86, 93, 14);
 		add(lbl_contrato);
 
-		combo_contrato = new JComboBox<Contrato>(); 
+		combo_contrato = new JComboBox<Contrato>();
 		combo_contrato.addItem(Contrato.INDEFINIDO_TIEMPO_COMPLETO);
 		combo_contrato.addItem(Contrato.INDEFINIDO_TIEMPO_PARCIAL);
 		combo_contrato.addItem(Contrato.TEMPORAL_TIEMPO_COMPLETO);
@@ -262,6 +269,10 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		add(textFieldTitulo);
 	}
 
+	/**
+	 * Initializes the offer's information to be introduced.
+	 * @param ofer
+	 */
 	private void inicializar(Oferta ofer) {
 		lbl_Oferta.setText(ofer.getInfo());
 		txField_Empresa.setText(ofer.getEmpresa().getNombre());
@@ -275,6 +286,10 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		txArea_aspectosImpres.setText(ofer.getAspectosImprescindibles());
 	}
 
+	/**
+	 * Makes the fields editable to insert information to the offer.
+	 * @param hab
+	 */
 	private void desHabCampos(boolean hab) {
 		lbl_Oferta.setText(textFieldTitulo.getText());
 		txArea_descripcion.setEditable(hab);
@@ -288,6 +303,10 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		pa_conocimientos.setEnabled(hab);
 	}
 
+	/**
+	 * It gives functionality to the buttons so the offer can be saved, cancelled,
+	 * edited or deleted.
+	 */
 	@Override
 	public void funcionalidad(boolean aceptado) {
 		if (aceptado) {
@@ -321,6 +340,11 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		}
 	}
 
+	/**
+	 * Validates the inserted information of the offer.
+	 * 
+	 * @return _esValido
+	 */
 	private boolean validarDatos() {
 		boolean _esValido = true;
 

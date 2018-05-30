@@ -769,5 +769,6 @@ public abstract class UtilidadesBD {
 
 		return _conocimientos;
 	}
+	
 
 }

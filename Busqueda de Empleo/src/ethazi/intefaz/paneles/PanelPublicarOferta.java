@@ -51,7 +51,7 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 	private JComboBox<Contrato> combo_contrato;
 	private final JPanel padre=this;
 	/**
-	 * Create the panel.
+	 * Create the panel and shows the information of a new offer to be uploaded.
 	 */
 	//TODO label que informe que la oferta se realizó correcta o no
 	public PanelPublicarOferta() {
@@ -233,6 +233,9 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 			}
 		});
 	}
+	/**
+	 * Gives functionality to the button 'Publicar' so the offer is uploaded to the data base.
+	 */
 	@Override
 	public void funcionalidad(boolean aceptado) {
 		//Añade Oferta

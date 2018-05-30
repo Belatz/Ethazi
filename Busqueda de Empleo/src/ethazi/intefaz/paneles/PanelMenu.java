@@ -99,6 +99,8 @@ public class PanelMenu extends JPanel {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
 						//TODO no tenemos conocimientos mas buscados
+						//VentanaPrincipal.setListaDeElementos(
+						//		Utilidades.cambiar(UtilidadesBD.buscarConocimientosRequeridos()));
 						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONOCIMIENTOS_BUSCADOS);
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
