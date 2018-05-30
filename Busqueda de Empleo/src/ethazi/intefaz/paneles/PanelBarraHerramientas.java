@@ -8,23 +8,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import ethazi.aplicacion.Aplicacion;
-import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Utilidades;
-import ethazi.aplicacion.Oferta;
 import ethazi.datos.UtilidadesBD;
 import ethazi.excepciones.PanelNoDisponible;
-import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -58,16 +51,32 @@ public class PanelBarraHerramientas extends JPanel {
 	public PanelBarraHerramientas() {
 		setLayout(null);
 		JButton btn_buscar = new JButton("");
-		btn_buscar.setIcon(new ImageIcon(PanelBarraHerramientas.class.getResource("/ethazi/intefaz/iconos/search.ico.png")));
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-        try {
-					VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
-							.filtrarOfertas(txField_buscar.getText(), null, null, null, null, 0, null, null)));
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-      }
+
+				if (txField_buscar.getText().isEmpty()) {
+					try {
+						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
+								.buscarOfertas()));
+						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA,VentanaPrincipal.getListaDeElementos());
+					} catch (SQLException | PanelNoDisponible e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}							
+				} else {
+					try {
+						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
+								.filtrarOfertas(txField_buscar.getText(), null, null, null, null, 0, null, null)));
+						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_BUSCAR_OFERTA,
+								VentanaPrincipal.getListaDeElementos());
+					} catch (SQLException | PanelNoDisponible e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					VentanaPrincipal.getPanelListadoGenerico().cambiarTituloOferta(txField_buscar.getText());
+					;
+				} 
+
 			}
 		});
 		btn_buscar.setBounds(0, 0, 50, 50);
@@ -75,7 +84,6 @@ public class PanelBarraHerramientas extends JPanel {
 		setBounds(0, 0, 762, 50);
 
 		JButton btn_perfil = new JButton("");
-		btn_perfil.setIcon(new ImageIcon(PanelBarraHerramientas.class.getResource("/ethazi/intefaz/iconos/perfil.ico")));
 		btn_perfil.setToolTipText("Ver Perfil");
 		btn_perfil.setPreferredSize(new Dimension(33, 9));
 		btn_perfil.setMinimumSize(new Dimension(33, 9));
@@ -96,7 +104,6 @@ public class PanelBarraHerramientas extends JPanel {
 		add(btn_perfil);
 
 		JButton btn_apagar = new JButton("");
-		btn_apagar.setIcon(new ImageIcon(PanelBarraHerramientas.class.getResource("/ethazi/intefaz/iconos/apagar.png")));
 		btn_apagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Borrar el usuario
@@ -152,6 +159,11 @@ public class PanelBarraHerramientas extends JPanel {
 
 	public static String getTxField_buscar() {
 		return txField_buscar.getText();
+	}
+
+	public void cambiarTitulo(String titulo) {
+		txField_buscar.setText(titulo);
+		System.out.println(titulo);
 	}
 
 }

@@ -2,12 +2,10 @@ package ethazi.intefaz.paneles;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-
 import ethazi.intefaz.Elemento_A_Listar;
 import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.Elementos_Listados;
@@ -18,13 +16,13 @@ import ethazi.intefaz.Elementos_Listados;
  *
  */
 public class GenericoDePanelesConLista extends JPanel {
-	public Elementos_Listados panel_QueTieneLaLista = null;
-	public JPanel _panelBotonAtrasYAlante = null;
-	public JScrollPane pa_listado;
-	public JLabel sinResultados;
-	public JScrollPane pa_filtrosOferta;
-	public JScrollPane pa_filtrosCandidato;
-	private static final long serialVersionUID = 1L;
+	private Elementos_Listados panel_QueTieneLaLista = null;
+	private JPanel _panelBotonAtrasYAlante = null;
+	private JScrollPane pa_listado;
+	private JLabel sinResultados;
+	private PanelFiltrosOferta pa_filtrosOferta;
+	private JScrollPane pa_filtrosCandidato;
+	public static final long serialVersionUID = 1L;
 
 	public GenericoDePanelesConLista() {
 
@@ -33,6 +31,10 @@ public class GenericoDePanelesConLista extends JPanel {
 	public GenericoDePanelesConLista(ArrayList<Elemento_Listable> listaDeElementosListables, byte tipo) {
 
 		construir(listaDeElementosListables, tipo);
+	}
+
+	public JScrollPane getPa_filtrosOferta() {
+		return pa_filtrosOferta;
 	}
 
 	public void actualizar(ArrayList<Elemento_Listable> listaDeElementosListables, byte tipo) {
@@ -69,7 +71,7 @@ public class GenericoDePanelesConLista extends JPanel {
 			}
 			System.out.println("LOG: PANEL ACTUAL -- Sus Solicitudes");
 			break;
-
+ 
 		case Elemento_A_Listar.C_CONSULTAR_OFERTAS:
 			if (listaDeElementosListables.size() == 0) {
 				sinResultados = new JLabel("No se encontraron ofertas con esa busqueda");
@@ -86,6 +88,7 @@ public class GenericoDePanelesConLista extends JPanel {
 				_panelBotonAtrasYAlante = new PanelAtrasAlante(panel_QueTieneLaLista);
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
 				pa_listado.setViewportView(panel_QueTieneLaLista);
+
 				add(pa_listado);
 				add(_panelBotonAtrasYAlante);
 			}
@@ -178,11 +181,14 @@ public class GenericoDePanelesConLista extends JPanel {
 				_panelBotonAtrasYAlante.setBounds(10, 445, 500, 37);
 
 				pa_listado.setViewportView(panel_QueTieneLaLista);
+				pa_listado.getVerticalScrollBar().setVisible(false);
+
 				add(pa_listado);
 				add(_panelBotonAtrasYAlante);
 			}
 			pa_filtrosCandidato = new PanelFiltrosCandidato();
 			pa_filtrosCandidato.setBounds(512, 0, 247, 482);
+			
 			add(pa_filtrosCandidato);
 			System.out.println("LOG: PANEL ACTUAL -- Buscar Candidatos");
 			break;
@@ -190,5 +196,11 @@ public class GenericoDePanelesConLista extends JPanel {
 		}
 
 	}
-
+	public void cambiarTituloOferta(String titulo) {
+		pa_filtrosOferta.setTxField_titulo(titulo);
+	}
 }
+	
+			
+		
+

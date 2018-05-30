@@ -30,7 +30,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
 
 public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 	/**
@@ -140,7 +139,6 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 		txField_buscarCono.setColumns(10);
 		
 		JButton btn_buscar = new JButton("");
-		btn_buscar.setIcon(new ImageIcon(PanelPublicarOferta.class.getResource("/ethazi/intefaz/iconos/search_24px.png")));
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				pa_conocimientos.filtrarElemento(txField_buscarCono.getText());
@@ -162,8 +160,10 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente{
 		add(btn_restaurar);
 		
 		JButton btn_crear = new JButton("");
+
 		btn_crear.setToolTipText("Crear Conocimiento");
 		btn_crear.setIcon(new ImageIcon(PanelPublicarOferta.class.getResource("/ethazi/intefaz/iconos/add.png")));
+
 		btn_crear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {

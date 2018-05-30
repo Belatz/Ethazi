@@ -20,7 +20,7 @@ import java.awt.Dimension;
 	 */
 public class VentanaIdentificarse extends JFrame {
 
-	/**
+	/** 
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -41,12 +41,15 @@ public class VentanaIdentificarse extends JFrame {
 			public void run() {
 				try {
 					frame = new VentanaIdentificarse();
+					frame.setLocationRelativeTo(null);
 					cambiarTam(new Dimension(300,300));
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
+
+	
 		});
 	}
 	

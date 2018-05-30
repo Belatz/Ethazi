@@ -35,6 +35,7 @@ public class PanelMenu extends JPanel {
 		aux.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+
 					VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_SUS_SOLICITUDES);
 					VentanaPrincipal.visMenu2();
 					PanelBarraHerramientas.botonMenuInv();
@@ -54,6 +55,8 @@ public class PanelMenu extends JPanel {
 			btn_solicitudes.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
+						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarSolicitudAElemento(
+								UtilidadesBD.descargarSolicitudes((Candidato) Aplicacion.getUsuario())));
 						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_SUS_SOLICITUDES);
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
@@ -71,7 +74,14 @@ public class PanelMenu extends JPanel {
 			btn_ofertasAdecuadas.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_OFERTAS_ADECUADAS);
+						VentanaPrincipal.setListaDeElementos(
+								Utilidades.cambiarOfertaAElemento(UtilidadesBD.filtrarOfertas(null, null, null, null,
+										String.valueOf(
+												((Candidato) Aplicacion.getUsuario()).getExperienciaProfesional()),
+										-1, null, UtilidadesBD.descargarConocimientosCandidato(
+												((Candidato) Aplicacion.getUsuario()).getNumID()))));
+						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_OFERTAS_ADECUADAS,
+								VentanaPrincipal.getListaDeElementos());
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
 					} catch (PanelNoDisponible e) {
@@ -88,6 +98,7 @@ public class PanelMenu extends JPanel {
 			btn_conocimientosDeman.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
+						//TODO no tenemos conocimientos mas buscados
 						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONOCIMIENTOS_BUSCADOS);
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
@@ -106,9 +117,10 @@ public class PanelMenu extends JPanel {
 
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
-								.filtrarOfertas("Dum", null, null, null, null, 0, null, null)));
-						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_OFERTAS_CON_SOLICITUDES, VentanaPrincipal.getListaDeElementos());
+						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(
+								UtilidadesBD.filtrarOfertas("Dum", null, null, null, null, 0, null, null)));
+						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_OFERTAS_CON_SOLICITUDES,
+								VentanaPrincipal.getListaDeElementos());
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
 					} catch (PanelNoDisponible e) {
@@ -125,12 +137,12 @@ public class PanelMenu extends JPanel {
 			btn_candidatos.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-
-						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarCandidatoAElemento(UtilidadesBD.buscarCandidatos()));
-				VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONSULTAR_CANDIDATOS,VentanaPrincipal.getListaDeElementos());
+						VentanaPrincipal.setListaDeElementos(
+								Utilidades.cambiarCandidatoAElemento(UtilidadesBD.buscarCandidatos()));
+						VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_CONSULTAR_CANDIDATOS,
+								VentanaPrincipal.getListaDeElementos());
 						VentanaPrincipal.visMenu2();
 						PanelBarraHerramientas.botonMenuInv();
-				
 
 					} catch (PanelNoDisponible e) {
 						e.printStackTrace();

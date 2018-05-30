@@ -10,9 +10,11 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Usuario;
@@ -26,6 +28,8 @@ import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.intefaz.frame.VentanaPrincipal;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -44,6 +48,7 @@ public class PanelIdentificarse extends JPanel {
 	private static JPasswordField pssField_contrasena;
 	private static JTextField txField_usuario;
 	private JLabel lbl_contrasenaErronea;
+	JButton btn_entrar;
 
 	public PanelIdentificarse() {
 		setName("Identificarse");
@@ -81,7 +86,7 @@ public class PanelIdentificarse extends JPanel {
 		btn_registrarse.setBounds(85, 204, 126, 23);
 		this.add(btn_registrarse);
 
-		JButton btn_entrar = new JButton("Entrar");
+		btn_entrar = new JButton("Entrar");
 		btn_entrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -98,6 +103,7 @@ public class PanelIdentificarse extends JPanel {
 				}
 			}
 		});
+
 		btn_entrar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btn_entrar.setBounds(84, 170, 126, 23);
 		this.add(btn_entrar);
@@ -132,6 +138,38 @@ public class PanelIdentificarse extends JPanel {
 		lbl_recuperarContrasena.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lbl_recuperarContrasena.setBounds(84, 144, 189, 14);
 		this.add(lbl_recuperarContrasena);
+		pssField_contrasena.addKeyListener(new KeyListener() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btn_entrar.doClick();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					System.out.println("ds");
+				}
+			}
+
+			public void keyReleased(KeyEvent e) {
+			}
+ 
+			public void keyTyped(KeyEvent e) {
+			}
+		});
+		txField_usuario.addKeyListener(new KeyListener() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btn_entrar.doClick();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					System.out.println("ds");
+				}
+			}
+
+			public void keyReleased(KeyEvent e) {
+			}
+
+			public void keyTyped(KeyEvent e) {
+			}
+		});
 	}
 
 	private static boolean validarUsuario() throws SQLException {
