@@ -254,7 +254,7 @@ public abstract class UtilidadesBD {
 				throw new ResultSetVacio();
 			}
 		}
-		//
+		//??
 
 		Oferta _ofer;
 		_ofer = new Oferta(p_rs.getInt(Tablas.C_OFERTA_CODIGO), p_rs.getString(Tablas.C_OFERTA_TITULO),
