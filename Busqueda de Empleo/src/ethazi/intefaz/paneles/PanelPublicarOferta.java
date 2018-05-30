@@ -254,7 +254,7 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente {
 					valido = false;
 					txField_titulo.setText("");
 				}
-				if (Integer.valueOf(txField_sueldoMin.getText()) > Integer.valueOf(txField_sueldoMax.getText())) {
+				if ((txField_sueldoMin==null || txField_sueldoMin.getText().isEmpty())&&(txField_sueldoMax==null || txField_sueldoMax.getText().isEmpty()) || Integer.valueOf(txField_sueldoMin.getText()) > Integer.valueOf(txField_sueldoMax.getText())) {
 					valido = false;
 					txField_sueldoMin.setText("");
 					txField_sueldoMax.setText("");

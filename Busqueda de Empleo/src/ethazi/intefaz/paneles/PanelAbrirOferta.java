@@ -68,7 +68,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 	public PanelAbrirOferta() {
 		try {
 			miOferta = new Oferta(0, "Dummy", "Oferta de muestra", "", 1, 1, 0, "", "", false, Contrato.value(1),
-					(Empresa) UtilidadesBD.toUsuario("iberdrola", true), Usuario.getConocimientosTotales());
+					(Empresa) UtilidadesBD.toUsuario("Dummy2", true), Usuario.getConocimientosTotales());
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
