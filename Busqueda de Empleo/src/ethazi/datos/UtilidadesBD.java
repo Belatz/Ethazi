@@ -3,6 +3,9 @@ package ethazi.datos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.*;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
@@ -321,13 +324,12 @@ public abstract class UtilidadesBD {
 		return _oferta;
 	}
 
-	public static ArrayList<Oferta> buscarOfertas(String titulo) throws SQLException {
+	public static ArrayList<Oferta> buscarOfertas() throws SQLException {
 		boolean fin = false;
-		ArrayList<Oferta> ofertas = new ArrayList<>();
+		ArrayList<Oferta> ofertas = new ArrayList<Oferta>();
 
 		// Decargar ofertas
-		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + " WHERE "
-				+ Tablas.C_OFERTA_TITULO + " like '%" + titulo + "%';");
+		ResultSet _rsOferta = Conexion.consultar("SELECT * FROM " + Tablas.C_OFERTA_TABLA + ";");
 
 		while (!fin) {
 			try {
@@ -423,6 +425,9 @@ public abstract class UtilidadesBD {
 		return _conocimientos;
 	}
 
+
+
+   
 	/**
 	 * This method downloads in an ArrayList the list of a Candidato's conocimientos
 	 * 
@@ -532,20 +537,20 @@ public abstract class UtilidadesBD {
 
 		return _ofertas;
 	}
-	public static ArrayList<Candidato> buscarCandidatos() throws SQLException{
+
+	public static ArrayList<Candidato> buscarCandidatos() throws SQLException {
 		ArrayList<Candidato> _candidatos = new ArrayList<>();
-		String _sentencia = "SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", "
-				+ Tablas.C_CANDIDATO_TABLA + " WHERE " + Tablas.C_USUARIO_NUMID + "="
-				+ Tablas.C_CANDIDATO_NUMID;
+		String _sentencia = "SELECT * FROM " + Tablas.C_USUARIO_TABLA + ", " + Tablas.C_CANDIDATO_TABLA + " WHERE "
+				+ Tablas.C_USUARIO_NUMID + "=" + Tablas.C_CANDIDATO_NUMID;
 		_sentencia += ";";
 		ResultSet _rs = Conexion.consultar(_sentencia);
-		
+
 		while (_rs.next()) {
 			_candidatos.add((Candidato) toUsuario((_rs.getString(Tablas.C_CANDIDATO_NUMID)), false));
 		}
 
 		return _candidatos;
-		
+
 	}
 
 	public static ArrayList<Candidato> filtrarCandidatos(String p_nombreApellidos, String p_nick, String p_experiencia,
@@ -719,12 +724,6 @@ public abstract class UtilidadesBD {
 		}
 
 		return _conocimientos;
-	}
-
-	public static ArrayList<Oferta> buscarOfertasAdecuadas(Candidato usr) throws SQLException {
-		ArrayList<Oferta> _ofertas = filtrarOfertas(null, null, null, null,
-				String.valueOf(usr.getExperienciaProfesional()), -1, null, usr.getConocimientos());
-		return _ofertas;
 	}
 
 }

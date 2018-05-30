@@ -1,7 +1,7 @@
 package ethazi.datos;
 
 public abstract class Tablas {
-
+ 
 	// Tabla Usuario
 	public static String C_USUARIO_TABLA = "USUARIO";
 	public static String C_USUARIO_NUMID = "USUARIO.NUMID";

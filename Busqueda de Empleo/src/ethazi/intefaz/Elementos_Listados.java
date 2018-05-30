@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 /**
  * This class receives elements from the class Elementos_A_Listar
  * 
- * @author Nestor
+ * @author Nestor, JonOr
  *
  */
 public class Elementos_Listados extends JPanel {

@@ -456,8 +456,8 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 				}
 			});
 			actualizarDia();
-			// System.out.println(((Candidato)user).getFechaNac().substring(pos2));
-			diacomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(8, 9)));
+			System.out.println(((Candidato) user).getFechaNac().substring(0, 3));
+			diacomboBox.setSelectedItem(Integer.valueOf(((Candidato) user).getFechaNac().substring(4, 6)));
 
 			otrosConocimientostextArea.setText(((Candidato) user).getOtrosConocimientos());
 			vidaLaboraltextArea.setText(((Candidato) user).getVidaLaboral());

@@ -145,10 +145,12 @@ public class PanelFiltrosOferta extends JScrollPane {
 									txField_sueldoMax.getText(), txField_sueldoMin.getText(),
 									txFiedl_experiencia.getText(), ((Contrato) combo_contrato.getSelectedItem()).getTipo() ,
 									txField_empresa.getText(), pa_conocimientos.getConocimientosAnadidos()));
+					VentanaPrincipal.getPa_barraHerramientas().cambiarTitulo(txField_titulo.getText());
 					VentanaPrincipal.cambiarPanel(VentanaPrincipal.C_BUSCAR_OFERTA, _ofertas);
 				} catch (SQLException | PanelNoDisponible e) {
 					e.printStackTrace();
 				}
+			
 			}
 		});
 		btn_aplicar.setBounds(66, 11, 89, 23);
@@ -164,5 +166,11 @@ public class PanelFiltrosOferta extends JScrollPane {
 		txField_titulo.setColumns(10);
 
 		return pa_filtros;
+	}
+
+	
+
+	public void setTxField_titulo(String titulo) {
+		txField_titulo.setText(titulo);;
 	}
 }
