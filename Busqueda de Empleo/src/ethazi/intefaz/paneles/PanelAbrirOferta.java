@@ -30,6 +30,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 	/**
 	 * 
 	 */
+	//sdf
 	private static final long serialVersionUID = 1L;
 	private JTextField txField_Empresa;
 	private JTextField txField_sueldoMin;

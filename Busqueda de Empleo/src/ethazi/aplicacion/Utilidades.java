@@ -17,6 +17,7 @@ import ethazi.intefaz.paneles.PanelBarraHerramientas;
 	 * the program that performs various functions
 	 *
    */
+//g
 public abstract class Utilidades {
 	
 	/**

@@ -25,6 +25,7 @@ import ethazi.intefaz.Elemento_Listable;
  * @category Utilities, DataBase
  * @author belatz
  */
+//d
 public abstract class UtilidadesBD {
 	public static void insertarOferta(Oferta ofer) throws SQLException
 	{
