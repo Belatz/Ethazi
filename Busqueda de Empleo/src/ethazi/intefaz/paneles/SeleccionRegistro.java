@@ -15,7 +15,7 @@ import java.awt.event.MouseEvent;
 
 /**
  * The panel shows two options to register: Empresa or Candidato
- * @author mañana
+ * @author Nestor
  *
  */
 public class SeleccionRegistro extends JPanel{

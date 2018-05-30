@@ -3,12 +3,12 @@ package ethazi.aplicacion;
 import ethazi.intefaz.Elemento_Listable;
 
 /**
+ * This class @return ofer, cand, descrip
+ * 
  * @author Belatz
  */
 public class Solicitud implements Elemento_Listable {
-	/**
-	 * This class shows @ofer @cand @descrip
-	 */
+
 	private Oferta ofer;
 	private Candidato cand;
 	private String descrip;

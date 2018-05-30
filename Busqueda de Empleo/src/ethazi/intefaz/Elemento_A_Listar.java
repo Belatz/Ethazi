@@ -15,7 +15,8 @@ import javax.swing.JPanel;
 import com.sun.prism.paint.Color;
 
 /**
- * 
+ * List the elements in a panel
+ *
  * @author Nestor
  *
  */
@@ -41,6 +42,7 @@ public class Elemento_A_Listar extends JPanel {
 
 	/**
 	 * Generates an element so it can be listed in the class Elementos_listados
+	 * 
 	 * @param p_elemento
 	 * @param p_constante_opcion
 	 */
@@ -242,7 +244,7 @@ public class Elemento_A_Listar extends JPanel {
 		}
 			break;
 		case C_BUSCAR_CANDIDATOS: {
-			miLblAnalizar = new JLabel (p_elemento.getInfo());
+			miLblAnalizar = new JLabel(p_elemento.getInfo());
 			miLblAnalizar.setBounds(0, 0, 450, 50);
 			add(miLblAnalizar);
 			// Codificar

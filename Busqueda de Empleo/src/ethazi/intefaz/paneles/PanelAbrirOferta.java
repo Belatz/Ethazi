@@ -28,9 +28,12 @@ import javax.swing.UIManager;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
+/**
+ * @author Nestor, Belatz, Xavier, JonOr
+ */
 public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 	/**
-	 * 
+	 * Shows offers, with their data
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txField_Empresa;
