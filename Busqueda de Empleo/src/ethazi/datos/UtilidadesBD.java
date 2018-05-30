@@ -3,9 +3,9 @@ package ethazi.datos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.*;
 
-
-
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
@@ -16,6 +16,7 @@ import ethazi.aplicacion.Solicitud;
 import ethazi.aplicacion.Usuario;
 import ethazi.excepciones.ResultSetVacio;
 import ethazi.excepciones.NoQuedanFilas;
+import ethazi.intefaz.Elemento_Listable;
 
 /**
  * 

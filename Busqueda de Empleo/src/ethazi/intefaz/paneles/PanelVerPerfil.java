@@ -8,11 +8,18 @@ import ethazi.aplicacion.Empresa;
 import ethazi.aplicacion.Usuario;
 import ethazi.aplicacion.Utilidades;
 import ethazi.datos.UtilidadesBD;
+import ethazi.intefaz.emergentes.EmergenteCambios;
 import ethazi.intefaz.emergentes.EmergenteSoloAceptar;
 import ethazi.intefaz.emergentes.TieneEmergente;
+import ethazi.intefaz.frame.VentanaPrincipal;
+
 import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import org.omg.PortableInterceptor.USER_EXCEPTION;
+
 import java.awt.TextArea;
 import javax.swing.JCheckBox;
 import javax.swing.JSeparator;
