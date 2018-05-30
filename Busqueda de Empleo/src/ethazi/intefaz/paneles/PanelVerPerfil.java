@@ -38,9 +38,11 @@ import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 
+
 /**
  * @author Nestor, Belatz
  */
+
 public class PanelVerPerfil extends JPanel implements TieneEmergente {
 	/**
 	 * This panel is used to show the data of the correspondent user: Empresa or
@@ -430,11 +432,18 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 
 		if (nombretextField.getText() == null || nombretextField.getText().isEmpty())
 			_esValido = false;
-		else if (user instanceof Empresa && user.getNombre().compareToIgnoreCase(nombretextField.getText()) != 0
-				&& Utilidades.empresaExiste(nombretextField.getText()))
-			_esValido = false;
+
+		else {
+			if (user instanceof Empresa && user.getNombre().compareToIgnoreCase(nombretextField.getText()) != 0
+					&& Utilidades.empresaExiste(nombretextField.getText()))
+				_esValido = false;
+		}
 		if (dirtextField.getText() == null || dirtextField.getText().isEmpty())
+		{
 			_esValido = false;
+			dirtextField.setText("");
+		}
+
 		if (teltextField.getText() == null || teltextField.getText().isEmpty()
 				|| !Utilidades.telefonoValido(teltextField.getText()))
 			_esValido = false;
@@ -468,15 +477,17 @@ public class PanelVerPerfil extends JPanel implements TieneEmergente {
 			}
 			if (apellidostextField.getText() == null || apellidostextField.getText().isEmpty())
 				_esValido = false;
-			if (teltextField.getText() != null || teltextField.getText().isEmpty()
+
+			if (teltextField.getText() == null || teltextField.getText().isEmpty()
 					|| !Utilidades.telefonoValido(teltextField.getText())) {
 				_esValido = false;
 				teltextField.setText("");
 			}
-			if (dirtextField != null || dirtextField.getText().isEmpty()) {
+	if (dirtextField != null || dirtextField.getText().isEmpty()) {
 				_esValido = false;
 				dirtextField.setText("");
 			}
+
 			int i = 0;
 			while (i < experienciaProfesionaltextField.getText().length()
 					&& ((experienciaProfesionaltextField.getText().charAt(i) >= '0'

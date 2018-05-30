@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -289,14 +290,14 @@ public class PanelPublicarOferta extends JPanel implements TieneEmergente {
 			}
 		}
 		// Añade Conocimiento
-		else {
-			Usuario.misConocimientosTotales.add(txField_buscarCono.getText());
-			pa_conocimientos.actualizarListas(Usuario.misConocimientosTotales, null);
+		else
+		{
 			try {
 				UtilidadesBD.insertarConocimiento(txField_buscarCono.getText());
+				Usuario.misConocimientosTotales.add(txField_buscarCono.getText());
+				pa_conocimientos.actualizarListas(Usuario.misConocimientosTotales, null);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			}
 		}
 

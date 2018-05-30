@@ -133,6 +133,7 @@ public class PanelIdentificarse extends JPanel {
 				limpiarTextos();
 				RecuperarContrasena.crearVentana(VentanaIdentificarse.getPa_identificarse().getParent());
 			}
+			//5
 		});
 		lbl_recuperarContrasena.setForeground(Color.BLUE);
 		lbl_recuperarContrasena.setFont(new Font("Tahoma", Font.BOLD, 11));

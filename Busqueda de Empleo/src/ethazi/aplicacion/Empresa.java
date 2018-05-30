@@ -24,6 +24,7 @@ public class Empresa extends Usuario {
 	 * @param miContacto
 	 * @param miDescripcion
 	 */
+	
 	public Empresa(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
 			String miEmail, String miTelefono, String miContacto, String miDescripcion) {
 		super(miNumID, miNick, miPassword, miNombre, miDireccion, miEmail, miTelefono);

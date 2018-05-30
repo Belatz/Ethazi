@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import com.sun.prism.paint.Color;
+
 /**
  * This class receives elements from the class Elementos_A_Listar
  * 
@@ -53,7 +55,7 @@ public class Elementos_Listados extends JPanel {
 		setAlignmentX(0);
 		setAlignmentY(0);
 		setPreferredSize(new Dimension(600, 1050));
-		mostrar10();
+		mostrar10(tipo);
 
 		for (int i = 0, coordenada = 0; i < limite; i++, coordenada += 100) {
 			arrayElementos_A_Listar.get(i).setBounds(10, coordenada, 500, 91);
@@ -77,7 +79,7 @@ public class Elementos_Listados extends JPanel {
 	/**
 	 * Mostrar 10.
 	 */
-	public void mostrar10() {
+	public void mostrar10(byte tipo) {
 		int cont = 0;
 		int elemento = (nPagina * C_LIMITEMAX) - C_LIMITEMAX;
 		int sobra = listaDeElementosListables.size() % 10;
@@ -97,7 +99,7 @@ public class Elementos_Listados extends JPanel {
 	/**
 	 * Mostrar otras 10.
 	 */
-	public void mostrarOtras10() {
+	public void mostrarOtras10( byte tipo) {
 		limite = 10;
 		int cont = 0;
 		arrayElementos_A_Listar.clear();
@@ -110,7 +112,7 @@ public class Elementos_Listados extends JPanel {
 		}
 		Elemento_A_Listar aux;
 		while (cont < this.limite) {
-			aux = new Elemento_A_Listar(listaDeElementosListables.get(elemento + cont), (byte) 1);
+			aux = new Elemento_A_Listar(listaDeElementosListables.get(elemento + cont), tipo);
 			arrayElementos_A_Listar.add(aux);
 			cont++;
 		}

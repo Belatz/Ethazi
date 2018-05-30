@@ -98,7 +98,7 @@ public abstract class UtilidadesBD {
 					p_rs.getDate(Tablas.C_CANDIDATO_FECHA_NAC).toString(), p_rs.getBoolean(Tablas.C_CANDIDATO_CARNET),
 					p_rs.getBoolean(Tablas.C_CANDIDATO_COCHE), p_rs.getBoolean(Tablas.C_CANDIDATO_VIAJES),
 					p_rs.getString(Tablas.C_CANDIDATO_ESTUDIOS),
-					descargarConocimientosCandidato(Tablas.C_CANDIDATO_NUMID),
+					descargarConocimientosCandidato(p_rs.getNString(Tablas.C_CANDIDATO_NUMID)),
 					p_rs.getString(Tablas.C_CANDIDATO_OTROS_CONOCIMIENTOS),
 					p_rs.getString(Tablas.C_CANDIDATO_VIDA_LABORAL),
 					p_rs.getInt(Tablas.C_CANDIDATO_EXPERIENCIA_LABORAL));
@@ -263,7 +263,7 @@ public abstract class UtilidadesBD {
 				p_rs.getString(Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES), p_rs.getBoolean(Tablas.C_OFERTA_VISIBLE),
 				Contrato.value(p_rs.getByte(Tablas.C_OFERTA_TIPO_CONTRATO)),
 				(Empresa) (toUsuario(p_rs.getString(Tablas.C_OFERTA_EMPRESA), false)),
-				descargarConocimientosOferta(Tablas.C_OFERTA_CODIGO));
+				descargarConocimientosOferta(p_rs.getString(Tablas.C_OFERTA_CODIGO)));
 
 		return _ofer;
 	}
@@ -693,7 +693,9 @@ public abstract class UtilidadesBD {
 				+ Tablas.C_OFERTA_ASPECTOS_IMPRESCINDIBLES + "='" + ofer.getAspectosImprescindibles() + "', "
 				+ Tablas.C_OFERTA_ASPECTOS_VALORAR + "='" + ofer.getAspectosAValorar() + "' WHERE "
 				+ Tablas.C_OFERTA_CODIGO + "=" + ofer.getCodigo() + ";");
-		Conexion.actualizar("DELETE " + Tablas.C_OFER_CONO_TABLA + " WHERE " + Tablas.C_OFER_CONO_OFERTA + "="
+		if(Conexion.consultar("SELECT * FROM "+Tablas.C_OFER_CONO_TABLA+" WHERE "+Tablas.C_OFER_CONO_OFERTA+"="
+				+ofer.getCodigo()+";").next())
+			Conexion.actualizar("DELETE " + Tablas.C_OFER_CONO_TABLA + " WHERE " + Tablas.C_OFER_CONO_OFERTA + "="
 				+ ofer.getCodigo() + ";");
 		for (String conocimiento : ofer.getConocimientos()) {
 			Conexion.actualizar("INSERT INTO " + Tablas.C_OFER_CONO_TABLA + " VALUES (" + ofer.getCodigo() + ", '"
@@ -719,7 +721,7 @@ public abstract class UtilidadesBD {
 					+ Tablas.C_CANDIDATO_FECHA_NAC + "='" + can.getFechaNac() + "' WHERE " + Tablas.C_CANDIDATO_NUMID
 					+ "='" + can.getNumID() + "';");
 			if (!((Candidato) usr).getConocimientos().isEmpty()) {
-				Conexion.actualizar("DELETE " + Tablas.C_CANDI_CONO_TABLA + " WHERE " + Tablas.C_CANDI_CONO_CANDIDATO
+				Conexion.actualizar("DELETE FROM " + Tablas.C_CANDI_CONO_TABLA + " WHERE " + Tablas.C_CANDI_CONO_CANDIDATO
 						+ "='" + can.getNumID() + "';");
 				for (String conocimiento : can.getConocimientos()) {
 					Conexion.actualizar("INSERT INTO " + Tablas.C_CANDI_CONO_TABLA + " VALUES ('" + can.getNumID()

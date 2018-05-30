@@ -26,7 +26,7 @@ public class PanelAtrasAlante extends JPanel {
 	 * Generates btn_siguiente and btn_anterior buttons
 	 * @param panel_QueTieneLaLista
 	 */
-	public PanelAtrasAlante(Elementos_Listados panel_QueTieneLaLista) {
+	public PanelAtrasAlante(Elementos_Listados panel_QueTieneLaLista, byte tipo) {
 		setLayout(null);
 		JButton btn_siguiente = new JButton("Siguiente");
 		JButton btn_anterior = new JButton("Anterior");
@@ -53,7 +53,7 @@ public class PanelAtrasAlante extends JPanel {
 					btn_siguiente.setVisible(false);
 				}
 				panel_QueTieneLaLista.sumarPagina();
-				panel_QueTieneLaLista.mostrarOtras10();
+				panel_QueTieneLaLista.mostrarOtras10(tipo);
 
 			}
 		});
@@ -72,7 +72,7 @@ public class PanelAtrasAlante extends JPanel {
 				}
 
 				panel_QueTieneLaLista.restarPagina();
-				panel_QueTieneLaLista.mostrarOtras10();
+				panel_QueTieneLaLista.mostrarOtras10(tipo);
 
 				// VentanaPrincipal.addcont();
 			}

@@ -137,9 +137,44 @@ public class PruebasBD
 			Conexion.actualizar(
 					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion20','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',1,'66666666Z',3)");
 			Conexion.actualizar(
-					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion21','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'88888888X',0)");
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion21','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
+			Conexion.actualizar(
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion22','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
+
+			Conexion.actualizar(
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion23','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
+
+			Conexion.actualizar(
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion24','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
+
+			Conexion.actualizar(
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion25','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
+
+			Conexion.actualizar(
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion26','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
+
+			Conexion.actualizar(
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion27','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
+
+			Conexion.actualizar(
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion28','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
+
+			Conexion.actualizar(
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion29','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
+			Conexion.actualizar(
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion30','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
+
+			Conexion.actualizar(
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion31','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
+
+			Conexion.actualizar(
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion32','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
+
+			Conexion.actualizar(
+					"INSERT INTO oferta (TITULO, DESCRIPCION, LUGAR, SUELDO_MAX, SUELDO_MIN, EXPERIENCIA, ASPECTOS_VALORAR, ASPECTOS_IMPRES, VISIBLE, EMPRESA_NUMID, TIPO_CONTRATO) VALUES ('Programacion33','Se solicita un trabajador con un minimo de 3 años de experiencia','Bilbao',1500,800,3,'Conocimientos en C++, C y XQuery','Conocimientos en Java y C#',0,'00000000B',0)");
 
 			// Datos solicitudes
+			
 			Conexion.actualizar("INSERT INTO solicitudes VALUES (" + codigo
 					+ ",'11111111D','Buenos dias: Estaria encantado de colaborar con vosotros')");
 			Conexion.actualizar("INSERT INTO solicitudes VALUES (" + (codigo + 1)
@@ -158,7 +193,9 @@ public class PruebasBD
 					+ ",'55555555P','Buenos tardes: Mi situacion economica no es muy buena y necesito trabajar')");
 			Conexion.actualizar("INSERT INTO solicitudes VALUES (" + (codigo + 8)
 					+ ",'55555555P','Buenos tardes: Mi situacion economica no es muy buena y necesito trabajar')");
-
+			Conexion.actualizar("INSERT INTO solicitudes VALUES (" + (codigo + 9)
+					+ ",'00000000A','Buenos tardes: Mi situacion economica no es muy buena y necesito trabajar')");
+			
 			// Datos candidato_conocimientos
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('11111111D','Mecanico')");
 			Conexion.actualizar("INSERT INTO candidato_conocimientos VALUES ('11111111D','Electricista')");
@@ -202,8 +239,8 @@ public class PruebasBD
 			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 18) + ",'Contabilidad avanzada')");
 			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 19) + ",'Programacion en Java')");
 			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 20) + ",'Contabilidad')");
-			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 21) + ",'Marketing')");
-			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES (" + (codigo + 21) + ",'Dependiente')");
+			Conexion.actualizar("INSERT INTO oferta_conocimientos VALUES ('00000000B','Marketing')");
+	
 		}
 	}
 }
