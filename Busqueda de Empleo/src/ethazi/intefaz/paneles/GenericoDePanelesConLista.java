@@ -11,6 +11,8 @@ import ethazi.intefaz.Elemento_Listable;
 import ethazi.intefaz.Elementos_Listados;
 
 /**
+ * This panel is used in many panels to show the lists of 'Ofertas con
+ * Solicitudes', 'Tus Ofertas', 'Analizar solicitudes' and 'Buscar Candidatos'.
  * 
  * @author JonOr
  *
