@@ -15,8 +15,10 @@ import javax.swing.JTextArea;
 
 import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Usuario;
+
 import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
+
 import ethazi.aplicacion.Contrato;
 import ethazi.aplicacion.Empresa;
 import ethazi.datos.UtilidadesBD;
@@ -61,7 +63,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 	/**
 	 * Creates the panel
 	 * 
-	 * ç
+	 * Ã§
 	 * 
 	 * 
 	 */
@@ -264,7 +266,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 					btn_guardar.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							EmergenteCambios.createWindow("¿Desea guardar los cambios?", (TieneEmergente) padre);
+							EmergenteCambios.createWindow("Â¿Desea guardar los cambios?", (TieneEmergente) padre);
 						}
 					});
 				}

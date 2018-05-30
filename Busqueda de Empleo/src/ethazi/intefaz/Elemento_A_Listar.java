@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.sun.prism.paint.Color;
+
 
 /**
  * List the elements in a panel

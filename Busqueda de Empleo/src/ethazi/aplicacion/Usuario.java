@@ -13,7 +13,7 @@ import ethazi.datos.Conexion;
  */
 
 import ethazi.datos.Tablas;
-import ethazi.datos.UtilidadesBD;
+
 
 /**
  * Class gets and set user personal data
