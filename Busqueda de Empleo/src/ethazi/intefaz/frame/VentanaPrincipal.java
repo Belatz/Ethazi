@@ -307,8 +307,10 @@ public class VentanaPrincipal extends JFrame {
 //d
 		switch (p_nuevoPanel) {
 		case C_ABRIR_OFERTA:
+		{
 			pa_abrirOferta.cambiarOferta((Oferta) p_obj);
 			nuevoPanel = pa_abrirOferta;
+		}
 			break;
 		case C_ANALIZAR_CANDIDATO:
 			pa_verPerfil.cambiarPerfil((Usuario) p_obj, false);

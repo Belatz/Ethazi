@@ -15,12 +15,14 @@ import javax.swing.JTextArea;
 
 import ethazi.aplicacion.Oferta;
 import ethazi.aplicacion.Usuario;
+import ethazi.aplicacion.Aplicacion;
 import ethazi.aplicacion.Candidato;
 import ethazi.aplicacion.Contrato;
 import ethazi.aplicacion.Empresa;
 import ethazi.datos.UtilidadesBD;
 import ethazi.intefaz.emergentes.EmergenteCambios;
 import ethazi.intefaz.emergentes.TieneEmergente;
+import ethazi.intefaz.frame.VentanaPrincipal;
 
 import javax.swing.UIManager;
 import javax.swing.JButton;
@@ -43,7 +45,6 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 	private PanelListaDoble pa_conocimientos;
 	private JComboBox<Contrato> combo_contrato;
 	private JLabel lbl_Oferta;
-	private JTextField textFieldTitulo;
 	private final JPanel padre = this;
 	private JButton btn_cancelar;
 	private JButton btn_guardar;
@@ -77,7 +78,9 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 	}
 
 	/**
-	 * To change the offer, first removes all information, and then creates a new panel.
+	 * To change the offer, first removes all information, and then creates a new
+	 * panel.
+	 * 
 	 * @param ofer
 	 */
 	public void cambiarOferta(Oferta ofer) {
@@ -92,53 +95,53 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 	 */
 	private void crearPanel() {
 		JLabel lbl_Empresa = new JLabel("Empresa:");
-		lbl_Empresa.setBounds(10, 52, 46, 14);
+		lbl_Empresa.setBounds(10, 52, 72, 14);
 		add(lbl_Empresa);
 
 		txField_Empresa = new JTextField();
-		txField_Empresa.setBounds(93, 49, 204, 20);
+		txField_Empresa.setBounds(116, 49, 204, 20);
 		add(txField_Empresa);
 		txField_Empresa.setColumns(10);
 
 		lbl_Oferta = new JLabel(" ");
 		lbl_Oferta.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lbl_Oferta.setBounds(309, 11, 172, 20);
+		lbl_Oferta.setBounds(10, 11, 742, 20);
 		add(lbl_Oferta);
 
 		JLabel lbl_sueldoMin = new JLabel("Sueldo Minimo:");
-		lbl_sueldoMin.setBounds(10, 83, 85, 14);
+		lbl_sueldoMin.setBounds(10, 83, 96, 14);
 		add(lbl_sueldoMin);
 
 		txField_sueldoMin = new JTextField();
 		txField_sueldoMin.setColumns(10);
-		txField_sueldoMin.setBounds(93, 80, 93, 20);
+		txField_sueldoMin.setBounds(116, 80, 93, 20);
 		add(txField_sueldoMin);
 
 		JLabel lbl_sueldoMax = new JLabel("Sueldo Maximo:");
-		lbl_sueldoMax.setBounds(10, 115, 85, 14);
+		lbl_sueldoMax.setBounds(10, 115, 96, 14);
 		add(lbl_sueldoMax);
 
 		txField_sueldoMax = new JTextField();
 		txField_sueldoMax.setColumns(10);
-		txField_sueldoMax.setBounds(93, 112, 93, 20);
+		txField_sueldoMax.setBounds(116, 112, 93, 20);
 		add(txField_sueldoMax);
 
 		JLabel lbl_experiencia = new JLabel("A\u00F1os de experiencia minimos:");
-		lbl_experiencia.setBounds(10, 143, 152, 14);
+		lbl_experiencia.setBounds(10, 143, 185, 14);
 		add(lbl_experiencia);
 
 		txField_experiencia = new JTextField();
 		txField_experiencia.setColumns(10);
-		txField_experiencia.setBounds(162, 140, 93, 20);
+		txField_experiencia.setBounds(205, 140, 93, 20);
 		add(txField_experiencia);
 
 		JLabel lbl_aspectosValorar = new JLabel("Aspectos a valorar:");
-		lbl_aspectosValorar.setBounds(10, 178, 107, 14);
+		lbl_aspectosValorar.setBounds(10, 178, 137, 14);
 		add(lbl_aspectosValorar);
 
 		txArea_aspectosValorar = new JTextArea();
 		txArea_aspectosValorar.setBorder(UIManager.getBorder("TextField.border"));
-		txArea_aspectosValorar.setBounds(137, 173, 253, 41);
+		txArea_aspectosValorar.setBounds(157, 172, 253, 41);
 		add(txArea_aspectosValorar);
 
 		JLabel lbl_aspectosImpres = new JLabel("Aspectos imprescindibles:");
@@ -147,7 +150,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 
 		txArea_aspectosImpres = new JTextArea();
 		txArea_aspectosImpres.setBorder(UIManager.getBorder("TextField.border"));
-		txArea_aspectosImpres.setBounds(137, 233, 253, 41);
+		txArea_aspectosImpres.setBounds(157, 232, 253, 41);
 		add(txArea_aspectosImpres);
 
 		JLabel lbl_descripcion = new JLabel("Descripcion:");
@@ -187,11 +190,11 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		add(txField_lugar);
 
 		JLabel lbl_lugar = new JLabel("Lugar de trabajo:");
-		lbl_lugar.setBounds(411, 52, 93, 14);
+		lbl_lugar.setBounds(392, 52, 104, 14);
 		add(lbl_lugar);
 
 		JLabel lbl_contrato = new JLabel("Tipo de contrato:");
-		lbl_contrato.setBounds(411, 86, 93, 14);
+		lbl_contrato.setBounds(392, 83, 104, 14);
 		add(lbl_contrato);
 
 		combo_contrato = new JComboBox<Contrato>();
@@ -201,80 +204,78 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		combo_contrato.addItem(Contrato.TEMPORTAL_TIEMPO_PARCIAL);
 		combo_contrato.setBounds(506, 83, 159, 20);
 		add(combo_contrato);
-//d
+		// d
 		inicializar(miOferta);
+		desHabCampos(false);
+		if (miOferta.getEmpresa().getNumID().compareToIgnoreCase(Aplicacion.getUsuario().getNumID()) == 0) {
+			btnEliminar = new JButton("Eliminar");
+			btnEliminar.setToolTipText("Eliminar");
+			btnEliminar.setBounds(492, 384, 125, 41);
+			add(btnEliminar);
 
-		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setToolTipText("Eliminar");
-		btnEliminar.setBounds(492, 384, 125, 41);
-		add(btnEliminar);
+			btnRetirar = new JButton("\uD83D\uDC40");
+			btnRetirar.setToolTipText("Retirar Oferta");
+			btnRetirar.setBounds(627, 384, 125, 41);
+			add(btnRetirar);
 
-		btnRetirar = new JButton("\uD83D\uDC40");
-		btnRetirar.setToolTipText("Retirar Oferta");
-		btnRetirar.setBounds(627, 384, 125, 41);
-		add(btnRetirar);
+			button_Editar = new JButton("Editar");
+			button_Editar.setToolTipText("Editar");
+			button_Editar.setBounds(627, 436, 125, 41);
+			add(button_Editar);
 
-		button_Editar = new JButton("Editar");
-		button_Editar.setToolTipText("Editar");
-		button_Editar.setBounds(627, 436, 125, 41);
-		add(button_Editar);
+			button_Editar.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					desHabCampos(true);
+					button_Editar.setVisible(false);
+					btnEliminar.setVisible(false);
+					btnRetirar.setVisible(false);
+					btn_crear.setVisible(false);
 
-		button_Editar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				desHabCampos(true);
-				button_Editar.setVisible(false);
-				btnEliminar.setVisible(false);
-				btnRetirar.setVisible(false);
-				btn_crear.setVisible(false);
+					btn_guardar = new JButton("Guardar");
+					btn_guardar.setToolTipText("Guardar");
+					btn_guardar.setBounds(627, 436, 125, 41);
+					add(btn_guardar);
 
-				btn_guardar = new JButton("Guardar");
-				btn_guardar.setToolTipText("Guardar");
-				btn_guardar.setBounds(627, 436, 125, 41);
-				add(btn_guardar);
+					btn_cancelar = new JButton("Cancelar");
+					btn_cancelar.setToolTipText("Cancelar");
+					btn_cancelar.setBounds(492, 436, 125, 41);
+					add(btn_cancelar);
 
-				btn_cancelar = new JButton("Cancelar");
-				btn_cancelar.setToolTipText("Cancelar");
-				btn_cancelar.setBounds(492, 436, 125, 41);
-				add(btn_cancelar);
+					btn_cancelar.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							btn_guardar.removeAll();
+							btn_cancelar.removeAll();
+							btn_cancelar.setVisible(false);
+							btn_guardar.setVisible(false);
+							btnEliminar.setVisible(true);
+							button_Editar.setVisible(true);
+							btnRetirar.setVisible(true);
+							btn_crear.setVisible(true);
+							inicializar(miOferta);
+							desHabCampos(false);
+						}
+					});
 
-				btn_cancelar.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						btn_guardar.removeAll();
-						btn_cancelar.removeAll();
-						btn_cancelar.setVisible(false);
-						btn_guardar.setVisible(false);
-						btnEliminar.setVisible(true);
-						button_Editar.setVisible(true);
-						btnRetirar.setVisible(true);
-						btn_crear.setVisible(true);
-						inicializar(miOferta);
-						desHabCampos(false);
-					}
-				});
-
-				btn_guardar.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						EmergenteCambios.createWindow("¿Desea guardar los cambios?", (TieneEmergente) padre);
-					}
-				});
-			}
-		});
-
-		textFieldTitulo = new JTextField();
-		textFieldTitulo.setColumns(10);
-		textFieldTitulo.setBounds(34, 11, 470, 20);
-		add(textFieldTitulo);
+					btn_guardar.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							EmergenteCambios.createWindow("¿Desea guardar los cambios?", (TieneEmergente) padre);
+						}
+					});
+				}
+			});
+		}
 	}
 
 	/**
 	 * Initializes the offer's information to be introduced.
+	 * 
 	 * @param ofer
 	 */
 	private void inicializar(Oferta ofer) {
-		lbl_Oferta.setText(ofer.getInfo());
+		lbl_Oferta.setText(ofer.getTitulo());
 		txField_Empresa.setText(ofer.getEmpresa().getNombre());
 		txArea_descripcion.setText(ofer.getDescripcion());
 		txField_lugar.setText(ofer.getLugar());
@@ -288,10 +289,11 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 
 	/**
 	 * Makes the fields editable to insert information to the offer.
+	 * 
 	 * @param hab
 	 */
 	private void desHabCampos(boolean hab) {
-		lbl_Oferta.setText(textFieldTitulo.getText());
+		lbl_Oferta.setEnabled(hab);
 		txArea_descripcion.setEditable(hab);
 		txField_lugar.setEditable(hab);
 		txField_experiencia.setEditable(hab);
@@ -301,6 +303,9 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 		txArea_aspectosImpres.setEditable(hab);
 		txArea_aspectosValorar.setEditable(hab);
 		pa_conocimientos.setEnabled(hab);
+		txField_Empresa.setEnabled(false);
+		pa_conocimientos.getBtn_anadir().setEnabled(hab);
+		pa_conocimientos.getBtn_eliminar().setEnabled(hab);
 	}
 
 	/**
@@ -323,7 +328,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 				// Actualizar miOferta
 				miOferta.setDescripcion(txArea_descripcion.getText());
 				miOferta.setLugar(txField_lugar.getText());
-				miOferta.setExperiencia(Integer.parseInt(txField_experiencia.getText()));
+				miOferta.setExperiencia(Float.parseFloat(txField_experiencia.getText()));
 				miOferta.setContrato(((Contrato) combo_contrato.getSelectedItem()));
 				miOferta.setSalarioMax(Integer.parseInt(txField_sueldoMax.getText()));
 				miOferta.setSalarioMin(Integer.parseInt(txField_sueldoMin.getText()));
