@@ -141,14 +141,19 @@ public class Elemento_A_Listar extends JPanel {
 			miLblAbrir_Elemento.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
+					try {
+						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_OFERTAS_CON_SOLICITUDES, p_elemento);
+					} catch (PanelNoDisponible | SQLException e1) {
+						
+						e1.printStackTrace();
+					}
 					super.mouseClicked(e);
 				}
 			});
 		}
 			break;
 		case C_CONSULTAR_SUS_OFERTAS: {
-			miLblAbrir_Elemento = new JLabel(((Oferta) p_elemento).getInfo());
+			miLblAbrir_Elemento = new JLabel(((Oferta) p_elemento).getTitulo());
 			miLblAbrir_Elemento.setBounds(0, 0, 290, 50);
 			add(miLblAbrir_Elemento);
 			miBtnEliminar = new JButton();
@@ -217,7 +222,12 @@ public class Elemento_A_Listar extends JPanel {
 			miLblAnalizar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
+					try {
+						VentanaPrincipal.cambiarPanel((short) VentanaPrincipal.C_ANALIZAR_SOLICITUDES, p_elemento);
+					} catch (PanelNoDisponible | SQLException e1) {
+						
+						e1.printStackTrace();
+					}
 					super.mouseClicked(e);
 				}
 			});
@@ -239,7 +249,7 @@ public class Elemento_A_Listar extends JPanel {
 			miLblAnalizar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
+			
 					super.mouseClicked(e);
 				}
 			});
