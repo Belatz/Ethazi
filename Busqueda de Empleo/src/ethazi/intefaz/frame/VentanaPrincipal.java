@@ -30,6 +30,9 @@ import ethazi.intefaz.paneles.PanelPublicarOferta;
 import ethazi.intefaz.paneles.PanelRealizarSolicitud;
 import ethazi.intefaz.paneles.PanelVerPerfil;
 
+/**
+ * @author Nestor, Belatz, Xavier, JonOr, Urtzi, Edu
+ */
 public class VentanaPrincipal extends JFrame {
 	/**
 	 * Is the main window from where we load the JPanels

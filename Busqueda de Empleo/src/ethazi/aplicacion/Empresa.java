@@ -1,14 +1,13 @@
 package ethazi.aplicacion;
 
 /**
+ * When you register as company in the program empresa inherit methods and
+ * options from user
+ * 
  * @author Nestor, Belatz
  */
 
 public class Empresa extends Usuario {
-	/**
-	 * When you register as company in the program empresa inherit methods and
-	 * options from user
-	 */
 
 	private String miContacto;
 	private String miDescripcion;
@@ -34,7 +33,7 @@ public class Empresa extends Usuario {
 
 	/**
 	 * 
-	 * @return
+	 * @return miContacto
 	 */
 	public String getContacto() {
 		return miContacto;
@@ -50,7 +49,7 @@ public class Empresa extends Usuario {
 
 	/**
 	 * 
-	 * @return
+	 * @return miDescripcion
 	 */
 	public String getDescripcion() {
 		return miDescripcion;

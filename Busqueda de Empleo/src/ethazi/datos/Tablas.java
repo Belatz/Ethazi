@@ -1,7 +1,13 @@
 package ethazi.datos;
 
+/**
+ * In this class we have the names of the tables and their columns
+ * 
+ * @author Belatz
+ *
+ */
 public abstract class Tablas {
- 
+
 	// Tabla Usuario
 	public static String C_USUARIO_TABLA = "USUARIO";
 	public static String C_USUARIO_NUMID = "USUARIO.NUMID";

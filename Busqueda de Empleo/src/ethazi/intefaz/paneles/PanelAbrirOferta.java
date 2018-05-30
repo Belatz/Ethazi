@@ -26,9 +26,12 @@ import javax.swing.UIManager;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
+/**
+ * @author Nestor, Belatz, Xavier, JonOr
+ */
 public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 	/**
-	 * 
+	 * Shows offers, with their data
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txField_Empresa;
@@ -73,7 +76,9 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 	}
 
 	/**
-	 * To change the offer, first removes all information, and then creates a new panel.
+	 * To change the offer, first removes all information, and then creates a new
+	 * panel.
+	 * 
 	 * @param ofer
 	 */
 	public void cambiarOferta(Oferta ofer) {
@@ -267,6 +272,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 
 	/**
 	 * Initializes the offer's information to be introduced.
+	 * 
 	 * @param ofer
 	 */
 	private void inicializar(Oferta ofer) {
@@ -284,6 +290,7 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 
 	/**
 	 * Makes the fields editable to insert information to the offer.
+	 * 
 	 * @param hab
 	 */
 	private void desHabCampos(boolean hab) {

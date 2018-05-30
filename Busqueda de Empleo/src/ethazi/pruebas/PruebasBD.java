@@ -5,7 +5,9 @@ import java.sql.SQLException;
 
 import ethazi.datos.Conexion;
 import ethazi.datos.Tablas;
-
+/**
+ * @author Xavier
+ */
 public class PruebasBD 
 {
 	public static void insertar() throws SQLException {

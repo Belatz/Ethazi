@@ -18,6 +18,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Color;
 
+/**
+ * 
+ * @author Belatz
+ *
+ */
 public class PanelConocimientosBuscados extends JPanel {
 	/**
 	 * Shows the most wanted knowledge of the platform
@@ -57,8 +62,6 @@ public class PanelConocimientosBuscados extends JPanel {
 	}
 
 	/**
-	 * @author Belatz
-	 * 
 	 * @param cantidad
 	 * @return _resultado
 	 */

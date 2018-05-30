@@ -1,10 +1,13 @@
 package ethazi.excepciones;
 
+/**
+ * it's thrown when the last row it's visualized
+ * 
+ * @author Belatz
+ *
+ */
 public class NoQuedanFilas extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public NoQuedanFilas() {

@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 import ethazi.intefaz.Elemento_Listable;
 
+/**
+ * This is the class user candidato with all his parameters, methods and
+ * constructors
+ * 
+ * @author mañana
+ *
+ */
 public class Candidato extends Usuario implements Elemento_Listable {
 
 	private String apellidos;
@@ -17,6 +24,26 @@ public class Candidato extends Usuario implements Elemento_Listable {
 	private String vidaLaboral;
 	private float experienciaProfesional;
 
+	/**
+	 * 
+	 * @param miNick
+	 * @param miPassword
+	 * @param miNombre
+	 * @param miNumID
+	 * @param miDireccion
+	 * @param miEmail
+	 * @param miTelefono
+	 * @param apellidos
+	 * @param fechaNac
+	 * @param carnet
+	 * @param cochePropio
+	 * @param disViajar
+	 * @param estudios
+	 * @param conocimientos
+	 * @param otrosConocimientos
+	 * @param vidaLaboral
+	 * @param experienciaProfesional
+	 */
 	public Candidato(String miNick, String miPassword, String miNombre, String miNumID, String miDireccion,
 			String miEmail, String miTelefono, String apellidos, String fechaNac, boolean carnet, boolean cochePropio,
 			boolean disViajar, String estudios, ArrayList<String> conocimientos, String otrosConocimientos,

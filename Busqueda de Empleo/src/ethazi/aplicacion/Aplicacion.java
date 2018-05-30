@@ -8,13 +8,12 @@ import ethazi.intefaz.frame.VentanaIdentificarse;
 import ethazi.pruebas.PruebasBD;
 
 /**
+ * This is the main class that start all the project
+ * 
  * @author Belatz Arce, Xabier Cabezuelo, Nestor Echebarria, Eduardo Garcia,
  *         Urtzi Lamikiz, Jon Ortigueira
  */
 public class Aplicacion {
-	/**
-	 * This is the main class that start all the project
-	 */
 
 	private static Usuario miUsuario;
 	private static Conexion miConexion;
