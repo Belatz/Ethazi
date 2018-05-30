@@ -15,11 +15,11 @@ public class Oferta implements Elemento_Listable {
 	private String miLugar;
 	private int miSalarioMax;
 	private int miSalarioMin;
-	private int miExperiencia;
+	private float miExperiencia;
 	private String misAspectosAValorar;
 	private String misAspectosImprescindibles;
 	private boolean miVisibilidad;
-	private byte miContrato;
+	private Contrato miContrato;
 	private Empresa miEmpresa;
 	private ArrayList<String> misConocimientos;
 
@@ -40,8 +40,8 @@ public class Oferta implements Elemento_Listable {
 	 * @param conocimientos
 	 */	
 	public Oferta(int miCodigo, String miTitulo, String miDescripcion, String miLugar, int miSalarioMax, int miSalarioMin,
-		  int miExperiencia, String misAspectosAValorar, String misAspectosImprescindibles, boolean miVisibilidad,
-			byte miContrato, Empresa miEmpresa, ArrayList<String> conocimientos) {
+		  float miExperiencia, String misAspectosAValorar, String misAspectosImprescindibles, boolean miVisibilidad,
+			Contrato miContrato, Empresa miEmpresa, ArrayList<String> conocimientos) {
 		super();
 		this.miCodigo = miCodigo;
 		this.miTitulo = miTitulo;
@@ -57,6 +57,23 @@ public class Oferta implements Elemento_Listable {
 		this.miEmpresa = miEmpresa;
 		this.misConocimientos = conocimientos;
 	}
+	public Oferta(String miTitulo, String miDescripcion, String miLugar, int miSalarioMax, int miSalarioMin,
+			  float miExperiencia, String misAspectosAValorar, String misAspectosImprescindibles, boolean miVisibilidad,
+				Contrato miContrato, Empresa miEmpresa, ArrayList<String> conocimientos) {
+			super();
+			this.miTitulo = miTitulo;
+			this.miDescripcion = miDescripcion;
+			this.miLugar = miLugar;
+			this.miSalarioMax = miSalarioMax;
+			this.miSalarioMin = miSalarioMin;
+			this.miExperiencia = miExperiencia;
+			this.misAspectosAValorar = misAspectosAValorar;
+			this.misAspectosImprescindibles = misAspectosImprescindibles;
+			this.miVisibilidad = miVisibilidad;
+			this.miContrato = miContrato;
+			this.miEmpresa = miEmpresa;
+			this.misConocimientos = conocimientos;
+		}
 
 	public int getCodigo() {
 		return miCodigo;
@@ -195,7 +212,7 @@ public class Oferta implements Elemento_Listable {
 	 * 
 	 * @return
 	 */
-	public byte getContrato() {
+	public Contrato getContrato() {
 		return miContrato;
 	}
 
@@ -203,7 +220,7 @@ public class Oferta implements Elemento_Listable {
 	 * 
 	 * @param miContrato
 	 */
-	public void setContrato(byte miContrato) {
+	public void setContrato(Contrato miContrato) {
 		this.miContrato = miContrato;
 	}
 
@@ -211,7 +228,7 @@ public class Oferta implements Elemento_Listable {
 	 * 
 	 * @return
 	 */
-	public int getExperiencia() {
+	public float getExperiencia() {
 		return miExperiencia;
 	}
 
@@ -219,7 +236,7 @@ public class Oferta implements Elemento_Listable {
 	 * 
 	 * @param miExperiencia
 	 */
-	public void setExperiencia(int miExperiencia) {
+	public void setExperiencia(float miExperiencia) {
 		this.miExperiencia = miExperiencia;
 	}
 

@@ -71,6 +71,7 @@ public class VentanaIdentificarse extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
+		setResizable(false);
 
 		pa_identificarse= new PanelIdentificarse();
 		pa_identificarse.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));

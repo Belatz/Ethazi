@@ -57,7 +57,7 @@ public class PanelIdentificarse extends JPanel {
 		lbl_contrasenaErronea = new JLabel("Credenciales Incorrectas");
 		lbl_contrasenaErronea.setForeground(new Color(128, 0, 0));
 		lbl_contrasenaErronea.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lbl_contrasenaErronea.setBounds(219, 129, 141, 14);
+		lbl_contrasenaErronea.setBounds(84, 23, 141, 14);
 		lbl_contrasenaErronea.setVisible(false);
 		add(lbl_contrasenaErronea);
 
@@ -75,6 +75,7 @@ public class PanelIdentificarse extends JPanel {
 		btn_registrarse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				lbl_contrasenaErronea.setVisible(false);
 				limpiarTextos();
 				VentanaIdentificarse.getPa_identificarse().setVisible(false);
 				VentanaIdentificarse.getSelect().setVisible(true);
@@ -128,6 +129,8 @@ public class PanelIdentificarse extends JPanel {
 		lbl_recuperarContrasena.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				lbl_contrasenaErronea.setVisible(false);
+				limpiarTextos();
 				RecuperarContrasena.crearVentana(VentanaIdentificarse.getPa_identificarse().getParent());
 			}
 		});
