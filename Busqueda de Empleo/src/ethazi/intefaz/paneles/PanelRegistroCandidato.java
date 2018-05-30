@@ -29,6 +29,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.awt.Color;
+import javax.swing.JPasswordField;
 
 /**
  * The panel RegistroCandidato will show the facts that the user will have to
@@ -58,9 +59,9 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 	private JComboBox<Integer> aniocomboBox;
 	private PanelListaDoble conocimientosEditar;
 	private JButton btnRegistrar;
-	private JTextField textFieldPass;
 	private JLabel lbl_Invalido;
 	private JPanel padre;
+	private JPasswordField passwordField;
 
 	public PanelRegistroCandidato() {
     setName("Registro candidato");
@@ -242,12 +243,6 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 			}
 		});
 		
-		textFieldPass = new JTextField();
-		textFieldPass.setText("");
-		textFieldPass.setColumns(10);
-		textFieldPass.setBounds(270, 18, 265, 20);
-		add(textFieldPass);
-		
 		JLabel labelPass = new JLabel("Contrase\u00F1a:");
 		labelPass.setBounds(186, 20, 74, 14);
 		add(labelPass);
@@ -293,6 +288,10 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 		estudiostextArea.setText("");
 		otrosConocimientostextArea.setText("");
 		vidaLaboraltextArea.setText("");
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(268, 18, 267, 20);
+		add(passwordField);
 		conocimientosEditar.actualizarListas(Usuario.getConocimientosTotales(), null);
 	
 	}
@@ -382,9 +381,9 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 					dirtextField.setText("");
 					lbl_Invalido.setText(lbl_Invalido.getText() + " Dir");
 				}
-				if (textFieldPass.getText().compareTo("") == 0) {
+				if (String.valueOf(passwordField.getPassword()).compareTo("") == 0) {
 					valido = false;
-					textFieldPass.setText("");
+					passwordField.setText("");
 					lbl_Invalido.setText(lbl_Invalido.getText() + " Contrase�a");
 				}
 				String fecha=comboAFecha();
@@ -403,9 +402,9 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 					lbl_Invalido.setText(lbl_Invalido.getText()+" Apellidos");
 				}
 				int i=0;
-				while(i<experienciaProfesionaltextField.getText().length() && experienciaProfesionaltextField.getText().charAt(i)>='0' && experienciaProfesionaltextField.getText().charAt(i)<='9')
+				while(i<experienciaProfesionaltextField.getText().length() && ((experienciaProfesionaltextField.getText().charAt(i)>='0' && experienciaProfesionaltextField.getText().charAt(i)<='9')|| experienciaProfesionaltextField.getText().charAt(i)=='.'))
 					i++;
-				if(experienciaProfesionaltextField.getText().compareTo("")==0 || i<experienciaProfesionaltextField.getText().length() || Integer.valueOf(experienciaProfesionaltextField.getText())<0)
+				if(i<experienciaProfesionaltextField.getText().length() || experienciaProfesionaltextField.getText().compareTo("")==0 || i<experienciaProfesionaltextField.getText().length() || Float.parseFloat(experienciaProfesionaltextField.getText())<0)
 				{
 					valido=false;
 					experienciaProfesionaltextField.setText("");
@@ -413,7 +412,7 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 				}
 				lbl_Invalido.setVisible(!valido);
 				if (valido) {
-					aux=new Candidato(nickTextField.getText(), textFieldPass.getText(), nombretextField.getText(), numIdtextField.getText(), dirtextField.getText(), emailtextField.getText(), teltextField.getText(), apellidostextField.getText(), fecha, chckbxCarnet.getSelectedObjects()==null?false:true,chckbxCoche.getSelectedObjects()==null?false:true, chckbxDisponibilidadParaViajar.getSelectedObjects()==null?false:true, estudiostextArea.getText(), conocimientosEditar.getConocimientosAnadidos(), otrosConocimientostextArea.getText(), vidaLaboraltextArea.getText(), Integer.valueOf(experienciaProfesionaltextField.getText()));
+					aux=new Candidato(nickTextField.getText(), String.valueOf(passwordField.getPassword()), nombretextField.getText(), numIdtextField.getText(), dirtextField.getText(), emailtextField.getText(), teltextField.getText(), apellidostextField.getText(), fecha, chckbxCarnet.getSelectedObjects()==null?false:true,chckbxCoche.getSelectedObjects()==null?false:true, chckbxDisponibilidadParaViajar.getSelectedObjects()==null?false:true, estudiostextArea.getText(), conocimientosEditar.getConocimientosAnadidos(), otrosConocimientostextArea.getText(), vidaLaboraltextArea.getText(), Float.parseFloat(experienciaProfesionaltextField.getText()));
 					UtilidadesBD.insertarCandidato(aux);
 					VentanaIdentificarse.cerrar();
 					VentanaPrincipal.ejecutar();
@@ -424,7 +423,7 @@ public class PanelRegistroCandidato extends JPanel implements TieneEmergente{
 					emailtextField.setText("");
 					nickTextField.setText("");
 					nombretextField.setText("");
-					textFieldPass.setText("");
+					passwordField.setText("");
 					teltextField.setText("");
 					estudiostextArea.setText("");
 					otrosConocimientostextArea.setText("");

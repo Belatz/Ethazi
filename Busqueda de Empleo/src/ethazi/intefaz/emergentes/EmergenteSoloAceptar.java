@@ -39,7 +39,7 @@ public class EmergenteSoloAceptar extends JDialog{
 		contentPanel.add(labelTexto);
 	}
 	
-	public static void createWindow(String texto, TieneEmergente p_padre)
+	public static void createWindow(String texto, TieneEmergente p_padre, boolean funcion)
 	{	
 		VentanaPrincipal.desHabVentana(false, ((JPanel)p_padre).getParent());
 		EmergenteSoloAceptar ventanaEmergente=new EmergenteSoloAceptar(texto);
@@ -50,7 +50,7 @@ public class EmergenteSoloAceptar extends JDialog{
 			public void mouseClicked(MouseEvent e) {
 				ventanaEmergente.setVisible(false);
 				ventanaEmergente.removeAll();
-				p_padre.funcionalidad(true);
+				p_padre.funcionalidad(funcion);
 				VentanaPrincipal.desHabVentana(true, ((JPanel)p_padre).getParent());
 			}
 		});

@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
@@ -52,6 +53,7 @@ public class PanelBarraHerramientas extends JPanel {
 		JButton btn_buscar = new JButton("");
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				if (txField_buscar.getText().isEmpty()) {
 					try {
 						VentanaPrincipal.setListaDeElementos(Utilidades.cambiarOfertaAElemento(UtilidadesBD
@@ -74,6 +76,7 @@ public class PanelBarraHerramientas extends JPanel {
 					VentanaPrincipal.getPanelListadoGenerico().cambiarTituloOferta(txField_buscar.getText());
 					;
 				} 
+
 			}
 		});
 		btn_buscar.setBounds(0, 0, 50, 50);
@@ -136,35 +139,12 @@ public class PanelBarraHerramientas extends JPanel {
 		btnMenu.setBounds(369, 11, 229, 23);
 		add(btnMenu);
 
-		MouseListener ml = new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				System.out.println("ola");
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-
-			}
-
-			@Override
+		btnMenu.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent arg0) {
 				botonMenuInv();
 				VentanaPrincipal.visibilidadMenu();
 			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-
-			}
-		};
-		btnMenu.addMouseListener(ml);
+		});
 	}
 
 	public static void botonMenuInv() {

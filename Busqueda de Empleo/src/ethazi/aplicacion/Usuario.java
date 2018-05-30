@@ -72,7 +72,9 @@ public abstract class Usuario {
 	public String getPassword() {
 		return miPassword;
 	}
-
+	public void setPassword(String pass) {
+		this.miPassword=pass;
+	}
 	/**
 	 * 
 	 * @return
