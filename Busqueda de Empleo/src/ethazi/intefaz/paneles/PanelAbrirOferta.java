@@ -56,6 +56,9 @@ public class PanelAbrirOferta extends JPanel implements TieneEmergente {
 
 	/**
 	 * Creates the panel
+	 * 
+	 * 
+	 * 
 	 */
 	public PanelAbrirOferta() {
 		try {
